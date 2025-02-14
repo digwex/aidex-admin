@@ -283,35 +283,6 @@ const HorizontalMenu = ({ dictionary }: { dictionary: Awaited<ReturnType<typeof 
               {dictionary['navigation'].createDeal}
             </MenuItem>
           </SubMenu>
-          <MenuItem href={`/${locale}/pages/dialog-examples`} icon={<i className='tabler-square' />}>
-            {dictionary['navigation'].dialogExamples}
-          </MenuItem>
-          <SubMenu label={dictionary['navigation'].widgetExamples} icon={<i className='tabler-chart-bar' />}>
-            <MenuItem href={`/${locale}/pages/widget-examples/basic`}>{dictionary['navigation'].basic}</MenuItem>
-            <MenuItem href={`/${locale}/pages/widget-examples/advanced`}>{dictionary['navigation'].advanced}</MenuItem>
-            <MenuItem href={`/${locale}/pages/widget-examples/statistics`}>
-              {dictionary['navigation'].statistics}
-            </MenuItem>
-            <MenuItem href={`/${locale}/pages/widget-examples/charts`}>{dictionary['navigation'].charts}</MenuItem>
-            <MenuItem href={`/${locale}/pages/widget-examples/actions`}>{dictionary['navigation'].actions}</MenuItem>
-          </SubMenu>
-          <SubMenu label={dictionary['navigation'].frontPages} icon={<i className='tabler-files' />}>
-            <MenuItem href='/front-pages/landing-page' target='_blank'>
-              {dictionary['navigation'].landing}
-            </MenuItem>
-            <MenuItem href='/front-pages/pricing' target='_blank'>
-              {dictionary['navigation'].pricing}
-            </MenuItem>
-            <MenuItem href='/front-pages/payment' target='_blank'>
-              {dictionary['navigation'].payment}
-            </MenuItem>
-            <MenuItem href='/front-pages/checkout' target='_blank'>
-              {dictionary['navigation'].checkout}
-            </MenuItem>
-            <MenuItem href='/front-pages/help-center' target='_blank'>
-              {dictionary['navigation'].helpCenter}
-            </MenuItem>
-          </SubMenu>
         </SubMenu>
         <SubMenu label={dictionary['navigation'].formsAndTables} icon={<i className='tabler-file-invoice' />}>
           <MenuItem href={`/${locale}/forms/form-layouts`} icon={<i className='tabler-layout' />}>
