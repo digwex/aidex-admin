@@ -45,19 +45,9 @@ const Layout = async (props: ChildrenType & { params: Promise<{ lang: Locale }> 
         <LayoutWrapper
           systemMode={systemMode}
           verticalLayout={
-            <VerticalLayout
-              navigation={<Navigation dictionary={dictionary} mode={mode} />}
-              navbar={<Navbar />}
-              footer={<VerticalFooter />}
-            >
-              {children}
-            </VerticalLayout>
+            <VerticalLayout navigation={<Navigation dictionary={dictionary} mode={mode} />}>{children}</VerticalLayout>
           }
-          horizontalLayout={
-            <HorizontalLayout header={<Header dictionary={dictionary} />} footer={<HorizontalFooter />}>
-              {children}
-            </HorizontalLayout>
-          }
+          horizontalLayout={<HorizontalLayout header={<Header dictionary={dictionary} />}>{children}</HorizontalLayout>}
         />
         <ScrollToTop className='mui-fixed'>
           <Button

@@ -54,14 +54,14 @@ export type Config = {
 }
 
 const themeConfig: Config = {
-  templateName: 'Vuexy',
-  homePageUrl: '/dashboards/crm',
-  settingsCookieName: 'vuexy-mui-next-demo-1',
-  mode: 'system', // 'system', 'light', 'dark'
+  templateName: 'aidex',
+  homePageUrl: '/dashboard',
+  settingsCookieName: 'aidex-settings',
+  mode: 'dark', // 'system', 'light', 'dark'
   skin: 'default', // 'default', 'bordered'
   semiDark: false, // true, false
   layout: 'vertical', // 'vertical', 'collapsed', 'horizontal'
-  layoutPadding: 24, // Common padding for header, content, footer layout components (in px)
+  layoutPadding: 12, // Common padding for header, content, footer layout components (in px)
   compactContentWidth: 1440, // in px
   navbar: {
     type: 'fixed', // 'fixed', 'static'
@@ -70,7 +70,7 @@ const themeConfig: Config = {
     detached: true, //! true, false (This will not work in the Horizontal Layout or floating navbar is enabled)
     blur: true // true, false
   },
-  contentWidth: 'compact', // 'compact', 'wide'
+  contentWidth: 'wide', // 'compact', 'wide'
   footer: {
     type: 'static', // 'fixed', 'static'
     contentWidth: 'compact', // 'compact', 'wide'
