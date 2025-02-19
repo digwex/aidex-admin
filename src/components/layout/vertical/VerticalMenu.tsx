@@ -10,6 +10,8 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 // Type Imports
 import { signOut } from 'next-auth/react'
 
+import { Divider } from '@mui/material'
+
 import type { getDictionary } from '@/utils/getDictionary'
 import type { VerticalMenuContextProps } from '@menu/components/vertical-menu/Menu'
 
@@ -28,6 +30,7 @@ import StyledVerticalNavExpandIcon from '@menu/styles/vertical/StyledVerticalNav
 // Style Imports
 import menuItemStyles from '@core/styles/vertical/menuItemStyles'
 import menuSectionStyles from '@core/styles/vertical/menuSectionStyles'
+import { LangSelector } from '../horizontal/langSelector'
 
 // Menu Data Imports
 // import menuData from '@/data/navigation/verticalMenuData'
@@ -144,20 +147,33 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
           Ввод/Вывод
         </MenuItem>
         <MenuItem
-          icon={<i className='tabler-shield-lock' />}
-          href={`/${locale}/apps/security`}
-          exactMatch={false}
-          activeUrl='/apps/security'
-        >
-          Безопасность
-        </MenuItem>
-        <MenuItem
           icon={<i className='tabler-align-box-left-top' />}
           href={`/${locale}/apps/content`}
           exactMatch={false}
           activeUrl='/apps/content'
         >
           Контент
+        </MenuItem>
+        <MenuItem
+          icon={<i className='tabler-mail' />}
+          href={`/${locale}/apps/mailing`}
+          exactMatch={false}
+          activeUrl='/apps/mailing'
+        >
+          Рассылка
+        </MenuItem>
+
+        <Divider className='pt-4 mb-4' />
+
+        <LangSelector />
+
+        <MenuItem
+          icon={<i className='tabler-shield-lock' />}
+          href={`/${locale}/apps/security`}
+          exactMatch={false}
+          activeUrl='/apps/security'
+        >
+          Безопасность
         </MenuItem>
         <MenuItem
           onClick={handleUserLogout}
@@ -168,15 +184,15 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
           Выход
         </MenuItem>
 
-        <SubMenu
-          label={dictionary['navigation'].dashboards}
-          icon={<i className='tabler-smart-home' />}
-          suffix={<CustomChip label='5' size='small' color='error' round='true' />}
-        >
-          <MenuItem href={`/${locale}/dashboards/ecommerce`}>{dictionary['navigation'].eCommerce}</MenuItem>
-        </SubMenu>
+        <MenuSection label='Референсные страницы'>
+          <SubMenu
+            label={dictionary['navigation'].dashboards}
+            icon={<i className='tabler-smart-home' />}
+            suffix={<CustomChip label='5' size='small' color='error' round='true' />}
+          >
+            <MenuItem href={`/${locale}/dashboards/ecommerce`}>{dictionary['navigation'].eCommerce}</MenuItem>
+          </SubMenu>
 
-        <MenuSection label={dictionary['navigation'].appsPages}>
           <SubMenu label={dictionary['navigation'].eCommerce} icon={<i className='tabler-shopping-cart' />}>
             <MenuItem href={`/${locale}/apps/ecommerce/dashboard`}>{dictionary['navigation'].dashboard}</MenuItem>
             <SubMenu label={dictionary['navigation'].products}>

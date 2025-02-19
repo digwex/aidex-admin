@@ -16,6 +16,8 @@ const Header = ({ dictionary }: { dictionary: Awaited<ReturnType<typeof getDicti
   // Hooks
   const { isBreakpointReached } = useHorizontalNav()
 
+  console.debug('isBreakpointReached', isBreakpointReached)
+
   return (
     <>
       <LayoutHeader>

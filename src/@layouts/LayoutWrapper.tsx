@@ -24,7 +24,6 @@ const LayoutWrapper = (props: LayoutWrapperProps) => {
   const { settings } = useSettings()
 
   useLayoutInit(systemMode)
-  console.debug(settings.layout)
 
   // Return the layout based on the layout context
   return (

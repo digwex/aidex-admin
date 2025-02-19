@@ -19,7 +19,6 @@ import type { TextFieldProps } from '@mui/material/TextField'
 import classnames from 'classnames'
 import { rankItem } from '@tanstack/match-sorter-utils'
 import {
-  createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
@@ -28,7 +27,8 @@ import {
   getFacetedUniqueValues,
   getFacetedMinMaxValues,
   getPaginationRowModel,
-  getSortedRowModel
+  getSortedRowModel,
+  createColumnHelper
 } from '@tanstack/react-table'
 import type { ColumnDef, FilterFn } from '@tanstack/react-table'
 import type { RankingInfo } from '@tanstack/match-sorter-utils'

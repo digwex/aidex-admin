@@ -1,81 +1,37 @@
 'use client'
 
-import Paper from '@mui/material/Paper'
+import { useMemo, useState } from 'react'
 
-import type { GridColDef } from '@mui/x-data-grid'
-import { DataGrid } from '@mui/x-data-grid'
+import type { ColumnDef } from '@tanstack/react-table'
+import {
+  createColumnHelper,
+  useReactTable,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel
+} from '@tanstack/react-table'
 
-const CustomCellRenderer = () => {
-  return (
-    <div className='flex items-center justify-start gap-2'>
-      <img className='w-[18px] h-[18px] min-w-[18px]' src='/images/tariff/super-nova-ellite.svg' alt='success' />
-      <p>Super Nova Elite</p>
-    </div>
-  )
+import Table, { fuzzyFilter } from '@/components/Table'
+
+interface Columns {
+  transactionID: number
+  email: string
+  ftd: string
+  ctr: string
+  rtd: string
+  deposits: string
+  withdrawals: string
+  tariff: string
+  profit: string
 }
 
-const columns: GridColDef[] = [
-  { sortable: true, field: 'transactionID', headerName: 'ID', align: 'center', minWidth: 120 },
-  {
-    sortable: true,
-    field: 'email',
-    headerName: 'Электронная почта',
-    align: 'center',
-    headerAlign: 'center',
-    minWidth: 170
-  },
-  {
-    sortable: true,
-    field: 'ftd',
-    headerName: 'FTD',
-    align: 'center',
-    headerAlign: 'center',
-    minWidth: 170
-  },
-  { sortable: true, field: 'ctr', headerName: '%,CTR', align: 'center', headerAlign: 'center', minWidth: 150 },
-  { sortable: true, field: 'rtd', headerName: 'RTD', align: 'center', headerAlign: 'center', flex: 1 },
-  {
-    sortable: true,
-    field: 'deposits',
-    headerName: 'Депозиты,$',
-    align: 'center',
-    headerAlign: 'center',
-    minWidth: 230
-  },
-  {
-    sortable: true,
-    field: 'withdrawals',
-    headerName: 'Выводы,$',
-    align: 'center',
-    headerAlign: 'center',
-    minWidth: 230
-  },
-  {
-    sortable: true,
-    field: 'tariff',
-    headerName: 'Тарифный план',
-
-    minWidth: 230,
-    renderCell: CustomCellRenderer
-  },
-  {
-    sortable: true,
-    field: 'profit',
-    headerName: 'Профит от суб-партнера,$',
-    align: 'center',
-    headerAlign: 'center',
-    minWidth: 230
-  }
-]
-
-const rows = [
-  ...Array(80)
+const data = [
+  ...Array(50)
     .fill(null)
     .map((_, i) => ({
-      id: i,
       transactionID: 4245346545 + i,
       email: `alexsandr.tkachuk18@gmail.com`,
-      ftd: 425,
+      ftd: '425',
       ctr: '13.43%',
       rtd: '13.43%',
       deposits: '$275.74',
@@ -83,22 +39,91 @@ const rows = [
       tariff: '',
       profit: '$ 55 484,42'
     }))
-]
+] as Columns[]
 
-const paginationModel = { page: 0, pageSize: 20 }
+const columnHelper = createColumnHelper<Columns>()
 
 const PartnerSubAffiliateTable = () => {
-  return (
-    <Paper sx={{ height: '100%', width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{ pagination: { paginationModel } }}
-        pageSizeOptions={[5, 10, 20, 30]}
-        sx={{ border: 0 }}
-      />
-    </Paper>
+  const [sorting, setSorting] = useState<{ id: string; desc: boolean }[]>([])
+
+  const columns = useMemo<ColumnDef<Columns, any>[]>(
+    () => [
+      columnHelper.accessor('transactionID', {
+        header: 'ID',
+        cell: ({ row }) => <div className='text-center'> {row.original.transactionID}</div>
+      }),
+
+      columnHelper.accessor('email', {
+        header: 'Электронная почта',
+
+        cell: ({ row }) => <div className='text-center'>{row.original.email}</div>
+      }),
+
+      columnHelper.accessor('ftd', {
+        header: 'FTD',
+        cell: ({ row }) => <div className='text-center'> {row.original.ftd}</div>
+      }),
+
+      columnHelper.accessor('ctr', {
+        header: '%,CTR',
+        cell: ({ row }) => <div className='text-center'> {row.original.ctr}</div>
+      }),
+
+      columnHelper.accessor('rtd', {
+        header: 'RTD',
+        cell: ({ row }) => <div className='text-center flex-1'> {row.original.rtd}</div>
+      }),
+
+      columnHelper.accessor('deposits', {
+        header: 'Депозиты,$',
+        cell: ({ row }) => <div className='text-center'> {row.original.deposits}</div>
+      }),
+
+      columnHelper.accessor('withdrawals', {
+        header: 'Выводы,$',
+        cell: ({ row }) => <div className='text-center'> {row.original.withdrawals}</div>
+      }),
+
+      columnHelper.accessor('tariff', {
+        header: 'Бонусы,$',
+        cell: () => (
+          <div className='flex items-center justify-center gap-2'>
+            <img className='w-[18px] h-[18px] min-w-[18px]' src='/images/tariff/super-nova-ellite.svg' alt='success' />
+            <p>Super Nova Elite</p>
+          </div>
+        )
+      }),
+
+      columnHelper.accessor('profit', {
+        header: 'Профит от суб-партнера,$',
+        cell: ({ row }) => <div className='text-center'> {row.original.profit}</div>
+      })
+    ],
+    []
   )
+
+  const table = useReactTable({
+    data,
+    columns,
+    filterFns: {
+      fuzzy: fuzzyFilter
+    },
+    state: {
+      sorting
+    },
+    initialState: {
+      pagination: {
+        pageSize: 15
+      }
+    },
+
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel()
+  })
+
+  return <Table table={table} />
 }
 
 export default PartnerSubAffiliateTable

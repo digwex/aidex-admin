@@ -1,146 +1,159 @@
 'use client'
-import Paper from '@mui/material/Paper'
 
-import type { GridColDef } from '@mui/x-data-grid'
-import { DataGrid } from '@mui/x-data-grid'
+import { useMemo, useState } from 'react'
 
-const columns: GridColDef[] = [
-  { sortable: true, field: 'date', headerName: 'Дата', align: 'center', headerAlign: 'center', minWidth: 120 },
-  { sortable: true, field: 'email', headerName: 'Почта', align: 'center', headerAlign: 'center', minWidth: 180 },
-  {
-    sortable: true,
-    field: 'webmasterId',
-    headerName: 'ID Вебмастера',
-    align: 'center',
-    headerAlign: 'center',
-    minWidth: 120
-  },
-  {
-    sortable: true,
-    field: 'transitions',
-    headerName: 'Переходов',
-    align: 'center',
-    headerAlign: 'center',
-    minWidth: 100
-  },
-  {
-    sortable: true,
-    field: 'registrations',
-    headerName: 'Регистраций',
-    align: 'center',
-    headerAlign: 'center',
-    minWidth: 100
-  },
-  { sortable: true, field: 'ftd', headerName: 'FTD', align: 'center', flex: 1, headerAlign: 'center', minWidth: 50 },
-  {
-    sortable: true,
-    field: 'tradersDeposits',
-    headerName: 'Депозиты трейд.',
-    align: 'center',
-    flex: 1,
-    headerAlign: 'center',
-    minWidth: 160
-  },
-  {
-    sortable: true,
-    field: 'tradersDepositsAmount',
-    headerName: 'Депозиты трейд.,$',
-    align: 'center',
-    flex: 1,
-    headerAlign: 'center',
-    minWidth: 160
-  },
-  {
-    sortable: true,
-    field: 'tradersWithdrawals',
-    headerName: 'Выводы трейд.',
-    align: 'center',
-    flex: 1,
+import type { ColumnDef } from '@tanstack/react-table'
+import {
+  createColumnHelper,
+  useReactTable,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel
+} from '@tanstack/react-table'
 
-    headerAlign: 'center',
-    minWidth: 120
-  },
-  {
-    sortable: true,
-    field: 'tradersWithdrawalsAmount',
-    headerName: 'Выводы трейд.,$',
-    align: 'center',
-    flex: 1,
-    headerAlign: 'center',
-    minWidth: 130
-  },
-  {
-    sortable: true,
-    field: 'activeTradersToday',
-    headerName: 'Активные трейд. сегодня',
-    align: 'center',
-    headerAlign: 'center',
-    minWidth: 180
-  },
-  {
-    sortable: true,
-    field: 'dynamic',
-    headerName: 'Динамика по всем,$',
-    align: 'center',
-    headerAlign: 'center',
-    minWidth: 150
-  },
-  { sortable: true, field: 'tariff', headerName: 'Тарифы', align: 'center', headerAlign: 'center', minWidth: 100 },
-  {
-    sortable: true,
-    field: 'sybEarn',
-    headerName: 'Суб начисление,$',
-    align: 'center',
-    headerAlign: 'center',
-    minWidth: 150
-  },
-  {
-    sortable: true,
-    field: 'partnersEarn',
-    headerName: 'Парнерское начисление,$',
-    align: 'center',
-    headerAlign: 'center',
-    minWidth: 200
-  }
-]
+import Table, { fuzzyFilter } from '@/components/Table'
 
-const rows = [
-  ...Array(80)
+interface Columns {
+  date: string
+  email: string
+  webmasterId: number
+  transitions: number
+  registrations: string
+  ftd: string
+  tradersDeposits: string
+  tradersDepositsAmount: string
+  tradersWithdrawals: string
+  tradersWithdrawalsAmount: string
+  activeTradersToday: string
+  dynamic: string
+  tariff: string
+  sybEarn: string
+  partnersEarn: string
+}
+
+const data = [
+  ...Array(50)
     .fill(null)
     .map((_, i) => ({
-      id: i,
       date: `2023/04/2${i}`,
       email: 'alexa@gmail.com',
       webmasterId: 73 + i,
       transitions: 6 + i,
-      registrations: 0,
-      ftd: 0,
-      tradersDeposits: 32,
+      registrations: '0',
+      ftd: '0',
+      tradersDeposits: '32',
       tradersDepositsAmount: '$275.74',
-      tradersWithdrawals: 32,
+      tradersWithdrawals: '32',
       tradersWithdrawalsAmount: '$275.74',
-      activeTradersToday: 10,
+      activeTradersToday: '10',
       dynamic: '$275.74',
       tariff: 'Silver UP',
       sybEarn: '$275.74',
       partnersEarn: '$275.74'
     }))
-]
+] as Columns[]
 
-const paginationModel = { page: 0, pageSize: 20 }
+const columnHelper = createColumnHelper<Columns>()
 
 const StatisticWebTable = () => {
-  return (
-    <Paper sx={{ height: '100%', width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{ pagination: { paginationModel } }}
-        pageSizeOptions={[5, 10, 20, 30]}
-        sx={{ border: 0 }}
-      />
-    </Paper>
+  const [sorting, setSorting] = useState<{ id: string; desc: boolean }[]>([])
+
+  const columns = useMemo<ColumnDef<Columns, any>[]>(
+    () => [
+      columnHelper.accessor('date', {
+        header: 'Дата',
+        cell: ({ row }) => <div className='text-center'>{row.original.date}</div>
+      }),
+      columnHelper.accessor('email', {
+        header: 'Почта',
+        cell: ({ row }) => <div className='text-center'>{row.original.email}</div>
+      }),
+
+      columnHelper.accessor('webmasterId', {
+        header: 'ID Вебмастера',
+        cell: ({ row }) => <div className='text-center'> {row.original.webmasterId}</div>
+      }),
+
+      columnHelper.accessor('transitions', {
+        header: 'Переходов',
+        cell: ({ row }) => <div className='text-center'> {row.original.transitions}</div>
+      }),
+
+      columnHelper.accessor('registrations', {
+        header: 'Регистраций',
+        cell: ({ row }) => <div className='text-center'> {row.original.registrations}</div>
+      }),
+
+      columnHelper.accessor('ftd', {
+        header: () => 'FTD',
+        cell: ({ row }) => <div className='text-center'> {row.original.ftd}</div>
+      }),
+
+      columnHelper.accessor('tradersDeposits', {
+        header: 'Депозиты трейд.',
+        cell: ({ row }) => <div className='text-center'> {row.original.tradersDeposits}</div>
+      }),
+
+      columnHelper.accessor('tradersDepositsAmount', {
+        header: 'Депозиты трейд.,$',
+        cell: ({ row }) => <div className='text-center'> {row.original.tradersDepositsAmount}</div>
+      }),
+
+      columnHelper.accessor('tradersWithdrawals', {
+        header: 'Выводы трейд.',
+        cell: ({ row }) => <div className='text-center'> {row.original.tradersWithdrawals}</div>
+      }),
+
+      columnHelper.accessor('tradersWithdrawalsAmount', {
+        header: 'Выводы трейд.,$',
+        cell: ({ row }) => <div className='text-center'> {row.original.tradersWithdrawalsAmount}</div>
+      }),
+
+      columnHelper.accessor('activeTradersToday', {
+        header: 'Активные трейд. сегодня',
+        cell: ({ row }) => <div className='text-center'> {row.original.activeTradersToday}</div>
+      }),
+
+      columnHelper.accessor('dynamic', {
+        header: 'Динамика по всем,$',
+        cell: ({ row }) => <div className='text-center'> {row.original.dynamic}</div>
+      }),
+
+      columnHelper.accessor('sybEarn', {
+        header: 'Суб начисление,$',
+        cell: ({ row }) => <div className='text-center'> {row.original.sybEarn}</div>
+      }),
+
+      columnHelper.accessor('partnersEarn', {
+        header: 'Парнерское начисление,$',
+        cell: ({ row }) => <div className='text-center'> {row.original.partnersEarn}</div>
+      })
+    ],
+    []
   )
+
+  const table = useReactTable({
+    data,
+    columns,
+    filterFns: {
+      fuzzy: fuzzyFilter
+    },
+    state: {
+      sorting
+    },
+    initialState: {
+      pagination: {
+        pageSize: 15
+      }
+    },
+
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel()
+  })
+
+  return <Table table={table} />
 }
 
 export default StatisticWebTable
