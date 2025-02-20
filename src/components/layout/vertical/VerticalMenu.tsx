@@ -16,8 +16,7 @@ import type { getDictionary } from '@/utils/getDictionary'
 import type { VerticalMenuContextProps } from '@menu/components/vertical-menu/Menu'
 
 // Component Imports
-import { Menu, SubMenu, MenuItem, MenuSection } from '@menu/vertical-menu'
-import CustomChip from '@core/components/mui/Chip'
+import { Menu, MenuItem } from '@menu/vertical-menu'
 
 // import { GenerateVerticalMenu } from '@components/GenerateMenu'
 
@@ -51,7 +50,7 @@ const RenderExpandIcon = ({ open, transitionDuration }: RenderExpandIconProps) =
   </StyledVerticalNavExpandIcon>
 )
 
-const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
+const VerticalMenu = ({ scrollMenu }: Props) => {
   // Hooks
   const theme = useTheme()
   const verticalNavOptions = useVerticalNav()

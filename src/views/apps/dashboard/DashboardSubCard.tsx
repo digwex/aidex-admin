@@ -11,7 +11,7 @@ import classnames from 'classnames'
 import type { ThemeColor } from '@core/types'
 
 import CustomAvatar from '@core/components/mui/Avatar'
-import type { DashboardCardProps } from '@/types/pages/dashboardTypes'
+import type { DashboardCardProps } from './types'
 
 type Props = CardProps & {
   color: ThemeColor
