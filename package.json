@@ -1,6 +1,6 @@
 {
-  "name": "vuexy-mui-nextjs-admin-template",
-  "version": "4.0.0",
+  "name": "apedex-admin",
+  "version": "0.0.1",
   "license": "Commercial",
   "private": true,
   "scripts": {
