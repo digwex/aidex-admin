@@ -87,7 +87,7 @@
     "@types/fs-extra": "^11.0.4",
     "@types/mapbox-gl": "^3.4.1",
     "@types/negotiator": "^0.6.3",
-    "@types/node": "^22.10.2",
+    "@types/node": "^22.13.4",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@typescript-eslint/eslint-plugin": "7.18.0",
