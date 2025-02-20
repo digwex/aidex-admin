@@ -6,7 +6,6 @@ import { NextAuthProvider } from '@/contexts/nextAuthProvider'
 import { VerticalNavProvider } from '@menu/contexts/verticalNavContext'
 import { SettingsProvider } from '@core/contexts/settingsContext'
 import ThemeProvider from '@components/theme'
-// import ReduxProvider from '@/redux-store/ReduxProvider'
 
 // Styled Component Imports
 import AppReactToastify from '@/libs/styles/AppReactToastify'

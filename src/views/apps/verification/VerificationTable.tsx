@@ -46,7 +46,7 @@ const data = [
 
 const columnHelper = createColumnHelper<Columns>()
 
-export const VerificationTable = () => {
+const VerificationTable = () => {
   const pathname = usePathname()
   const [sorting, setSorting] = useState<{ id: string; desc: boolean }[]>([])
 
@@ -105,7 +105,7 @@ export const VerificationTable = () => {
         ),
         enableSorting: false
       })
-    ],
+    ], // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   )
 

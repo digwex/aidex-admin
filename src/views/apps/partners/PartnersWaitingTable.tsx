@@ -109,7 +109,7 @@ const PartnersWaitingTable = () => {
         ),
         enableSorting: false
       })
-    ],
+    ], // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   )
 

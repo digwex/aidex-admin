@@ -66,9 +66,7 @@ const WithdrawalsTradersHistory = () => {
         header: 'ID трейдера',
         cell: ({ row }) => (
           <div className='text-center'>
-            <Link href={'/' + (params?.lang || '') + '/users/' + row.original.traderId}>
-              {row.original.traderId}
-            </Link>
+            <Link href={'/' + (params?.lang || '') + '/users/' + row.original.traderId}>{row.original.traderId}</Link>
           </div>
         )
       }),
@@ -108,7 +106,7 @@ const WithdrawalsTradersHistory = () => {
         cell: () => <Status variant='processing' />,
         enableSorting: false
       })
-    ],
+    ], // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   )
 

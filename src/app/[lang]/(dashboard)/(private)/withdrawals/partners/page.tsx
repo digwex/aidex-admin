@@ -1,6 +1,6 @@
 import WithdrawalsPartners from '@/views/apps/withdrawals/WithdrawalsPartners'
 
-export const Partners = () => {
+const Partners = () => {
   return <WithdrawalsPartners />
 }
 

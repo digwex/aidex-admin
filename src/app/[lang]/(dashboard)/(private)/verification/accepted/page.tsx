@@ -1,7 +1,7 @@
-import VerificationTable from '@/views/apps/verification/VerificationTable'
+import Table from '@/views/apps/verification/VerificationTable'
 
 const Accepted = () => {
-  return <VerificationTable />
+  return <Table />
 }
 
 export default Accepted

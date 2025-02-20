@@ -66,9 +66,7 @@ const WithdrawalsFake = () => {
         header: 'ID трейдера',
         cell: ({ row }) => (
           <div className='text-center'>
-            <Link href={'/' + (params?.lang || '') + '/users/' + row.original.traderId}>
-              {row.original.traderId}
-            </Link>
+            <Link href={'/' + (params?.lang || '') + '/users/' + row.original.traderId}>{row.original.traderId}</Link>
           </div>
         )
       }),
@@ -108,7 +106,7 @@ const WithdrawalsFake = () => {
         cell: () => <Status variant='success' />,
         enableSorting: false
       })
-    ],
+    ], // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   )
 
