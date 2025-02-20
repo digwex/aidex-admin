@@ -40,7 +40,7 @@ const DashboardSubCard = (props: DashboardCardProps) => {
     <Card color={color || 'primary'} sx={{ width: '100%' }}>
       <CardContent className='flex flex-col gap-1 p-4'>
         <div className='flex items-center gap-2 '>
-          <CustomAvatar   sx={{ width: 34, height: 34 }} color={color} skin='light' variant='rounded'>
+          <CustomAvatar sx={{ width: 34, height: 34 }} color={color} skin='light' variant='rounded'>
             <i className={classnames(avatarIcon, 'text-[18px]')} />
           </CustomAvatar>
           <Typography variant='h6'>{title}</Typography>

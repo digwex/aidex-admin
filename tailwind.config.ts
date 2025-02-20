@@ -29,7 +29,7 @@ const config: Config = {
       max600: { max: '600px' },
       max650: { max: '650px' },
       max500: { max: '600px' },
-      max400: { max: '600px' },
+      max400: { max: '600px' }
     },
     extend: {}
   }
