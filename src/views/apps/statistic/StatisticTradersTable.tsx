@@ -1,79 +1,143 @@
 'use client'
-import Paper from '@mui/material/Paper'
 
-import type { GridColDef } from '@mui/x-data-grid'
-import { DataGrid } from '@mui/x-data-grid'
+import { useMemo, useState } from 'react'
 
-const columns: GridColDef[] = [
-  { sortable: true, field: 'date', headerName: 'Дата', align: 'center', headerAlign: 'center' },
-  { sortable: true, field: 'traderId', headerName: 'ID трейдера', align: 'center', headerAlign: 'center' },
-  { sortable: true, field: 'deposits', headerName: 'Депозиты,$', align: 'center', headerAlign: 'center' },
-  { sortable: true, field: 'depositsAmount', headerName: 'Трейдеры', align: 'center', headerAlign: 'center' },
-  { sortable: true, field: 'withdrawals', headerName: 'Выводы', align: 'center', flex: 1, headerAlign: 'center' },
-  { sortable: true, field: 'withdrawalsAmount', headerName: 'Выводы', align: 'center', flex: 1, headerAlign: 'center' },
-  {
-    sortable: true,
-    field: 'orders',
-    headerName: 'Сделки',
-    align: 'center',
-    flex: 1,
-    headerAlign: 'center'
-  },
-  {
-    sortable: true,
-    field: 'ordersAmount',
-    headerName: 'Сделки,$',
-    align: 'center',
-    flex: 1,
+import type { ColumnDef } from '@tanstack/react-table'
+import {
+  createColumnHelper,
+  useReactTable,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel
+} from '@tanstack/react-table'
 
-    headerAlign: 'center'
-  },
-  {
-    sortable: true,
-    field: 'profit',
-    headerName: 'Прибыть / Убыток,$',
-    align: 'center',
-    flex: 1,
-    headerAlign: 'center'
-  },
-  { sortable: true, field: 'bonuses', headerName: 'Бонусы,$', align: 'center', headerAlign: 'center' },
-  { sortable: true, field: 'balance', headerName: 'Баланс,$', align: 'center', headerAlign: 'center' }
-]
+import Table, { fuzzyFilter } from '@/components/Table'
 
-const rows = [
-  ...Array(80)
+interface Columns {
+  date: string
+  transitions: string
+  registrations: string
+  traders: string
+  orders: string
+  deposits: string
+  depositsAmount: string
+  withdrawals: string
+  withdrawalsAmount: string
+  dynamic: string
+  ordersAmount: string
+  online: string
+}
+
+const data = [
+  ...Array(50)
     .fill(null)
     .map((_, i) => ({
-      id: i,
       date: `2023/04/2${i}`,
-      traderId: 73 + i,
-      deposits: 6 + i,
+      transitions: '73',
+      registrations: '0(0.00%)',
+      traders: '0(0.00%)',
+      orders: '6',
+      deposits: '2',
       depositsAmount: '$275.74',
-      withdrawals: 6 + i,
-      withdrawalsAmount: '$2,575.74',
-      orders: 2 + i,
-      ordersAmount: '$275.74',
-      profit: '$45.74',
-      bonuses: '$25.74',
+      withdrawals: '1',
+      withdrawalsAmount: '$25.74',
       dynamic: '$45.74',
-      balance: '$25.74'
+      ordersAmount: '$25.74',
+      online: '73'
     }))
-]
+] as Columns[]
 
-const paginationModel = { page: 0, pageSize: 20 }
+const columnHelper = createColumnHelper<Columns>()
 
 const StatisticTradersTable = () => {
-  return (
-    <Paper sx={{ height: '100%', width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{ pagination: { paginationModel } }}
-        pageSizeOptions={[5, 10, 20, 30]}
-        sx={{ border: 0 }}
-      />
-    </Paper>
+  const [sorting, setSorting] = useState<{ id: string; desc: boolean }[]>([])
+
+  const columns = useMemo<ColumnDef<Columns, any>[]>(
+    () => [
+      columnHelper.accessor('date', {
+        header: 'Дата',
+        cell: ({ row }) => <div className='text-center'>{row.original.date}</div>
+      }),
+      columnHelper.accessor('transitions', {
+        header: 'Переходы',
+        cell: ({ row }) => <div className='text-center'>{row.original.transitions}</div>
+      }),
+
+      columnHelper.accessor('registrations', {
+        header: 'Регистрации',
+        cell: ({ row }) => <div className='text-center'> {row.original.registrations}</div>
+      }),
+
+      columnHelper.accessor('traders', {
+        header: 'Трейдеры',
+        cell: ({ row }) => <div className='text-center'> {row.original.traders}</div>
+      }),
+
+      columnHelper.accessor('orders', {
+        header: 'Сделки',
+        cell: ({ row }) => <div className='text-center'> {row.original.orders}</div>
+      }),
+
+      columnHelper.accessor('deposits', {
+        header: () => 'Депозиты',
+        cell: ({ row }) => <div className='text-center'> {row.original.deposits}</div>
+      }),
+
+      columnHelper.accessor('depositsAmount', {
+        header: 'Депозиты,$',
+        cell: ({ row }) => <div className='text-center'> {row.original.depositsAmount}</div>
+      }),
+
+      columnHelper.accessor('withdrawals', {
+        header: 'Выводы',
+        cell: ({ row }) => <div className='text-center'> {row.original.withdrawals}</div>
+      }),
+
+      columnHelper.accessor('withdrawalsAmount', {
+        header: 'Выводы,$',
+        cell: ({ row }) => <div className='text-center'> {row.original.withdrawalsAmount}</div>
+      }),
+
+      columnHelper.accessor('dynamic', {
+        header: 'Динамика,$',
+        cell: ({ row }) => <div className='text-center'> {row.original.dynamic}</div>
+      }),
+
+      columnHelper.accessor('ordersAmount', {
+        header: 'Открыли сделок,$',
+        cell: ({ row }) => <div className='text-center'> {row.original.ordersAmount}</div>
+      }),
+
+      columnHelper.accessor('online', {
+        header: 'Макс Online',
+        cell: ({ row }) => <div className='text-center'> {row.original.online}</div>
+      })
+    ],
+    []
   )
+
+  const table = useReactTable({
+    data,
+    columns,
+    filterFns: {
+      fuzzy: fuzzyFilter
+    },
+    state: {
+      sorting
+    },
+    initialState: {
+      pagination: {
+        pageSize: 15
+      }
+    },
+
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel()
+  })
+
+  return <Table table={table} />
 }
 
 export default StatisticTradersTable

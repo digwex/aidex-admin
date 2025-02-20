@@ -1,85 +1,136 @@
 'use client'
+
+import { useMemo, useState } from 'react'
+
+import Link from 'next/link'
+
+import { usePathname } from 'next/navigation'
+
+import type { ColumnDef } from '@tanstack/react-table'
+import {
+  createColumnHelper,
+  useReactTable,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel
+} from '@tanstack/react-table'
+
 import { Button } from '@mui/material'
-import Paper from '@mui/material/Paper'
 
-import type { GridColDef } from '@mui/x-data-grid'
-import { DataGrid } from '@mui/x-data-grid'
+import Table, { fuzzyFilter } from '@/components/Table'
+import { UnblockModal } from '../users/UnblockModal'
 
-const CustomCellRenderer = () => {
-  return (
-    <div className='flex h-full w-full justify-end items-center gap-4'>
-      <Button variant='outlined' color='error'>
-        Отклонить
-      </Button>
-      <Button variant='outlined' color='success'>
-        Одобрить
-      </Button>
-    </div>
-  )
+interface Columns {
+  traderId: number
+  name: string
+  documentNumber: string
+  address: string
+  photo: string
+  document: string
+  options: any
 }
 
-const columns: GridColDef[] = [
-  { sortable: true, field: 'traderId', headerName: 'ID трейдера', align: 'center', headerAlign: 'center', flex: 1 },
-  { sortable: true, field: 'name', headerName: 'Имя Фамилия', align: 'center', headerAlign: 'center', flex: 1 },
-  {
-    sortable: true,
-    field: 'documentNumber',
-    headerName: 'Номер документа',
-    align: 'center',
-    headerAlign: 'center',
-    flex: 1
-  },
-  { sortable: true, field: 'address', headerName: 'Адресс', align: 'center', headerAlign: 'center', flex: 1 },
-  { sortable: true, field: 'photo', headerName: 'Файл/Фото', align: 'center', flex: 1, headerAlign: 'center' },
-  {
-    sortable: true,
-    field: 'document',
-    headerName: 'Документ',
-    align: 'center',
-    flex: 1,
-    headerAlign: 'center'
-  },
-  {
-    sortable: false,
-    field: 'actions',
-    headerName: '',
-    align: 'center',
-    width: 250,
-    headerAlign: 'center',
-    renderCell: CustomCellRenderer
-  }
-]
-
-const rows = [
-  ...Array(80)
+const data = [
+  ...Array(50)
     .fill(null)
     .map((_, i) => ({
-      id: i,
       traderId: 532556542 + i,
       name: 'Ткачук Александр',
       documentNumber: 'alexsandr.tkachuk18@gmail.com',
       address: 'г.Киев, ул. Хрещатика 57, кв74',
       photo: 'Фото',
       document: 'PDF',
-      actions: ''
+      options: ''
     }))
-]
+] as Columns[]
 
-const paginationModel = { page: 0, pageSize: 20 }
+const columnHelper = createColumnHelper<Columns>()
 
-const VerificationTable = () => {
-  return (
-    <Paper sx={{ height: '100%', width: '100%' }}>
-      <DataGrid
-        checkboxSelection
-        rows={rows}
-        columns={columns}
-        initialState={{ pagination: { paginationModel } }}
-        pageSizeOptions={[5, 10, 20, 30]}
-        sx={{ border: 0 }}
-      />
-    </Paper>
+export const VerificationTable = () => {
+  const pathname = usePathname()
+  const [sorting, setSorting] = useState<{ id: string; desc: boolean }[]>([])
+
+  const columns = useMemo<ColumnDef<Columns, any>[]>(
+    () => [
+      columnHelper.accessor('traderId', {
+        header: 'ID трейдера',
+
+        cell: ({ row }) => (
+          <div className='text-center'>
+            <Link href={pathname + '/' + row.original.traderId}>{row.original.traderId}</Link>
+          </div>
+        )
+      }),
+
+      columnHelper.accessor('name', {
+        header: 'Имя Фамилия',
+        cell: ({ row }) => <div className='text-center'> {row.original.name}</div>
+      }),
+
+      columnHelper.accessor('documentNumber', {
+        header: 'Номер документа',
+        cell: ({ row }) => <div className='text-center'> {row.original.documentNumber}</div>
+      }),
+
+      columnHelper.accessor('address', {
+        header: 'Адресс',
+        cell: ({ row }) => <div className='text-center'> {row.original.address}</div>
+      }),
+
+      columnHelper.accessor('photo', {
+        header: () => 'Файл/Фото',
+        cell: ({ row }) => <div className='text-center'> {row.original.photo}</div>
+      }),
+
+      columnHelper.accessor('document', {
+        header: 'Документ',
+        cell: ({ row }) => <div className='text-center'> {row.original.document}</div>
+      }),
+
+      columnHelper.accessor('options', {
+        header: 'Опции',
+        cell: () => (
+          <div className='flex justify-center items-center gap-4'>
+            <Button variant='outlined' color='secondary'>
+              Больше
+            </Button>
+            <Button variant='outlined' color='warning'>
+              Торговля
+            </Button>
+            <Button variant='outlined' color='success'>
+              Изменить
+            </Button>
+            <UnblockModal />
+          </div>
+        ),
+        enableSorting: false
+      })
+    ],
+    []
   )
+
+  const table = useReactTable({
+    data,
+    columns,
+    filterFns: {
+      fuzzy: fuzzyFilter
+    },
+    state: {
+      sorting
+    },
+    initialState: {
+      pagination: {
+        pageSize: 15
+      }
+    },
+
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel()
+  })
+
+  return <Table table={table} />
 }
 
 export default VerificationTable

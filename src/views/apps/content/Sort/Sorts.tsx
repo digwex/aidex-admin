@@ -14,12 +14,12 @@ export const Sorts = () => {
 
   const tabs = [
     {
-      value: `/${lang}/apps/content`,
+      value: `/${lang}/content`,
       label: 'Баннеры',
       icon: 'tabler-photo'
     },
     {
-      value: `/${lang}/apps/content/promo`,
+      value: `/${lang}/content/promo`,
       label: 'Промоматериалы',
       icon: 'tabler-cast'
     }

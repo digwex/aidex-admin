@@ -36,6 +36,7 @@ export type MenuItemProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'prefi
   RootStylesType &
   Partial<ChildrenType> &
   MenuItemExactMatchUrlProps & {
+    forceActive?: boolean
     icon?: ReactElement
     prefix?: ReactNode
     suffix?: ReactNode
@@ -66,6 +67,7 @@ const MenuItem: ForwardRefRenderFunction<HTMLLIElement, MenuItemProps> = (props,
     component,
     onActiveChange,
     rootStyles,
+    forceActive,
     ...rest
   } = props
 
@@ -142,7 +144,7 @@ const MenuItem: ForwardRefRenderFunction<HTMLLIElement, MenuItemProps> = (props,
       rootStyles={rootStyles}
     >
       <MenuButton
-        className={classnames(menuClasses.button, { [menuClasses.active]: active })}
+        className={classnames(menuClasses.button, { [menuClasses.active]: active || forceActive })}
         component={component}
         tabIndex={disabled ? -1 : 0}
         {...rest}

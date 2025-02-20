@@ -1,74 +1,33 @@
 'use client'
 
-import Paper from '@mui/material/Paper'
+import { useMemo, useState } from 'react'
 
-import type { GridColDef } from '@mui/x-data-grid'
-import { DataGrid } from '@mui/x-data-grid'
+import type { ColumnDef } from '@tanstack/react-table'
+import {
+  createColumnHelper,
+  useReactTable,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel
+} from '@tanstack/react-table'
 
+import Table, { fuzzyFilter } from '@/components/Table'
 import CustomIconButton from '@/@core/components/mui/IconButton'
 
-const ActionsCell = () => {
-  return (
-    <CustomIconButton variant='outlined' color='error'>
-      <i className='tabler-x'></i>
-    </CustomIconButton>
-  )
+interface Columns {
+  time: string
+  login: string
+  name: string
+  role: string
+  lastActivity: string
+  tineInSite: string
+  permission: string
 }
 
-const columns: GridColDef[] = [
-  { sortable: true, field: 'time', headerName: 'Время', minWidth: 200 },
-  {
-    sortable: true,
-    field: 'login',
-    headerName: 'Логин',
-    align: 'center',
-    headerAlign: 'center',
-    flex: 1,
-    minWidth: 250
-  },
-  {
-    sortable: true,
-    field: 'name',
-    headerName: 'Имя Фамилия',
-    align: 'center',
-    headerAlign: 'center',
-    flex: 1,
-    minWidth: 200
-  },
-  { sortable: true, field: 'role', headerName: 'Роль', align: 'center', headerAlign: 'center', flex: 1, minWidth: 200 },
-  {
-    sortable: true,
-    field: 'lastActivity',
-    headerName: 'Последняя активность',
-    align: 'center',
-    headerAlign: 'center',
-    flex: 1,
-    minWidth: 200
-  },
-  {
-    sortable: true,
-    field: 'tineInSite',
-    headerName: 'Время на сайте',
-    align: 'center',
-    headerAlign: 'center',
-    flex: 1,
-    minWidth: 200
-  },
-  {
-    field: 'permission',
-    headerName: 'Доступ',
-    align: 'center',
-    headerAlign: 'center',
-    minWidth: 40,
-    renderCell: ActionsCell
-  }
-]
-
-const rows = [
-  ...Array(80)
+const data = [
+  ...Array(50)
     .fill(null)
-    .map((_, i) => ({
-      id: i,
+    .map(() => ({
       time: '2023/04/27  09:44:07',
       login: '@bijdgfsdkfbsekufsekfbskekbf',
       name: 'Ткачук Александр',
@@ -77,22 +36,82 @@ const rows = [
       tineInSite: '267 дней',
       permission: ''
     }))
-]
+] as Columns[]
 
-const paginationModel = { page: 0, pageSize: 20 }
+const columnHelper = createColumnHelper<Columns>()
 
 const SecurityLoginsTable = () => {
-  return (
-    <Paper sx={{ height: '100%', width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{ pagination: { paginationModel } }}
-        pageSizeOptions={[5, 10, 20, 30]}
-        sx={{ border: 0 }}
-      />
-    </Paper>
+  const [sorting, setSorting] = useState<{ id: string; desc: boolean }[]>([])
+
+  const columns = useMemo<ColumnDef<Columns, any>[]>(
+    () => [
+      columnHelper.accessor('time', {
+        header: 'Время',
+        cell: ({ row }) => <div className='text-center'> {row.original.time}</div>
+      }),
+
+      columnHelper.accessor('login', {
+        header: 'Логин',
+        cell: ({ row }) => <div className='text-center'>{row.original.login}</div>
+      }),
+
+      columnHelper.accessor('name', {
+        header: 'Имя Фамилия',
+        cell: ({ row }) => <div className='text-center'> {row.original.name}</div>
+      }),
+
+      columnHelper.accessor('role', {
+        header: 'Роль',
+        cell: ({ row }) => <div className='text-center'> {row.original.role}</div>
+      }),
+
+      columnHelper.accessor('lastActivity', {
+        header: 'Последняя активность',
+        cell: ({ row }) => <div className='text-center flex-1'> {row.original.lastActivity}</div>
+      }),
+
+      columnHelper.accessor('tineInSite', {
+        header: 'Время на сайте',
+        cell: ({ row }) => <div className='text-center'> {row.original.tineInSite}</div>
+      }),
+
+      columnHelper.accessor('permission', {
+        header: 'Доступ',
+        cell: () => (
+          <div className='flex justify-center'>
+            <CustomIconButton variant='outlined' color='error'>
+              <i className='tabler-x'></i>
+            </CustomIconButton>
+          </div>
+        ),
+        enableSorting: false
+      })
+    ],
+    []
   )
+
+  const table = useReactTable({
+    data,
+    columns,
+    filterFns: {
+      fuzzy: fuzzyFilter
+    },
+    state: {
+      sorting
+    },
+    initialState: {
+      pagination: {
+        pageSize: 15
+      }
+    },
+
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel()
+  })
+
+  return <Table table={table} />
 }
 
 export default SecurityLoginsTable

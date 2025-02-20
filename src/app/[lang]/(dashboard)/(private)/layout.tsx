@@ -1,23 +1,18 @@
 // MUI Imports
 import Button from '@mui/material/Button'
 
-// Type Imports
 import type { ChildrenType } from '@core/types'
 import type { Locale } from '@configs/i18n'
 
 // Layout Imports
 import LayoutWrapper from '@layouts/LayoutWrapper'
 import VerticalLayout from '@layouts/VerticalLayout'
-import HorizontalLayout from '@layouts/HorizontalLayout'
 
 // Component Imports
 import Providers from '@components/Providers'
 import Navigation from '@components/layout/vertical/Navigation'
-import Header from '@components/layout/horizontal/Header'
+
 import Navbar from '@components/layout/vertical/Navbar'
-import VerticalFooter from '@components/layout/vertical/Footer'
-import HorizontalFooter from '@components/layout/horizontal/Footer'
-import Customizer from '@core/components/customizer'
 import ScrollToTop from '@core/components/scroll-to-top'
 import AuthGuard from '@/hocs/AuthGuard'
 
@@ -45,9 +40,11 @@ const Layout = async (props: ChildrenType & { params: Promise<{ lang: Locale }> 
         <LayoutWrapper
           systemMode={systemMode}
           verticalLayout={
-            <VerticalLayout navigation={<Navigation dictionary={dictionary} mode={mode} />}>{children}</VerticalLayout>
+            <VerticalLayout navbar={<Navbar />} navigation={<Navigation dictionary={dictionary} mode={mode} />}>
+              {children}
+            </VerticalLayout>
           }
-          horizontalLayout={<HorizontalLayout header={<Header dictionary={dictionary} />}>{children}</HorizontalLayout>}
+          horizontalLayout={<></>}
         />
         <ScrollToTop className='mui-fixed'>
           <Button
@@ -57,7 +54,6 @@ const Layout = async (props: ChildrenType & { params: Promise<{ lang: Locale }> 
             <i className='tabler-arrow-up' />
           </Button>
         </ScrollToTop>
-        <Customizer dir={direction} />
       </AuthGuard>
     </Providers>
   )

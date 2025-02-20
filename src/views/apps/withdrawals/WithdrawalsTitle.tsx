@@ -20,18 +20,18 @@ export const WithdrawalsTitle = ({ lang }: Props) => {
     <Box className='flex items-center gap-4'>
       <i className='tabler-wallet w-10 h-10 block' />
 
-      <Link href={`/${lang}/apps/withdrawals`}>
+      <Link href={`/${lang}/withdrawals`}>
         <Typography
           className={classNames('font-semibold text-white/55 hover:text-white duration-300 transition-all', {
             '!text-white pointer-events-none':
-              pathname.includes(`/${lang}/apps/withdrawals`) && !pathname.includes('deposits')
+              pathname.includes(`/${lang}/withdrawals`) && !pathname.includes('deposits')
           })}
           variant='h2'
         >
           Вывод
         </Typography>
       </Link>
-      <Link href={`/${lang}/apps/withdrawals/deposits`}>
+      <Link href={`/${lang}/withdrawals/deposits`}>
         <Typography
           className={classNames('font-semibold text-white/55 hover:text-white duration-300 transition-all', {
             '!text-white pointer-events-none': pathname.includes('deposits')
