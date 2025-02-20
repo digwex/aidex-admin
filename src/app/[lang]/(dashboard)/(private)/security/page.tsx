@@ -1,4 +1,4 @@
-import SecurityAdminTable from '@/views/apps/security/SecurityLoginsTable'
+import SecurityAdminTable from '@/views/apps/security/SecurityAdminTable'
 
 const Security = () => {
   return <SecurityAdminTable />

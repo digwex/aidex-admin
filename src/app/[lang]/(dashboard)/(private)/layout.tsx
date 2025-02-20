@@ -1,7 +1,6 @@
 // MUI Imports
 import Button from '@mui/material/Button'
 
-// Type Imports
 import type { ChildrenType } from '@core/types'
 import type { Locale } from '@configs/i18n'
 
@@ -14,7 +13,6 @@ import Providers from '@components/Providers'
 import Navigation from '@components/layout/vertical/Navigation'
 
 import Navbar from '@components/layout/vertical/Navbar'
-import Customizer from '@core/components/customizer'
 import ScrollToTop from '@core/components/scroll-to-top'
 import AuthGuard from '@/hocs/AuthGuard'
 
@@ -56,7 +54,6 @@ const Layout = async (props: ChildrenType & { params: Promise<{ lang: Locale }> 
             <i className='tabler-arrow-up' />
           </Button>
         </ScrollToTop>
-        <Customizer dir={direction} />
       </AuthGuard>
     </Providers>
   )
