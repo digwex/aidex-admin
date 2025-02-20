@@ -13,6 +13,10 @@ interface Props extends PropsWithChildren {
   params: Promise<{ lang: Locale }>
 }
 
+export const metadata = {
+  title: 'Рассылка'
+}
+
 const Layout = async ({ children, params }: Props) => {
   const lang = (await params).lang
 

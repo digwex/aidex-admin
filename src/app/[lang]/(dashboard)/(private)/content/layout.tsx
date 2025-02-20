@@ -5,6 +5,10 @@ interface Props {
   children: React.ReactNode
 }
 
+export const metadata = {
+  title: 'Контент'
+}
+
 const Layout = async ({ children }: Props) => {
   return (
     <div className='space-y-4'>
