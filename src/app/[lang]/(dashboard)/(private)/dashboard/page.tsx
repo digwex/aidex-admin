@@ -1,5 +1,9 @@
 import DashboardPage from '@/views/apps/dashboard/Daschboard'
 
+export const metadata = {
+  title: 'Главная'
+}
+
 const Dashboard = () => {
   return <DashboardPage />
 }

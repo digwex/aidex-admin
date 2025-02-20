@@ -9,6 +9,10 @@ interface Props {
   params: Promise<{ lang: Locale }>
 }
 
+export const metadata = {
+  title: 'Пользователи'
+}
+
 const Layout = async ({ children, params }: Props) => {
   const lang = (await params).lang
 
