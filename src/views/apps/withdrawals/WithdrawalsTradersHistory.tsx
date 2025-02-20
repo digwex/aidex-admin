@@ -66,7 +66,7 @@ const WithdrawalsTradersHistory = () => {
         header: 'ID трейдера',
         cell: ({ row }) => (
           <div className='text-center'>
-            <Link href={'/' + (params?.lang || '') + '/apps/users/' + row.original.traderId}>
+            <Link href={'/' + (params?.lang || '') + '/users/' + row.original.traderId}>
               {row.original.traderId}
             </Link>
           </div>

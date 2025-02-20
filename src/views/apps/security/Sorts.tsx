@@ -19,12 +19,12 @@ export const Sorts = ({ lang }: Props) => {
 
   const tabs = [
     {
-      value: `/${lang}/apps/security`,
+      value: `/${lang}/security`,
       label: 'Админы',
       icon: 'tabler-user-hexagon'
     },
     {
-      value: `/${lang}/apps/security/logins`,
+      value: `/${lang}/security/logins`,
       label: 'Логины безопасности',
       icon: 'tabler-square-key'
     }

@@ -17,9 +17,9 @@ const Layout = async ({ children, params }: Props) => {
   const lang = (await params).lang
 
   const tabs = [
-    { label: 'На почту', value: `/${lang}/apps/mailing` },
-    { label: 'Сайт / Поп ап', value: `/${lang}/apps/mailing/site` },
-    { label: 'В бот', value: `/${lang}/apps/mailing/bot` }
+    { label: 'На почту', value: `/${lang}/mailing` },
+    { label: 'Сайт / Поп ап', value: `/${lang}/mailing/site` },
+    { label: 'В бот', value: `/${lang}/mailing/bot` }
   ]
 
   return (

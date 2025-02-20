@@ -15,27 +15,27 @@ const Layout = async ({ children, params }: Props) => {
   const tabs = [
     {
       label: 'Пользователь',
-      value: `/${lang}/apps/users`,
+      value: `/${lang}/users`,
       icon: 'tabler-user'
     },
     {
       label: 'Партнеры',
-      value: `/${lang}/apps/users/partners`,
+      value: `/${lang}/users/partners`,
       icon: 'tabler-users-group'
     },
     {
       label: 'Верификация',
-      value: `/${lang}/apps/users/verification`,
+      value: `/${lang}/users/verification`,
       icon: 'tabler-checklist'
     },
     {
       label: 'KYC',
-      value: `/${lang}/apps/users/kyc`,
+      value: `/${lang}/users/kyc`,
       icon: 'tabler-file-barcode'
     },
     {
       label: 'Список заблокированых',
-      value: `/${lang}/apps/users/blocked`,
+      value: `/${lang}/users/blocked`,
       icon: 'tabler-circle-x'
     }
   ]

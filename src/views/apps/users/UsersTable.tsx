@@ -54,7 +54,7 @@ const data = [
 
 const columnHelper = createColumnHelper<Columns>()
 
-export const UsersTable = () => {
+const UsersTable = () => {
   const pathname = usePathname()
   const [sorting, setSorting] = useState<{ id: string; desc: boolean }[]>([])
 

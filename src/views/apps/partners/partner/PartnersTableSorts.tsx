@@ -9,19 +9,19 @@ interface Props {
 const PartnersTableSorts = ({ id, lang }: Props) => {
   const tabs = [
     {
-      value: `/${lang}/apps/partners/${id}`,
+      value: `/${lang}/partners/${id}`,
       label: 'Список выплат'
     },
     {
-      value: `/${lang}/apps/partners/${id}/statistic`,
+      value: `/${lang}/partners/${id}/statistic`,
       label: 'Глубокая статистика'
     },
     {
-      value: `/${lang}/apps/partners/${id}/hold`,
+      value: `/${lang}/partners/${id}/hold`,
       label: 'Реферальные начисления на холд баланс'
     },
     {
-      value: `/${lang}/apps/partners/${id}/subAffiliates`,
+      value: `/${lang}/partners/${id}/subAffiliates`,
       label: 'Суб-партнеры'
     }
   ]

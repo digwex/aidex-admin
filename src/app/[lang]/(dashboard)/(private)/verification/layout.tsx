@@ -11,9 +11,9 @@ const Layout = async ({ children, params }: Props) => {
   const lang = (await params).lang
 
   const tabs = [
-    { value: `/${lang}/apps/verification`, label: 'Ожидания', icon: 'tabler-clock-hour-4-filled' },
-    { value: `/${lang}/apps/verification/accepted`, label: 'Одобренные', icon: 'tabler-circle-check' },
-    { value: `/${lang}/apps/verification/rejected`, label: 'Не одобренные', icon: 'tabler-circle-x' }
+    { value: `/${lang}/verification`, label: 'Ожидания', icon: 'tabler-clock-hour-4-filled' },
+    { value: `/${lang}/verification/accepted`, label: 'Одобренные', icon: 'tabler-circle-check' },
+    { value: `/${lang}/verification/rejected`, label: 'Не одобренные', icon: 'tabler-circle-x' }
   ]
 
   return (

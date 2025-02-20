@@ -70,7 +70,7 @@ const WithdrawalsPartners = () => {
         header: 'ID трейдера',
         cell: ({ row }) => (
           <div className='text-center'>
-            <Link href={'/' + (params?.lang || '') + '/apps/partners/' + row.original.traderId}>
+            <Link href={'/' + (params?.lang || '') + '/partners/' + row.original.traderId}>
               {row.original.traderId}
             </Link>
           </div>

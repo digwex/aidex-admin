@@ -11,10 +11,10 @@ const Layout = async ({ children, params }: Props) => {
   const lang = (await params).lang
 
   const tabs = [
-    { value: `/${lang}/apps/statistic`, label: 'По дням', icon: 'tabler-clock-hour-4-filled' },
-    { value: `/${lang}/apps/statistic/months`, label: 'По месяцам', icon: 'tabler-calendar' },
-    { value: `/${lang}/apps/statistic/traders`, label: 'По трейдерам', icon: 'tabler-chart-candle' },
-    { value: `/${lang}/apps/statistic/web`, label: 'По Web мастерам', icon: 'tabler-file-code' }
+    { value: `/${lang}/statistic`, label: 'По дням', icon: 'tabler-clock-hour-4-filled' },
+    { value: `/${lang}/statistic/months`, label: 'По месяцам', icon: 'tabler-calendar' },
+    { value: `/${lang}/statistic/traders`, label: 'По трейдерам', icon: 'tabler-chart-candle' },
+    { value: `/${lang}/statistic/web`, label: 'По Web мастерам', icon: 'tabler-file-code' }
   ]
 
   return (

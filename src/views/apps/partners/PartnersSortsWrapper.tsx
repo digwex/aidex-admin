@@ -12,7 +12,7 @@ interface Props {
 export const PartnersSortsWrapper = ({ children, lang }: Props) => {
   const pathname = usePathname()
 
-  const regex = new RegExp(`^/${lang}/apps/partners/\\d+(/.*)?$`)
+  const regex = new RegExp(`^/${lang}/partners/\\d+(/.*)?$`)
   const isPartnerPage = regex.test(pathname || '')
 
   if (isPartnerPage) return null

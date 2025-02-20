@@ -11,11 +11,11 @@ const Layout = async ({ children, params }: Props) => {
   const lang = (await params).lang
 
   const tabs = [
-    { value: `/${lang}/apps/withdrawals`, label: 'Ожидаемые выводы трейдера' },
-    { value: `/${lang}/apps/withdrawals/partners`, label: 'Ожидаемые выводы партнера' },
-    { value: `/${lang}/apps/withdrawals/trader-history`, label: 'История трейдера' },
-    { value: `/${lang}/apps/withdrawals/partner-history`, label: 'История партнера' },
-    { value: `/${lang}/apps/withdrawals/fake-withdraw`, label: 'Фейк вывода' }
+    { value: `/${lang}/withdrawals`, label: 'Ожидаемые выводы трейдера' },
+    { value: `/${lang}/withdrawals/partners`, label: 'Ожидаемые выводы партнера' },
+    { value: `/${lang}/withdrawals/trader-history`, label: 'История трейдера' },
+    { value: `/${lang}/withdrawals/partner-history`, label: 'История партнера' },
+    { value: `/${lang}/withdrawals/fake-withdraw`, label: 'Фейк вывода' }
   ]
 
   return (

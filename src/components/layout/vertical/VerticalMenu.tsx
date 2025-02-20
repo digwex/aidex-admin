@@ -18,8 +18,6 @@ import type { VerticalMenuContextProps } from '@menu/components/vertical-menu/Me
 // Component Imports
 import { Menu, MenuItem } from '@menu/vertical-menu'
 
-// import { GenerateVerticalMenu } from '@components/GenerateMenu'
-
 // Hook Imports
 import useVerticalNav from '@menu/hooks/useVerticalNav'
 
@@ -29,10 +27,7 @@ import StyledVerticalNavExpandIcon from '@menu/styles/vertical/StyledVerticalNav
 // Style Imports
 import menuItemStyles from '@core/styles/vertical/menuItemStyles'
 import menuSectionStyles from '@core/styles/vertical/menuSectionStyles'
-import { LangSelector } from '../horizontal/langSelector'
-
-// Menu Data Imports
-// import menuData from '@/data/navigation/verticalMenuData'
+import { LangSelector } from './langSelector'
 
 type RenderExpandIconProps = {
   open?: boolean
@@ -99,65 +94,60 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
       >
         <MenuItem
           icon={<i className='tabler-smart-home' />}
-          href={`/${locale}/apps/dashboard`}
+          href={`/${locale}/dashboard`}
           exactMatch={false}
-          activeUrl='/apps/dashboard'
+          activeUrl='/dashboard'
         >
           Главная
         </MenuItem>
         <MenuItem
-          href={`/${locale}/apps/statistic`}
+          href={`/${locale}/statistic`}
           icon={<i className='tabler-chart-histogram' />}
           exactMatch={false}
-          activeUrl='/apps/statistic'
+          activeUrl='/statistic'
         >
           Статистика
         </MenuItem>
-        <MenuItem
-          icon={<i className='tabler-user' />}
-          href={`/${locale}/apps/users`}
-          exactMatch={false}
-          activeUrl='/apps/users'
-        >
+        <MenuItem icon={<i className='tabler-user' />} href={`/${locale}/users`} exactMatch={false} activeUrl='/users'>
           Пользователи
         </MenuItem>
         <MenuItem
           icon={<i className='tabler-users-group' />}
-          href={`/${locale}/apps/partners`}
+          href={`/${locale}/partners`}
           exactMatch={false}
-          activeUrl='/apps/partners'
+          activeUrl='/partners'
         >
           Партнёры
         </MenuItem>
         <MenuItem
           icon={<i className='tabler-checklist' />}
-          href={`/${locale}/apps/verification`}
+          href={`/${locale}/verification`}
           exactMatch={false}
-          activeUrl='/apps/verification'
+          activeUrl='/verification'
         >
           Верификация
         </MenuItem>
         <MenuItem
           icon={<i className='tabler-wallet' />}
-          href={`/${locale}/apps/withdrawals`}
+          href={`/${locale}/withdrawals`}
           exactMatch={false}
-          activeUrl='/apps/withdrawals'
+          activeUrl='/withdrawals'
         >
           Ввод/Вывод
         </MenuItem>
         <MenuItem
           icon={<i className='tabler-align-box-left-top' />}
-          href={`/${locale}/apps/content`}
+          href={`/${locale}/content`}
           exactMatch={false}
-          activeUrl='/apps/content'
+          activeUrl='/content'
         >
           Контент
         </MenuItem>
         <MenuItem
           icon={<i className='tabler-mail' />}
-          href={`/${locale}/apps/mailing`}
+          href={`/${locale}/mailing`}
           exactMatch={false}
-          activeUrl='/apps/mailing'
+          activeUrl='/mailing'
         >
           Рассылка
         </MenuItem>
@@ -168,9 +158,9 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
 
         <MenuItem
           icon={<i className='tabler-shield-lock' />}
-          href={`/${locale}/apps/security`}
+          href={`/${locale}/security`}
           exactMatch={false}
-          activeUrl='/apps/security'
+          activeUrl='/security'
         >
           Безопасность
         </MenuItem>
@@ -178,7 +168,7 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
           onClick={handleUserLogout}
           icon={<i className='tabler-logout' />}
           exactMatch={false}
-          activeUrl='/apps/withdrawals'
+          activeUrl='/withdrawals'
         >
           Выход
         </MenuItem>
