@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "cf:build": "npx @cloudflare/next-on-pages",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
@@ -81,10 +82,12 @@
     "valibot": "0.42.1"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.8",
     "@iconify/json": "2.2.286",
     "@iconify/tools": "4.1.1",
     "@iconify/types": "2.0.0",
     "@iconify/utils": "2.2.1",
+    "@opennextjs/cloudflare": "^0.5.3",
     "@types/fs-extra": "^11.0.4",
     "@types/mapbox-gl": "^3.4.1",
     "@types/negotiator": "^0.6.3",
@@ -101,6 +104,7 @@
     "eslint-config-prettier": "9.1.0",
     "eslint-import-resolver-typescript": "3.7.0",
     "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-next-on-pages": "^1.13.8",
     "globby": "14.0.2",
     "postcss": "8.4.49",
     "postcss-styled-syntax": "0.7.0",
@@ -113,7 +117,8 @@
     "tailwindcss": "3.4.17",
     "tailwindcss-logical": "3.0.1",
     "tsx": "4.19.2",
-    "typescript": "5.5.4"
+    "typescript": "5.5.4",
+    "wrangler": "^3.109.3"
   },
   "resolutions": {
     "rimraf": "^5.0.7",
