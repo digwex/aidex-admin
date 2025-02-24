@@ -1,5 +1,7 @@
 import { PromoContent } from '@/views/apps/content/PromoContent'
 
+export const runtime = 'edge'
+
 const Promo = () => {
   return (
     <div className='grid grid-cols-3 gap-4 max1400:grid-cols-2 max1000:grid-cols-1'>

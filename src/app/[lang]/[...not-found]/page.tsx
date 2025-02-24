@@ -12,6 +12,8 @@ import { i18n } from '@configs/i18n'
 // Util Imports
 import { getServerMode, getSystemMode } from '@core/utils/serverHelpers'
 
+export const runtime = 'edge'
+
 const NotFoundPage = async (props: { params: Promise<{ lang: Locale }> }) => {
   const params = await props.params
 
