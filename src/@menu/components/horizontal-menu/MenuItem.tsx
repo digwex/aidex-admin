@@ -1,8 +1,8 @@
 'use client'
 
 // React Imports
-import { forwardRef, useEffect, useState } from 'react'
-import type { AnchorHTMLAttributes, ForwardRefRenderFunction, ReactElement, ReactNode } from 'react'
+import { forwardRef, useContext, useEffect, useState } from 'react'
+import type { AnchorHTMLAttributes, ForwardRefRenderFunction, ReactElement, MouseEvent, ReactNode } from 'react'
 
 // Next Imports
 import { usePathname } from 'next/navigation'
@@ -11,16 +11,20 @@ import { usePathname } from 'next/navigation'
 import classnames from 'classnames'
 import { useUpdateEffect } from 'react-use'
 import type { CSSObject } from '@emotion/styled'
+import { useFloatingTree } from '@floating-ui/react'
 
 // Type Imports
 import type { ChildrenType, MenuItemElement, MenuItemExactMatchUrlProps, RootStylesType } from '../../types'
+
+// Context Imports
+import { HorizontalSubMenuContext } from './SubMenu'
 
 // Component Imports
 import MenuButton from './MenuButton'
 
 // Hook Imports
+import useHorizontalMenu from '../../hooks/useHorizontalMenu'
 import useVerticalNav from '../../hooks/useVerticalNav'
-import useVerticalMenu from '../../hooks/useVerticalMenu'
 
 // Util Imports
 import { renderMenuIcon } from '../../utils/menuUtils'
@@ -30,7 +34,10 @@ import { menuClasses } from '../../utils/menuClasses'
 import StyledMenuLabel from '../../styles/StyledMenuLabel'
 import StyledMenuPrefix from '../../styles/StyledMenuPrefix'
 import StyledMenuSuffix from '../../styles/StyledMenuSuffix'
-import StyledVerticalMenuItem from '../../styles/vertical/StyledVerticalMenuItem'
+import StyledHorizontalMenuItem from '../../styles/horizontal/StyledHorizontalMenuItem'
+
+// Style Imports
+import styles from '../../styles/horizontal/horizontalUl.module.css'
 
 export type MenuItemProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'prefix'> &
   RootStylesType &
@@ -44,7 +51,6 @@ export type MenuItemProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'prefi
     rel?: string
     component?: string | ReactElement
     onActiveChange?: (active: boolean) => void
-    forceActive?: boolean
 
     /**
      * @ignore
@@ -67,7 +73,6 @@ const MenuItem: ForwardRefRenderFunction<HTMLLIElement, MenuItemProps> = (props,
     component,
     onActiveChange,
     rootStyles,
-    forceActive,
     ...rest
   } = props
 
@@ -75,13 +80,12 @@ const MenuItem: ForwardRefRenderFunction<HTMLLIElement, MenuItemProps> = (props,
   const [active, setActive] = useState(false)
 
   // Hooks
+  const tree = useFloatingTree()
   const pathname = usePathname()
-  const { menuItemStyles, renderExpandedMenuItemIcon, textTruncate } = useVerticalMenu()
+  const { toggleVerticalNav, isToggled } = useVerticalNav()
+  const { getItemProps } = useContext(HorizontalSubMenuContext)
+  const { menuItemStyles, renderExpandedMenuItemIcon, textTruncate } = useHorizontalMenu()
 
-  const { isCollapsed, isHovered, isPopoutWhenCollapsed, toggleVerticalNav, isToggled, isBreakpointReached } =
-    useVerticalNav()
-
-  // Get the styles for the specified element.
   const getMenuItemStyles = (element: MenuItemElement): CSSObject | undefined => {
     // If the menuItemStyles prop is provided, get the styles for the specified element.
     if (menuItemStyles) {
@@ -127,48 +131,47 @@ const MenuItem: ForwardRefRenderFunction<HTMLLIElement, MenuItemProps> = (props,
   }, [active])
 
   return (
-    <StyledVerticalMenuItem
+    <StyledHorizontalMenuItem
       ref={ref}
       className={classnames(
-        menuClasses.menuItemRoot,
+        { [menuClasses.menuItemRoot]: level === 0 },
+        { [menuClasses.active]: active },
         { [menuClasses.disabled]: disabled },
-        { [menuClasses.active]: active || forceActive },
+        styles.li,
         className
       )}
       level={level}
-      isCollapsed={isCollapsed}
-      isPopoutWhenCollapsed={isPopoutWhenCollapsed}
       disabled={disabled}
       buttonStyles={getMenuItemStyles('button')}
       menuItemStyles={getMenuItemStyles('root')}
       rootStyles={rootStyles}
     >
       <MenuButton
-        className={classnames(menuClasses.button, { [menuClasses.active]: active || forceActive })}
+        className={classnames(menuClasses.button, { [menuClasses.active]: active })}
         component={component}
         tabIndex={disabled ? -1 : 0}
+        onClick={handleClick}
+        {...getItemProps({
+          onClick(event: MouseEvent<HTMLAnchorElement>) {
+            props.onClick?.(event)
+            tree?.events.emit('click')
+          }
+        })}
         {...rest}
-        onClick={e => {
-          handleClick()
-          rest.onClick && rest.onClick(e)
-        }}
       >
         {/* Menu Item Icon */}
         {renderMenuIcon({
           icon,
           level,
-          active: active || forceActive,
+          active,
           disabled,
           renderExpandedMenuItemIcon,
-          styles: getMenuItemStyles('icon'),
-          isBreakpointReached
+          styles: getMenuItemStyles('icon')
         })}
 
         {/* Menu Item Prefix */}
         {prefix && (
           <StyledMenuPrefix
-            isHovered={isHovered}
-            isCollapsed={isCollapsed}
             firstLevel={level === 0}
             className={menuClasses.prefix}
             rootStyles={getMenuItemStyles('prefix')}
@@ -189,8 +192,6 @@ const MenuItem: ForwardRefRenderFunction<HTMLLIElement, MenuItemProps> = (props,
         {/* Menu Item Suffix */}
         {suffix && (
           <StyledMenuSuffix
-            isHovered={isHovered}
-            isCollapsed={isCollapsed}
             firstLevel={level === 0}
             className={menuClasses.suffix}
             rootStyles={getMenuItemStyles('suffix')}
@@ -199,7 +200,7 @@ const MenuItem: ForwardRefRenderFunction<HTMLLIElement, MenuItemProps> = (props,
           </StyledMenuSuffix>
         )}
       </MenuButton>
-    </StyledVerticalMenuItem>
+    </StyledHorizontalMenuItem>
   )
 }
 
