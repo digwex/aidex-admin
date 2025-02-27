@@ -235,8 +235,8 @@ const colorSchemes = (skin: Skin): Theme['colorSchemes'] => {
         divider: `rgb(var(--mui-mainColorChannels-dark) / 0.12)`,
         dividerChannel: 'var(--mui-mainColorChannels-dark)',
         background: {
-          default: skin === 'bordered' ? '#2F3349' : '#25293C',
-          paper: '#2F3349',
+          default: skin === 'bordered' ? '#29323b' : '#1f2630',
+          paper: '#29323b',
           paperChannel: '47 51 73'
         },
         action: {
@@ -300,12 +300,12 @@ const colorSchemes = (skin: Skin): Theme['colorSchemes'] => {
           border: 'var(--mui-palette-divider)'
         },
         customColors: {
-          bodyBg: '#25293C',
+          bodyBg: '#1f2630',
           chatBg: '#202534',
           greyLightBg: '#353A52',
           inputBorder: `rgb(var(--mui-mainColorChannels-dark) / 0.22)`,
-          tableHeaderBg: '#2F3349',
-          tooltipText: '#2F3349',
+          tableHeaderBg: '#29323b',
+          tooltipText: '#29323b',
           trackBg: '#3A3F57'
         }
       }
