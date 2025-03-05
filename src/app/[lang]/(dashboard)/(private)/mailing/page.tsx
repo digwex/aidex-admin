@@ -1,5 +1,7 @@
+import { EmailMailing } from '@/views/apps/mailing/Email'
+
 const Mailing = () => {
-  return <div></div>
+  return <EmailMailing />
 }
 
 export default Mailing
