@@ -2,19 +2,19 @@
 
 import { useState } from 'react'
 
-import type { InputBaseProps } from '@mui/material'
 import { ClickAwayListener, InputBase } from '@mui/material'
+import type { InputBaseProps } from '@mui/material'
 import type { SxProps } from '@mui/system'
 import classNames from 'classnames'
 
 interface Props {
-  input?: InputBaseProps & { sx?: SxProps }
+  input?: Omit<InputBaseProps, 'sx'> & { sx?: SxProps }
   buttonClassName?: string
   wrapperClassName?: string
 }
 
-export const EditInput = ({ input, buttonClassName, wrapperClassName }: Props) => {
-  const { sx, ...inputProps } = input ?? {}
+export const EditInput: React.FC<Props> = ({ input = {}, buttonClassName, wrapperClassName }) => {
+  const { sx, ...inputProps } = input
 
   const [isEdit, setIsEdit] = useState(false)
 
@@ -40,10 +40,7 @@ export const EditInput = ({ input, buttonClassName, wrapperClassName }: Props) =
             flex: 1,
             fontSize: '1.125rem',
             fontWeight: 500,
-            '& .MuiInputBase-input': {
-              p: 0
-            },
-
+            '& .MuiInputBase-input': { p: 0 },
             ...sx
           }}
           inputProps={{ 'aria-label': 'edit field' }}
