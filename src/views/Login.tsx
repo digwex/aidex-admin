@@ -28,7 +28,7 @@ const Login = () => {
   const login = async () => {
     const res = await signIn('credentials', {
       password: 'admin',
-      email: 'admin@vuexy.com',
+      email: 'admin@apedex.com',
       redirect: false
     })
 
