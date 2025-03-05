@@ -1,5 +1,7 @@
+import { BotMailing } from '@/views/apps/mailing/Bot'
+
 const Bot = () => {
-  return <div></div>
+  return <BotMailing />
 }
 
 export default Bot

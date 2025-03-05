@@ -5,8 +5,6 @@ import { Divider, Paper } from '@mui/material'
 import Tabs from '@/views/sorts/Tabs'
 import type { Locale } from '@/configs/i18n'
 import { Title } from '@/components/Title'
-import { MailingControls } from '@/views/apps/mailing/MailingControls'
-import { MailingEditor } from '@/views/apps/mailing/MailingEditor'
 import MailingTable from '@/views/apps/mailing/MailingTable'
 
 interface Props extends PropsWithChildren {
@@ -31,21 +29,18 @@ const Layout = async ({ children, params }: Props) => {
       <Title title='Рассылка' icon='tabler-mail' />
 
       <div className='grid grid-cols-2 h-full gap-4 max1400:grid-cols-1'>
-        <Paper className='p-4 grid gap-4 grid-rows-[auto_auto_auto_1fr]'>
+        <Paper className='p-4 grid gap-4 grid-rows-[auto_auto_1fr]'>
           <Tabs tabs={tabs} />
 
           <Divider />
 
-          <MailingControls />
-
-          <MailingEditor />
+          {children}
         </Paper>
 
         <Paper className='p-4'>
           <MailingTable />
         </Paper>
       </div>
-      {children}
     </div>
   )
 }
