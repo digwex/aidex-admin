@@ -60,7 +60,7 @@ const themeConfig: Config = {
   mode: 'dark', // 'system', 'light', 'dark'
   skin: 'default', // 'default', 'bordered'
   semiDark: false, // true, false
-  layout: 'collapsed', // 'vertical', 'collapsed', 'horizontal'
+  layout: 'vertical', // 'vertical', 'collapsed', 'horizontal'
   layoutPadding: 12, // Common padding for header, content, footer layout components (in px)
   compactContentWidth: 1440, // in px
   navbar: {

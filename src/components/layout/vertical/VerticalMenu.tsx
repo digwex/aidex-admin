@@ -27,7 +27,6 @@ import StyledVerticalNavExpandIcon from '@menu/styles/vertical/StyledVerticalNav
 // Style Imports
 import menuItemStyles from '@core/styles/vertical/menuItemStyles'
 import menuSectionStyles from '@core/styles/vertical/menuSectionStyles'
-import { LangSelector } from './langSelector'
 
 type RenderExpandIconProps = {
   open?: boolean
@@ -153,8 +152,6 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
         </MenuItem>
 
         <Divider className='pt-4 mb-4' />
-
-        <LangSelector />
 
         <MenuItem
           icon={<i className='tabler-shield-lock' />}

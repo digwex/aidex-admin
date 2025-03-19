@@ -43,7 +43,7 @@ const DashboardSubCard = (props: DashboardCardProps) => {
           <CustomAvatar sx={{ width: 32, height: 32 }} color='success' skin='light' variant='rounded'>
             <i className={classnames(avatarIcon, 'text-[26px]')} />
           </CustomAvatar>
-          <Typography variant='h6' color='text.secondary' className='text-sm'>
+          <Typography variant='h6' color='text.secondary' className='text-xs'>
             {title}
           </Typography>
         </div>
