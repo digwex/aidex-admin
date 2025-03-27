@@ -1,7 +1,5 @@
-import { Title } from '@/components/Title'
 import type { Locale } from '@/configs/i18n'
-import { PartnersSortsWrapper } from '@/views/apps/partners/PartnersSortsWrapper'
-import { Sorts } from '@/views/sorts/Sorts'
+import { Partners } from '@/views/apps/partners/Partners'
 
 interface Props {
   children: React.ReactNode
@@ -23,16 +21,9 @@ const Layout = async ({ children, params }: Props) => {
   ]
 
   return (
-    <div className='space-y-4'>
-      <div>
-        <PartnersSortsWrapper lang={lang}>
-          <Title icon='tabler-users-group' title='Партнеры' />
-          <Sorts tabs={{ tabs }} />
-        </PartnersSortsWrapper>
-      </div>
-
-      <div>{children}</div>
-    </div>
+    <Partners lang={lang} tabs={tabs}>
+      {children}
+    </Partners>
   )
 }
 

@@ -1,6 +1,5 @@
-import { Title } from '@/components/Title'
 import type { Locale } from '@/configs/i18n'
-import { Sorts } from '@/views/sorts/Sorts'
+import { Verification } from '@/views/apps/verification/Verification'
 
 interface Props {
   children: React.ReactNode
@@ -20,15 +19,7 @@ const Layout = async ({ children, params }: Props) => {
     { value: `/${lang}/verification/rejected`, label: 'Не одобренные', icon: 'tabler-circle-x' }
   ]
 
-  return (
-    <div className='space-y-4'>
-      <Title icon='tabler-checklist' title='Верификация' />
-      <div>
-        <Sorts tabs={{ tabs }} />
-      </div>
-      <div>{children}</div>
-    </div>
-  )
+  return <Verification tabs={tabs}>{children}</Verification>
 }
 
 export default Layout

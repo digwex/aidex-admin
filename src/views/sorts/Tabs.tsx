@@ -42,7 +42,7 @@ const Tabs = ({ tabs }: TabsCustomizedProps) => {
           variant={isRoutMatch(tab.value, pathname) ? 'contained' : 'tonal'}
           color={isRoutMatch(tab.value, pathname) ? 'success' : 'secondary'}
         >
-          <Link className='h-full px-5 py-2 gap-2 flex items-center' href={tab.value}>
+          <Link prefetch={true} className='h-full px-5 py-2 gap-2 flex items-center' href={tab.value}>
             {tab.icon && <i className={classNames(tab.icon, 'w-[18px] h-[18px] min-w-[18px]')} />}
             <span>{tab.label}</span>
           </Link>

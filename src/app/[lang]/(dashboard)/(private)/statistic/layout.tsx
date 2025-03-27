@@ -1,6 +1,5 @@
-import { Title } from '@/components/Title'
 import type { Locale } from '@/configs/i18n'
-import { Sorts } from '@/views/sorts/Sorts'
+import { Statistic } from '@/views/apps/statistic/Statistic'
 
 interface Props {
   children: React.ReactNode
@@ -21,19 +20,7 @@ const Layout = async ({ children, params }: Props) => {
     { value: `/${lang}/statistic/web`, label: 'По Web мастерам', icon: 'tabler-file-code' }
   ]
 
-  return (
-    <div className='space-y-4'>
-      <Title icon='tabler-chart-histogram' title='Статистика' />
-      <div>
-        <Sorts
-          tabs={{
-            tabs
-          }}
-        />
-      </div>
-      <div>{children}</div>
-    </div>
-  )
+  return <Statistic tabs={tabs}>{children}</Statistic>
 }
 
 export default Layout

@@ -1,6 +1,5 @@
-import { Title } from '@/components/Title'
 import type { Locale } from '@/configs/i18n'
-import { Sorts } from '@/views/apps/security/Sorts'
+import { Security } from '@/views/apps/security/security'
 
 interface Props {
   children: React.ReactNode
@@ -14,15 +13,7 @@ export const metadata = {
 const Layout = async ({ children, params }: Props) => {
   const lang = (await params).lang
 
-  return (
-    <div className='space-y-4'>
-      <Title icon='tabler-shield-lock' title='Безопасность' />
-
-      <Sorts lang={lang} />
-
-      <div>{children}</div>
-    </div>
-  )
+  return <Security lang={lang}>{children}</Security>
 }
 
 export default Layout

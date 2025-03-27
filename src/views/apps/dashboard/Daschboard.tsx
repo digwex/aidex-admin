@@ -1,3 +1,5 @@
+'use client'
+
 import Grid from '@mui/material/Grid2'
 
 import DashboardChart from '@/views/apps/dashboard/DaschboardChart'
