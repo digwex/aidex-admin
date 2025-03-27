@@ -5,7 +5,8 @@ import { PersonalData } from '@/views/apps/users/user/PersonalData'
 import { Head } from '@/views/apps/users/user/Head'
 import { Sessions } from '@/views/apps/users/user/Sessions'
 import { Actions } from '@/views/apps/users/user/Actions'
-import { Documents } from '@/views/apps/users/user/Documents'
+
+// import { Documents } from '@/views/apps/users/user/Documents'
 
 interface Props {
   children: React.ReactNode
@@ -25,7 +26,7 @@ const PartnerLayout = async ({ children, params }: Props) => {
         <Sessions />
       </div>
 
-      <Documents />
+      {/* <Documents /> */}
 
       <div className='space-y-4'>
         <PartnersTableSorts id={id} lang={lang} />
