@@ -1,6 +1,5 @@
 import type { Locale } from '@/configs/i18n'
-import { WithdrawalSorts } from '@/views/apps/withdrawals/Sorts/WithdrawalSorts'
-import { WithdrawalsTitle } from '@/views/apps/withdrawals/WithdrawalsTitle'
+import { Withdrawals } from '@/views/apps/withdrawals/Withdrawals'
 
 interface Props {
   children: React.ReactNode
@@ -23,13 +22,9 @@ const Layout = async ({ children, params }: Props) => {
   ]
 
   return (
-    <div className='space-y-4'>
-      <div className='space-y-4'>
-        <WithdrawalsTitle lang={lang} />
-        <WithdrawalSorts withdrawalsSortTabs={tabs} />
-      </div>
-      <div>{children}</div>
-    </div>
+    <Withdrawals tabs={tabs} lang={lang}>
+      {children}
+    </Withdrawals>
   )
 }
 

@@ -96,7 +96,7 @@ const MenuButton: ForwardRefRenderFunction<HTMLAnchorElement, MenuButtonProps> =
     // If there is no component but href is defined, render RouterLink
     if (rest.href) {
       return (
-        <RouterLink ref={ref} className={className} href={rest.href} {...rest}>
+        <RouterLink prefetch={true} ref={ref} className={className} href={rest.href} {...rest}>
           {children}
         </RouterLink>
       )

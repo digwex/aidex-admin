@@ -1,6 +1,4 @@
-import { Title } from '@/components/Title'
-import { UsersSortsWrapper } from '@/views/apps/users/UsersSortsWrapper'
-import { Sorts } from '@/views/sorts/Sorts'
+import { Users } from '@/views/apps/users/Users'
 
 import type { Locale } from '@configs/i18n'
 
@@ -45,15 +43,9 @@ const Layout = async ({ children, params }: Props) => {
   ]
 
   return (
-    <div>
-      <div className='space-y-4 mb-4'>
-        <UsersSortsWrapper lang={lang}>
-          <Title icon='tabler-user' title='Пользователи' />
-          <Sorts tabs={{ tabs }} />
-        </UsersSortsWrapper>
-      </div>
-      <div>{children}</div>
-    </div>
+    <Users lang={lang} tabs={tabs}>
+      {children}
+    </Users>
   )
 }
 

@@ -1,3 +1,5 @@
+'use client'
+
 import SecurityLoginsTable from '@/views/apps/security/SecurityLoginsTable'
 
 const Logins = () => {
