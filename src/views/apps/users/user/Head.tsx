@@ -6,7 +6,7 @@ import { EditInput } from '@/components/EditInput'
 
 const stackProps: StackProps = {
   direction: 'column',
-  className: 'mr-auto',
+  className: 'mr-2',
   spacing: 1
 }
 
@@ -45,7 +45,7 @@ export const Head = () => {
           <Typography variant='h5'>2023-04-06 16:41</Typography>
         </Stack>
 
-        <Stack {...stackProps}>
+        {/* <Stack {...stackProps}>
           <Typography color='secondary'>E-mail:</Typography>
           <EditInput
             input={{
@@ -67,7 +67,7 @@ export const Head = () => {
             variant='tonal'
             color='error'
           />
-        </Stack>
+        </Stack> */}
       </Box>
 
       <Divider className='w-full max600:block hidden' />
