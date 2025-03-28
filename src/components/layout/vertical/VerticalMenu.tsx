@@ -8,7 +8,6 @@ import { useTheme } from '@mui/material/styles'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // Type Imports
-import { signOut } from 'next-auth/react'
 
 import { Divider } from '@mui/material'
 
@@ -27,6 +26,7 @@ import StyledVerticalNavExpandIcon from '@menu/styles/vertical/StyledVerticalNav
 // Style Imports
 import menuItemStyles from '@core/styles/vertical/menuItemStyles'
 import menuSectionStyles from '@core/styles/vertical/menuSectionStyles'
+import { useAuth } from '@/hooks/useAuth'
 
 type RenderExpandIconProps = {
   open?: boolean
@@ -46,6 +46,7 @@ const RenderExpandIcon = ({ open, transitionDuration }: RenderExpandIconProps) =
 
 const VerticalMenu = ({ scrollMenu }: Props) => {
   // Hooks
+  const { logout } = useAuth()
   const theme = useTheme()
   const verticalNavOptions = useVerticalNav()
   const params = useParams()
@@ -57,7 +58,7 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
   const handleUserLogout = async () => {
     try {
       // Sign out from the app
-      await signOut({ callbackUrl: process.env.NEXT_PUBLIC_APP_URL })
+      await logout()
     } catch (error) {
       console.error(error)
 
