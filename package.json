@@ -94,6 +94,7 @@
     "server-only": "0.0.1",
     "suneditor": "^2.47.0",
     "suneditor-react": "^3.6.1",
+    "usehooks-ts": "^3.1.1",
     "valibot": "0.42.1"
   },
   "devDependencies": {
