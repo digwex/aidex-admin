@@ -2,8 +2,6 @@
 
 import { useEffect } from 'react'
 
-import { useParams, useRouter } from 'next/navigation'
-
 import { toast } from 'react-toastify'
 
 import { useAppDispatch } from '../hooks/useRedux'
@@ -21,8 +19,6 @@ let socket: WebSocket
 
 const WebSocketUserProvider = ({ children }: Props) => {
   const dispatch = useAppDispatch()
-  const { lang } = useParams()
-  const router = useRouter()
 
   const { adminTicket } = useUser()
 
@@ -58,7 +54,6 @@ const WebSocketUserProvider = ({ children }: Props) => {
               refreshTokenId
             })
           )
-          router.replace(`/${lang}/dashboard`)
         } else if (message?.message?.includes?.('token already connected')) {
           toast.error('Клиент, использующий этот токен, уже подключен')
           console.log('Close socket from token already connected')
