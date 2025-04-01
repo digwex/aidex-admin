@@ -99,8 +99,8 @@ const CustomTable = ({
           <div className='table_wrap_border'>
             <table cellSpacing='0' className={`table_reduce ${customTableClass}`}>
               <thead>{tableSortTitles}</thead>
-              <tbody>
-                {!isSuccess && <TableLoader isLoading={isLoading || isFetching} className='tableLoader' />}
+              <tbody className='relative'>
+                {!isSuccess && <TableLoader isLoading={isLoading || isFetching} />}
                 {isSuccess &&
                   (data?.data || data?.result)?.map((item: any, index: number) => (
                     <DataItem

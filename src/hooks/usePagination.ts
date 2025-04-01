@@ -4,6 +4,8 @@ import { usePathname } from 'next/navigation'
 
 import { useDebounceValue } from 'usehooks-ts'
 
+import { addDays } from 'date-fns'
+
 import { useAppSelector } from './useRedux'
 import { store } from '@/redux-store'
 
@@ -20,7 +22,7 @@ interface Props {
 
 const getTake = (take: string | number | undefined) => parseInt(take as string) || undefined
 
-const isBadPathName = (pathname: string, date: [number, number]) => {
+const isBadPathName = (pathname: string, date: [number | null, number | null]) => {
   if (
     (pathname.startsWith('/admin/statistics') ||
       pathname.includes('by-days') ||
@@ -78,7 +80,7 @@ export const usePagination = ({
   const date = useAppSelector(state => state.search.date)
   const searchValue = useAppSelector(state => state.search.value)
 
-  const [storeDate, setStoreDate] = useState<[number, number] | undefined>(undefined)
+  const [storeDate, setStoreDate] = useState<[number | null, number | null] | undefined>(undefined)
 
   useLayoutEffect(() => {
     const unsubscribe = store.subscribe(() => {
@@ -101,17 +103,25 @@ export const usePagination = ({
   const fetchAdmins = useCallback(async () => {
     const willSendDate = storeDate === undefined ? store.getState().search.date : storeDate
 
-    console.debug('orderBy', orderBy)
+    const from = isDate
+      ? willSendDate?.[0]
+        ? Math.floor(new Date(willSendDate[0]).getTime() / 1000)
+        : undefined
+      : undefined
+
+    const to = isDate
+      ? willSendDate?.[1]
+        ? Math.floor(new Date(willSendDate[1]).getTime() / 1000)
+        : willSendDate[0]
+          ? Math.floor(addDays(new Date(willSendDate[0]), 1).getTime() / 1000)
+          : undefined
+      : undefined
+
     await refetch({
       skip,
       take,
-
-      from: isDate
-        ? willSendDate?.[0]
-          ? Math.floor(new Date(willSendDate[0]).getTime() / 1000)
-          : undefined
-        : undefined,
-      to: isDate ? (willSendDate?.[1] ? Math.floor(new Date(willSendDate[1]).getTime() / 1000) : undefined) : undefined,
+      from,
+      to,
       search: isSearch ? debouncedSearchValue || undefined : undefined,
       searchBar: isSearchBar ? debouncedSearchValue || undefined : undefined,
       uid,

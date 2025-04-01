@@ -9,9 +9,7 @@ interface Props {
 export const HandledFlag = ({ flag, className }: Props) => {
   if (!flag) return null
 
-  const findFlag = codeList.find(
-    code => code?.alpha2 === flag || code?.alpha3 === flag,
-  )
+  const findFlag = codeList.find(code => code?.alpha2 === flag || code?.alpha3 === flag)
 
   if (!findFlag) return null
 

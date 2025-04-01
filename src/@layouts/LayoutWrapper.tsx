@@ -9,7 +9,8 @@ import type { SystemMode } from '@core/types'
 // Hook Imports
 import { useSettings } from '@core/hooks/useSettings'
 import useLayoutInit from '@core/hooks/useLayoutInit'
-import { useClearStateSearch } from '@/hooks/useClearStateSearch'
+
+// import { useClearStateSearch } from '@/hooks/useClearStateSearch'
 
 type LayoutWrapperProps = {
   systemMode: SystemMode
@@ -21,7 +22,7 @@ const LayoutWrapper = (props: LayoutWrapperProps) => {
   // Props
   const { systemMode, verticalLayout, horizontalLayout } = props
 
-  useClearStateSearch()
+  // useClearStateSearch()
 
   // Hooks
   const { settings } = useSettings()

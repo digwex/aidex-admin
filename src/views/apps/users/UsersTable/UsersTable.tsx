@@ -29,7 +29,6 @@ export default UsersCustomTable
 
 // import { usePathname } from 'next/navigation'
 
-// import type { ColumnDef } from '@tanstack/react-table'
 // import {
 //   createColumnHelper,
 //   useReactTable,

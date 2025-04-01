@@ -47,13 +47,14 @@ export const useTableSortHeader = ({ sortTitles, orderBy, setOrderBy }: Props) =
             >
               {sort === null ? null : (
                 <div className='th_column'>
-                  <ArrowIcon isYellow={orderBy.field === sort && orderBy.direction === SORT_DIRECTION.ASC} />
-                  <ArrowIcon isDown isYellow={orderBy.field === sort && orderBy.direction === SORT_DIRECTION.DESC} />
+                  <ArrowIcon isActive={orderBy.field === sort && orderBy.direction === SORT_DIRECTION.ASC} />
+                  <ArrowIcon isDown isActive={orderBy.field === sort && orderBy.direction === SORT_DIRECTION.DESC} />
                 </div>
               )}
               <span
                 style={{
-                  color: sort !== null ? (orderBy.field === sort ? '#80F6BC' : 'inherit') : 'inherit'
+                  color:
+                    sort !== null ? (orderBy.field === sort ? 'var(--mui-palette-success-main)' : 'inherit') : 'inherit'
                 }}
               >
                 {label}

@@ -3359,7 +3359,7 @@ __metadata:
     eslint-config-prettier: "npm:9.1.0"
     eslint-import-resolver-typescript: "npm:3.7.0"
     eslint-plugin-import: "npm:2.31.0"
-    flagpack-core: "npm:^2.0.0"
+    flagpack-core: "npm:^1.0.0"
     fs-extra: "npm:11.2.0"
     globby: "npm:14.0.2"
     input-otp: "npm:1.4.1"
@@ -5628,10 +5628,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flagpack-core@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "flagpack-core@npm:2.0.0"
-  checksum: 10c0/7ba0da668ddd7ea3931c4a68d02387be39249d4481d491ab8199e1452fd6a732d0b24f952e2140d10ad0be768616215433f865eaac92b9d0580cb9a1adbc63eb
+"flagpack-core@npm:^1.0.0":
+  version: 1.1.2
+  resolution: "flagpack-core@npm:1.1.2"
+  checksum: 10c0/4f254621bb4e8b07d5758cd47ceb103021d2fb56bc03915b8a9e645e34794a469571dbab980ee9db9732338b1083cf43747e45282dcf1386fd9c995d9471fbcf
   languageName: node
   linkType: hard
 

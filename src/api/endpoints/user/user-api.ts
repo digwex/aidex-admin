@@ -1,4 +1,4 @@
-import { Tag, apiFalio } from '../..'
+import { Tag, API } from '../..'
 import { type IUserToBanBody } from '../../types'
 import type {
   ApiResponseTransactions,
@@ -16,111 +16,106 @@ import type {
   UserToggleTwoFa,
   UserVerificationParams,
   UserVerificationResponse,
-  WithdrawalFakeParams,
+  WithdrawalFakeParams
 } from './user-types'
 
-export const userApi = apiFalio.injectEndpoints({
+export const userApi = API.injectEndpoints({
   endpoints: builder => ({
     getMainUserStats: builder.query({
       query: (params: { uid: string }) => ({ url: 'user/total', params }),
       transformResponse: (response: ApiResponseUserStats) => response,
-      providesTags: [Tag.User, Tag.UserMainStats],
+      providesTags: [Tag.User, Tag.UserMainStats]
     }),
     getUserSessions: builder.query({
       query: (params: { uid: string }) => ({
         url: 'user/sessions',
-        params,
+        params
       }),
       transformResponse: (response: ApiResponseUserSessions) => response,
-      providesTags: [Tag.User],
+      providesTags: [Tag.User]
     }),
     getUserTransactions: builder.query({
       query: (params: IQueryTransactions) => ({
         url: 'users/transactions',
-        params,
+        params
       }),
       transformResponse: (response: ApiResponseTransactions) => response,
-      providesTags: [Tag.User],
+      providesTags: [Tag.User]
     }),
     setEmailUser: builder.mutation({
       query: (body: { uid: string; email: string }) => ({
         url: 'users/email',
         method: 'POST',
-        body,
+        body
       }),
       transformResponse: (response: ApiResponseTransactions) => response,
-      invalidatesTags: [Tag.User],
+      invalidatesTags: [Tag.User]
     }),
     setUserName: builder.mutation({
       query: (body: { uid: string; username: string }) => ({
         url: 'users/username',
         method: 'POST',
-        body,
+        body
       }),
       transformResponse: (response: ApiResponseTransactions) => response,
-      invalidatesTags: [Tag.User],
+      invalidatesTags: [Tag.User]
     }),
     stopUserSession: builder.mutation({
       query: (body: { sessionId: string }) => ({
         url: 'user/sessions',
         method: 'DELETE',
-        body,
+        body
       }),
       transformResponse: (response: ApiResponseTransactions) => response,
-      invalidatesTags: [Tag.User],
+      invalidatesTags: [Tag.User]
     }),
     upgradeKYCLevel: builder.mutation({
       query: (body: { uid: string }) => ({
         url: 'users/kyc/upgrade',
         method: 'POST',
-        body,
+        body
       }),
       transformResponse: (response: ApiResponseTransactions) => response,
-      invalidatesTags: [Tag.User],
+      invalidatesTags: [Tag.User]
     }),
     downgradeKYCLevel: builder.mutation({
       query: (body: { uid: string }) => ({
         url: 'users/kyc/downgrade',
         method: 'POST',
-        body,
+        body
       }),
       transformResponse: (response: ApiResponseTransactions) => response,
-      invalidatesTags: [Tag.User],
+      invalidatesTags: [Tag.User]
     }),
     deleteUser: builder.mutation({
       query: (body: { uid: string }) => ({
         url: 'users/delete',
         method: 'DELETE',
-        body,
+        body
       }),
       transformResponse: (response: unknown) => response,
-      invalidatesTags: [Tag.User, Tag.Users],
+      invalidatesTags: [Tag.User, Tag.Users]
     }),
     revertDeletingUser: builder.mutation({
       query: (body: { uid: string }) => ({
         url: 'users/revert-deleting',
         method: 'POST',
-        body,
+        body
       }),
       transformResponse: (response: unknown) => response,
-      invalidatesTags: [Tag.User, Tag.Users],
+      invalidatesTags: [Tag.User, Tag.Users]
     }),
-    setPersonalUserData: builder.mutation<
-      UserSetPersonalDataResponse,
-      Partial<UserPersonalDataParams>
-    >({
+    setPersonalUserData: builder.mutation<UserSetPersonalDataResponse, Partial<UserPersonalDataParams>>({
       query: body => ({
         url: 'users/personalData',
         method: 'POST',
-        body,
+        body
       }),
 
-      async onQueryStarted(
-        willSendData: UserPersonalDataParams,
-        { queryFulfilled, dispatch },
-      ) {
+      async onQueryStarted(willSendData: UserPersonalDataParams, { queryFulfilled, dispatch }) {
         try {
           const { data: updatedData } = await queryFulfilled
+
           dispatch(
             userApi.util.updateQueryData(
               'getUserPersonalData',
@@ -128,10 +123,12 @@ export const userApi = apiFalio.injectEndpoints({
               (cachePersonalData: ApiResponseUserPersonalData) => {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const { message, code, ...restUpdateData } = updatedData
+
                 cachePersonalData.user = restUpdateData
+
                 return cachePersonalData
-              },
-            ),
+              }
+            )
           )
           dispatch(
             userApi.util.updateQueryData(
@@ -139,182 +136,176 @@ export const userApi = apiFalio.injectEndpoints({
               { uid: willSendData.uid ?? '' },
               (cacheMainUserData: ApiResponseUserStats) => {
                 const { email, password, partnerId } = willSendData
+
                 if (password) cacheMainUserData.plainPassword = password
                 if (email) cacheMainUserData.user.email = email
-                if (partnerId)
-                  cacheMainUserData.user.partnerId = partnerId?.toString() ?? ''
+                if (partnerId) cacheMainUserData.user.partnerId = partnerId?.toString() ?? ''
+
                 return cacheMainUserData
-              },
-            ),
+              }
+            )
           )
         } catch (error) {
           console.error('setPersonalUserData onQueryStarted error ', error)
         }
-      },
+      }
+
       //  invalidatesTags: [Tag.User],
     }),
     getUserPersonalData: builder.query({
       query: (params: { uid: string }) => ({
         url: 'users/personalData',
-        params,
+        params
       }),
       transformResponse: (response: ApiResponseUserPersonalData) => response,
-      providesTags: [Tag.User],
+      providesTags: [Tag.User]
     }),
     setUserPassword: builder.mutation({
       query: (body: { uid: string; password: string }) => ({
         url: 'users/password',
         method: 'POST',
-        body,
+        body
       }),
       transformResponse: (response: unknown) => response,
-      invalidatesTags: [Tag.User],
+      invalidatesTags: [Tag.User]
     }),
     getUserDocuments: builder.query({
       query: (params: { uid: string }) => ({
         url: 'users/personalData/documents',
-        params,
+        params
       }),
       transformResponse: (response: ApiResponseUserDocuments) => response,
-      providesTags: [Tag.UserDocs],
+      providesTags: [Tag.UserDocs]
     }),
     setUserDocuments: builder.mutation<void, FormData>({
       query: body => ({
         url: 'users/personalData/documents',
         method: 'POST',
-        body,
+        body
       }),
-      invalidatesTags: [Tag.UserDocs, Tag.UserVerification],
+      invalidatesTags: [Tag.UserDocs, Tag.UserVerification]
     }),
     setDepositFake: builder.mutation({
       query: (body: DepositFakeParams) => ({
         url: 'users/deposit/fake',
         method: 'POST',
-        body,
+        body
       }),
       transformResponse: (response: unknown) => response,
-      invalidatesTags: [Tag.User],
+      invalidatesTags: [Tag.User]
     }),
     setWithdrawalFake: builder.mutation({
       query: (body: WithdrawalFakeParams) => ({
         url: 'users/withdrawal/fake',
         method: 'POST',
-        body,
+        body
       }),
       transformResponse: (response: unknown) => response,
-      invalidatesTags: [Tag.User],
+      invalidatesTags: [Tag.User]
     }),
     userToBan: builder.mutation({
       query: (body: IUserToBanBody) => ({
         url: 'users/ban',
         method: 'POST',
-        body,
+        body
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled
+
           dispatch(
-            userApi.util.updateQueryData(
-              'getMainUserStats',
-              { uid: data.id },
-              stats => {
-                stats.user.isBlocked = true
-                return stats
-              },
-            ),
+            userApi.util.updateQueryData('getMainUserStats', { uid: data.id }, stats => {
+              stats.user.isBlocked = true
+
+              return stats
+            })
           )
         } catch (error) {
           console.log('getMainUserStats error', error)
         }
       },
-      invalidatesTags: [Tag.Users],
+      invalidatesTags: [Tag.Users]
     }),
     deletePersonalDataDocuments: builder.mutation({
       query: (body: { ids: string[] }) => ({
         url: 'users/personalData/documents',
         method: 'DELETE',
-        body,
+        body
       }),
       transformResponse: (response: unknown) => response,
-      invalidatesTags: [Tag.User, Tag.UserDocs],
+      invalidatesTags: [Tag.User, Tag.UserDocs]
     }),
     setDeclineRequest: builder.mutation({
       query: (body: DeclineRequestBody) => ({
         url: 'verification/decline',
         method: 'POST',
-        body,
+        body
       }),
       transformResponse: (response: unknown) => response,
-      invalidatesTags: [Tag.User],
+      invalidatesTags: [Tag.User]
     }),
-    getUserVerifications: builder.query<
-      UserVerificationResponse,
-      UserVerificationParams
-    >({
+    getUserVerifications: builder.query<UserVerificationResponse, UserVerificationParams>({
       query: params => ({
         url: 'users/verifications',
-        params,
+        params
       }),
       providesTags: result =>
         result
           ? [
               ...result.data.map(({ id }) => ({
                 type: Tag.UserVerification,
-                id,
+                id
               })),
-              { type: Tag.UserVerification, id: 'USER-VERIFICATIONS' },
+              { type: Tag.UserVerification, id: 'USER-VERIFICATIONS' }
             ]
-          : [{ type: Tag.UserVerification, id: 'USER-VERIFICATIONS' }],
+          : [{ type: Tag.UserVerification, id: 'USER-VERIFICATIONS' }]
     }),
     toggleTwoFa: builder.mutation({
       query: (body: UserToggleTwoFa) => ({
         url: 'users/2fa',
         method: 'PUT',
-        body,
+        body
       }),
-      invalidatesTags: [Tag.User],
+      invalidatesTags: [Tag.User]
     }),
     unfreeze: builder.mutation({
       query: (body: { uid: string }) => ({
         url: 'users/unfreeze',
         method: 'DELETE',
-        body,
+        body
       }),
       transformResponse: (response: ApiResponseTransactions) => response,
-      invalidatesTags: [Tag.User],
+      invalidatesTags: [Tag.User]
     }),
     freeze: builder.mutation({
       query: (body: { uid: string; days: number }) => ({
         url: 'users/freeze',
         method: 'POST',
-        body,
+        body
       }),
       transformResponse: (response: ApiResponseTransactions) => response,
-      invalidatesTags: [Tag.User],
+      invalidatesTags: [Tag.User]
     }),
-    invisibleSession: builder.query<
-      InvisibleSessionResponse,
-      InvisibleSessionBody
-    >({
+    invisibleSession: builder.query<InvisibleSessionResponse, InvisibleSessionBody>({
       query: params => ({
         url: 'auth/invisible-session',
-        params,
-      }),
+        params
+      })
     }),
     changeAccountType: builder.mutation<void, { uid: string; type: string }>({
       query: body => ({
         url: 'user/account-type',
         method: 'PUT',
-        body,
-      }),
+        body
+      })
     }),
     editBalance: builder.mutation({
       query: (body: { uid: string; newBalance: number; isDemo: boolean }) => ({
         url: 'users/balance',
         method: 'PUT',
-        body,
+        body
       }),
-      invalidatesTags: [Tag.User],
+      invalidatesTags: [Tag.User]
     }),
     getUserTransactionsRate: builder.query<
       { deposits: number; withdrawals: number; cancel: number; bonus: number },
@@ -322,11 +313,11 @@ export const userApi = apiFalio.injectEndpoints({
     >({
       query: params => ({
         url: 'users/transactions-rate',
-        params,
+        params
       }),
-      providesTags: [Tag.User],
-    }),
-  }),
+      providesTags: [Tag.User]
+    })
+  })
 })
 
 export const {
@@ -359,5 +350,5 @@ export const {
   useInvisibleSessionQuery,
   useChangeAccountTypeMutation,
   useEditBalanceMutation,
-  useGetUserTransactionsRateQuery,
+  useGetUserTransactionsRateQuery
 } = userApi

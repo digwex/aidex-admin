@@ -4,12 +4,12 @@ const styles = {
 }
 
 interface Props {
-  isYellow?: boolean
+  isActive?: boolean
   isDown?: boolean
 }
 
-const ArrowIcon = ({ isYellow, isDown }: Props) => {
-  const handleColor = () => (isYellow ? '#80F6BC' : '#909DA9')
+const ArrowIcon = ({ isActive, isDown }: Props) => {
+  const handleColor = () => (isActive ? 'var(--mui-palette-success-main)' : 'currentColor')
 
   return isDown ? (
     <div style={styles}>

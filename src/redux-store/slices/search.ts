@@ -3,7 +3,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 interface SearchState {
   value: string
   take: string
-  date: [number, number]
+  date: [number | null, number | null]
   dateTime: string
 }
 
@@ -33,7 +33,7 @@ const searchSlice = createSlice({
     setSearchTerm(state, action: PayloadAction<string>) {
       state.value = action.payload
     },
-    setSearchByDate(state, action: PayloadAction<[number, number]>) {
+    setSearchByDate(state, action: PayloadAction<[number | null, number | null]>) {
       state.date = action.payload
     },
     setSearchByTake(state, action: PayloadAction<string>) {

@@ -2,13 +2,13 @@ const EmptyDataTitle = ({ title }: { title?: string }) => {
   return (
     <p
       style={{
+        height: '100%',
         width: '100%',
         textAlign: 'center',
-        paddingBlock: '30px',
-        color: '#ffffff'
+        paddingBlock: '30px'
       }}
     >
-      {title ?? 'Список пуст'}
+      {title || 'Список пуст'}
     </p>
   )
 }
