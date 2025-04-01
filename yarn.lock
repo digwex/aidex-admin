@@ -3359,6 +3359,7 @@ __metadata:
     eslint-config-prettier: "npm:9.1.0"
     eslint-import-resolver-typescript: "npm:3.7.0"
     eslint-plugin-import: "npm:2.31.0"
+    flagpack-core: "npm:^2.0.0"
     fs-extra: "npm:11.2.0"
     globby: "npm:14.0.2"
     input-otp: "npm:1.4.1"
@@ -3378,6 +3379,7 @@ __metadata:
     react-dom: "npm:18.3.1"
     react-draft-wysiwyg: "npm:^1.15.0"
     react-dropzone: "npm:14.3.5"
+    react-flagpack: "npm:^2.0.6"
     react-hook-form: "npm:7.54.1"
     react-map-gl: "npm:7.1.8"
     react-perfect-scrollbar: "npm:1.5.8"
@@ -3870,6 +3872,13 @@ __metadata:
     ansi-styles: "npm:^4.1.0"
     supports-color: "npm:^7.1.0"
   checksum: 10c0/4a3fef5cc34975c898ffe77141450f679721df9dde00f6c304353fa9c8b571929123b26a0e4617bde5018977eb655b31970c297b91b63ee83bb82aeb04666880
+  languageName: node
+  linkType: hard
+
+"chalk@npm:^5.3.0":
+  version: 5.4.1
+  resolution: "chalk@npm:5.4.1"
+  checksum: 10c0/b23e88132c702f4855ca6d25cb5538b1114343e41472d5263ee8a37cccfccd9c4216d111e1097c6a27830407a1dc81fecdf2a56f2c63033d4dbbd88c10b0dcef
   languageName: node
   linkType: hard
 
@@ -5619,6 +5628,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"flagpack-core@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "flagpack-core@npm:2.0.0"
+  checksum: 10c0/7ba0da668ddd7ea3931c4a68d02387be39249d4481d491ab8199e1452fd6a732d0b24f952e2140d10ad0be768616215433f865eaac92b9d0580cb9a1adbc63eb
+  languageName: node
+  linkType: hard
+
 "flat-cache@npm:^3.0.4":
   version: 3.2.0
   resolution: "flat-cache@npm:3.2.0"
@@ -5703,6 +5719,17 @@ __metadata:
     jsonfile: "npm:^6.0.1"
     universalify: "npm:^2.0.0"
   checksum: 10c0/d77a9a9efe60532d2e790e938c81a02c1b24904ef7a3efb3990b835514465ba720e99a6ea56fd5e2db53b4695319b644d76d5a0e9988a2beef80aa7b1da63398
+  languageName: node
+  linkType: hard
+
+"fs-extra@npm:^11.2.0":
+  version: 11.3.0
+  resolution: "fs-extra@npm:11.3.0"
+  dependencies:
+    graceful-fs: "npm:^4.2.0"
+    jsonfile: "npm:^6.0.1"
+    universalify: "npm:^2.0.0"
+  checksum: 10c0/5f95e996186ff45463059feb115a22fb048bdaf7e487ecee8a8646c78ed8fdca63630e3077d4c16ce677051f5e60d3355a06f3cd61f3ca43f48cc58822a44d0a
   languageName: node
   linkType: hard
 
@@ -8504,6 +8531,21 @@ __metadata:
   version: 3.2.2
   resolution: "react-fast-compare@npm:3.2.2"
   checksum: 10c0/0bbd2f3eb41ab2ff7380daaa55105db698d965c396df73e6874831dbafec8c4b5b08ba36ff09df01526caa3c61595247e3269558c284e37646241cba2b90a367
+  languageName: node
+  linkType: hard
+
+"react-flagpack@npm:^2.0.6":
+  version: 2.0.6
+  resolution: "react-flagpack@npm:2.0.6"
+  dependencies:
+    chalk: "npm:^5.3.0"
+    fs-extra: "npm:^11.2.0"
+    meow: "npm:^13.2.0"
+  peerDependencies:
+    react: ^16.8.* || ^17.* || ^18.*
+  bin:
+    react-flagpack: cli/flagpack.js
+  checksum: 10c0/bbbf2f93f7715ae69566e6d17a047fc29056333b67fdc80782a39e40b45af6f95799700ac9b54c15859fcd71adfc5c11836948cb36eab5f19c46df223ffd6c27
   languageName: node
   linkType: hard
 
