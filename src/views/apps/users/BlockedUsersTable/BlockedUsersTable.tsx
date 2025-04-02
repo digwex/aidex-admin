@@ -15,7 +15,7 @@ function BlockedUsersTable() {
       query={useLazyGetAllUsersQuery}
       DataItem={BlockedUserRow}
       sortTitles={userSortTitles}
-      fetchParams={{ isBlocked: false }}
+      fetchParams={{ isBlocked: true }}
       order={{ field: 'balance', direction: SORT_DIRECTION.DESC }}
     />
   )

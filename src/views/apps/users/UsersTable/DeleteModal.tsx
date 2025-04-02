@@ -44,7 +44,7 @@ export const DeleteModal = ({ uid }: Props) => {
           <img src='/images/icons/reject.svg' alt='close' className='w-16 h-16' />
 
           <Typography className='text-center' variant='h4'>
-            Вы уверены что хотите <br /> заблокировать трейдера?
+            Вы уверены что хотите <br /> удалить трейдера?
           </Typography>
 
           <div className='w-full flex items-center gap-3 max600:flex-col'>
@@ -52,7 +52,7 @@ export const DeleteModal = ({ uid }: Props) => {
               Нет
             </Button>
             <Button variant='contained' color='error' className='w-full' onClick={() => handleDeleteUser(closeModal)}>
-              Заблокировать
+              Удалить
             </Button>
           </div>
         </div>

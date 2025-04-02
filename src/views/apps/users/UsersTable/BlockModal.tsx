@@ -1,8 +1,31 @@
 import { Button, Typography } from '@mui/material'
 
-import ModalButton from '@/components/ModalButton'
+import { toast } from 'react-toastify'
 
-export const BlockModal = () => {
+import ModalButton from '@/components/ModalButton'
+import { useUserToBanMutation } from '@/api/endpoints/users/users-api'
+
+interface Props {
+  uId: string
+}
+
+export const BlockModal = ({ uId }: Props) => {
+  const [userToBan] = useUserToBanMutation()
+
+  const handleBanUser = async (close: () => void) => {
+    await toast.promise(
+      userToBan({
+        uId
+      }).unwrap(),
+      {
+        pending: 'Блокировка...',
+        success: 'Аккаунт успешно заблокирован',
+        error: 'Ошибка при блокировке аккаунта'
+      }
+    )
+    close()
+  }
+
   return (
     <ModalButton
       maxWidth='xs'
@@ -29,7 +52,7 @@ export const BlockModal = () => {
             <Button variant='outlined' color='secondary' className='w-full' onClick={closeModal}>
               Нет
             </Button>
-            <Button variant='contained' color='error' className='w-full' onClick={closeModal}>
+            <Button variant='contained' color='error' className='w-full' onClick={() => handleBanUser(closeModal)}>
               Заблокировать
             </Button>
           </div>

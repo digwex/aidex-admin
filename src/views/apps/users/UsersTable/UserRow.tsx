@@ -70,7 +70,7 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
               ) : (
                 <>
                   <DeleteModal uid={String(user.nId)} />
-                  <BlockModal />
+                  <BlockModal uId={String(user.nId)} />
                 </>
               )}
             </div>
