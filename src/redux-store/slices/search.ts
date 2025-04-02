@@ -1,22 +1,12 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
+import { getInitialSearchDate } from '@/utils/getInitialSearchDate'
+
 interface SearchState {
   value: string
   take: string
   date: [number | null, number | null]
   dateTime: string
-}
-
-const getInitialSearchDate = (): [number, number] => {
-  const startDate = new Date()
-
-  startDate.setDate(startDate.getDate() - 30 * 12)
-
-  const endDate = new Date()
-
-  endDate.setHours(23, 59, 59, 999)
-
-  return [startDate.getTime(), endDate.getTime()]
 }
 
 const initialState: SearchState = {

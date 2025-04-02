@@ -10,6 +10,7 @@ import { addDays } from 'date-fns'
 
 import { useAppSelector } from './useRedux'
 import { store } from '@/redux-store'
+import { getInitialSearchDate } from '@/utils/getInitialSearchDate'
 
 interface Props {
   refetch: any
@@ -104,14 +105,13 @@ export const usePagination = ({
 
   const fetchAdmins = useCallback(async () => {
     const willSendDate = storeDate === undefined ? store.getState().search.date : storeDate
-
-    const currentData = new Date()
+    const [seconds10YearsAgo, endOfDaySeconds] = getInitialSearchDate()
 
     const from = isDate
       ? willSendDate?.[0]
         ? Math.floor(new Date(willSendDate[0]).getTime() / 1000)
         : undefined
-      : currentData.setFullYear(currentData.getFullYear() - 10) / 1000
+      : seconds10YearsAgo
 
     const to = isDate
       ? willSendDate?.[1]
@@ -119,22 +119,8 @@ export const usePagination = ({
         : willSendDate[0]
           ? Math.floor(addDays(new Date(willSendDate[0]), 1).getTime() / 1000)
           : undefined
-      : currentData.getTime()
+      : endOfDaySeconds
 
-    console.log('START FETCHING', store.getState().search, {
-      skip,
-      take,
-      from,
-      to,
-      search: isSearch ? debouncedSearchValue || undefined : undefined,
-      searchBar: isSearchBar ? debouncedSearchValue || undefined : undefined,
-      uid,
-      type,
-      withHash,
-      orderBy: orderBy.field,
-      direction: orderBy.direction,
-      ...rest
-    })
     await refetch({
       skip,
       take,
@@ -149,7 +135,6 @@ export const usePagination = ({
       direction: orderBy.direction,
       ...rest
     })
-    console.log('FINISHED')
   }, [skip, take, storeDate, debouncedSearchValue, type, withHash, pages, uid, orderBy])
 
   useEffect(() => {

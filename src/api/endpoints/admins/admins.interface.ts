@@ -10,8 +10,10 @@ export interface AdminResponse {
 }
 
 export interface AdminResponseData {
-  data: Admin[]
-  total: number
+  data: {
+    data: Admin[]
+    total: number
+  }
 }
 
 export interface Admin {

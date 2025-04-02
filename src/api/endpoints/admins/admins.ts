@@ -7,7 +7,7 @@ const adminsApi = API.injectEndpoints({
       query: params => ({ url: 'admins', params }),
       providesTags: result =>
         result
-          ? [...result.data.map(({ id }) => ({ type: Tag.Admins, id })), { type: Tag.Admins, id: 'ADMIN' }]
+          ? [...result.data.data.map(({ id }) => ({ type: Tag.Admins, id })), { type: Tag.Admins, id: 'ADMIN' }]
           : [{ type: Tag.Admins, id: 'ADMIN' }]
     }),
     createAdmin: builder.mutation({
