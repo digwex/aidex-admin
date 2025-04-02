@@ -1,25 +1,20 @@
-import { MenuItem } from '@mui/material'
-
-import CustomTextField from '@/@core/components/mui/TextField'
 import DataPickerRange from '@/views/DataPickerRange'
+import { Search } from '@/views/sorts/Search'
+import { SelectRange } from '@/views/sorts/SelectRange'
+import { SelectTakeAmount } from '@/views/sorts/SelectTakeAmount'
 
 export const LoginsSorts = () => {
   return (
     <div className='flex items-center gap-2 max800:flex-wrap'>
-      <CustomTextField className='max800:w-full' placeholder='Найти по ID / Клиенту' />
-      <DataPickerRange />
+      <div className='flex items-center gap-2 max800:flex-wrap max800:w-full'>
+        <Search />
+        <DataPickerRange />
+      </div>
 
-      <CustomTextField select className='max800:w-full' defaultValue='today'>
-        <MenuItem value='today'>Все статусы</MenuItem>
-        <MenuItem value='7_day'>Специальные</MenuItem>
-        <MenuItem value='30_day'>Специальные</MenuItem>
-        <MenuItem value='90_day'>Специальные</MenuItem>
-      </CustomTextField>
-
-      <CustomTextField select className='max800:w-full' defaultValue='50'>
-        <MenuItem value='50'>50 записей</MenuItem>
-        <MenuItem value='90'>90 записей</MenuItem>
-      </CustomTextField>
+      <div className='flex items-center gap-2 max800:flex-wrap max800:w-full'>
+        <SelectRange />
+        <SelectTakeAmount />
+      </div>
     </div>
   )
 }

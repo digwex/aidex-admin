@@ -1,13 +1,15 @@
 'use client'
 
-import { MenuItem, Paper } from '@mui/material'
+import { Paper } from '@mui/material'
 
 import classNames from 'classnames'
 
-import CustomTextField from '@/@core/components/mui/TextField'
 import type { TabsCustomizedProps } from './Tabs'
 import Tabs from './Tabs'
 import DataPickerRange from '../DataPickerRange'
+import { SelectRange } from './SelectRange'
+import { SelectTakeAmount } from './SelectTakeAmount'
+import { Search } from './Search'
 
 interface Props {
   tabs: TabsCustomizedProps
@@ -29,22 +31,13 @@ export const Sorts = ({ tabs }: Props) => {
         })}
       >
         <div className={classNames('flex items-center gap-2 max800:flex-wrap max800:w-full')}>
-          <CustomTextField className='max700:w-full' placeholder='Найти по ID / Клиенту' />
+          <Search />
           <DataPickerRange />
         </div>
 
         <div className={classNames('flex items-center gap-2 max800:flex-wrap max800:w-full')}>
-          <CustomTextField className='max700:w-full' select defaultValue='today'>
-            <MenuItem value='today'>Сегодня</MenuItem>
-            <MenuItem value='7_day'>7 дней</MenuItem>
-            <MenuItem value='30_day'>30 дней</MenuItem>
-            <MenuItem value='90_day'>90 дней</MenuItem>
-          </CustomTextField>
-
-          <CustomTextField className='max700:w-full' select defaultValue='50'>
-            <MenuItem value='50'>50 записей</MenuItem>
-            <MenuItem value='90'>90 записей</MenuItem>
-          </CustomTextField>
+          <SelectRange />
+          <SelectTakeAmount />
         </div>
       </div>
     </Paper>

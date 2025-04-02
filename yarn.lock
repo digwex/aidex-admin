@@ -3359,6 +3359,7 @@ __metadata:
     eslint-config-prettier: "npm:9.1.0"
     eslint-import-resolver-typescript: "npm:3.7.0"
     eslint-plugin-import: "npm:2.31.0"
+    flagpack-core: "npm:^1.0.0"
     fs-extra: "npm:11.2.0"
     globby: "npm:14.0.2"
     input-otp: "npm:1.4.1"
@@ -3378,6 +3379,7 @@ __metadata:
     react-dom: "npm:18.3.1"
     react-draft-wysiwyg: "npm:^1.15.0"
     react-dropzone: "npm:14.3.5"
+    react-flagpack: "npm:^2.0.6"
     react-hook-form: "npm:7.54.1"
     react-map-gl: "npm:7.1.8"
     react-perfect-scrollbar: "npm:1.5.8"
@@ -3400,6 +3402,7 @@ __metadata:
     typescript: "npm:5.5.4"
     usehooks-ts: "npm:^3.1.1"
     valibot: "npm:0.42.1"
+    yup: "npm:^1.6.1"
   languageName: unknown
   linkType: soft
 
@@ -3870,6 +3873,13 @@ __metadata:
     ansi-styles: "npm:^4.1.0"
     supports-color: "npm:^7.1.0"
   checksum: 10c0/4a3fef5cc34975c898ffe77141450f679721df9dde00f6c304353fa9c8b571929123b26a0e4617bde5018977eb655b31970c297b91b63ee83bb82aeb04666880
+  languageName: node
+  linkType: hard
+
+"chalk@npm:^5.3.0":
+  version: 5.4.1
+  resolution: "chalk@npm:5.4.1"
+  checksum: 10c0/b23e88132c702f4855ca6d25cb5538b1114343e41472d5263ee8a37cccfccd9c4216d111e1097c6a27830407a1dc81fecdf2a56f2c63033d4dbbd88c10b0dcef
   languageName: node
   linkType: hard
 
@@ -5619,6 +5629,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"flagpack-core@npm:^1.0.0":
+  version: 1.1.2
+  resolution: "flagpack-core@npm:1.1.2"
+  checksum: 10c0/4f254621bb4e8b07d5758cd47ceb103021d2fb56bc03915b8a9e645e34794a469571dbab980ee9db9732338b1083cf43747e45282dcf1386fd9c995d9471fbcf
+  languageName: node
+  linkType: hard
+
 "flat-cache@npm:^3.0.4":
   version: 3.2.0
   resolution: "flat-cache@npm:3.2.0"
@@ -5703,6 +5720,17 @@ __metadata:
     jsonfile: "npm:^6.0.1"
     universalify: "npm:^2.0.0"
   checksum: 10c0/d77a9a9efe60532d2e790e938c81a02c1b24904ef7a3efb3990b835514465ba720e99a6ea56fd5e2db53b4695319b644d76d5a0e9988a2beef80aa7b1da63398
+  languageName: node
+  linkType: hard
+
+"fs-extra@npm:^11.2.0":
+  version: 11.3.0
+  resolution: "fs-extra@npm:11.3.0"
+  dependencies:
+    graceful-fs: "npm:^4.2.0"
+    jsonfile: "npm:^6.0.1"
+    universalify: "npm:^2.0.0"
+  checksum: 10c0/5f95e996186ff45463059feb115a22fb048bdaf7e487ecee8a8646c78ed8fdca63630e3077d4c16ce677051f5e60d3355a06f3cd61f3ca43f48cc58822a44d0a
   languageName: node
   linkType: hard
 
@@ -8166,6 +8194,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"property-expr@npm:^2.0.5":
+  version: 2.0.6
+  resolution: "property-expr@npm:2.0.6"
+  checksum: 10c0/69b7da15038a1146d6447c69c445306f66a33c425271235bb20507f1846dbf9577a8f9dfafe8acbfcb66f924b270157f155248308f026a68758f35fc72265b3c
+  languageName: node
+  linkType: hard
+
 "prosemirror-changeset@npm:^2.2.1":
   version: 2.2.1
   resolution: "prosemirror-changeset@npm:2.2.1"
@@ -8504,6 +8539,21 @@ __metadata:
   version: 3.2.2
   resolution: "react-fast-compare@npm:3.2.2"
   checksum: 10c0/0bbd2f3eb41ab2ff7380daaa55105db698d965c396df73e6874831dbafec8c4b5b08ba36ff09df01526caa3c61595247e3269558c284e37646241cba2b90a367
+  languageName: node
+  linkType: hard
+
+"react-flagpack@npm:^2.0.6":
+  version: 2.0.6
+  resolution: "react-flagpack@npm:2.0.6"
+  dependencies:
+    chalk: "npm:^5.3.0"
+    fs-extra: "npm:^11.2.0"
+    meow: "npm:^13.2.0"
+  peerDependencies:
+    react: ^16.8.* || ^17.* || ^18.*
+  bin:
+    react-flagpack: cli/flagpack.js
+  checksum: 10c0/bbbf2f93f7715ae69566e6d17a047fc29056333b67fdc80782a39e40b45af6f95799700ac9b54c15859fcd71adfc5c11836948cb36eab5f19c46df223ffd6c27
   languageName: node
   linkType: hard
 
@@ -10108,6 +10158,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tiny-case@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "tiny-case@npm:1.0.3"
+  checksum: 10c0/c0cbed35884a322265e2cd61ff435168d1ea523f88bf3864ce14a238ae9169e732649776964283a66e4eb882e655992081d4daf8c865042e2233425866111b35
+  languageName: node
+  linkType: hard
+
 "tiny-invariant@npm:^1.3.1":
   version: 1.3.3
   resolution: "tiny-invariant@npm:1.3.3"
@@ -10161,6 +10218,13 @@ __metadata:
   version: 1.0.6
   resolution: "toggle-selection@npm:1.0.6"
   checksum: 10c0/f2cf1f2c70f374fd87b0cdc8007453ba9e981c4305a8bf4eac10a30e62ecdfd28bca7d18f8f15b15a506bf8a7bfb20dbe3539f0fcf2a2c8396c1a78d53e1f179
+  languageName: node
+  linkType: hard
+
+"toposort@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "toposort@npm:2.0.2"
+  checksum: 10c0/ab9ca91fce4b972ccae9e2f539d755bf799a0c7eb60da07fd985fce0f14c159ed1e92305ff55697693b5bc13e300f5417db90e2593b127d421c9f6c440950222
   languageName: node
   linkType: hard
 
@@ -10258,6 +10322,13 @@ __metadata:
   version: 0.20.2
   resolution: "type-fest@npm:0.20.2"
   checksum: 10c0/dea9df45ea1f0aaa4e2d3bed3f9a0bfe9e5b2592bddb92eb1bf06e50bcf98dbb78189668cd8bc31a0511d3fc25539b4cd5c704497e53e93e2d40ca764b10bfc3
+  languageName: node
+  linkType: hard
+
+"type-fest@npm:^2.19.0":
+  version: 2.19.0
+  resolution: "type-fest@npm:2.19.0"
+  checksum: 10c0/a5a7ecf2e654251613218c215c7493574594951c08e52ab9881c9df6a6da0aeca7528c213c622bc374b4e0cb5c443aa3ab758da4e3c959783ce884c3194e12cb
   languageName: node
   linkType: hard
 
@@ -10857,5 +10928,17 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: 10c0/dceb44c28578b31641e13695d200d34ec4ab3966a5729814d5445b194933c096b7ced71494ce53a0e8820685d1d010df8b2422e5bf2cdea7e469d97ffbea306f
+  languageName: node
+  linkType: hard
+
+"yup@npm:^1.6.1":
+  version: 1.6.1
+  resolution: "yup@npm:1.6.1"
+  dependencies:
+    property-expr: "npm:^2.0.5"
+    tiny-case: "npm:^1.0.3"
+    toposort: "npm:^2.0.2"
+    type-fest: "npm:^2.19.0"
+  checksum: 10c0/84c2b53996e8001041239cf2719851719f67063ec7cd843067df73562353216f5ad4f8a222319696882d5a6058e528fade1e463c59d70cbffb41b99cd0d7571b
   languageName: node
   linkType: hard

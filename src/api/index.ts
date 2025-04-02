@@ -2,6 +2,31 @@ import { createApi, type BaseQueryFn, type FetchArgs, type FetchBaseQueryError }
 
 import { baseQuery } from './base'
 
+export const Tag = {
+  Admins: 'Admins',
+  Logins: 'Logins',
+  Users: 'Users',
+  Pairs: 'Pairs',
+  Deposits: 'Deposits',
+  Withdrawals: 'Withdrawals',
+  Verification: 'Verification',
+  Partners: 'Partners',
+  User: 'User',
+  Deposites: 'Deposites',
+  AdminPartners: 'AdminPartners',
+  Orders: 'Orders',
+  Partner: 'Partner',
+  PartnerSessions: 'PartnerSessions',
+  PartnerWallet: 'PartnerWallet',
+  Mailing: 'Mailing',
+  UserVerification: 'UserVerification',
+  UserDocs: 'UserDocs',
+  PromoMaterial: 'PromoMaterial',
+  PromoBonus: 'PromoBonus',
+  Bonus: 'Bonus',
+  UserMainStats: 'UserMainStats'
+}
+
 export const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
   args,
   api,
@@ -12,7 +37,26 @@ export const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, Fetch
 
 export const API = createApi({
   reducerPath: 'API',
-  tagTypes: [],
+  tagTypes: [
+    Tag.Admins,
+    Tag.Logins,
+    Tag.Users,
+    Tag.User,
+    Tag.Pairs,
+    Tag.Deposits,
+    Tag.Withdrawals,
+    Tag.Verification,
+    Tag.Partners,
+    Tag.AdminPartners,
+    Tag.Orders,
+    Tag.Partner,
+    Tag.PartnerSessions,
+    Tag.PartnerWallet,
+    Tag.Mailing,
+    Tag.UserVerification,
+    Tag.PromoBonus,
+    Tag.UserMainStats
+  ],
   baseQuery: (args, api, extraOptions) => baseQueryWithReauth(args, api, extraOptions),
   endpoints: () => ({})
 })

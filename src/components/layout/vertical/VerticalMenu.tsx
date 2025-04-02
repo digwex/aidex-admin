@@ -120,14 +120,6 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
           Партнёры
         </MenuItem>
         <MenuItem
-          icon={<i className='tabler-checklist' />}
-          href={`/${locale}/verification`}
-          exactMatch={false}
-          activeUrl='/verification'
-        >
-          Верификация
-        </MenuItem>
-        <MenuItem
           icon={<i className='tabler-wallet' />}
           href={`/${locale}/withdrawals`}
           exactMatch={false}

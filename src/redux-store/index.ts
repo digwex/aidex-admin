@@ -1,12 +1,14 @@
 // Third-party Imports
 import { configureStore } from '@reduxjs/toolkit'
 
-import { userReducer } from './slices'
+import { userReducer, documentsFetchReducer, searchReducer } from './slices'
 import { API } from '@/api'
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
+    search: searchReducer,
+    documents: documentsFetchReducer,
     [API.reducerPath]: API.reducer
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware({ serializableCheck: false }).concat(API.middleware)

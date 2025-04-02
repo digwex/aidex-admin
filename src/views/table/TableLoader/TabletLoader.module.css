@@ -1,0 +1,33 @@
+.wrapper {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: none;
+  border: none;
+}
+
+.animatedItem {
+  width: 30px !important;
+  height: 30px !important;
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  perspective: 600px;
+  border-radius: 10px;
+  animation: pulse 2s normal infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: perspective(800px) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(800px) rotateY(-40deg);
+  }
+  80% {
+    transform: perspective(800px) rotateY(40deg);
+  }
+  100% {
+    transform: perspective(800px) rotateY(0deg);
+  }
+}

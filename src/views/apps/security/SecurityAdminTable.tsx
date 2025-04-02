@@ -1,99 +1,41 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useCallback } from 'react'
 
-import type { ColumnDef } from '@tanstack/react-table'
-import {
-  createColumnHelper,
-  useReactTable,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel
-} from '@tanstack/react-table'
+import { useLazyGetAllAdminsQuery } from '@/api/endpoints/admins/admins'
+import { SORT_DIRECTION } from '@/api/types'
 
-import { Checkbox } from '@mui/material'
+import AdminItem from './Admins/AdminItem'
+import { adminsSortTitles } from './Admins/adminsSortTitles'
 
-import Table, { fuzzyFilter } from '@/components/Table'
+import CustomTable from '@/views/table/CustomTable'
+import { useSecurityContext } from './Admins/security-provider'
 
-interface Columns {
-  check: string
-  tgId: number
-  tgLogin: string
-  role: string
-  name: string
-  lvl: string
-}
+function SecurityAdminTable() {
+  const { selectedAdmins, setSelectedAdmins } = useSecurityContext()
 
-const data = [
-  ...Array(50)
-    .fill(null)
-    .map((_, i) => ({
-      check: '',
-      tgId: i,
-      tgLogin: '@bijdgfsdkfbsekufsekfbskekbf',
-      role: 'Главный админ',
-      name: 'Сергей',
-      lvl: '5 урвоень'
-    }))
-] as Columns[]
-
-const columnHelper = createColumnHelper<Columns>()
-
-const SecurityAdminTable = () => {
-  const [sorting, setSorting] = useState<{ id: string; desc: boolean }[]>([])
-
-  const columns = useMemo<ColumnDef<Columns, any>[]>(
-    () => [
-      columnHelper.accessor('check', {
-        header: '',
-        enableSorting: false,
-        cell: () => <Checkbox />
-      }),
-      columnHelper.accessor('tgId', {
-        header: 'Телеграм  ID',
-        cell: ({ row }) => <div className='text-center'> {row.original.tgId}</div>
-      }),
-      columnHelper.accessor('tgLogin', {
-        header: 'Логин телеграм',
-        cell: ({ row }) => <div className='text-center'>{row.original.tgLogin}</div>
-      }),
-      columnHelper.accessor('role', {
-        header: 'Роль',
-        cell: ({ row }) => <div className='text-center'> {row.original.role}</div>
-      }),
-      columnHelper.accessor('name', {
-        header: 'Имя',
-        cell: ({ row }) => <div className='text-center'> {row.original.name}</div>
-      }),
-      columnHelper.accessor('lvl', {
-        header: 'Уровень доступа',
-        cell: ({ row }) => <div className='text-center flex-1'> {row.original.lvl}</div>
-      })
-    ],
-    []
-  )
-
-  const table = useReactTable({
-    data,
-    columns,
-    filterFns: {
-      fuzzy: fuzzyFilter
-    },
-    state: {
-      sorting
-    },
-    initialState: {
-      pagination: {
-        pageSize: 15
+  const handleSelect = useCallback(
+    (id: string, login: string, level: string) => {
+      if (selectedAdmins.some(admin => admin.id === id)) {
+        setSelectedAdmins(selectedAdmins.filter(item => item.id !== id))
+      } else {
+        setSelectedAdmins(prev => [...prev, { id, login, level }])
       }
     },
-    onSortingChange: setSorting,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel()
-  })
+    [selectedAdmins, setSelectedAdmins]
+  )
 
-  return <Table table={table} />
+  return (
+    <CustomTable
+      query={useLazyGetAllAdminsQuery}
+      DataItem={AdminItem}
+      dataItemsProps={{ handleSelect, selectedAdmins }}
+      queryProps='permissions'
+      sortTitles={adminsSortTitles}
+      order={{ field: 'tgId', direction: SORT_DIRECTION.DESC }}
+      fetchParams={{ take: '20' }}
+    />
+  )
 }
 
 export default SecurityAdminTable
