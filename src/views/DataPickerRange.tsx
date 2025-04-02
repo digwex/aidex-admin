@@ -40,8 +40,8 @@ const DataPickerRange = () => {
   const CustomInput = forwardRef((props: CustomInputProps, ref) => {
     const { start, end, ...rest } = props
 
-    const startDate = start !== null ? format(start, 'MM/dd/yyyy') : null
-    const endDate = end !== null ? ` - ${format(end, 'MM/dd/yyyy')}` : null
+    const startDate = start !== null ? format(start, 'dd/MM/yyyy') : null
+    const endDate = end !== null ? ` - ${format(end, 'dd/MM/yyyy')}` : null
 
     const value = `${startDate}${endDate !== null ? endDate : ''}`
 

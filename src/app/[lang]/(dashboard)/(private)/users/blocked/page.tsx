@@ -1,4 +1,4 @@
-import BlockedUsersTable from '@/views/apps/users/PartnersUsersTable'
+import BlockedUsersTable from '@/views/apps/users/BlockedUsersTable/BlockedUsersTable'
 
 const Blocked = () => {
   return <BlockedUsersTable />

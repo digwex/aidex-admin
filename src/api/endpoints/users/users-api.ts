@@ -5,18 +5,19 @@ import { type ApiResponseTrades, type IUserOrdersParams, type User } from './use
 const usersApi = API.injectEndpoints({
   endpoints: builder => ({
     getAllUsers: builder.query<ApiResponse<User[]>, IQuery>({
-      query: params => ({ url: 'users', params }),
-      providesTags: result =>
-        result
-          ? [
-              ...result.result.map(({ nId }) => ({ type: Tag.User, id: nId })),
-              { type: Tag.Users, id: 'USERS' },
-              { type: Tag.User, id: 'USER' }
-            ]
-          : [
-              { type: Tag.Users, id: 'USERS' },
-              { type: Tag.User, id: 'USER' }
-            ]
+      query: params => ({ url: 'users', params })
+
+      // providesTags: result =>
+      //   result
+      //     ? [
+      //         ...result.result.map(({ nId }) => ({ type: Tag.User, id: nId })),
+      //         { type: Tag.Users, id: 'USERS' },
+      //         { type: Tag.User, id: 'USER' }
+      //       ]
+      //     : [
+      //         { type: Tag.Users, id: 'USERS' },
+      //         { type: Tag.User, id: 'USER' }
+      //       ]
     }),
     getAdvertisingUsers: builder.query({
       query: (params: IQuery) => ({ url: 'users/advertising', params })

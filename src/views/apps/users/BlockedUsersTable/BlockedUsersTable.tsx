@@ -5,15 +5,15 @@ import { useLazyGetAllUsersQuery } from '../../../../api/endpoints/users/users-a
 import { SORT_DIRECTION } from '../../../../api/types'
 
 import { userSortTitles } from './userSortTitles'
-import { UserRow } from '@/views/apps/users/UsersTable/UserRow'
+import { BlockedUserRow } from './BlockedUserRow'
 
-function UsersCustomTable() {
+function BlockedUsersTable() {
   return (
     <CustomTable
       isSearchBar
       isDate
       query={useLazyGetAllUsersQuery}
-      DataItem={UserRow}
+      DataItem={BlockedUserRow}
       sortTitles={userSortTitles}
       fetchParams={{ isBlocked: false }}
       order={{ field: 'balance', direction: SORT_DIRECTION.DESC }}
@@ -21,4 +21,4 @@ function UsersCustomTable() {
   )
 }
 
-export default UsersCustomTable
+export default BlockedUsersTable

@@ -21,23 +21,18 @@ const Layout = async ({ children, params }: Props) => {
       icon: 'tabler-user'
     },
     {
-      label: 'Партнеры',
-      value: `/${lang}/users/partners`,
-      icon: 'tabler-users-group'
-    },
-    {
-      label: 'Верификация',
-      value: `/${lang}/users/verification`,
-      icon: 'tabler-checklist'
-    },
-    {
-      label: 'KYC',
-      value: `/${lang}/users/kyc`,
-      icon: 'tabler-file-barcode'
+      label: 'Рекламные пользователи',
+      value: `/${lang}/users/advertisement`,
+      icon: 'tabler-align-box-left-bottom'
     },
     {
       label: 'Список заблокированых',
       value: `/${lang}/users/blocked`,
+      icon: 'tabler-lock-filled'
+    },
+    {
+      label: 'Список удаённых',
+      value: `/${lang}/users/deleted`,
       icon: 'tabler-circle-x'
     }
   ]

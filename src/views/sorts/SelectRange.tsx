@@ -41,7 +41,7 @@ export const SelectRange = () => {
         dispatch(setSearchByDateTime('7 дней'))
         break
       default:
-        startDate = new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000)
+        startDate = new Date(new Date().getTime() - 12 * 30 * 24 * 60 * 60 * 1000)
 
         startDate.setHours(0, 0, 0, 0)
         endDate = new Date()

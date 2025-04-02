@@ -10,7 +10,7 @@ interface SearchState {
 const getInitialSearchDate = (): [number, number] => {
   const startDate = new Date()
 
-  startDate.setDate(startDate.getDate() - 7)
+  startDate.setDate(startDate.getDate() - 30 * 12)
 
   const endDate = new Date()
 

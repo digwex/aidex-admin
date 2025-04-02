@@ -96,7 +96,8 @@
     "suneditor": "^2.47.0",
     "suneditor-react": "^3.6.1",
     "usehooks-ts": "^3.1.1",
-    "valibot": "0.42.1"
+    "valibot": "0.42.1",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@iconify/json": "2.2.286",

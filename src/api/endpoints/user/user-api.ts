@@ -1,5 +1,4 @@
 import { Tag, API } from '../..'
-import { type IUserToBanBody } from '../../types'
 import type {
   ApiResponseTransactions,
   ApiResponseUserDocuments,
@@ -203,29 +202,7 @@ export const userApi = API.injectEndpoints({
       transformResponse: (response: unknown) => response,
       invalidatesTags: [Tag.User]
     }),
-    userToBan: builder.mutation({
-      query: (body: IUserToBanBody) => ({
-        url: 'users/ban',
-        method: 'POST',
-        body
-      }),
-      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled
 
-          dispatch(
-            userApi.util.updateQueryData('getMainUserStats', { uid: data.id }, stats => {
-              stats.user.isBlocked = true
-
-              return stats
-            })
-          )
-        } catch (error) {
-          console.log('getMainUserStats error', error)
-        }
-      },
-      invalidatesTags: [Tag.Users]
-    }),
     deletePersonalDataDocuments: builder.mutation({
       query: (body: { ids: string[] }) => ({
         url: 'users/personalData/documents',
@@ -339,7 +316,6 @@ export const {
   useSetUserDocumentsMutation,
   useSetDepositFakeMutation,
   useSetWithdrawalFakeMutation,
-  useUserToBanMutation,
   useDeletePersonalDataDocumentsMutation,
   useSetDeclineRequestMutation,
   useLazyGetUserVerificationsQuery,

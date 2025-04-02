@@ -1,3 +1,5 @@
+'use client'
+
 import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 
 import { usePathname } from 'next/navigation'
@@ -103,11 +105,13 @@ export const usePagination = ({
   const fetchAdmins = useCallback(async () => {
     const willSendDate = storeDate === undefined ? store.getState().search.date : storeDate
 
+    const currentData = new Date()
+
     const from = isDate
       ? willSendDate?.[0]
         ? Math.floor(new Date(willSendDate[0]).getTime() / 1000)
         : undefined
-      : undefined
+      : currentData.setFullYear(currentData.getFullYear() - 10) / 1000
 
     const to = isDate
       ? willSendDate?.[1]
@@ -115,8 +119,22 @@ export const usePagination = ({
         : willSendDate[0]
           ? Math.floor(addDays(new Date(willSendDate[0]), 1).getTime() / 1000)
           : undefined
-      : undefined
+      : currentData.getTime()
 
+    console.log('START FETCHING', store.getState().search, {
+      skip,
+      take,
+      from,
+      to,
+      search: isSearch ? debouncedSearchValue || undefined : undefined,
+      searchBar: isSearchBar ? debouncedSearchValue || undefined : undefined,
+      uid,
+      type,
+      withHash,
+      orderBy: orderBy.field,
+      direction: orderBy.direction,
+      ...rest
+    })
     await refetch({
       skip,
       take,
@@ -131,6 +149,7 @@ export const usePagination = ({
       direction: orderBy.direction,
       ...rest
     })
+    console.log('FINISHED')
   }, [skip, take, storeDate, debouncedSearchValue, type, withHash, pages, uid, orderBy])
 
   useEffect(() => {

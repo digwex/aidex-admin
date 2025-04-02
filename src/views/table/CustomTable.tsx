@@ -1,3 +1,5 @@
+'use client'
+
 import { memo, useLayoutEffect, useState } from 'react'
 
 import { SORT_DIRECTION } from '../../api/types'
@@ -92,6 +94,8 @@ const CustomTable = ({
     processFetch(isFetching)
   }, [isFetching])
 
+  const resultData = fakeData ?? data?.data?.data ?? data?.result ?? []
+
   return (
     <>
       <div className='table_wrap'>
@@ -102,7 +106,7 @@ const CustomTable = ({
               <tbody className='relative'>
                 {!isSuccess && <TableLoader isLoading={isLoading || isFetching} />}
                 {isSuccess &&
-                  (data?.data || data?.result)?.map((item: any, index: number) => (
+                  resultData.map((item: any, index: number) => (
                     <DataItem
                       index={index}
                       key={getKey(item?.id ?? item?.partner?.id, index)}
@@ -113,15 +117,15 @@ const CustomTable = ({
                     />
                   ))}
               </tbody>
-              {DataFooter && isSuccess && (!!data?.data?.length || !!data?.result?.length) && (
+              {DataFooter && isSuccess && resultData.length && (
                 <tfoot>
-                  <DataFooter {...(data?.data ?? data?.result)} />
+                  <DataFooter {...resultData} />
                 </tfoot>
               )}
             </table>
           </div>
           {isError && <EmptyDataTitle title={getError(error)} />}
-          {isSuccess && (data?.data ?? data?.result)?.length === 0 && <EmptyDataTitle />}
+          {isSuccess && resultData?.length === 0 && <EmptyDataTitle />}
         </div>
       </div>
       <CustomPagination
