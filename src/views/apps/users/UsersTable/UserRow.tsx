@@ -2,8 +2,6 @@
 
 import Link from 'next/link'
 
-import { useParams } from 'next/navigation'
-
 import { Button } from '@mui/material'
 
 import { type User } from '../../../../api/endpoints/users/users-types'
@@ -23,7 +21,6 @@ type Props = User & { updateTable: () => void }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const UserRow = ({ updateTable, ...user }: Props) => {
   const { checkAction } = useCheckAccess()
-  const { lang } = useParams()
 
   const accessAnyAction = checkAction(ACTION_ACCESS.ANY_ACTION_USER)
 
@@ -31,7 +28,7 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
     <>
       <tr>
         <td>
-          <Link href={`/${lang}/users/${user.nId}`}>
+          <Link href={`/users/${user.nId}`}>
             <HandledFlag className='w-5' flag={user.CountryCode} />
             <span className='color_green td_active'>{user.nId}</span>
           </Link>
@@ -50,17 +47,17 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
         <td>
           {accessAnyAction ? (
             <div className='flex items-center justify-center gap-3'>
-              <Link href={`${user.nId}`}>
+              <Link href={`/users/${user.nId}`}>
                 <Button variant='outlined' color='secondary'>
                   Больше
                 </Button>
               </Link>
-              <Link href={`${user.nId}`}>
+              <Link href={`/users/${user.nId}`}>
                 <Button variant='outlined' color='warning'>
                   Торговля
                 </Button>
               </Link>
-              <Link href={`${user.nId}`}>
+              <Link href={`/users/${user.nId}`}>
                 <Button variant='outlined' color='success'>
                   Изменить
                 </Button>

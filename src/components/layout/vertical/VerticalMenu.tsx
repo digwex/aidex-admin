@@ -1,6 +1,3 @@
-// Next Imports
-import { useParams } from 'next/navigation'
-
 // MUI Imports
 import { useTheme } from '@mui/material/styles'
 
@@ -11,7 +8,6 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 
 import { Divider } from '@mui/material'
 
-import type { getDictionary } from '@/utils/getDictionary'
 import type { VerticalMenuContextProps } from '@menu/components/vertical-menu/Menu'
 
 // Component Imports
@@ -34,7 +30,6 @@ type RenderExpandIconProps = {
 }
 
 type Props = {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>
   scrollMenu: (container: any, isPerfectScrollbar: boolean) => void
 }
 
@@ -49,11 +44,9 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
   const { logout } = useAuth()
   const theme = useTheme()
   const verticalNavOptions = useVerticalNav()
-  const params = useParams()
 
   // Vars
   const { isBreakpointReached, transitionDuration } = verticalNavOptions
-  const { lang: locale } = params
 
   const handleUserLogout = async () => {
     try {
@@ -94,26 +87,26 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
       >
         <MenuItem
           icon={<i className='tabler-smart-home' />}
-          href={`/${locale}/dashboard`}
+          href={`/dashboard`}
           exactMatch={false}
           activeUrl='/dashboard'
         >
           Главная
         </MenuItem>
         <MenuItem
-          href={`/${locale}/statistic`}
+          href={`/statistic`}
           icon={<i className='tabler-chart-histogram' />}
           exactMatch={false}
           activeUrl='/statistic'
         >
           Статистика
         </MenuItem>
-        <MenuItem icon={<i className='tabler-user' />} href={`/${locale}/users`} exactMatch={false} activeUrl='/users'>
+        <MenuItem icon={<i className='tabler-user' />} href={`/users`} exactMatch={false} activeUrl='/users'>
           Пользователи
         </MenuItem>
         <MenuItem
           icon={<i className='tabler-users-group' />}
-          href={`/${locale}/partners`}
+          href={`/partners`}
           exactMatch={false}
           activeUrl='/partners'
         >
@@ -121,7 +114,7 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
         </MenuItem>
         <MenuItem
           icon={<i className='tabler-wallet' />}
-          href={`/${locale}/withdrawals`}
+          href={`/withdrawals`}
           exactMatch={false}
           activeUrl='/withdrawals'
         >
@@ -129,18 +122,13 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
         </MenuItem>
         <MenuItem
           icon={<i className='tabler-align-box-left-top' />}
-          href={`/${locale}/content`}
+          href={`/content`}
           exactMatch={false}
           activeUrl='/content'
         >
           Контент
         </MenuItem>
-        <MenuItem
-          icon={<i className='tabler-mail' />}
-          href={`/${locale}/mailing`}
-          exactMatch={false}
-          activeUrl='/mailing'
-        >
+        <MenuItem icon={<i className='tabler-mail' />} href={`/mailing`} exactMatch={false} activeUrl='/mailing'>
           Рассылка
         </MenuItem>
 
@@ -148,7 +136,7 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
 
         <MenuItem
           icon={<i className='tabler-shield-lock' />}
-          href={`/${locale}/security`}
+          href={`/security`}
           exactMatch={false}
           activeUrl='/security'
         >

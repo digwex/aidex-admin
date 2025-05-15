@@ -1,20 +1,18 @@
 'use client'
 import { useEffect } from 'react'
 
-import { useParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 import { useBoolean } from 'usehooks-ts'
 
-import type { Locale } from '@configs/i18n'
 import type { ChildrenType } from '@core/types'
 import { getItemFromLocalStorage } from '@/utils/localStorageService'
 import { useAuth } from '@/hooks/useAuth'
 import { useUser } from '@/hooks/useUser'
 import { Loader } from '@/components/Loader'
 
-export default function AuthGuard({ children }: ChildrenType & { locale: Locale }) {
+export default function AuthGuard({ children }: ChildrenType) {
   const { isLogged } = useUser()
-  const { lang } = useParams()
   const { value: isLoading, setFalse } = useBoolean(true)
   const { verifySession } = useAuth()
   const router = useRouter()
@@ -29,9 +27,9 @@ export default function AuthGuard({ children }: ChildrenType & { locale: Locale 
     const accessToken = getItemFromLocalStorage('accessToken')
 
     if (accessToken) {
-      void verifySession(setFalse, () => router.replace(`/${lang}/login`))
+      void verifySession(setFalse, () => router.replace(`/login`))
     } else {
-      router.replace(`/${lang}/login`)
+      router.replace(`/login`)
     }
   }, [isLogged])
 

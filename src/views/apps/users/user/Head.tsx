@@ -1,8 +1,13 @@
+'use client'
+
+import { useParams } from 'next/navigation'
+
 import type { StackProps } from '@mui/material'
 
 import { Avatar, Box, Button, Chip, Divider, Paper, Stack, Typography } from '@mui/material'
 
 import { EditInput } from '@/components/EditInput'
+import { useGetConvertedNIdToUIdQuery } from '@/api/endpoints/users/users-api'
 
 const stackProps: StackProps = {
   direction: 'column',
@@ -11,6 +16,19 @@ const stackProps: StackProps = {
 }
 
 export const Head = () => {
+  const { id } = useParams()
+
+  const { data } = useGetConvertedNIdToUIdQuery(
+    {
+      nid: String(id) ?? ''
+    },
+    {
+      refetchOnMountOrArgChange: true
+    }
+  )
+
+  console.log(data)
+
   return (
     <Paper className='flex items-center gap-3 justify-between p-4 flex-wrap'>
       <Box className='flex justify-start flex-wrap flex-1 gap-4'>

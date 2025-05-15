@@ -96,6 +96,8 @@ const CustomTable = ({
 
   const resultData = fakeData ?? data?.data?.data ?? data?.result ?? []
 
+  console.log('data', data)
+
   return (
     <>
       <div className='table_wrap'>
@@ -111,7 +113,7 @@ const CustomTable = ({
                       index={index}
                       key={getKey(item?.id ?? item?.partner?.id, index)}
                       updateTable={refetch}
-                      queryProps={data[queryProps || '']}
+                      queryProps={data.data?.[queryProps || '']}
                       {...item}
                       {...dataItemsProps}
                     />

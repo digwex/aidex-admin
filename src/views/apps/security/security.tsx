@@ -2,16 +2,15 @@ import type { PropsWithChildren } from 'react'
 
 import { Title } from '@/components/Title'
 import { Sorts } from '@/views/apps/security/Sorts'
-import type { Locale } from '@/configs/i18n'
 import { SecurityProvider } from './Admins/security-provider'
 
-export const Security = ({ children, lang }: PropsWithChildren<{ lang: Locale }>) => {
+export const Security = ({ children }: PropsWithChildren) => {
   return (
     <SecurityProvider>
       <div className='space-y-4'>
         <Title icon='tabler-shield-lock' title='Безопасность' />
 
-        <Sorts lang={lang} />
+        <Sorts />
 
         <div>{children}</div>
       </div>

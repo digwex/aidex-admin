@@ -50,7 +50,7 @@ const AdminItem = ({
     <>
       <tr>
         <td className='w50'>
-          <Checkbox value={isActive} onClick={() => handleSelect(id, tgLogin, accessLevel)} />
+          <Checkbox checked={isActive} onClick={() => handleSelect(id, tgLogin, accessLevel)} />
         </td>
         <td>{tgId}</td>
         <td>{tgLogin}</td>
