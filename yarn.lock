@@ -682,15 +682,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/intl-localematcher@npm:0.5.9":
-  version: 0.5.9
-  resolution: "@formatjs/intl-localematcher@npm:0.5.9"
-  dependencies:
-    tslib: "npm:2"
-  checksum: 10c0/0b66aee81b9fd8fff9e737fd98e71edd20beb077713fa81b471bd6b1c6fe17f5d5bd6d1883cc0bf6f7ea5bfaedd3a2009aa3235bfacdfbc4950f2b4106d5ac76
-  languageName: node
-  linkType: hard
-
 "@formkit/drag-and-drop@npm:0.2.6":
   version: 0.2.6
   resolution: "@formkit/drag-and-drop@npm:0.2.6"
@@ -2708,13 +2699,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/negotiator@npm:^0.6.3":
-  version: 0.6.3
-  resolution: "@types/negotiator@npm:0.6.3"
-  checksum: 10c0/d182002d9d7d3248139008e29857dddbc98bd7ada1fddbb33c96fce2f62821698a1ac62e90a92ea004c594abc6865e143f50146e21123a0aeb0641c2bf832aa3
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:*, @types/node@npm:^22.13.4":
   version: 22.13.4
   resolution: "@types/node@npm:22.13.4"
@@ -3294,7 +3278,6 @@ __metadata:
     "@emotion/react": "npm:11.14.0"
     "@emotion/styled": "npm:11.14.0"
     "@floating-ui/react": "npm:0.27.2"
-    "@formatjs/intl-localematcher": "npm:0.5.9"
     "@formkit/drag-and-drop": "npm:0.2.6"
     "@fullcalendar/common": "npm:5.11.5"
     "@fullcalendar/core": "npm:6.1.15"
@@ -3333,7 +3316,6 @@ __metadata:
     "@types/html-to-draftjs": "npm:^1.4.3"
     "@types/is-url": "npm:^1.2.32"
     "@types/mapbox-gl": "npm:^3.4.1"
-    "@types/negotiator": "npm:^0.6.3"
     "@types/node": "npm:^22.13.4"
     "@types/react": "npm:^18.3.18"
     "@types/react-dom": "npm:^18.3.5"
@@ -3366,7 +3348,6 @@ __metadata:
     is-url: "npm:^1.2.4"
     keen-slider: "npm:6.8.6"
     mapbox-gl: "npm:3.9.0"
-    negotiator: "npm:1.0.0"
     next: "npm:15.1.2"
     postcss: "npm:8.4.49"
     postcss-styled-syntax: "npm:0.7.0"
@@ -7391,7 +7372,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"negotiator@npm:1.0.0, negotiator@npm:^1.0.0":
+"negotiator@npm:^1.0.0":
   version: 1.0.0
   resolution: "negotiator@npm:1.0.0"
   checksum: 10c0/4c559dd52669ea48e1914f9d634227c561221dd54734070791f999c52ed0ff36e437b2e07d5c1f6e32909fc625fe46491c16e4a8f0572567d4dd15c3a4fda04b
@@ -10286,7 +10267,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:2, tslib@npm:^2.0.0, tslib@npm:^2.1.0, tslib@npm:^2.4.0, tslib@npm:^2.7.0, tslib@npm:^2.8.0":
+"tslib@npm:^2.0.0, tslib@npm:^2.1.0, tslib@npm:^2.4.0, tslib@npm:^2.7.0, tslib@npm:^2.8.0":
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: 10c0/9c4759110a19c53f992d9aae23aac5ced636e99887b51b9e61def52611732872ff7668757d4e4c61f19691e36f4da981cd9485e869b4a7408d689f6bf1f14e62

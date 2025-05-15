@@ -3,18 +3,16 @@
 import { redirect } from 'next/navigation'
 
 import type { ChildrenType } from '@core/types'
-import type { Locale } from '@configs/i18n'
 
-import { getLocalizedUrl } from '@/utils/i18n'
 import { useUser } from '@/hooks/useUser'
 
 import themeConfig from '@configs/themeConfig'
 
-const GuestOnlyRoute = ({ children, lang }: ChildrenType & { lang: Locale }) => {
+const GuestOnlyRoute = ({ children }: ChildrenType) => {
   const { isLogged } = useUser()
 
   if (isLogged) {
-    redirect(getLocalizedUrl(themeConfig.homePageUrl, lang))
+    redirect(themeConfig.homePageUrl)
   }
 
   return <>{children}</>

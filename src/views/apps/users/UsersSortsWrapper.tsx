@@ -2,17 +2,14 @@
 
 import { usePathname } from 'next/navigation'
 
-import type { Locale } from '@/configs/i18n'
-
 interface Props {
   children: React.ReactNode
-  lang: Locale
 }
 
-export const UsersSortsWrapper = ({ children, lang }: Props) => {
+export const UsersSortsWrapper = ({ children }: Props) => {
   const pathname = usePathname()
 
-  const regex = new RegExp(`^/${lang}/users/\\d+(/.*)?$`)
+  const regex = new RegExp(`^/users/\\d+(/.*)?$`)
   const isPartnerPage = regex.test(pathname || '')
 
   if (isPartnerPage) return null

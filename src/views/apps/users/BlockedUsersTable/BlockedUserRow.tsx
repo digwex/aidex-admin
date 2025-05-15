@@ -1,7 +1,5 @@
 import Link from 'next/link'
 
-import { useParams } from 'next/navigation'
-
 import { Button } from '@mui/material'
 
 import { determineBalance } from '@/utils/determineBalance'
@@ -15,13 +13,12 @@ type Props = User
 
 export const BlockedUserRow = (props: Props) => {
   const user = props
-  const { lang } = useParams()
 
   return (
     <>
       <tr>
         <td>
-          <Link href={`/${lang}/users/${user.nId}`}>
+          <Link href={`/users/${user.nId}`}>
             <HandledFlag className='w-5' flag={user.CountryCode} />
             <span>{user.nId}</span>
           </Link>

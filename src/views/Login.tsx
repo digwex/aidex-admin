@@ -1,7 +1,7 @@
 'use client'
 
 // Next Imports
-import { useParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 import classNames from 'classnames'
 
@@ -14,24 +14,29 @@ import { useAuth } from '@/hooks/useAuth'
 
 const Login = () => {
   const router = useRouter()
-  const { lang: locale } = useParams()
   const { login, verifySession } = useAuth()
   const { user } = useUser()
 
   const handleAuth = async () => {
-    const accessToken = getItemFromLocalStorage('accessToken')
+    try {
+      const accessToken = getItemFromLocalStorage('accessToken')
 
-    if (user) {
-      router.replace(`/${locale}/dashboard`)
-    } else if (accessToken) {
-      await verifySession(
-        () => router.replace(`/${locale}/dashboard`),
-        async () => await login()
-      )
-    } else {
-      await login()
+      if (user) {
+        router.replace(`/dashboard`)
+      } else if (accessToken) {
+        await verifySession(
+          () => router.replace(`/dashboard`),
+          async () => await login()
+        )
+      } else {
+        await login()
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
+
+  console.log('user!!!!!')
 
   return (
     <div className={styles.login_wrap}>

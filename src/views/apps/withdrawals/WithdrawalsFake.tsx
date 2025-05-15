@@ -4,8 +4,6 @@ import { useMemo, useState } from 'react'
 
 import Link from 'next/link'
 
-import { useParams } from 'next/navigation'
-
 import type { ColumnDef } from '@tanstack/react-table'
 import {
   createColumnHelper,
@@ -52,8 +50,6 @@ const data = [
 const columnHelper = createColumnHelper<Columns>()
 
 const WithdrawalsFake = () => {
-  const params = useParams()
-
   const [sorting, setSorting] = useState<{ id: string; desc: boolean }[]>([])
 
   const columns = useMemo<ColumnDef<Columns, any>[]>(
@@ -66,7 +62,7 @@ const WithdrawalsFake = () => {
         header: 'ID трейдера',
         cell: ({ row }) => (
           <div className='text-center'>
-            <Link href={'/' + (params?.lang || '') + '/users/' + row.original.traderId}>{row.original.traderId}</Link>
+            <Link href={'/users/' + row.original.traderId}>{row.original.traderId}</Link>
           </div>
         )
       }),

@@ -4,27 +4,22 @@ import { usePathname } from 'next/navigation'
 
 import { Paper } from '@mui/material'
 
-import type { Locale } from '@/configs/i18n'
 import Tabs from '@/views/sorts/Tabs'
 
 import { AdminSorts } from './AdminSorts/AdminSorts'
 import { LoginsSorts } from './LoginsSorts'
 
-interface Props {
-  lang: Locale
-}
-
-export const Sorts = ({ lang }: Props) => {
+export const Sorts = () => {
   const pathname = usePathname()
 
   const tabs = [
     {
-      value: `/${lang}/security`,
+      value: `/security`,
       label: 'Админы',
       icon: 'tabler-user-hexagon'
     },
     {
-      value: `/${lang}/security/logins`,
+      value: `/security/logins`,
       label: 'Логины безопасности',
       icon: 'tabler-square-key'
     }

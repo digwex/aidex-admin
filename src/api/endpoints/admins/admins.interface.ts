@@ -12,6 +12,7 @@ export interface AdminResponse {
 export interface AdminResponseData {
   data: {
     data: Admin[]
+    permissions: string[]
     total: number
   }
 }
@@ -23,11 +24,11 @@ export interface Admin {
   isBanned: boolean
   lastLogin: string
   name: string
+  permissions: string[]
   role: string
   spentInAppSecs: number
   tgId: string
   tgLogin: string
-  permissions: string[]
 }
 
 export type LoginParams = AdminParams & { search: string }

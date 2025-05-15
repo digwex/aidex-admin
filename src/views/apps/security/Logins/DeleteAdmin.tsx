@@ -1,5 +1,3 @@
-
-
 import { memo } from 'react'
 
 import { toast } from 'react-toastify'
@@ -37,7 +35,7 @@ const DeleteAdmin = ({ id, login }: Props) => {
       )}
       modalContent={({ closeModal }) => (
         <div className='flex justify-center flex-col items-center gap-6'>
-          <img src='/images/icons/reject.svg' alt='close' className='w-16 h-16' />
+          <img src='/images/icons/reject.svg' alt='close' className='w-16 block mx-auto h-16' />
 
           <Typography className='text-center' variant='h4'>
             Вы уверены что хотите удалить <br /> {login}?

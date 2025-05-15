@@ -15,7 +15,6 @@ const NavbarContent = () => {
     <div className={classnames(verticalLayoutClasses.navbarContent, 'flex items-center justify-between gap-4 is-full')}>
       <div className='flex items-center -mr-6 w-full justify-center'>
         <Typography variant='h4'>AIDEX</Typography>
-        {/* <LanguageDropdown /> */}
       </div>
       <div>
         <NavToggle />

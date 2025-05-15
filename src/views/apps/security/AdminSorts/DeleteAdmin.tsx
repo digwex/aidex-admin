@@ -45,13 +45,15 @@ export const DeleteAdmin = () => {
       )}
       modalContent={({ closeModal }) => (
         <Stack direction='column' spacing={3}>
-          <img
-            className='w-[72px] h-[72px] block mx-auto'
-            width={72}
-            height={72}
-            src='/images/icons/reject.svg'
-            alt='Close'
-          />
+          <div className='flex w-full justify-center'>
+            <img
+              className='w-[72px] h-[72px] block mx-auto'
+              width={72}
+              height={72}
+              src='/images/icons/reject.svg'
+              alt='Close'
+            />
+          </div>
           <Typography>
             Вы уверены что хотите удалить{' '}
             {Array.isArray(selectedAdmins) && selectedAdmins.length > 1 ? 'администраторов' : 'администратора'}?

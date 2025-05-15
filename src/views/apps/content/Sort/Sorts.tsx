@@ -1,6 +1,6 @@
 'use client'
 
-import { useParams, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 import { Paper } from '@mui/material'
 
@@ -9,17 +9,16 @@ import { BannersSort } from './BannersSort'
 import { PromoSort } from './PromoSort'
 
 export const Sorts = () => {
-  const { lang } = useParams()
   const pathname = usePathname()
 
   const tabs = [
     {
-      value: `/${lang}/content`,
+      value: `/content`,
       label: 'Баннеры',
       icon: 'tabler-photo'
     },
     {
-      value: `/${lang}/content/promo`,
+      value: `/content/promo`,
       label: 'Промоматериалы',
       icon: 'tabler-cast'
     }
