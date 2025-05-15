@@ -8,9 +8,9 @@ import { useDebounceValue } from 'usehooks-ts'
 
 import { addDays } from 'date-fns'
 
-import { useAppSelector } from './useRedux'
 import { store } from '@/redux-store'
 import { getInitialSearchDate } from '@/utils/getInitialSearchDate'
+import { useAppSelector } from './useRedux'
 
 interface Props {
   refetch: any
@@ -111,7 +111,7 @@ export const usePagination = ({
       ? willSendDate?.[0]
         ? Math.floor(new Date(willSendDate[0]).getTime() / 1000)
         : undefined
-      : seconds10YearsAgo
+      : Math.floor(seconds10YearsAgo / 1000)
 
     const to = isDate
       ? willSendDate?.[1]
@@ -119,7 +119,7 @@ export const usePagination = ({
         : willSendDate[0]
           ? Math.floor(addDays(new Date(willSendDate[0]), 1).getTime() / 1000)
           : undefined
-      : endOfDaySeconds
+      : Math.floor(endOfDaySeconds / 1000)
 
     console.debug('willSendDate', { willSendDate, from, to })
     await refetch({
