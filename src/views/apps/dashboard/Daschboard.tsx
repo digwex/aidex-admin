@@ -15,8 +15,8 @@ const data: DashboardCardProps[] = [
     color: 'primary'
   },
   {
-    title: 'Профит трейдеров сегодня',
-    stats: '-$2 537 365.43',
+    title: 'Комиссии за сегодня $',
+    stats: '$2 537 365.43',
     avatarIcon: 'tabler-currency-dollar',
     color: 'success'
   },
@@ -31,12 +31,6 @@ const data: DashboardCardProps[] = [
     stats: '24 545',
     avatarIcon: 'tabler-users-group',
     color: 'info'
-  },
-  {
-    title: 'Расходы за все время',
-    stats: '$ 7 364 / 435',
-    avatarIcon: 'tabler-credit-card-pay',
-    color: 'warning'
   }
 ]
 
@@ -52,24 +46,9 @@ const secondData: DashboardCardProps[] = [
     avatarIcon: 'tabler-user-edit'
   },
   {
-    title: 'FTD',
-    stats: '20',
-    avatarIcon: 'tabler-wallet'
-  },
-  {
-    title: 'Депозиты за все время',
-    stats: '$ 7 365',
-    avatarIcon: 'tabler-credit-card-refund'
-  },
-  {
-    title: 'Депозиты сегодня',
-    stats: '$356',
+    title: 'Комиссии $',
+    stats: '$3 564 344',
     avatarIcon: 'tabler-currency-dollar'
-  },
-  {
-    title: 'Реальные депозиты',
-    stats: '$ 7 365',
-    avatarIcon: 'tabler-cash-banknote'
   },
   {
     title: 'Выводы за все время',
@@ -91,7 +70,7 @@ const secondData: DashboardCardProps[] = [
 const DashboardPage = () => {
   return (
     <div className='grid h-full grid-rows-[auto_auto_1fr] gap-2 overflow-y-auto'>
-      <Grid container spacing={2} columns={{ xl: 5, lg: 2, xs: 1 }}>
+      <Grid container spacing={2} columns={{ xl: 4, lg: 2, xs: 1 }}>
         {data.map((item, index) => (
           <Grid
             size={1}
@@ -105,7 +84,7 @@ const DashboardPage = () => {
         ))}
       </Grid>
 
-      <Grid container spacing={2} columns={{ xl: 9, lg: 5, xs: 2 }}>
+      <Grid container spacing={2} columns={{ xl: 6, lg: 3, xs: 2 }}>
         {secondData.map((item, index) => (
           <Grid
             size={1}

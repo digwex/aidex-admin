@@ -104,32 +104,25 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
         <MenuItem icon={<i className='tabler-user' />} href={`/users`} exactMatch={false} activeUrl='/users'>
           Пользователи
         </MenuItem>
-        <MenuItem
-          icon={<i className='tabler-users-group' />}
-          href={`/partners`}
-          exactMatch={false}
-          activeUrl='/partners'
-        >
-          Партнёры
+        <MenuItem icon={<i className='tabler-wallet' />} href={`/wallets`} exactMatch={false} activeUrl='/wallets'>
+          Кошельки
         </MenuItem>
         <MenuItem
-          icon={<i className='tabler-wallet' />}
+          icon={<i className='tabler-users-group' />}
+          href={`/referrals`}
+          exactMatch={false}
+          activeUrl='/referrals'
+        >
+          Рефальная программа
+        </MenuItem>
+
+        <MenuItem
+          icon={<i className='tabler-credit-card-pay' />}
           href={`/withdrawals`}
           exactMatch={false}
           activeUrl='/withdrawals'
         >
-          Ввод/Вывод
-        </MenuItem>
-        <MenuItem
-          icon={<i className='tabler-align-box-left-top' />}
-          href={`/content`}
-          exactMatch={false}
-          activeUrl='/content'
-        >
-          Контент
-        </MenuItem>
-        <MenuItem icon={<i className='tabler-mail' />} href={`/mailing`} exactMatch={false} activeUrl='/mailing'>
-          Рассылка
+          Вывод
         </MenuItem>
 
         <Divider className='pt-4 mb-4' />

@@ -1,7 +1,7 @@
-import StatisticMonthsTable from '@/views/apps/statistic/StatisticMonthsTable'
+import Months from '@/views/apps/statistic/months/months'
 
-const Months = () => {
-  return <StatisticMonthsTable />
+const Page = () => {
+  return <Months />
 }
 
-export default Months
+export default Page

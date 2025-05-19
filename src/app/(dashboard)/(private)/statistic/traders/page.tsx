@@ -1,7 +1,7 @@
-import StatisticTradersTable from '@/views/apps/statistic/StatisticTradersTable'
+import Traders from '@/views/apps/statistic/traders/traders'
 
-const Traders = () => {
-  return <StatisticTradersTable />
+const Page = () => {
+  return <Traders />
 }
 
-export default Traders
+export default Page

@@ -1,7 +1,7 @@
-import WithdrawalsFake from '@/views/apps/withdrawals/WithdrawalsFake'
+import FakeHistory from '@/views/apps/withdrawals/fake/fake'
 
 const FakeWithdraw = () => {
-  return <WithdrawalsFake />
+  return <FakeHistory />
 }
 
 export default FakeWithdraw

@@ -4,9 +4,8 @@ import { useParams } from 'next/navigation'
 
 import type { StackProps } from '@mui/material'
 
-import { Avatar, Box, Button, Chip, Divider, Paper, Stack, Typography } from '@mui/material'
+import { Avatar, Box, Button, Divider, Paper, Stack, Typography } from '@mui/material'
 
-import { EditInput } from '@/components/EditInput'
 import { useGetConvertedNIdToUIdQuery } from '@/api/endpoints/users/users-api'
 
 const stackProps: StackProps = {
@@ -18,7 +17,7 @@ const stackProps: StackProps = {
 export const Head = () => {
   const { id } = useParams()
 
-  const { data } = useGetConvertedNIdToUIdQuery(
+  useGetConvertedNIdToUIdQuery(
     {
       nid: String(id) ?? ''
     },
@@ -27,30 +26,11 @@ export const Head = () => {
     }
   )
 
-  console.log(data)
-
   return (
     <Paper className='flex items-center gap-3 justify-between p-4 flex-wrap'>
       <Box className='flex justify-start flex-wrap flex-1 gap-4'>
         <Stack direction='row' spacing={4}>
           <Avatar sx={{ width: 60, height: 60 }} src='/images/avatars/1.png' />
-          <Stack direction='column'>
-            <EditInput
-              input={{
-                sx: {
-                  width: '115px'
-                },
-                defaultValue: 'GOSHA2027'
-              }}
-            />
-            <Chip
-              className='w-fit'
-              icon={<Avatar src='/images/icons/verify.svg' />}
-              label='Подтверждено'
-              variant='outlined'
-              color='success'
-            />
-          </Stack>
         </Stack>
 
         <Stack {...stackProps}>
@@ -62,30 +42,6 @@ export const Head = () => {
           <Typography color='secondary'>Время последнего входа:</Typography>
           <Typography variant='h5'>2023-04-06 16:41</Typography>
         </Stack>
-
-        {/* <Stack {...stackProps}>
-          <Typography color='secondary'>E-mail:</Typography>
-          <EditInput
-            input={{
-              sx: {
-                width: '100%',
-                maxWidth: 280
-              },
-              defaultValue: 'alexsandr.tkachuk18@gmail.com'
-            }}
-          />
-        </Stack>
-
-        <Stack {...stackProps}>
-          <Typography color='secondary'>Верификация:</Typography>
-          <Chip
-            className='w-fit'
-            icon={<Avatar src='/images/icons/verify-red.svg' />}
-            label='Подтверждено'
-            variant='tonal'
-            color='error'
-          />
-        </Stack> */}
       </Box>
 
       <Divider className='w-full max600:block hidden' />

@@ -1,7 +1,7 @@
-import WithdrawalsTradersHistory from '@/views/apps/withdrawals/WithdrawalsTradersHistory'
+import TraderHistory from '@/views/apps/withdrawals/trader-history/trader-history'
 
-const TraderHistory = () => {
-  return <WithdrawalsTradersHistory />
+const Page = () => {
+  return <TraderHistory />
 }
 
-export default TraderHistory
+export default Page

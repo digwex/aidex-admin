@@ -5,15 +5,15 @@ interface Props {
 }
 
 export const metadata = {
-  title: 'Ввод/Вывод'
+  title: 'Вывод'
 }
 
 const Layout = async ({ children }: Props) => {
   const tabs = [
     { value: `/withdrawals`, label: 'Ожидаемые выводы трейдера' },
-    { value: `/withdrawals/partners`, label: 'Ожидаемые выводы партнера' },
+
     { value: `/withdrawals/trader-history`, label: 'История трейдера' },
-    { value: `/withdrawals/partner-history`, label: 'История партнера' },
+
     { value: `/withdrawals/fake-withdraw`, label: 'Фейк вывода' }
   ]
 
