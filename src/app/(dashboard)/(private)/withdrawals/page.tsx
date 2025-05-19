@@ -1,7 +1,7 @@
-import WithdrawalsTraders from '@/views/apps/withdrawals/WithdrawalsTraders'
+import ExpectedTrade from '@/views/apps/withdrawals/expected-trade/expected-trade'
 
 const Withdrawals = () => {
-  return <WithdrawalsTraders />
+  return <ExpectedTrade />
 }
 
 export default Withdrawals

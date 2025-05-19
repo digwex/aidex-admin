@@ -20,10 +20,17 @@ export const DeleteAdmin = () => {
   const handleDeleteAdmins = async (close: () => void) => {
     await toast.promise(deleteAdmins({ ids }).unwrap(), {
       pending: `Удаление ${isSingle ? 'администратора' : `администраторов`}...`,
-      success: `${isSingle ? 'Администратор' : `Администраторы`} успешно ${isSingle ? 'удален' : `удалены`}`,
+      success: {
+        render: () => {
+          close()
+
+          setSelectedAdmins([])
+
+          return `${isSingle ? 'Администратор' : `Администраторы`} успешно ${isSingle ? 'удален' : `удалены`}`
+        }
+      },
       error: `Ошибка при удалении ${isSingle ? 'администратора' : `администраторов`}`
     })
-    setSelectedAdmins([])
     close()
   }
 
@@ -75,7 +82,7 @@ export const DeleteAdmin = () => {
             <Button onClick={closeModal} type='button' variant='outlined' color='secondary' className='w-full'>
               Назад
             </Button>
-            <Button onClick={() => handleDeleteAdmins(close)} variant='contained' color='error' className='w-full'>
+            <Button onClick={() => handleDeleteAdmins(closeModal)} variant='contained' color='error' className='w-full'>
               Удалить
             </Button>
           </div>

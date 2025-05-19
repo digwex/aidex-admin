@@ -132,8 +132,6 @@ code {
   border: 0;
 }
 
-
-
 table th,
 table td {
   font-weight: 600;
@@ -352,4 +350,26 @@ tbody {
   justify-content: center;
   column-gap: 12px;
   height: 44px;
+}
+
+.td_success_row {
+  padding: 9px 14px;
+  border-radius: 35px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.td_success_row img {
+  width: 14px !important;
+}
+
+.td_success_row span {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  /* identical to box height, or 16px */
 }

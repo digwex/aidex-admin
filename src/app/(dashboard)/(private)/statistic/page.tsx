@@ -1,11 +1,7 @@
-import StatisticTable from '@/views/apps/statistic/StatisticTable'
+import Days from '@/views/apps/statistic/days/days'
 
 const Statistic = () => {
-  return (
-    <div className='space-y-4'>
-      <StatisticTable />
-    </div>
-  )
+  return <Days />
 }
 
 export default Statistic
