@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation'
 
 import { useBoolean } from 'usehooks-ts'
 
-import type { ChildrenType } from '@core/types'
-import { getItemFromLocalStorage } from '@/utils/localStorageService'
+import { Loader } from '@/components/Loader'
 import { useAuth } from '@/hooks/useAuth'
 import { useUser } from '@/hooks/useUser'
-import { Loader } from '@/components/Loader'
+import { getItemFromLocalStorage } from '@/utils/localStorageService'
+import type { ChildrenType } from '@core/types'
 
 export default function AuthGuard({ children }: ChildrenType) {
   const { isLogged } = useUser()
@@ -31,6 +31,7 @@ export default function AuthGuard({ children }: ChildrenType) {
     } else {
       router.replace(`/login`)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogged])
 
   if (isLoading) {

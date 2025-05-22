@@ -125,8 +125,8 @@ export const usePagination = ({
     await refetch({
       skip,
       take,
-      from,
-      to,
+      from: isDate ? from : undefined,
+      to: isDate ? to : undefined,
       search: isSearch ? debouncedSearchValue || undefined : undefined,
       searchBar: isSearchBar ? debouncedSearchValue || undefined : undefined,
       uid,
@@ -136,10 +136,12 @@ export const usePagination = ({
       direction: orderBy.direction,
       ...rest
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [skip, take, storeDate, debouncedSearchValue, type, withHash, pages, uid, orderBy])
 
   useEffect(() => {
     if (!isBadPathName(pathname, storeDate ?? date ?? [])) void fetchAdmins()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchAdmins, pathname, storeDate])
 
   useEffect(() => {
@@ -155,6 +157,7 @@ export const usePagination = ({
         setSkip((countPages - 1) * (take ?? 1))
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
   const handlePageChange = useCallback(

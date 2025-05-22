@@ -4,8 +4,8 @@ import CustomTable from '@/views/table/CustomTable'
 import { useLazyGetAllUsersQuery } from '../../../../api/endpoints/users/users-api'
 import { SORT_DIRECTION } from '../../../../api/types'
 
-import { userSortTitles } from './userSortTitles'
 import { UserRow } from '@/views/apps/users/UsersTable/UserRow'
+import { userSortTitles } from './userSortTitles'
 
 function UsersCustomTable() {
   return (

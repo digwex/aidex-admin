@@ -1,8 +1,10 @@
-export const WalletsTableRow = () => {
+import type { IWallet } from '@/api/endpoints/wallets/wallets'
+
+export const WalletsTableRow = ({ publicKey, balance }: IWallet) => {
   return (
     <tr>
-      <td>b3c87123nx871r6b23x98thjgsagdfxbiuqbgx91t8</td>
-      <td>328 SOL</td>
+      <td>{publicKey}</td>
+      <td>{balance} SOL</td>
     </tr>
   )
 }

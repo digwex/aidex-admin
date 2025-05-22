@@ -1,10 +1,10 @@
 'use client'
 
+import type { CardProps } from '@mui/material/Card'
 import MuiCard from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
-import type { CardProps } from '@mui/material/Card'
 
 import classnames from 'classnames'
 
@@ -33,8 +33,8 @@ const Card = styled(MuiCard)<Props>(({ color }) => ({
   }
 }))
 
-const DashboardSubCard = (props: DashboardCardProps) => {
-  const { title, stats, avatarIcon, color } = props
+const DashboardSubCard = (props: DashboardCardProps & { value: number }) => {
+  const { title, prefix, avatarIcon, color, value } = props
 
   return (
     <Card color={color || 'primary'} sx={{ width: '100%' }}>
@@ -48,7 +48,7 @@ const DashboardSubCard = (props: DashboardCardProps) => {
           </Typography>
         </div>
         <Typography color='text.primary' className='text-lg'>
-          {stats}
+          {prefix} {value}
         </Typography>
       </CardContent>
     </Card>

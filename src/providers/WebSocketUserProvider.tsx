@@ -4,10 +4,10 @@ import { useEffect } from 'react'
 
 import { toast } from 'react-toastify'
 
-import { useAppDispatch } from '../hooks/useRedux'
-import { useUser } from '../hooks/useUser'
 import { userActions } from '@/redux-store/slices'
 import { API_URL } from '@/utils/constants'
+import { useAppDispatch } from '../hooks/useRedux'
+import { useUser } from '../hooks/useUser'
 
 export const mainDomainApi = new URL(API_URL).host
 
@@ -72,6 +72,7 @@ const WebSocketUserProvider = ({ children }: Props) => {
         socket.close()
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [adminTicket])
 
   return children

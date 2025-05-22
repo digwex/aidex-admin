@@ -1,6 +1,6 @@
 'use client'
 
-import { useLazyGetWithdrawalsQuery } from '@/api/endpoints/withdrawals/withdrawals'
+import { useLazyGetFakeWithdrawalsQuery } from '@/api/endpoints/withdrawals/withdrawals'
 import { SORT_DIRECTION } from '@/api/types'
 import CustomTable from '@/views/table/CustomTable'
 import FakeItem from './fake-item'
@@ -11,10 +11,9 @@ const FakeHistory = () => {
     <CustomTable
       isDate
       isSearch
-      query={useLazyGetWithdrawalsQuery}
+      query={useLazyGetFakeWithdrawalsQuery}
       DataItem={FakeItem}
       sortTitles={fakeSortTitles}
-      fetchParams={{ type: 'FAKE' }}
       order={{ field: 'createdAt', direction: SORT_DIRECTION.DESC }}
     />
   )

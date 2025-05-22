@@ -1,6 +1,6 @@
 'use client'
 
-import { useLazyGetWithdrawalsQuery } from '@/api/endpoints/withdrawals/withdrawals'
+import { useLazyGetHistoryWithdrawalsQuery } from '@/api/endpoints/withdrawals/withdrawals'
 import { SORT_DIRECTION } from '@/api/types'
 import CustomTable from '@/views/table/CustomTable'
 import TradeHistoryItem from './trade-history-item'
@@ -11,7 +11,7 @@ const TraderHistory = () => {
     <CustomTable
       isDate
       isSearch
-      query={useLazyGetWithdrawalsQuery}
+      query={useLazyGetHistoryWithdrawalsQuery}
       DataItem={TradeHistoryItem}
       sortTitles={tradeHistorySortTitles}
       order={{ field: 'createdAt', direction: SORT_DIRECTION.DESC }}

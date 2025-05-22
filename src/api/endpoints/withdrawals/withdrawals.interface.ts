@@ -84,3 +84,22 @@ export interface WithdrawalChangeAddressBody {
   wallet: string | undefined
   wwSignature: string | undefined
 }
+
+export interface IWithdrawal {
+  id: string
+  amount: string
+  status: string
+  signature: string | null
+  userId: string
+  walletId: number
+  address: string
+  isFake: boolean
+  createdAt: string
+  userNid: number
+  wallet: {
+    publicKey: string
+  }
+  totalWithdrawals: number
+  withdrawalsSum: number
+  withdrawalAmount: number
+}

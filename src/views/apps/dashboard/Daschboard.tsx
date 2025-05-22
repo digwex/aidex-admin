@@ -2,6 +2,8 @@
 
 import Grid from '@mui/material/Grid2'
 
+import { useDashboardOverallQuery } from '@/api/endpoints/dashboard/dashboard-api'
+import { Loader } from '@/components/Loader'
 import DashboardChart from '@/views/apps/dashboard/DaschboardChart'
 import DashboardCard from '@/views/apps/dashboard/DashboardCard'
 import DashboardSubCard from '@/views/apps/dashboard/DashboardSubCard'
@@ -10,64 +12,80 @@ import type { DashboardCardProps } from './types'
 const data: DashboardCardProps[] = [
   {
     title: 'Сегодня открыли сделок $',
-    stats: '+$12 537 365.43',
+    prefix: '$',
     avatarIcon: 'tabler-arrows-exchange',
-    color: 'primary'
+    color: 'primary',
+    row: 'todayOpenTrades'
   },
   {
     title: 'Комиссии за сегодня $',
-    stats: '$2 537 365.43',
+    prefix: '$',
     avatarIcon: 'tabler-currency-dollar',
-    color: 'success'
+    color: 'success',
+    row: 'commissionsToday'
   },
   {
     title: 'Максимальный online сегодня',
-    stats: '12 537',
     avatarIcon: 'tabler-users',
-    color: 'warning'
+    color: 'warning',
+    row: 'maxOnline'
   },
   {
     title: 'Online сейчас',
-    stats: '24 545',
     avatarIcon: 'tabler-users-group',
-    color: 'info'
+    color: 'info',
+    row: 'currOnline'
   }
 ]
 
 const secondData: DashboardCardProps[] = [
   {
     title: 'Посетителей за все время',
-    stats: '3',
-    avatarIcon: 'tabler-user'
+    avatarIcon: 'tabler-user',
+    row: 'visitorsTotal'
   },
   {
     title: 'Регистрации за все время ',
-    stats: '154 852',
-    avatarIcon: 'tabler-user-edit'
+    avatarIcon: 'tabler-user-edit',
+    row: 'registrationsTotal'
   },
   {
     title: 'Комиссии $',
-    stats: '$3 564 344',
-    avatarIcon: 'tabler-currency-dollar'
+    prefix: '$',
+    avatarIcon: 'tabler-currency-dollar',
+    row: 'commissions'
   },
   {
     title: 'Выводы за все время',
-    stats: '$ 7 365',
-    avatarIcon: 'tabler-credit-card-pay'
+    prefix: '$',
+    avatarIcon: 'tabler-credit-card-pay',
+    row: 'withdrawalsTotal'
   },
   {
     title: 'Выводы за сегодня',
-    stats: '$ 7 365',
-    avatarIcon: 'tabler-currency-dollar'
+    prefix: '$',
+    avatarIcon: 'tabler-currency-dollar',
+    row: 'withdrawalsToday'
   },
   {
     title: 'Ожидают вывода',
-    stats: '$ 7 365',
-    avatarIcon: 'tabler-refresh'
+    prefix: '$',
+    avatarIcon: 'tabler-refresh',
+    row: 'withdrawalsPending'
   }
 ]
 
 const DashboardPage = () => {
+  const { data: dataDashboard, isLoading, isError, error } = useDashboardOverallQuery()
+
+  if (isError) {
+    return <div>Overall произошла ошибка: {JSON.stringify(error, null, 2)}</div>
+  }
+
+  if (!dataDashboard || isLoading) {
+    return <Loader />
+  }
+
   return (
     <div className='grid h-full grid-rows-[auto_auto_1fr] gap-2 overflow-y-auto'>
       <Grid container spacing={2} columns={{ xl: 4, lg: 2, xs: 1 }}>
@@ -79,7 +97,7 @@ const DashboardPage = () => {
               display: 'flex'
             }}
           >
-            <DashboardCard {...item} />
+            <DashboardCard {...item} value={dataDashboard[item.row]} />
           </Grid>
         ))}
       </Grid>
@@ -93,7 +111,7 @@ const DashboardPage = () => {
               display: 'flex'
             }}
           >
-            <DashboardSubCard {...item} />
+            <DashboardSubCard {...item} value={dataDashboard[item.row]} />
           </Grid>
         ))}
       </Grid>

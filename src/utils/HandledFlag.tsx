@@ -2,7 +2,7 @@ import { codeList } from 'flagpack-core'
 import Flag from 'react-flagpack'
 
 interface Props {
-  flag: string | undefined
+  flag: string | undefined | null
   className?: string
 }
 

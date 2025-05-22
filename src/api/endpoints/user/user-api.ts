@@ -1,4 +1,5 @@
-import { Tag, API } from '../..'
+import { API, Tag } from '../..'
+import { usersApi } from '../users/users-api'
 import type {
   ApiResponseTransactions,
   ApiResponseUserDocuments,
@@ -38,8 +39,7 @@ export const userApi = API.injectEndpoints({
         url: 'users/transactions',
         params
       }),
-      transformResponse: (response: ApiResponseTransactions) => response,
-      providesTags: [Tag.User]
+      transformResponse: (response: ApiResponseTransactions) => response
     }),
     setEmailUser: builder.mutation({
       query: (body: { uid: string; email: string }) => ({
@@ -60,13 +60,22 @@ export const userApi = API.injectEndpoints({
       invalidatesTags: [Tag.User]
     }),
     stopUserSession: builder.mutation({
-      query: (body: { sessionId: string }) => ({
+      query: (body: { sessionId: string; userId: string }) => ({
         url: 'user/sessions',
         method: 'DELETE',
         body
       }),
       transformResponse: (response: ApiResponseTransactions) => response,
-      invalidatesTags: [Tag.User]
+      async onQueryStarted({ userId, sessionId }, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled
+          dispatch(
+            usersApi.util.updateQueryData('getUserById', userId, prev =>
+              prev.Sessions.filter((session: any) => session.id !== sessionId)
+            )
+          )
+        } catch (error) {}
+      }
     }),
     upgradeKYCLevel: builder.mutation({
       query: (body: { uid: string }) => ({

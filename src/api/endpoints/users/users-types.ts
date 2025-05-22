@@ -36,11 +36,7 @@ export interface User {
   isDelete: boolean
 }
 
-export type KYCLevel =
-  | 'NO_DATA'
-  | 'AI_REVIEW'
-  | 'MANUAL_REVIEW'
-  | 'INCOME_PROOF'
+export type KYCLevel = 'NO_DATA' | 'AI_REVIEW' | 'MANUAL_REVIEW' | 'INCOME_PROOF'
 
 export interface ApiResponseUserOrders {
   code: number
@@ -105,8 +101,7 @@ export interface PositionHistory {
   date: string | null
 }
 
-export interface IUserOrdersParams
-  extends Omit<IQuery, 'isBlocked' | 'isActive'> {
+export interface IUserOrdersParams extends Omit<IQuery, 'isBlocked' | 'isActive'> {
   uid: string
   search?: string
   dateStart?: string

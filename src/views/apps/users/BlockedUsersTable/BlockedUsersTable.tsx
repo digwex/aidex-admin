@@ -4,8 +4,8 @@ import CustomTable from '@/views/table/CustomTable'
 import { useLazyGetAllUsersQuery } from '../../../../api/endpoints/users/users-api'
 import { SORT_DIRECTION } from '../../../../api/types'
 
-import { userSortTitles } from './userSortTitles'
 import { BlockedUserRow } from './BlockedUserRow'
+import { userSortTitles } from './userSortTitles'
 
 function BlockedUsersTable() {
   return (

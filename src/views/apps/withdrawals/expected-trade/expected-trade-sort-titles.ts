@@ -1,9 +1,10 @@
 export const expectedTradeSortTitles = [
   { label: 'Дата', sort: 'createdAt' },
-  { label: 'ID трейдеров', sort: 'nId' },
-  { label: 'Выводы', sort: 'withdrawals' },
-  { label: 'Выводы,$', sort: 'withdrawalsTotal' },
-  { label: 'Запрос на вывод,$', sort: 'amount' },
-  { label: 'Остаток по балансу,$', sort: 'balanceLeft' },
+  { label: 'ID трейдеров', sort: 'userNid' },
+  { label: 'Выводы', sort: 'totalWithdrawals' },
+  { label: 'Выводы,$', sort: 'withdrawalsSum' },
+  { label: 'Запрос на вывод,$', sort: 'withdrawalAmount' },
+
+  // { label: 'Остаток по балансу,$', sort: 'balanceLeft' },
   { label: null, sort: null }
 ]

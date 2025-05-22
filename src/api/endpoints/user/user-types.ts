@@ -1,6 +1,5 @@
 import { type IQuery, type IUserToBanBody } from '../../types'
-import { type User } from '../users/users-types'
-import { type KYCLevel } from './../users/users-types'
+import { type KYCLevel, type User } from '../users/users-types'
 
 export interface MainUserStats {
   personalData: null
@@ -53,7 +52,7 @@ export interface IQueryTransactions extends IQuery {
 export enum TRANSACTION_TYPE {
   PENDING = 'PENDING',
   DEPOSIT = 'DEPOSIT',
-  WITHDRAWAL = 'WITHDRAWAL',
+  WITHDRAWAL = 'WITHDRAWAL'
 }
 
 export interface ApiResponseTransactions {
@@ -127,11 +126,7 @@ export interface UserPersonalDataParams {
   partnerId?: number
 }
 
-export type VerifiedWithDocumentTypes =
-  | 'ID_CARD'
-  | 'PASSPORT'
-  | 'DRIVERS'
-  | 'SELFIE'
+export type VerifiedWithDocumentTypes = 'ID_CARD' | 'PASSPORT' | 'DRIVERS' | 'SELFIE'
 
 export interface ApiResponseUserPersonalData {
   code: number

@@ -2,13 +2,13 @@
 
 import { memo, useLayoutEffect, useState } from 'react'
 
+import { useFetchDocuments } from '@/hooks/useFetchDocuments'
+import { usePagination } from '@/hooks/usePagination'
+import { useTableSortHeader } from '@/hooks/useTableSortHeader'
 import { SORT_DIRECTION } from '../../api/types'
 import CustomPagination from './CustomPagination'
 import EmptyDataTitle from './EmptyDataTitle'
 import TableLoader from './TableLoader/TableLoader'
-import { useFetchDocuments } from '@/hooks/useFetchDocuments'
-import { useTableSortHeader } from '@/hooks/useTableSortHeader'
-import { usePagination } from '@/hooks/usePagination'
 
 interface Props {
   query: any
@@ -92,11 +92,10 @@ const CustomTable = ({
 
   useLayoutEffect(() => {
     processFetch(isFetching)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFetching])
 
   const resultData = fakeData ?? data?.data?.data ?? data?.result ?? []
-
-  console.log('data', data)
 
   return (
     <>

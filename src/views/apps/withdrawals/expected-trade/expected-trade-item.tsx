@@ -4,29 +4,16 @@ import Link from 'next/link'
 
 import clsx from 'clsx'
 
-import type { Withdrawal } from '@/api/endpoints/withdrawals/withdrawals.interface'
+import type { IWithdrawal } from '@/api/endpoints/withdrawals/withdrawals.interface'
 import { useCheckAccess } from '@/hooks/useCheckAccess'
 import { calcDate } from '@/utils/calcDate'
 import { formatCurrency } from '@/utils/formatCurrency'
-import { HandledFlag } from '@/utils/HandledFlag'
 import { ApproveTrade } from './approve-trade'
 import { CancelTrade } from './cancel-trade'
-import { ChangeTrade } from './change-trade'
-import { BlockTrade } from './block-trade'
 
-type Props = Withdrawal
+type Props = IWithdrawal
 
-const ExpectedTradeItem = ({
-  id,
-  withdrawals,
-  withdrawalsTotal,
-  coin,
-  amount,
-  wallet,
-  balanceLeft,
-  createdAt,
-  user
-}: Props) => {
+const ExpectedTradeItem = ({ id, createdAt, userNid, totalWithdrawals, withdrawalAmount, withdrawalsSum }: Props) => {
   const { checkRoute } = useCheckAccess()
 
   return (
@@ -34,30 +21,24 @@ const ExpectedTradeItem = ({
       <td className='w100'>{calcDate(createdAt)}</td>
       <td>
         <Link
-          href={`/users/${user.nId}`}
+          href={`/users/${userNid}`}
           className={clsx('td_row', {
             'pointer-events-none': !checkRoute('/admin/user/:nId')
           })}
         >
-          <HandledFlag flag={user.CountryCode} />
-          <span className='text-success'>{user.nId}</span>
+          <span className='text-success'>{userNid}</span>
         </Link>
       </td>
 
-      <td>{withdrawals}</td>
-      <td>${formatCurrency(Number(withdrawalsTotal))}</td>
+      <td>{totalWithdrawals}</td>
+      <td>${formatCurrency(Number(withdrawalsSum))}</td>
 
-      <td className='w250'>${formatCurrency(Number(amount))}</td>
-      <td>${formatCurrency(Number(balanceLeft))}</td>
+      <td className='w250'>${formatCurrency(Number(withdrawalAmount))}</td>
       <td>
         <div className='flex h-full justify-start items-center gap-4'>
           <ApproveTrade id={id} />
-
           <CancelTrade id={id} />
-
-          <ChangeTrade id={id} network={coin.network} wallet={wallet} />
-
-          <BlockTrade />
+          {/* <BlockTrade /> */}
         </div>
       </td>
     </tr>

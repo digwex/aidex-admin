@@ -1,13 +1,13 @@
 'use client'
 
-import CustomTable from '@/views/table/CustomTable'
-import { SORT_DIRECTION } from '@/api/types'
-import { WalletsTableRow } from './wallets-table-row'
 import { useLazyGetWalletsQuery } from '@/api/endpoints/wallets/wallets'
+import { SORT_DIRECTION } from '@/api/types'
+import CustomTable from '@/views/table/CustomTable'
+import { WalletsTableRow } from './wallets-table-row'
 
 const WalletsTable = () => {
   const transactionSortTitles = [
-    { label: 'Кошелёк', sort: 'wallet' },
+    { label: 'Кошелёк', sort: 'publicKey' },
     { label: 'Баланс', sort: 'balance' }
   ]
 
