@@ -1,14 +1,54 @@
 import { Button, Paper } from '@mui/material'
 
-export const Actions = () => {
+import { BlockModal } from '../UsersTable/BlockModal'
+import { DeleteModal } from '../UsersTable/DeleteModal'
+import { UnblockModal } from '../UsersTable/UnblockModal'
+
+interface IProps {
+  isBlockedForever: boolean
+  isDelete: boolean
+  userId: string
+}
+
+export const Actions = ({ isBlockedForever, isDelete, userId }: IProps) => {
   return (
-    <Paper className='p-4 flex flex-wrap gap-4'>
-      <Button color='error' variant='outlined' className='max700:w-full'>
-        Деактивировать аккаунт
-      </Button>
-      <Button color='error' variant='outlined' className='max700:w-full'>
-        Удалить аккаунт
-      </Button>
-    </Paper>
+    <>
+      <Paper className='p-4 flex flex-wrap gap-4'>
+        {isBlockedForever ? (
+          <UnblockModal uId={userId}>
+            {({ openModal }) => (
+              <Button color='success' variant='outlined' className='max700:w-full' onClick={openModal}>
+                Разблокировать аккаунт
+              </Button>
+            )}
+          </UnblockModal>
+        ) : (
+          <BlockModal uId={userId}>
+            {({ openModal }) => (
+              <Button color='error' variant='outlined' className='max700:w-full' onClick={openModal}>
+                Деактивировать аккаунт
+              </Button>
+            )}
+          </BlockModal>
+        )}
+        {isDelete ? (
+          <DeleteModal uid={userId}>
+            {({ openModal }) => (
+              <Button color='success' variant='outlined' className='max700:w-full' onClick={openModal}>
+                Восстановить аккаунт
+              </Button>
+            )}
+          </DeleteModal>
+        ) : (
+          <DeleteModal uid={userId}>
+            {({ openModal }) => (
+              <Button color='error' variant='outlined' className='max700:w-full' onClick={openModal}>
+                Удалить аккаунт
+              </Button>
+            )}
+          </DeleteModal>
+        )}
+      </Paper>
+    </>
   )
 }

@@ -2,17 +2,18 @@ import { Button, Typography } from '@mui/material'
 
 import { toast } from 'react-toastify'
 
-import ModalButton from '@/components/ModalButton'
 import { useUserToBanMutation } from '@/api/endpoints/users/users-api'
+import ModalButton from '@/components/ModalButton'
 
 interface Props {
   uId: string
+  children: ({ openModal }: { openModal: () => void }) => React.ReactNode
 }
 
-export const BlockModal = ({ uId }: Props) => {
+export const BlockModal = ({ uId, children }: Props) => {
   const [userToBan] = useUserToBanMutation()
 
-  const handleBanUser = async (close: () => void) => {
+  const handleBanUser = async () => {
     await toast.promise(
       userToBan({
         uId
@@ -23,23 +24,13 @@ export const BlockModal = ({ uId }: Props) => {
         error: 'Ошибка при блокировке аккаунта'
       }
     )
-    close()
   }
 
   return (
     <ModalButton
       maxWidth='xs'
       fullWidth
-      openButton={({ openModal }) => (
-        <Button
-          onClick={openModal}
-          variant='contained'
-          color='error'
-          className='!w-[38px] !h-[38px] !p-0 min-w-min grid place-content-center'
-        >
-          <img src='/images/icons/lock.svg' alt='unlock' />
-        </Button>
-      )}
+      openButton={({ openModal }) => children({ openModal })}
       modalContent={({ closeModal }) => (
         <div className='flex justify-center flex-col items-center gap-6'>
           <img src='/images/icons/reject.svg' alt='close' className='w-16 h-16' />
@@ -52,7 +43,15 @@ export const BlockModal = ({ uId }: Props) => {
             <Button variant='outlined' color='secondary' className='w-full' onClick={closeModal}>
               Нет
             </Button>
-            <Button variant='contained' color='error' className='w-full' onClick={() => handleBanUser(closeModal)}>
+            <Button
+              variant='contained'
+              color='error'
+              className='w-full'
+              onClick={() => {
+                handleBanUser()
+                closeModal()
+              }}
+            >
               Заблокировать
             </Button>
           </div>

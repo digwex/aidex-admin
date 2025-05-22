@@ -1,5 +1,11 @@
 import { API } from '@/api'
 
+export interface IWallet {
+  id: number
+  balance: string
+  publicKey: string
+}
+
 const walletsApi = API.injectEndpoints({
   endpoints: build => ({
     getWallets: build.query({

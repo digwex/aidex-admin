@@ -2,26 +2,26 @@ import { Button, Typography } from '@mui/material'
 
 import { toast } from 'react-toastify'
 
-import { useUserToUnbanMutation } from '@/api/endpoints/users/users-api'
+import { useRevertDeletingUserMutation } from '@/api/endpoints/user/user-api'
 import ModalButton from '@/components/ModalButton'
 
 interface Props {
-  uId: string
+  uid: string
   children: ({ openModal }: { openModal: () => void }) => React.ReactNode
 }
 
-export const UnblockModal = ({ uId, children }: Props) => {
-  const [unBan] = useUserToUnbanMutation()
+export const RevertDeleteModal = ({ uid, children }: Props) => {
+  const [revertDelete] = useRevertDeletingUserMutation()
 
-  const handleUnBan = async () => {
+  const handleRevertDelete = async () => {
     await toast.promise(
-      unBan({
-        uId
+      revertDelete({
+        uid
       }).unwrap(),
       {
-        pending: 'Разблокировка...',
-        success: 'Успешно разблокирован',
-        error: 'Ошибка при разблокировке'
+        pending: 'Восстановление...',
+        success: 'Успешно восстановлен',
+        error: 'Ошибка при восстановлении'
       }
     )
   }
@@ -33,10 +33,10 @@ export const UnblockModal = ({ uId, children }: Props) => {
       openButton={({ openModal }) => children({ openModal })}
       modalContent={({ closeModal }) => (
         <div className='flex justify-center flex-col items-center gap-6'>
-          <img src='/images/icons/verify.svg' alt='close' className='w-16 h-16' />
+          <img src='/images/icons/reject.svg' alt='close' className='w-16 h-16' />
 
           <Typography className='text-center' variant='h4'>
-            Вы уверены что хотите <br /> разблокировать трейдера?
+            Вы уверены что хотите <br /> восстановить аккаунт?
           </Typography>
 
           <div className='w-full flex items-center gap-3 max600:flex-col'>
@@ -45,14 +45,14 @@ export const UnblockModal = ({ uId, children }: Props) => {
             </Button>
             <Button
               variant='contained'
-              color='success'
+              color='error'
               className='w-full'
               onClick={() => {
-                handleUnBan()
+                handleRevertDelete()
                 closeModal()
               }}
             >
-              Разблокировать
+              Восстановить
             </Button>
           </div>
         </div>

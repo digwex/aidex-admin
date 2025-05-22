@@ -6,7 +6,9 @@ import type { StackProps } from '@mui/material'
 
 import { Avatar, Box, Button, Divider, Paper, Stack, Typography } from '@mui/material'
 
-import { useGetConvertedNIdToUIdQuery } from '@/api/endpoints/users/users-api'
+import { format } from 'date-fns'
+
+import { useGetUserByIdQuery } from '@/api/endpoints/users/users-api'
 
 const stackProps: StackProps = {
   direction: 'column',
@@ -16,15 +18,9 @@ const stackProps: StackProps = {
 
 export const Head = () => {
   const { id } = useParams()
+  const { data } = useGetUserByIdQuery(String(id as string))
 
-  useGetConvertedNIdToUIdQuery(
-    {
-      nid: String(id) ?? ''
-    },
-    {
-      refetchOnMountOrArgChange: true
-    }
-  )
+  const totalSol = data.wallets.reduce((acc: number, wallet: any) => acc + Number(wallet.balance), 0)
 
   return (
     <Paper className='flex items-center gap-3 justify-between p-4 flex-wrap'>
@@ -35,12 +31,12 @@ export const Head = () => {
 
         <Stack {...stackProps}>
           <Typography color='secondary'>ID пользователя:</Typography>
-          <Typography variant='h5'>212121212</Typography>
+          <Typography variant='h5'>{data.nId}</Typography>
         </Stack>
 
         <Stack {...stackProps}>
           <Typography color='secondary'>Время последнего входа:</Typography>
-          <Typography variant='h5'>2023-04-06 16:41</Typography>
+          <Typography variant='h5'>{format(data.lastLoggedIn, 'yyyy-MM-dd HH:mm')}</Typography>
         </Stack>
       </Box>
 
@@ -48,10 +44,11 @@ export const Head = () => {
 
       <Box className='flex items-center gap-3 max1000:flex-col max600:justify-center max600:w-full'>
         <Stack direction='column'>
-          <Typography variant='h5'>964.34 USDT</Typography>
+          <Typography variant='h5'>{totalSol} SOL</Typography>
+          {/* <Typography variant='h5'>964.34 USDT</Typography>
           <Typography className='text-xs text-right' color='secondary'>
             ≈0.03524242 BTC
-          </Typography>
+          </Typography> */}
         </Stack>
         <Button variant='contained' color='success' className='w-fit max600:w-full'>
           Общий баланс пользователя

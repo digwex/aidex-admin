@@ -1,6 +1,6 @@
 'use client'
 
-import { useLazyGetWithdrawalsQuery } from '@/api/endpoints/withdrawals/withdrawals'
+import { useLazyGetPendingWithdrawalsQuery } from '@/api/endpoints/withdrawals/withdrawals'
 import { SORT_DIRECTION } from '@/api/types'
 import CustomTable from '@/views/table/CustomTable'
 import ExpectedTradeItem from './expected-trade-item'
@@ -11,10 +11,9 @@ const ExpectedTrade = () => {
     <CustomTable
       isDate
       isSearch
-      query={useLazyGetWithdrawalsQuery}
+      query={useLazyGetPendingWithdrawalsQuery}
       DataItem={ExpectedTradeItem}
       sortTitles={expectedTradeSortTitles}
-      fetchParams={{ type: 'WAITING' }}
       order={{ field: 'createdAt', direction: SORT_DIRECTION.DESC }}
     />
   )

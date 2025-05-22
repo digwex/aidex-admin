@@ -7,12 +7,12 @@ import VerticalLayout from '@layouts/VerticalLayout'
 
 import Navigation from '@components/layout/vertical/Navigation'
 
+import AuthGuard from '@/hocs/AuthGuard'
 import Navbar from '@components/layout/vertical/Navbar'
 import ScrollToTop from '@core/components/scroll-to-top'
-import AuthGuard from '@/hocs/AuthGuard'
 
-import { getMode, getSystemMode } from '@core/utils/serverHelpers'
 import Customizer from '@/@core/components/customizer'
+import { getMode, getSystemMode } from '@core/utils/serverHelpers'
 
 const Layout = async (props: ChildrenType) => {
   const { children } = props

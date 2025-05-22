@@ -1,6 +1,8 @@
 'use client'
 
-import { Typography, Paper, Stack, styled } from '@mui/material'
+import { useParams } from 'next/navigation'
+
+import { Paper, Stack, styled, Typography } from '@mui/material'
 
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -8,6 +10,8 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
+
+import { useGetUserByIdQuery } from '@/api/endpoints/users/users-api'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -20,6 +24,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }))
 
 export const PersonalData = () => {
+  const { id } = useParams()
+  const { data } = useGetUserByIdQuery(String(id as string))
+
   return (
     <Paper className='p-4'>
       <Stack spacing={4}>
@@ -36,22 +43,12 @@ export const PersonalData = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow>
-                <StyledTableCell>2kashdkh87as897g63153s8g1g1s82356gs123</StyledTableCell>
-                <StyledTableCell>200 SOL</StyledTableCell>
-              </TableRow>
-              <TableRow>
-                <StyledTableCell>2kashdkh87as897g63153s8g1g1s82356gs123</StyledTableCell>
-                <StyledTableCell>200 SOL</StyledTableCell>
-              </TableRow>
-              <TableRow>
-                <StyledTableCell>2kashdkh87as897g63153s8g1g1s82356gs123</StyledTableCell>
-                <StyledTableCell>200 SOL</StyledTableCell>
-              </TableRow>
-              <TableRow>
-                <StyledTableCell>2kashdkh87as897g63153s8g1g1s82356gs123</StyledTableCell>
-                <StyledTableCell>200 SOL</StyledTableCell>
-              </TableRow>
+              {data.wallets.map((row: any) => (
+                <TableRow key={row.id}>
+                  <StyledTableCell>{row.publicKey}</StyledTableCell>
+                  <StyledTableCell>{row.balance} SOL</StyledTableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>

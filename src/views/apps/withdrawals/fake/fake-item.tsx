@@ -1,57 +1,40 @@
-// import { Link } from 'react-router-dom'
-// import { type Withdrawal } from '../../../../../../api/endpoints/withdrawals/withdrawals.interface'
-// import CopyHash from '../../../../../../utils/CopyHash'
-// import { HandledFlag } from '../../../../../../utils/HandledFlag'
-// import { calcDate } from '../../../../../../utils/calcDate'
-// import { formatCurrency } from '../../../../../../utils/formatCurrency'
-// import { getStatusPaymentHistory } from '../../../../../../utils/getStatusPaymentHistory'
-// import { shortIdTooltip } from '../../../../../../utils/shortIdTooltip'
-// import { shortUserEmail } from '../../../../../../utils/shortUserEmail'
-
 import Link from 'next/link'
 
-import type { Withdrawal } from '@/api/endpoints/withdrawals/withdrawals.interface'
+import clsx from 'clsx'
+
+import type { IWithdrawal } from '@/api/endpoints/withdrawals/withdrawals.interface'
+import { useCheckAccess } from '@/hooks/useCheckAccess'
 import { calcDate } from '@/utils/calcDate'
-import { formatCurrency } from '@/utils/formatCurrency'
-import { HandledFlag } from '@/utils/HandledFlag'
-import { shortIdTooltip } from '@/utils/shortIdTooltip'
-import { getStatusPaymentHistory } from '@/utils/getStatusPaymentHistory'
 import CopyHash from '@/utils/CopyHash'
+import { formatCurrency } from '@/utils/formatCurrency'
+import { getStatusPaymentHistory } from '@/utils/getStatusPaymentHistory'
+import { shortIdTooltip } from '@/utils/shortIdTooltip'
 
-type Props = Withdrawal
+type Props = IWithdrawal
 
-const FakeItem = ({
-  PaymentStatus,
-  toUSDT,
-  coin,
-  additionalData,
-  wallet,
-  id,
-  coin: { network, symbolCoin },
-  createdAt,
-  user,
-  nId,
-  note
-}: Props) => {
+const FakeItem = ({ createdAt, userNid, id, withdrawalAmount, address, signature, status }: Props) => {
+  const { checkRoute } = useCheckAccess()
+
   return (
     <tr>
       <td className='w-[100px]'>{calcDate(createdAt)}</td>
       <td>
-        <Link href={`/users/${user.nId}`} className='flex items-center gap-2'>
-          <HandledFlag flag={user.CountryCode} />
-          <span className='text-success'>{user.nId}</span>
+        <Link
+          href={`/users/${userNid}`}
+          className={clsx('flex items-center justify-center gap-2', {
+            'pointer-events-none': !checkRoute('/admin/user/:nId')
+          })}
+        >
+          <span className='text-success'>{userNid}</span>
         </Link>
       </td>
-
-      <td>{nId ?? shortIdTooltip(id)}</td>
-      <td>${formatCurrency(Number(toUSDT))}</td>
-      <td>{coin.network ?? '-'}</td>
-      <td>{shortIdTooltip(wallet)}</td>
+      <td>{shortIdTooltip(id)}</td>
+      <td>${formatCurrency(Number(withdrawalAmount))}</td>
+      <td>{shortIdTooltip(address)}</td>
       <td>
-        <CopyHash hash={additionalData?.blockchain_hash} network={network ?? symbolCoin} />
+        <CopyHash hash={signature} />
       </td>
-      <td className='w-[250px]'>{note ?? '-'}</td>
-      <td>{getStatusPaymentHistory({ status: PaymentStatus })}</td>
+      <td>{getStatusPaymentHistory({ status })}</td>
     </tr>
   )
 }

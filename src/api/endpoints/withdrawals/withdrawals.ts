@@ -8,8 +8,23 @@ import {
   type WithdrawalResponseData
 } from './withdrawals.interface'
 
+const argsToString = (args: { [key: string]: string }) =>
+  Object.entries(args)
+    .filter(([, value]) => typeof value !== 'undefined')
+    .map(([key, value]) => `${key}=${value}`)
+    .join('&')
+
 const withdrawalsApi = API.injectEndpoints({
   endpoints: builder => ({
+    getPendingWithdrawals: builder.query<any, any>({
+      query: args => `/withdrawals/pending?${argsToString(args)}`
+    }),
+    getHistoryWithdrawals: builder.query<any, any>({
+      query: args => `/withdrawals/history?${argsToString(args)}`
+    }),
+    getFakeWithdrawals: builder.query<any, any>({
+      query: args => `/withdrawals/fake?${argsToString(args)}`
+    }),
     getWithdrawals: builder.query<WithdrawalResponseData, WithdrawalParams>({
       query: params => ({ url: 'payments/withdrawals', params }),
       transformResponse: (response: WithdrawalResponse) => response.data,
@@ -49,6 +64,9 @@ const withdrawalsApi = API.injectEndpoints({
 })
 
 export const {
+  useLazyGetPendingWithdrawalsQuery,
+  useLazyGetHistoryWithdrawalsQuery,
+  useLazyGetFakeWithdrawalsQuery,
   useLazyGetWithdrawalsQuery,
   useWithdrawalsCompleteMutation,
   useWithdrawalsCancelMutation,

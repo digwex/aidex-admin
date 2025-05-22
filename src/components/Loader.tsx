@@ -1,6 +1,6 @@
 export const Loader = () => {
   return (
-    <div role='status'>
+    <div role='status' className='flex w-full justify-center'>
       <svg
         aria-hidden='true'
         className='inline w-8 h-8 text-gray-100/10 animate-spin dark:text-gray-600 fill-primary'

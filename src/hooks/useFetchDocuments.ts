@@ -4,8 +4,8 @@ import { useCallback } from 'react'
 
 import { usePathname } from 'next/navigation'
 
-import { useAppDispatch } from './useRedux'
 import { documentsFetchActions } from '@/redux-store/slices'
+import { useAppDispatch } from './useRedux'
 
 export const useFetchDocuments = () => {
   const dispatch = useAppDispatch()
@@ -18,6 +18,7 @@ export const useFetchDocuments = () => {
       }
     },
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [pathname]
   )
 

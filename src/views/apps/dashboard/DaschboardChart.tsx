@@ -5,8 +5,8 @@ import dynamic from 'next/dynamic'
 
 // Mui Imports
 import Card from '@mui/material/Card'
-import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
+import CardHeader from '@mui/material/CardHeader'
 import { useTheme } from '@mui/material/styles'
 
 // Third Party Imports
@@ -16,28 +16,22 @@ import type { ApexOptions } from 'apexcharts'
 const AppReactApexCharts = dynamic(() => import('@/libs/styles/AppReactApexCharts'))
 
 // Style Imports
-import './styles.css'
 import { Box, InputAdornment } from '@mui/material'
+import './styles.css'
 
 import CustomTextField from '@/@core/components/mui/TextField'
 
+import { useDashboardGraphQuery } from '@/api/endpoints/dashboard/dashboard-api'
+import { Loader } from '@/components/Loader'
+import { useAppSelector } from '@/hooks/useRedux'
 import DashboardDataPickersRange from '../../DataPickerRange'
 
-const series = [
-  {
-    name: 'Shipment',
-    type: 'column',
-    data: [38, 45, 33, 38, 32, 48, 45, 40, 42, 37]
-  },
-  {
-    name: 'Delivery',
-    type: 'line',
-    data: [23, 28, 23, 32, 25, 42, 32, 32, 26, 24]
-  }
-]
-
 const DashboardChart = () => {
-  // Hooks
+  const date = useAppSelector(s => s.search.date)
+  const from = String(Math.floor(date[0]! / 1000))
+  const to = String(Math.floor(date[1]! / 1000))
+  const { data, isLoading, isError, error } = useDashboardGraphQuery({ from, to })
+
   const theme = useTheme()
 
   const options: ApexOptions = {
@@ -134,6 +128,45 @@ const DashboardChart = () => {
       }
     }
   }
+
+  if (isError) {
+    return <div>Graph произошла ошибка: {JSON.stringify(error, null, 2)}</div>
+  }
+
+  if (!data || isLoading) {
+    return <Loader />
+  }
+
+  const series = data.reduce(
+    (acc, item) => {
+      if (!acc[0]) {
+        acc[0] = {
+          name: 'Shipment',
+          type: 'column',
+          data: [item._delivery]
+        }
+      } else {
+        acc[0].data.push(item._delivery)
+      }
+
+      if (!acc[0]) {
+        acc[0] = {
+          name: 'Shipment',
+          type: 'column',
+          data: [item._delivery]
+        }
+      } else {
+        acc[0].data.push(item._delivery)
+      }
+
+      return acc
+    },
+    [] as {
+      name: string
+      type: string
+      data: number[]
+    }[]
+  )
 
   return (
     <Card sx={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>

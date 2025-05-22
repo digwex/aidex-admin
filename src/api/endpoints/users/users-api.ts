@@ -2,7 +2,7 @@ import { API, Tag } from '../..'
 import { type ApiResponse, type IQuery, type IUserToBanBody } from '../../types'
 import { type ApiResponseTrades, type IUserOrdersParams, type User } from './users-types'
 
-const usersApi = API.injectEndpoints({
+export const usersApi = API.injectEndpoints({
   endpoints: builder => ({
     getAllUsers: builder.query<ApiResponse<User[]>, IQuery>({
       query: params => ({ url: 'users', params })
@@ -60,6 +60,13 @@ const usersApi = API.injectEndpoints({
       }),
       invalidatesTags: [Tag.Users, Tag.User, Tag.Orders]
     }),
+    getUserById: builder.query({
+      query: (id: string) => ({
+        url: `users/${id}`
+      }),
+      transformResponse: (response: ApiResponse<any>) => response.data,
+      providesTags: [Tag.User]
+    }),
     updateTrade: builder.mutation({
       query: (body: any) => ({
         url: 'users/trades',
@@ -68,12 +75,6 @@ const usersApi = API.injectEndpoints({
       }),
       transformResponse: (response: unknown) => response,
       invalidatesTags: [Tag.Users, Tag.User, Tag.User]
-    }),
-    getConvertedNIdToUId: builder.query({
-      query: (params: { nid: string }) => ({
-        url: 'users/uid',
-        params
-      })
     })
   })
 })
@@ -89,5 +90,5 @@ export const {
   useLazyGetAllUserTradesQuery,
   useDeleteTradeMutation,
   useUpdateTradeMutation,
-  useGetConvertedNIdToUIdQuery
+  useGetUserByIdQuery
 } = usersApi

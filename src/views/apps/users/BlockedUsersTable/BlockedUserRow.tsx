@@ -5,9 +5,9 @@ import { Button } from '@mui/material'
 import { determineBalance } from '@/utils/determineBalance'
 import { HandledFlag } from '@/utils/HandledFlag'
 
-import { UnblockModal } from './UnblockModal'
 import type { User } from '@/api/endpoints/users/users-types'
 import { DeleteModal } from '../UsersTable/DeleteModal'
+import { UnblockModal } from './UnblockModal'
 
 type Props = User
 
@@ -51,7 +51,13 @@ export const BlockedUserRow = (props: Props) => {
                 Изменить
               </Button>
             </Link>
-            <DeleteModal uid={user.id} />
+            <DeleteModal uid={user.id}>
+              {({ openModal }) => (
+                <Button onClick={openModal} variant='outlined' color='error'>
+                  Удалить
+                </Button>
+              )}
+            </DeleteModal>
             <UnblockModal uId={user.id} nId={user.nId} />
           </div>
         </td>

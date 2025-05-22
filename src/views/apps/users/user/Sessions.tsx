@@ -1,5 +1,9 @@
 'use client'
 
+import { useParams } from 'next/navigation'
+
+import { Button, Typography } from '@mui/material'
+import Paper from '@mui/material/Paper'
 import { styled } from '@mui/material/styles'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -7,8 +11,11 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
-import { Button, Typography } from '@mui/material'
+
+import { toast } from 'react-toastify'
+
+import { useStopUserSessionMutation } from '@/api/endpoints/user/user-api'
+import { useGetUserByIdQuery } from '@/api/endpoints/users/users-api'
 
 export const Sessions = () => {
   return (
@@ -22,16 +29,6 @@ export const Sessions = () => {
   )
 }
 
-function createData(ip: string, agent: string, lastActivity: string) {
-  return { ip, agent, lastActivity }
-}
-
-const rows = [
-  createData('192.168.123.132', 'Desktop Mac 10.15.7 Chrome 111', 'Апр 11, 15:28'),
-  createData('192.168.123.132', 'Desktop Mac 10.15.7 Chrome 111', 'Апр 11, 15:28'),
-  createData('192.168.123.132', 'Desktop Mac 10.15.7 Chrome 111', 'Апр 11, 15:28')
-]
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#6B748E',
@@ -43,6 +40,30 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }))
 
 function SessionsTable() {
+  const { id } = useParams()
+  const { data } = useGetUserByIdQuery(String(id as string))
+  const [deleteSession] = useStopUserSessionMutation()
+
+  const handleDeleteSession = async (sessionId: string, userId: string) => {
+    const toastId = toast.loading('Завершение сессии...')
+
+    try {
+      await deleteSession({ sessionId, userId }).unwrap()
+      toast.update(toastId, {
+        type: 'success',
+        render: 'Сессия завершена',
+        isLoading: false
+      })
+    } catch (error) {
+      console.log(`Error deleting session: ${error}`)
+      toast.update(toastId, {
+        type: 'error',
+        render: 'Ошибка при завершении сессии',
+        isLoading: false
+      })
+    }
+  }
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label='customized table'>
@@ -55,15 +76,15 @@ function SessionsTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, i) => (
-            <TableRow key={i}>
+          {data.Sessions.map((row: any) => (
+            <TableRow key={row.id}>
               <StyledTableCell component='th' scope='row'>
                 {row.ip}
               </StyledTableCell>
-              <StyledTableCell>{row.agent}</StyledTableCell>
-              <StyledTableCell>{row.lastActivity}</StyledTableCell>
+              <StyledTableCell>{row.ua}</StyledTableCell>
+              <StyledTableCell>{row.lastOnline}</StyledTableCell>
               <StyledTableCell>
-                <Button variant='outlined' color='error'>
+                <Button variant='outlined' color='error' onClick={() => handleDeleteSession(row.id, row.userId)}>
                   Завершить
                 </Button>
               </StyledTableCell>
