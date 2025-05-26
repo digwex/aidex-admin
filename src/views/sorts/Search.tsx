@@ -17,7 +17,7 @@ export const Search = (props: TextFieldProps) => {
 
   return (
     <CustomTextField
-      placeholder='Найти по ID / Клиенту'
+      placeholder='Поиск...'
       {...props}
       value={value}
       onChange={e => {

@@ -31,8 +31,10 @@ export const Sorts = () => {
   return (
     <Paper className='p-4 flex items-center gap-3 justify-between flex-wrap max800:flex-col'>
       <Tabs tabs={tabs} />
-      {showAminSorts && <AdminSorts />}
-      {showLoginsSorts && <LoginsSorts />}
+      <div className='flex items-center gap-2 flex-wrap'>
+        {<LoginsSorts />}
+        {showAminSorts && <AdminSorts />}
+      </div>
     </Paper>
   )
 }
