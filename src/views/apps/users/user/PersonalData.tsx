@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation'
 
-import { Paper, Stack, styled, Typography } from '@mui/material'
+import { Chip, Paper, Stack, styled, Typography } from '@mui/material'
 
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -46,9 +46,11 @@ export const PersonalData = () => {
             <TableBody>
               {data.wallets.map((row: any) => (
                 <TableRow key={row.id}>
-                  <StyledTableCell>
+                  <StyledTableCell className='flex items-center gap-2'>
                     <CopyButton text={row.publicKey} />
                     {row.publicKey}
+                    {row?.isActive && <Chip size='small' variant='tonal' label={'Активен'} color={'success'} />}
+                    {row?.isArchived && <Chip size='small' variant='tonal' label={'В архиве'} color={'warning'} />}
                   </StyledTableCell>
                   <StyledTableCell>{row.balance} SOL</StyledTableCell>
                 </TableRow>
