@@ -1,8 +1,12 @@
+import type { TextFieldProps } from '@mui/material/TextField'
+
+import classNames from 'classnames'
+
 import CustomTextField from '@/@core/components/mui/TextField'
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux'
 import { setSearchTerm } from '@/redux-store/slices'
 
-export const Search = () => {
+export const Search = (props: TextFieldProps) => {
   const dispatch = useAppDispatch()
 
   const value = useAppSelector(state => state.search.value)
@@ -13,12 +17,13 @@ export const Search = () => {
 
   return (
     <CustomTextField
+      placeholder='Найти по ID / Клиенту'
+      {...props}
       value={value}
       onChange={e => {
         handleSearch(e.target.value)
       }}
-      className='max700:w-full'
-      placeholder='Найти по ID / Клиенту'
+      className={classNames('max700:w-full', props.className)}
     />
   )
 }

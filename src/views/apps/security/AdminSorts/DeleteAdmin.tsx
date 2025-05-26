@@ -9,10 +9,13 @@ import ModalButton from '@/components/ModalButton'
 import { useDeleteAdminMutation } from '@/api/endpoints/admins/admins'
 
 import { useSecurityContext } from '../Admins/security-provider'
+import { ACTION_ACCESS } from '@/utils/accessActions'
+import { useCheckAccess } from '@/hooks/useCheckAccess'
 
 export const DeleteAdmin = () => {
   const { selectedAdmins, setSelectedAdmins } = useSecurityContext()
   const [deleteAdmins] = useDeleteAdminMutation()
+  const { checkAction } = useCheckAccess()
   const ids = selectedAdmins.map(({ id }) => id)
 
   const isSingle = ids.length === 1
@@ -41,7 +44,7 @@ export const DeleteAdmin = () => {
       fullWidth
       openButton={({ openModal }) => (
         <Button
-          disabled={selectedAdmins.length === 0}
+          disabled={selectedAdmins.length === 0 || !checkAction(ACTION_ACCESS.DELETE_ADMIN)}
           onClick={openModal}
           variant='outlined'
           color='error'

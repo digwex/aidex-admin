@@ -4,7 +4,10 @@ import { type AdminParams, type AdminResponseData, type LoginParams, type LoginR
 const adminsApi = API.injectEndpoints({
   endpoints: builder => ({
     getAllAdmins: builder.query<AdminResponseData, AdminParams>({
-      query: params => ({ url: 'admins', params }),
+      query: params => ({
+        url: 'admins',
+        params
+      }),
       providesTags: result =>
         result
           ? [...result.data.data.map(({ id }) => ({ type: Tag.Admins, id })), { type: Tag.Admins, id: 'ADMIN' }]

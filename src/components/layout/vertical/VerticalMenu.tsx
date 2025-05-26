@@ -1,4 +1,6 @@
 // MUI Imports
+import React from 'react'
+
 import { useTheme } from '@mui/material/styles'
 
 // Third-party Imports
@@ -23,6 +25,9 @@ import StyledVerticalNavExpandIcon from '@menu/styles/vertical/StyledVerticalNav
 import menuItemStyles from '@core/styles/vertical/menuItemStyles'
 import menuSectionStyles from '@core/styles/vertical/menuSectionStyles'
 import { useAuth } from '@/hooks/useAuth'
+import { useCheckAccess } from '@/hooks/useCheckAccess'
+import { NAVIGATION_LINKS } from '@/utils/constants'
+import { ACTION_ACCESS } from '@/utils/accessActions'
 
 type RenderExpandIconProps = {
   open?: boolean
@@ -42,6 +47,8 @@ const RenderExpandIcon = ({ open, transitionDuration }: RenderExpandIconProps) =
 const VerticalMenu = ({ scrollMenu }: Props) => {
   // Hooks
   const { logout } = useAuth()
+  const { checkRoute, checkAction } = useCheckAccess()
+
   const theme = useTheme()
   const verticalNavOptions = useVerticalNav()
 
@@ -59,6 +66,81 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
       // toastService.error((err as Error).message)
     }
   }
+
+  const navData: Array<{
+    icon: JSX.Element
+    href: string
+    exactMatch?: boolean
+    activeUrl: string
+    label: string
+    checkType: 'route' | 'action'
+    actionAccess?: ACTION_ACCESS
+    divider?: boolean
+  }> = [
+    {
+      icon: <i className='tabler-smart-home' />,
+      href: NAVIGATION_LINKS.DASHBOARD,
+      exactMatch: false,
+      activeUrl: NAVIGATION_LINKS.DASHBOARD,
+      label: 'Главная',
+      checkType: 'route'
+    },
+    {
+      icon: <i className='tabler-chart-histogram' />,
+      href: NAVIGATION_LINKS.STATISTIC,
+      exactMatch: false,
+      activeUrl: NAVIGATION_LINKS.STATISTIC,
+      label: 'Статистика',
+      checkType: 'route'
+    },
+    {
+      icon: <i className='tabler-user' />,
+      href: NAVIGATION_LINKS.USERS,
+      exactMatch: false,
+      activeUrl: NAVIGATION_LINKS.USERS,
+      label: 'Пользователи',
+      checkType: 'action',
+      actionAccess: ACTION_ACCESS.VIEW_USERS
+    },
+    {
+      icon: <i className='tabler-wallet' />,
+      href: NAVIGATION_LINKS.WALLETS,
+      exactMatch: false,
+      activeUrl: NAVIGATION_LINKS.WALLETS,
+      label: 'Кошельки',
+      checkType: 'action',
+      actionAccess: ACTION_ACCESS.VIEW_WALLETS
+    },
+    {
+      icon: <i className='tabler-users-group' />,
+      href: NAVIGATION_LINKS.REFERRALS,
+      exactMatch: false,
+      activeUrl: NAVIGATION_LINKS.REFERRALS,
+      label: 'Реферальная программа',
+      checkType: 'action',
+      actionAccess: ACTION_ACCESS.VIEW_REFERRAL_LEVELS
+    },
+    {
+      icon: <i className='tabler-credit-card-pay' />,
+      href: NAVIGATION_LINKS.WITHDRAWALS,
+      exactMatch: false,
+      activeUrl: NAVIGATION_LINKS.WITHDRAWALS,
+      label: 'Вывод',
+      divider: true,
+      checkType: 'action',
+      actionAccess: ACTION_ACCESS.VIEW_WITHDRAWALS
+    },
+
+    {
+      icon: <i className='tabler-shield-lock' />,
+      href: NAVIGATION_LINKS.SECURITY,
+      exactMatch: false,
+      activeUrl: NAVIGATION_LINKS.SECURITY,
+      label: 'Безопасность',
+      checkType: 'action',
+      actionAccess: ACTION_ACCESS.VIEW_SECURITY
+    }
+  ]
 
   const ScrollWrapper = isBreakpointReached ? 'div' : PerfectScrollbar
 
@@ -85,6 +167,39 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
         renderExpandedMenuItemIcon={{ icon: <i className='tabler-circle text-xs' /> }}
         menuSectionStyles={menuSectionStyles(verticalNavOptions, theme)}
       >
+        {navData.map((item, i) => {
+          if (item.checkType === 'action' && !checkAction(item?.actionAccess as ACTION_ACCESS)) {
+            return null
+          }
+
+          if (item.checkType === 'route' && !checkRoute(item.href)) return null
+
+          return (
+            <React.Fragment key={i + item.href}>
+              {/* @ts-expect-error type */}
+              <MenuItem icon={item.icon} href={item.href} exactMatch={item.exactMatch} activeUrl={item.activeUrl}>
+                {item.label}
+              </MenuItem>
+              {item?.divider && <Divider className='pt-4 mb-4' />}
+            </React.Fragment>
+          )
+        })}
+
+        <MenuItem
+          onClick={handleUserLogout}
+          icon={<i className='tabler-logout' />}
+          exactMatch={false}
+          activeUrl='/withdrawals'
+        >
+          Выход
+        </MenuItem>
+        {/* 
+        <Divider className='pt-4 mb-4' />
+
+        <Divider className='pt-4 mb-4' />
+
+        <Divider className='pt-4 mb-4' />
+
         <MenuItem
           icon={<i className='tabler-smart-home' />}
           href={`/dashboard`}
@@ -93,6 +208,7 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
         >
           Главная
         </MenuItem>
+
         <MenuItem
           href={`/statistic`}
           icon={<i className='tabler-chart-histogram' />}
@@ -101,9 +217,12 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
         >
           Статистика
         </MenuItem>
-        <MenuItem icon={<i className='tabler-user' />} href={`/users`} exactMatch={false} activeUrl='/users'>
-          Пользователи
-        </MenuItem>
+
+        {checkRoute('/users') && (
+          <MenuItem icon={<i className='tabler-user' />} href={`/users`} exactMatch={false} activeUrl='/users'>
+            Пользователи
+          </MenuItem>
+        )}
         <MenuItem icon={<i className='tabler-wallet' />} href={`/wallets`} exactMatch={false} activeUrl='/wallets'>
           Кошельки
         </MenuItem>
@@ -113,7 +232,7 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
           exactMatch={false}
           activeUrl='/referrals'
         >
-          Рефальная программа
+          Реферальная программа
         </MenuItem>
 
         <MenuItem
@@ -134,15 +253,7 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
           activeUrl='/security'
         >
           Безопасность
-        </MenuItem>
-        <MenuItem
-          onClick={handleUserLogout}
-          icon={<i className='tabler-logout' />}
-          exactMatch={false}
-          activeUrl='/withdrawals'
-        >
-          Выход
-        </MenuItem>
+        </MenuItem> */}
       </Menu>
     </ScrollWrapper>
   )

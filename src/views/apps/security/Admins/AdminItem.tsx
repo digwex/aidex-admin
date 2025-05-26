@@ -8,6 +8,8 @@ import { type Admin } from '@/api/endpoints/admins/admins.interface'
 
 import { capitalize } from '@/utils/capitalize'
 import { AdminsPermissions } from './AdminsPermissions'
+import { useCheckAccess } from '@/hooks/useCheckAccess'
+import { ACTION_ACCESS } from '@/utils/accessActions'
 
 interface SelectAdmin {
   id: string
@@ -39,7 +41,7 @@ const AdminItem = ({
 }: Props) => {
   const [isOpen, toggle] = useToggle()
   const isActive = selectedAdmins.some(admin => admin.id === id)
-
+  const { checkAction } = useCheckAccess()
   const hiddenIds = ['@Ostapchela', '@selivestru']
 
   if (hiddenIds.includes(tgLogin)) {
@@ -58,8 +60,13 @@ const AdminItem = ({
         <td>{name}</td>
         <td>{reformatLevel(accessLevel)} уровень</td>
         <td>
-          <Button variant='contained' color='success' onClick={toggle} disabled={queryProps.length === 0}>
-            Открыть
+          <Button
+            variant={isOpen ? 'outlined' : 'contained'}
+            color='success'
+            onClick={toggle}
+            disabled={queryProps.length === 0 || !checkAction(ACTION_ACCESS.EDIT_ADMIN_PERMISSIONS)}
+          >
+            {isOpen ? 'Закрыть' : 'Открыть'}
           </Button>
         </td>
       </tr>

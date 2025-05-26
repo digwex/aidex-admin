@@ -15,9 +15,12 @@ import { useCreateAdminMutation } from '@/api/endpoints/admins/admins'
 import { ROLES } from '@/utils/helpers'
 import { addAdminSchema } from '../Admins/addAdminSchema'
 import { Error } from '@/components/Error'
+import { useCheckAccess } from '@/hooks/useCheckAccess'
+import { ACTION_ACCESS } from '@/utils/accessActions'
 
 export const AddAmin = () => {
   const [createAdmin] = useCreateAdminMutation()
+  const { checkAction } = useCheckAccess()
 
   const {
     register,
@@ -76,7 +79,13 @@ export const AddAmin = () => {
       maxWidth='xs'
       fullWidth
       openButton={({ openModal }) => (
-        <Button onClick={openModal} variant='outlined' color='success' className='max800:w-full'>
+        <Button
+          onClick={openModal}
+          disabled={!checkAction(ACTION_ACCESS.ADD_ADMIN)}
+          variant='outlined'
+          color='success'
+          className='max800:w-full'
+        >
           Добавить
         </Button>
       )}

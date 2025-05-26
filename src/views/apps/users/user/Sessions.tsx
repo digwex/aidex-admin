@@ -48,7 +48,7 @@ function SessionsTable() {
     const toastId = toast.loading('Завершение сессии...')
 
     try {
-      await deleteSession({ sessionId, userId }).unwrap()
+      await deleteSession({ sessionId, userId, id: String(id) }).unwrap()
       toast.update(toastId, {
         type: 'success',
         render: 'Сессия завершена',
@@ -92,6 +92,9 @@ function SessionsTable() {
           ))}
         </TableBody>
       </Table>
+      {data.Sessions.length === 0 && (
+        <Typography className='text-center bg-[var(--background-color)] py-4'>Нет активных сессий</Typography>
+      )}
     </TableContainer>
   )
 }

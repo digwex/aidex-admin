@@ -4,6 +4,7 @@ import { formatCurrency } from '@/utils/formatCurrency'
 type Props = StatisticDay
 
 const DaysFooterRow = (props: Props) => {
+  console.debug('!!!!!!!!!!!!!!!!!!!!!!')
   const data = Object.values(props)
 
   const totalClicks = data?.reduce((acc, item) => acc + Number(item._clicks ?? 0), 0)

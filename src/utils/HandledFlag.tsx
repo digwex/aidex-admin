@@ -11,6 +11,7 @@ export const HandledFlag = ({ flag, className }: Props) => {
 
   const findFlag = codeList.find(code => code?.alpha2 === flag || code?.alpha3 === flag)
 
+  console.log('findFlag', findFlag)
   if (!findFlag) return null
 
   return <Flag className={className} code={findFlag.alpha2} />

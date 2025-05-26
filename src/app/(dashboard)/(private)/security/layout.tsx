@@ -1,3 +1,5 @@
+import { ACTION_ACCESS } from '@/utils/accessActions'
+import { AccessActionGuard } from '@/views/access-action-guard'
 import { Security } from '@/views/apps/security/security'
 
 interface Props {
@@ -9,7 +11,11 @@ export const metadata = {
 }
 
 const Layout = async ({ children }: Props) => {
-  return <Security>{children}</Security>
+  return (
+    <AccessActionGuard action={ACTION_ACCESS.VIEW_SECURITY}>
+      <Security>{children}</Security>
+    </AccessActionGuard>
+  )
 }
 
 export default Layout

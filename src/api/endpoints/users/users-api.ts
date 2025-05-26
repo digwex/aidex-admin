@@ -5,25 +5,54 @@ import { type ApiResponseTrades, type IUserOrdersParams, type User } from './use
 export const usersApi = API.injectEndpoints({
   endpoints: builder => ({
     getAllUsers: builder.query<ApiResponse<User[]>, IQuery>({
-      query: params => ({ url: 'users', params })
+      query: params => ({ url: 'users', params }),
 
-      // providesTags: result =>
-      //   result
-      //     ? [
-      //         ...result.result.map(({ nId }) => ({ type: Tag.User, id: nId })),
-      //         { type: Tag.Users, id: 'USERS' },
-      //         { type: Tag.User, id: 'USER' }
-      //       ]
-      //     : [
-      //         { type: Tag.Users, id: 'USERS' },
-      //         { type: Tag.User, id: 'USER' }
-      //       ]
+      providesTags: result => {
+        console.log('result', result)
+
+        return result
+          ? [
+              // @ts-expect-error type
+              ...result.data.data.map(({ nId }) => ({ type: Tag.User, id: nId })),
+              { type: Tag.Users, id: 'USERS' },
+              { type: Tag.User, id: 'USER' }
+            ]
+          : [
+              { type: Tag.Users, id: 'USERS' },
+              { type: Tag.User, id: 'USER' }
+            ]
+      }
     }),
-    getAdvertisingUsers: builder.query({
-      query: (params: IQuery) => ({ url: 'users/advertising', params })
+    getAdvertisingUsers: builder.query<ApiResponse<User[]>, IQuery>({
+      query: (params: IQuery) => ({ url: 'users/advertising', params }),
+      providesTags: result =>
+        result
+          ? [
+              // @ts-expect-error type
+              ...result.data.data.map(({ nId }) => ({ type: Tag.User, id: nId })),
+              { type: Tag.UsersAdvertisements, id: 'USERS-ADVERTISEMENT' },
+              { type: Tag.UsersAdvertisements, id: 'USERS-ADVERTISEMENT' }
+            ]
+          : [
+              { type: Tag.UsersAdvertisements, id: 'USERS-ADVERTISEMENT' },
+              { type: Tag.UsersAdvertisements, id: 'USERS-ADVERTISEMENT' }
+            ]
     }),
+
     getDeletedUsers: builder.query({
-      query: (params: IQuery) => ({ url: 'users/deleted', params })
+      query: (params: IQuery) => ({ url: 'users/deleted', params }),
+      providesTags: result =>
+        result
+          ? [
+              // @ts-expect-error type
+              ...result.data.data.map(({ nId }) => ({ type: Tag.User, id: nId })),
+              { type: Tag.UsersDeleted, id: 'USERS-DELETED' },
+              { type: Tag.UsersDeleted, id: 'USERS-DELETED' }
+            ]
+          : [
+              { type: Tag.UsersDeleted, id: 'USERS-DELETED' },
+              { type: Tag.UsersDeleted, id: 'USERS-DELETED' }
+            ]
     }),
     userToBan: builder.mutation({
       query: (body: IUserToBanBody) => ({
@@ -31,10 +60,7 @@ export const usersApi = API.injectEndpoints({
         method: 'POST',
         body
       }),
-      invalidatesTags: (result, error, body) => [
-        { type: Tag.User, id: body.nId },
-        { type: Tag.Users, id: body.nId }
-      ]
+      invalidatesTags: [Tag.User, Tag.Users, Tag.UsersAdvertisements, Tag.UsersDeleted]
     }),
     userToUnban: builder.mutation({
       query: (body: IUserToBanBody) => ({
@@ -42,7 +68,7 @@ export const usersApi = API.injectEndpoints({
         method: 'POST',
         body
       }),
-      invalidatesTags: [Tag.Users, Tag.User, Tag.Withdrawals, Tag.Partners]
+      invalidatesTags: [Tag.User, Tag.Users, Tag.UsersAdvertisements, Tag.UsersDeleted]
     }),
     getAllUserTrades: builder.query({
       query: (params: IUserOrdersParams) => ({

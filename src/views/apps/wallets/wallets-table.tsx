@@ -15,6 +15,7 @@ const WalletsTable = () => {
     <CustomTable
       isDate
       isSearch
+      customTableClass='[&_th_button]:justify-start [&_thead_th]:w-1/2'
       query={useLazyGetWalletsQuery}
       DataItem={WalletsTableRow}
       sortTitles={transactionSortTitles}

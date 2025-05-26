@@ -1,3 +1,5 @@
+import { ACTION_ACCESS } from '@/utils/accessActions'
+import { AccessActionGuard } from '@/views/access-action-guard'
 import { Withdrawals } from '@/views/apps/withdrawals/Withdrawals'
 
 interface Props {
@@ -17,7 +19,11 @@ const Layout = async ({ children }: Props) => {
     { value: `/withdrawals/fake-withdraw`, label: 'Фейк вывода' }
   ]
 
-  return <Withdrawals tabs={tabs}>{children}</Withdrawals>
+  return (
+    <AccessActionGuard action={ACTION_ACCESS.VIEW_WITHDRAWALS}>
+      <Withdrawals tabs={tabs}>{children}</Withdrawals>
+    </AccessActionGuard>
+  )
 }
 
 export default Layout

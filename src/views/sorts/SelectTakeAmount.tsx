@@ -21,7 +21,7 @@ export const SelectTakeAmount = () => {
       onChange={e => {
         handleChange(e.target.value)
       }}
-      className='max700:w-full'
+      className='max700:w-full [&>div>i]:right-[6px]'
       select
       defaultValue='today'
     >
@@ -29,7 +29,7 @@ export const SelectTakeAmount = () => {
       <MenuItem value='10 записей'>10 записей</MenuItem>
       <MenuItem value='25 записей'>25 записей</MenuItem>
       <MenuItem value='50 записей'>50 записей</MenuItem>
-      <MenuItem value='Все'>Все</MenuItem>
+      {/* <MenuItem value='Все'>Все</MenuItem> */}
     </CustomTextField>
   )
 }

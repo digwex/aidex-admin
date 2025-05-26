@@ -12,6 +12,7 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 
 import { useGetUserByIdQuery } from '@/api/endpoints/users/users-api'
+import { CopyButton } from '@/hooks/useCopy'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -31,21 +32,24 @@ export const PersonalData = () => {
     <Paper className='p-4'>
       <Stack spacing={4}>
         <Typography className='font-medium' variant='h3'>
-          Адрес кошельков
+          Адреса кошельков
         </Typography>
 
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 500 }} aria-label='customized table'>
             <TableHead>
               <TableRow>
-                <StyledTableCell>Кошелёк</StyledTableCell>
+                <StyledTableCell> Кошелёк</StyledTableCell>
                 <StyledTableCell>Баланс</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {data.wallets.map((row: any) => (
                 <TableRow key={row.id}>
-                  <StyledTableCell>{row.publicKey}</StyledTableCell>
+                  <StyledTableCell>
+                    <CopyButton text={row.publicKey} />
+                    {row.publicKey}
+                  </StyledTableCell>
                   <StyledTableCell>{row.balance} SOL</StyledTableCell>
                 </TableRow>
               ))}

@@ -2,46 +2,56 @@ import Link from 'next/link'
 
 import { Button } from '@mui/material'
 
+import cn from 'classnames'
+
 import { determineBalance } from '@/utils/determineBalance'
-import { HandledFlag } from '@/utils/HandledFlag'
 
 import type { User } from '@/api/endpoints/users/users-types'
-import { DeleteModal } from '../UsersTable/DeleteModal'
+
 import { UnblockModal } from './UnblockModal'
+import { useCheckAccess } from '@/hooks/useCheckAccess'
+import { ACTION_ACCESS } from '@/utils/accessActions'
+import { WalletsInfo } from '../UsersTable/wallets-info'
 
 type Props = User
 
 export const BlockedUserRow = (props: Props) => {
   const user = props
+  const { checkAction } = useCheckAccess()
 
   return (
     <>
       <tr>
         <td>
-          <Link href={`/users/${user.nId}`}>
-            <HandledFlag className='w-5' flag={user.CountryCode} />
+          <Link
+            className={cn({
+              'pointer-events-none': !checkAction(ACTION_ACCESS.VIEW_USER_DETAIL)
+            })}
+            href={`/users/${user.nId}`}
+          >
             <span>{user.nId}</span>
           </Link>
         </td>
+        <td>{user.telegramId}</td>
+        <td>{user.tgUsername}</td>
         <td>{determineBalance(user.balance)}</td>
-
+        <td>{user.fee} SOL</td>
         <td>
-          {user.isActive ? (
-            <img className='w-4' src='/img/success.svg' alt='' />
-          ) : (
-            <img className='w-4' src='/img/no.svg' alt='' />
-          )}
+          <WalletsInfo wallets={user.wallets} />
         </td>
-
-        <td>{user.registrationIp ?? '-'}</td>
         <td>
           <div className='flex h-full w-full justify-center items-center gap-4'>
-            <Link href={`${user.nId}`}>
+            <Link
+              className={cn({
+                'pointer-events-none': !checkAction(ACTION_ACCESS.VIEW_USER_DETAIL)
+              })}
+              href={`${user.nId}`}
+            >
               <Button variant='outlined' color='secondary'>
                 Больше
               </Button>
             </Link>
-            <Link href={`${user.nId}`}>
+            {/* <Link href={`${user.nId}`}>
               <Button variant='outlined' color='warning'>
                 Торговля
               </Button>
@@ -50,14 +60,14 @@ export const BlockedUserRow = (props: Props) => {
               <Button variant='outlined' color='success'>
                 Изменить
               </Button>
-            </Link>
-            <DeleteModal uid={user.id}>
+            </Link> */}
+            {/* <DeleteModal uid={user.id}>
               {({ openModal }) => (
                 <Button onClick={openModal} variant='outlined' color='error'>
                   Удалить
                 </Button>
               )}
-            </DeleteModal>
+            </DeleteModal> */}
             <UnblockModal uId={user.id} nId={user.nId} />
           </div>
         </td>

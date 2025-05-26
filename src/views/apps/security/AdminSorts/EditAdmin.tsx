@@ -12,10 +12,13 @@ import ModalButton from '@/components/ModalButton'
 import { useEditAccessLevelMutation } from '@/api/endpoints/admins/admins'
 
 import { useSecurityContext } from '../Admins/security-provider'
+import { ACTION_ACCESS } from '@/utils/accessActions'
+import { useCheckAccess } from '@/hooks/useCheckAccess'
 
 export const EditAdmin = () => {
   const [editAccessLevel] = useEditAccessLevelMutation()
   const { selectedAdmins, setSelectedAdmins } = useSecurityContext()
+  const { checkAction } = useCheckAccess()
   const [accessLevel, setAccessLevel] = useState('5 уровень')
 
   const handleEditAccessLevel = async (close: () => void) => {
@@ -44,7 +47,7 @@ export const EditAdmin = () => {
       fullWidth
       openButton={({ openModal }) => (
         <Button
-          disabled={selectedAdmins.length === 0}
+          disabled={selectedAdmins.length === 0 || !checkAction(ACTION_ACCESS.EDIT_ADMIN_LEVEL)}
           onClick={openModal}
           variant='outlined'
           color='warning'

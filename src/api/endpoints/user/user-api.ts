@@ -60,21 +60,26 @@ export const userApi = API.injectEndpoints({
       invalidatesTags: [Tag.User]
     }),
     stopUserSession: builder.mutation({
-      query: (body: { sessionId: string; userId: string }) => ({
+      query: (body: { sessionId: string; userId: string; id: string }) => ({
         url: 'user/sessions',
         method: 'DELETE',
         body
       }),
       transformResponse: (response: ApiResponseTransactions) => response,
-      async onQueryStarted({ userId, sessionId }, { dispatch, queryFulfilled }) {
+      async onQueryStarted({ id, sessionId }, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled
           dispatch(
-            usersApi.util.updateQueryData('getUserById', userId, prev =>
-              prev.Sessions.filter((session: any) => session.id !== sessionId)
-            )
+            usersApi.util.updateQueryData('getUserById', id, prev => {
+              return {
+                ...prev,
+                Sessions: prev.Sessions.filter((session: any) => session.id !== sessionId)
+              }
+            })
           )
-        } catch (error) {}
+        } catch (error) {
+          console.log(error)
+        }
       }
     }),
     upgradeKYCLevel: builder.mutation({
@@ -102,7 +107,7 @@ export const userApi = API.injectEndpoints({
         body
       }),
       transformResponse: (response: unknown) => response,
-      invalidatesTags: [Tag.User, Tag.Users]
+      invalidatesTags: [Tag.User, Tag.Users, Tag.UsersAdvertisements, Tag.UsersDeleted]
     }),
     revertDeletingUser: builder.mutation({
       query: (body: { uid: string }) => ({
@@ -111,7 +116,7 @@ export const userApi = API.injectEndpoints({
         body
       }),
       transformResponse: (response: unknown) => response,
-      invalidatesTags: [Tag.User, Tag.Users]
+      invalidatesTags: [Tag.User, Tag.Users, Tag.UsersAdvertisements, Tag.UsersDeleted]
     }),
     setPersonalUserData: builder.mutation<UserSetPersonalDataResponse, Partial<UserPersonalDataParams>>({
       query: body => ({

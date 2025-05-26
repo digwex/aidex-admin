@@ -2,12 +2,15 @@
 
 import Grid from '@mui/material/Grid2'
 
+import { Chip } from '@mui/material'
+
 import { useDashboardOverallQuery } from '@/api/endpoints/dashboard/dashboard-api'
 import { Loader } from '@/components/Loader'
 import DashboardChart from '@/views/apps/dashboard/DaschboardChart'
 import DashboardCard from '@/views/apps/dashboard/DashboardCard'
 import DashboardSubCard from '@/views/apps/dashboard/DashboardSubCard'
 import type { DashboardCardProps } from './types'
+import { handleRTKError } from '@/utils/handleRTKError'
 
 const data: DashboardCardProps[] = [
   {
@@ -79,11 +82,19 @@ const DashboardPage = () => {
   const { data: dataDashboard, isLoading, isError, error } = useDashboardOverallQuery()
 
   if (isError) {
-    return <div>Overall произошла ошибка: {JSON.stringify(error, null, 2)}</div>
+    return (
+      <div className='flex h-full items-center justify-center'>
+        <Chip variant='tonal' label={handleRTKError(error)} color='error' className='text-center w-fit mx-auto' />
+      </div>
+    )
   }
 
-  if (!dataDashboard || isLoading) {
-    return <Loader />
+  if (isLoading) {
+    return (
+      <div className='flex h-full items-center justify-center'>
+        <Loader />
+      </div>
+    )
   }
 
   return (
@@ -97,7 +108,7 @@ const DashboardPage = () => {
               display: 'flex'
             }}
           >
-            <DashboardCard {...item} value={dataDashboard[item.row]} />
+            <DashboardCard {...item} value={dataDashboard?.[item.row] || 0} />
           </Grid>
         ))}
       </Grid>
@@ -111,7 +122,7 @@ const DashboardPage = () => {
               display: 'flex'
             }}
           >
-            <DashboardSubCard {...item} value={dataDashboard[item.row]} />
+            <DashboardSubCard {...item} value={dataDashboard?.[item.row] || 0} />
           </Grid>
         ))}
       </Grid>

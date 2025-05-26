@@ -1,3 +1,5 @@
+import { NAVIGATION_LINKS } from '@/utils/constants'
+import { AccessRouteGuard } from '@/views/access-route-guard'
 import DashboardPage from '@/views/apps/dashboard/Daschboard'
 
 export const metadata = {
@@ -5,7 +7,11 @@ export const metadata = {
 }
 
 const Dashboard = () => {
-  return <DashboardPage />
+  return (
+    <AccessRouteGuard route={NAVIGATION_LINKS.DASHBOARD}>
+      <DashboardPage />
+    </AccessRouteGuard>
+  )
 }
 
 export default Dashboard

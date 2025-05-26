@@ -2,33 +2,30 @@ import { Button, Typography } from '@mui/material'
 
 import { toast } from 'react-toastify'
 
-import { useUserToBanMutation } from '@/api/endpoints/users/users-api'
 import ModalButton from '@/components/ModalButton'
-import { handleRTKError } from '@/utils/handleRTKError'
+
+import { useRevertDeletingUserMutation } from '@/api/endpoints/user/user-api'
 
 interface Props {
-  uId: string
+  uid: string
   children: ({ openModal }: { openModal: () => void }) => React.ReactNode
 }
 
-export const BlockModal = ({ uId, children }: Props) => {
-  const [userToBan] = useUserToBanMutation()
+export const ReturnModal = ({ uid, children }: Props) => {
+  const [revertDelete] = useRevertDeletingUserMutation()
 
-  const handleBanUser = async () => {
+  const handleRevertDelete = async (closeModal: () => void) => {
     await toast.promise(
-      userToBan({
-        uId
+      revertDelete({
+        uid
       }).unwrap(),
       {
-        pending: 'Блокировка...',
-        success: 'Аккаунт успешно заблокирован',
-        error: {
-          render({ data }) {
-            return `Ошибка при блокировке аккаунта: ${handleRTKError(data)}`
-          }
-        }
+        pending: 'Восстановление...',
+        success: 'Успешно восстановлен',
+        error: 'Ошибка при восстановлении'
       }
     )
+    closeModal()
   }
 
   return (
@@ -38,10 +35,10 @@ export const BlockModal = ({ uId, children }: Props) => {
       openButton={({ openModal }) => children({ openModal })}
       modalContent={({ closeModal }) => (
         <div className='flex justify-center flex-col items-center gap-6'>
-          <img src='/images/icons/reject.svg' alt='close' className='w-16 h-16' />
+          <img src='/images/icons/verify.svg' alt='close' className='w-16 h-16' />
 
           <Typography className='text-center' variant='h4'>
-            Вы уверены что хотите <br /> заблокировать трейдера?
+            Вы уверены что хотите <br /> восстановить аккаунт?
           </Typography>
 
           <div className='w-full flex items-center gap-3 max600:flex-col'>
@@ -50,14 +47,14 @@ export const BlockModal = ({ uId, children }: Props) => {
             </Button>
             <Button
               variant='contained'
-              color='error'
+              color='success'
               className='w-full'
               onClick={() => {
-                handleBanUser()
+                handleRevertDelete(closeModal)
                 closeModal()
               }}
             >
-              Заблокировать
+              Восстановить
             </Button>
           </div>
         </div>

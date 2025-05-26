@@ -8,9 +8,12 @@ import CustomTextField from '@/@core/components/mui/TextField'
 import { useChangePercentMutation, useGetReferralLevelsQuery } from '@/api/endpoints/referralLevels/referral-levels-api'
 import { Loader } from '@/components/Loader'
 import { Title } from '@/components/Title'
+import { useCheckAccess } from '@/hooks/useCheckAccess'
+import { ACTION_ACCESS } from '@/utils/accessActions'
 
 export const Referrals = () => {
   const { data, isLoading } = useGetReferralLevelsQuery()
+  const { checkAction } = useCheckAccess()
   const [changePercent, { isLoading: changePercentLoading }] = useChangePercentMutation()
 
   return (
@@ -25,6 +28,7 @@ export const Referrals = () => {
           <form
             onSubmit={async e => {
               e.preventDefault()
+              if (!checkAction(ACTION_ACCESS.EDIT_REFERRAL_LEVEL_PERCENT)) return
 
               if (changePercentLoading) {
                 return
@@ -73,9 +77,13 @@ export const Referrals = () => {
                 defaultValue={percent}
                 type='number'
                 label='% комиссий'
-                disabled={changePercentLoading}
+                disabled={changePercentLoading || !checkAction(ACTION_ACCESS.EDIT_REFERRAL_LEVEL_PERCENT)}
               />
-              <Button type='submit' variant='contained' disabled={changePercentLoading}>
+              <Button
+                type='submit'
+                variant='contained'
+                disabled={changePercentLoading || !checkAction(ACTION_ACCESS.EDIT_REFERRAL_LEVEL_PERCENT)}
+              >
                 Сохранить
               </Button>
             </div>

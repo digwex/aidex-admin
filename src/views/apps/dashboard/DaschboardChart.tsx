@@ -16,7 +16,7 @@ import type { ApexOptions } from 'apexcharts'
 const AppReactApexCharts = dynamic(() => import('@/libs/styles/AppReactApexCharts'))
 
 // Style Imports
-import { Box, InputAdornment } from '@mui/material'
+import { Box, Chip, InputAdornment } from '@mui/material'
 import './styles.css'
 
 import CustomTextField from '@/@core/components/mui/TextField'
@@ -25,17 +25,55 @@ import { useDashboardGraphQuery } from '@/api/endpoints/dashboard/dashboard-api'
 import { Loader } from '@/components/Loader'
 import { useAppSelector } from '@/hooks/useRedux'
 import DashboardDataPickersRange from '../../DataPickerRange'
+import { handleRTKError } from '../../../utils/handleRTKError'
 
 const DashboardChart = () => {
   const date = useAppSelector(s => s.search.date)
   const from = String(Math.floor(date[0]! / 1000))
   const to = String(Math.floor(date[1]! / 1000))
-  const { data, isLoading, isError, error } = useDashboardGraphQuery({ from, to })
+  const { data = [], isLoading, isError, error } = useDashboardGraphQuery({ from, to })
 
   const theme = useTheme()
 
   const options: ApexOptions = {
     chart: {
+      locales: [
+        {
+          name: 'ru',
+          options: {
+            months: [
+              'Январь',
+              'Февраль',
+              'Март',
+              'Апрель',
+              'Май',
+              'Июнь',
+              'Июль',
+              'Август',
+              'Сентябрь',
+              'Октябрь',
+              'Ноябрь',
+              'Декабрь'
+            ],
+            shortMonths: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
+            days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortDays: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+            toolbar: {
+              exportToSVG: 'Скачать SVG',
+              exportToPNG: 'Скачать PNG',
+              exportToCSV: 'Скачать CSV',
+              selection: 'Выделение',
+              selectionZoom: 'Выделить для увеличения',
+              zoomIn: 'Приблизить',
+              zoomOut: 'Отдалить',
+              pan: 'Перемещение',
+              reset: 'Сбросить увеличение'
+            }
+          }
+        }
+      ],
+      defaultLocale: 'ru',
+
       type: 'line',
       stacked: false,
       parentHeightOffset: 0,
@@ -101,6 +139,7 @@ const DashboardChart = () => {
       enabled: false
     },
     xaxis: {
+      type: 'datetime',
       tickAmount: 10,
       categories: ['1 Jan', '2 Jan', '3 Jan', '4 Jan', '5 Jan', '6 Jan', '7 Jan', '8 Jan', '9 Jan', '10 Jan'],
       labels: {
@@ -130,10 +169,10 @@ const DashboardChart = () => {
   }
 
   if (isError) {
-    return <div>Graph произошла ошибка: {JSON.stringify(error, null, 2)}</div>
+    return <Chip variant='tonal' label={handleRTKError(error)} color='error' className='text-center w-fit mx-auto' />
   }
 
-  if (!data || isLoading) {
+  if (isLoading) {
     return <Loader />
   }
 

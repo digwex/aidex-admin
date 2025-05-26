@@ -6,6 +6,8 @@ export const Tag = {
   Admins: 'Admins',
   Logins: 'Logins',
   Users: 'Users',
+  UsersAdvertisements: 'UsersAdvertisements',
+  UsersDeleted: 'UsersDeleted',
   Pairs: 'Pairs',
   Deposits: 'Deposits',
   Withdrawals: 'Withdrawals',
@@ -57,7 +59,9 @@ export const API = createApi({
     Tag.UserVerification,
     Tag.PromoBonus,
     Tag.UserMainStats,
-    Tag.ReferralLevels
+    Tag.ReferralLevels,
+    Tag.UsersAdvertisements,
+    Tag.UsersDeleted
   ],
   baseQuery: (args, api, extraOptions) => baseQueryWithReauth(args, api, extraOptions),
   endpoints: () => ({})

@@ -28,6 +28,7 @@ function SecurityAdminTable() {
   return (
     <CustomTable
       query={useLazyGetAllAdminsQuery}
+      isDate
       DataItem={AdminItem}
       dataItemsProps={{ handleSelect, selectedAdmins }}
       queryProps='permissions'

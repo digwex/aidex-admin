@@ -3,6 +3,7 @@ import { Button, Paper } from '@mui/material'
 import { BlockModal } from '../UsersTable/BlockModal'
 import { DeleteModal } from '../UsersTable/DeleteModal'
 import { UnblockModal } from '../UsersTable/UnblockModal'
+import { ReturnModal } from '../UsersTable/ReturnModal'
 
 interface IProps {
   isBlockedForever: boolean
@@ -32,13 +33,13 @@ export const Actions = ({ isBlockedForever, isDelete, userId }: IProps) => {
           </BlockModal>
         )}
         {isDelete ? (
-          <DeleteModal uid={userId}>
+          <ReturnModal uid={userId}>
             {({ openModal }) => (
               <Button color='success' variant='outlined' className='max700:w-full' onClick={openModal}>
                 Восстановить аккаунт
               </Button>
             )}
-          </DeleteModal>
+          </ReturnModal>
         ) : (
           <DeleteModal uid={userId}>
             {({ openModal }) => (

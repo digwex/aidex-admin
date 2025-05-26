@@ -58,7 +58,7 @@ export const SelectRange = () => {
       onChange={e => {
         handleChange(e.target.value)
       }}
-      className='max700:w-full'
+      className='max700:w-full [&>div>i]:right-[6px]'
       select
       value={value}
     >

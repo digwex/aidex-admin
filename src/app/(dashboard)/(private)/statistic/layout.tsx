@@ -1,3 +1,5 @@
+import { NAVIGATION_LINKS } from '@/utils/constants'
+import { AccessRouteGuard } from '@/views/access-route-guard'
 import { Statistic } from '@/views/apps/statistic/Statistic'
 
 interface Props {
@@ -15,7 +17,11 @@ const Layout = async ({ children }: Props) => {
     { value: `/statistic/traders`, label: 'По трейдерам', icon: 'tabler-chart-candle' }
   ]
 
-  return <Statistic tabs={tabs}>{children}</Statistic>
+  return (
+    <AccessRouteGuard route={NAVIGATION_LINKS.STATISTIC}>
+      <Statistic tabs={tabs}>{children}</Statistic>
+    </AccessRouteGuard>
+  )
 }
 
 export default Layout

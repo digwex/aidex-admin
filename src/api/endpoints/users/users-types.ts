@@ -1,6 +1,9 @@
 import { type IQuery } from '../../types'
 
 export interface User {
+  tgUsername: string
+  telegramId: string
+  fee: string
   id: string
   deletedAt: Date | null
   createdAt: Date
@@ -34,6 +37,16 @@ export interface User {
   partnerId: string | null
   AccountType: string
   isDelete: boolean
+  wallets: Array<{
+    id: number
+    publicKey: string
+    secretKey: string
+    createdAt: string
+    label: string
+    isActive: boolean
+    isArchived: boolean
+    userId: string
+  }>
 }
 
 export type KYCLevel = 'NO_DATA' | 'AI_REVIEW' | 'MANUAL_REVIEW' | 'INCOME_PROOF'

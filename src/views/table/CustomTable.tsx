@@ -2,6 +2,8 @@
 
 import { memo, useLayoutEffect, useState } from 'react'
 
+import { Chip } from '@mui/material'
+
 import { useFetchDocuments } from '@/hooks/useFetchDocuments'
 import { usePagination } from '@/hooks/usePagination'
 import { useTableSortHeader } from '@/hooks/useTableSortHeader'
@@ -32,8 +34,6 @@ interface Props {
 const getKey = (key: string, index: number) => key ?? index
 
 const getError = (error: any) => {
-  console.log(error, 'error')
-
   if (typeof error?.data?.message === 'string') {
     return error.data.message
   }
@@ -97,6 +97,15 @@ const CustomTable = ({
 
   const resultData = fakeData ?? data?.data?.data ?? data?.result ?? []
 
+  const errorText = getError(error)
+
+  if (errorText === 'Permission denied')
+    return (
+      <div className='w-full flex justify-center  h-full items-center'>
+        <Chip variant='tonal' label={errorText} color='error' className='text-center' />
+      </div>
+    )
+
   return (
     <>
       <div className='table_wrap'>
@@ -118,7 +127,7 @@ const CustomTable = ({
                     />
                   ))}
               </tbody>
-              {DataFooter && isSuccess && resultData.length && (
+              {!!DataFooter && isSuccess && resultData.length > 0 && (
                 <tfoot>
                   <DataFooter {...resultData} />
                 </tfoot>
