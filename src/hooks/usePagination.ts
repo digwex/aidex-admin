@@ -146,7 +146,7 @@ export const usePagination = ({
 
   useEffect(() => {
     if (data) {
-      const countPages = pages(data.total ?? data.count)
+      const countPages = pages(data?.data?.total ?? data?.data?.count ?? data?.data?.totalPages)
 
       if (countPages !== totalPage) {
         setTotalPage(countPages)

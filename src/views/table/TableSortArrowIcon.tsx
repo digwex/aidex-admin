@@ -9,7 +9,7 @@ interface Props {
 }
 
 const ArrowIcon = ({ isActive, isDown }: Props) => {
-  const handleColor = () => (isActive ? 'var(--mui-palette-success-main)' : 'currentColor')
+  const handleColor = () => (isActive ? 'var(--mui-palette-primary-main)' : 'currentColor')
 
   return isDown ? (
     <div style={styles}>

@@ -45,8 +45,6 @@ export const accessRouteMap: Record<string, ACTION_ACCESS[]> = {
 export function canAccessRoute(path: string, userLevel: ACCESS_LEVELS, permissions: ACTION_ACCESS) {
   const routePath = accessRouteMap[path]
 
-  console.log('routePath', { routePath, path, permissions })
-
   if (routePath) {
     const requiredPermission = routePath[0]
 

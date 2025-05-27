@@ -54,7 +54,7 @@ export const useTableSortHeader = ({ sortTitles, orderBy, setOrderBy }: Props) =
               <span
                 style={{
                   color:
-                    sort !== null ? (orderBy.field === sort ? 'var(--mui-palette-success-main)' : 'inherit') : 'inherit'
+                    sort !== null ? (orderBy.field === sort ? 'var(--mui-palette-primary-main)' : 'inherit') : 'inherit'
                 }}
               >
                 {label}

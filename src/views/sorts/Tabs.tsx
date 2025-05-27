@@ -37,7 +37,11 @@ const Tabs = ({ tabs }: TabsCustomizedProps) => {
         <Button
           key={tab.value}
           className={classNames('whitespace-nowrap w-fit p-0 max700:w-full  min-h-10 min-w-min', {
-            'pointer-events-none': isRoutMatch(tab.value, pathname)
+            'pointer-events-none': isRoutMatch(tab.value, pathname),
+            'bg-[var(--mui-palette-primary-main)] text-[var(--mui-palette-primary-contrastText)]': isRoutMatch(
+              tab.value,
+              pathname
+            )
           })}
           variant={isRoutMatch(tab.value, pathname) ? 'contained' : 'tonal'}
           color={isRoutMatch(tab.value, pathname) ? 'success' : 'secondary'}
