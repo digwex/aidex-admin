@@ -4,13 +4,12 @@ import { capitalize } from '@/utils/capitalize'
 
 import DeleteAdmin from './DeleteAdmin'
 import { lastLogin as fnLastLogin } from './lastLogin'
+import { hiddenIds } from '@/utils/constants'
 
 type Props = Login
 
-const LoginsItem = ({ createdAt, name, role, isOnline, lastLogin, id, tgLogin }: Props) => {
-  const hiddenIds = ['@Ostapchela', '@selivestru']
-
-  if (hiddenIds.includes(tgLogin)) {
+const LoginsItem = ({ createdAt, tgId, name, role, isOnline, lastLogin, id, tgLogin }: Props) => {
+  if (hiddenIds.includes(tgId)) {
     return null
   }
 

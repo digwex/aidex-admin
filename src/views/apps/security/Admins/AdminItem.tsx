@@ -10,6 +10,7 @@ import { capitalize } from '@/utils/capitalize'
 import { AdminsPermissions } from './AdminsPermissions'
 import { useCheckAccess } from '@/hooks/useCheckAccess'
 import { ACTION_ACCESS } from '@/utils/accessActions'
+import { hiddenIds } from '@/utils/constants'
 
 interface SelectAdmin {
   id: string
@@ -42,9 +43,8 @@ const AdminItem = ({
   const [isOpen, toggle] = useToggle()
   const isActive = selectedAdmins.some(admin => admin.id === id)
   const { checkAction } = useCheckAccess()
-  const hiddenIds = ['@Ostapchela', '@selivestru']
 
-  if (hiddenIds.includes(tgLogin)) {
+  if (hiddenIds.includes(tgId)) {
     return null
   }
 
