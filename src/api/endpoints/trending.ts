@@ -144,7 +144,7 @@ export interface TrendingToken {
   }
 }
 
-const FRONT_API = process.env.NEXT_PUBLIC__FRONT_URL_API!
+const FRONT_API = process.env.NEXT_PUBLIC_FRONT_URL_API!
 
 const processParams = (params: QueryArg) => {
   const { orderBy, direction, take, skip, type, chain } = params
