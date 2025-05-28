@@ -1,6 +1,7 @@
 export const userSortTitles = [
   { label: 'ID', sort: 'nId' },
   { label: 'Telegram ID', sort: 'telegramId' },
+  { label: 'Кол.Реф', sort: 'referralsCount' },
   { label: 'Ник в телеграм', sort: 'tgUsername' },
   { label: 'Баланс,$', sort: 'balance' },
   { label: 'Fee, SOL', sort: null },

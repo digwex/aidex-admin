@@ -48,7 +48,13 @@ export const PersonalData = () => {
                 <TableRow key={row.id}>
                   <StyledTableCell className='flex items-center gap-2'>
                     <CopyButton text={row.publicKey} />
-                    {row.publicKey}
+                    <a
+                      target='_blank'
+                      className='transition-all duration-300 hover:text-primary'
+                      href={`https://solscan.io/account/${row.publicKey}`}
+                    >
+                      {row.publicKey}
+                    </a>
                     {row?.isActive && <Chip size='small' variant='tonal' label={'Активен'} color={'success'} />}
                     {row?.isArchived && <Chip size='small' variant='tonal' label={'В архиве'} color={'warning'} />}
                   </StyledTableCell>

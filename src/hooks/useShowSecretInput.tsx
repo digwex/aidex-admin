@@ -8,7 +8,7 @@ export const useShowSecretInput = () => {
   const toggleType = () => setType(type === 'password' ? 'text' : 'password')
 
   const Element = () => (
-    <IconButton onClick={toggleType}>
+    <IconButton title={type === 'password' ? 'Показать' : 'Скрыть'} onClick={toggleType}>
       {type === 'password' && <i className='tabler-eye' />}
       {type === 'text' && <i className='tabler-eye-off' />}
     </IconButton>

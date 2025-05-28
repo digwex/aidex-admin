@@ -24,7 +24,7 @@ export const BlockedUserRow = (props: Props) => {
       <tr>
         <td>
           <Link
-            className={cn({
+            className={cn('transition-all duration-300 hover:text-primary', {
               'pointer-events-none': !checkAction(ACTION_ACCESS.VIEW_USER_DETAIL)
             })}
             href={`/users/${user.nId}`}
@@ -33,7 +33,16 @@ export const BlockedUserRow = (props: Props) => {
           </Link>
         </td>
         <td>{user.telegramId}</td>
-        <td>{user.tgUsername}</td>
+        <td>{user.referralsCount || '0'}</td>
+        <td>
+          <a
+            target='_blank'
+            className='transition-all duration-300 hover:text-primary'
+            href={`https://t.me/${user.tgUsername}`}
+          >
+            {user.tgUsername}
+          </a>
+        </td>
         <td>{determineBalance(user.balance)}</td>
         <td>{user.fee} SOL</td>
         <td>

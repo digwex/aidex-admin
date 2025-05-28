@@ -26,7 +26,7 @@ export const CopyButton = ({ text }: { text: string }) => {
   const { isCopied, handleCopy } = useCopy(text)
 
   return (
-    <IconButton className={cn({ 'pointer-events-none': isCopied })} onClick={handleCopy}>
+    <IconButton title='Скопировать' className={cn({ 'pointer-events-none': isCopied })} onClick={handleCopy}>
       {isCopied ? <i className='tabler-copy-check-filled' /> : <i className='tabler-copy' />}
     </IconButton>
   )

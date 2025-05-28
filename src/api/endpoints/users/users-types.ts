@@ -1,6 +1,7 @@
 import { type IQuery } from '../../types'
 
 export interface User {
+  referralsCount: number
   tgUsername: string
   telegramId: string
   fee: string

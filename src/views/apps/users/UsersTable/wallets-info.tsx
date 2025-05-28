@@ -1,4 +1,4 @@
-import { Button, Chip, Divider, InputAdornment, Stack } from '@mui/material'
+import { Button, Chip, Divider, IconButton, InputAdornment, Stack } from '@mui/material'
 
 import classNames from 'classnames'
 
@@ -82,7 +82,19 @@ const WalletItem = ({
         slotProps={{
           input: {
             readOnly: true,
-            endAdornment: <InputAdornment position='end'>{<CopyButton text={publicKey} />}</InputAdornment>
+            endAdornment: (
+              <InputAdornment position='end'>
+                <IconButton
+                  title='Solscan'
+                  LinkComponent='a'
+                  href={`https://solscan.io/account/${publicKey}`}
+                  target='_blank'
+                >
+                  <i className='tabler-currency-solana' />
+                </IconButton>
+                <CopyButton text={publicKey} />
+              </InputAdornment>
+            )
           }
         }}
       />

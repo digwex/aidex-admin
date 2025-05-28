@@ -29,7 +29,7 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
       <tr>
         <td>
           <Link
-            className={cn({
+            className={cn('transition-all duration-300 hover:text-primary', {
               'pointer-events-none': !checkAction(ACTION_ACCESS.VIEW_USER_DETAIL)
             })}
             href={`/users/${user.nId}`}
@@ -39,7 +39,16 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
           </Link>
         </td>
         <td>{user.telegramId}</td>
-        <td>{user.tgUsername}</td>
+        <td>{user.referralsCount || '0'}</td>
+        <td>
+          <a
+            target='_blank'
+            className='transition-all duration-300 hover:text-primary'
+            href={`https://t.me/${user.tgUsername}`}
+          >
+            {user.tgUsername}
+          </a>
+        </td>
         <td>{determineBalance(user.balance)}</td>
         <td>{user.fee} SOL</td>
         <td>
@@ -58,7 +67,7 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
         <td>
           <div className='flex items-center justify-center gap-3'>
             <Link
-              className={cn({
+              className={cn('transition-all duration-300 hover:text-primary', {
                 'pointer-events-none': !checkAction(ACTION_ACCESS.VIEW_USER_DETAIL)
               })}
               href={`/users/${user.nId}`}
@@ -67,16 +76,7 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
                 Больше
               </Button>
             </Link>
-            {/* <Link href={`/users/${user.nId}`}>
-              <Button variant='outlined' color='warning'>
-                Торговля
-              </Button>
-            </Link>
-            <Link href={`/users/${user.nId}`}>
-              <Button variant='outlined' color='success'>
-                Изменить
-              </Button>
-            </Link> */}
+
             {user.isBlockedForever ? (
               <UnblockModal uId={String(user.nId)}>
                 {({ openModal }) => (

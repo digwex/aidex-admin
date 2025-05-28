@@ -7,7 +7,13 @@ export const WalletsTableRow = ({ publicKey, balance }: IWallet) => {
       <td className='text-left'>
         <div className='flex items-center gap-2'>
           <CopyButton text={publicKey} />
-          <span>{publicKey}</span>
+          <a
+            target='_blank'
+            className='transition-all duration-300 hover:text-primary'
+            href={`https://solscan.io/account/${publicKey}`}
+          >
+            {publicKey}
+          </a>
         </div>
       </td>
       <td className='text-left whitespace-nowrap'>{balance} SOL</td>
