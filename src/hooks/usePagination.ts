@@ -121,7 +121,6 @@ export const usePagination = ({
           : undefined
       : Math.floor(endOfDaySeconds / 1000)
 
-    console.debug('willSendDate', { willSendDate, from, to })
     await refetch({
       skip,
       take,

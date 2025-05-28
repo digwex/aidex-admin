@@ -373,3 +373,11 @@ tbody {
   line-height: 130%;
   /* identical to box height, or 16px */
 }
+
+[data-is-na='false'] {
+  color: var(--mui-palette-text-primary);
+}
+
+[data-is-na='true'] {
+  color: var(--mui-palette-text-primary);
+}

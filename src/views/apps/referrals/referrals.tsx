@@ -22,7 +22,7 @@ export const Referrals = () => {
         <Title icon='tabler-wallet' title='Реферальная программа' />
       </div>
 
-      <Paper className='flex p-5 w-full flex-wrap gap-4 items-center'>
+      <Paper className='flex p-5 w-full max1100:flex-col gap-4 items-center'>
         {isLoading && <Loader />}
         {data?.map(({ id, name, percent }) => (
           <form
@@ -63,7 +63,7 @@ export const Referrals = () => {
                 })
               }
             }}
-            className='w-1/4'
+            className='w-1/3 max1100:w-full '
             key={name}
           >
             <Typography variant='h4' className='mb-2'>

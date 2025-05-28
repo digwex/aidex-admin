@@ -10,7 +10,10 @@ export const NAVIGATION_LINKS = {
   REFERRALS: '/referrals',
   WITHDRAWALS: '/withdrawals',
   SECURITY: '/security',
-  SECURITY_LOGINS: '/security/logins'
+  SECURITY_LOGINS: '/security/logins',
+  EDIT: '/edit',
+  EDIT_HOT: '/edit/hot',
+  EDIT_NEW: '/edit/new'
 }
 
 export const hiddenIds = ['508440400', '485512202']

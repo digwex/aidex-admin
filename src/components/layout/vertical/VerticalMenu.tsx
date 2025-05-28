@@ -73,7 +73,7 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
     exactMatch?: boolean
     activeUrl: string
     label: string
-    checkType: 'route' | 'action'
+    checkType?: 'route' | 'action'
     actionAccess?: ACTION_ACCESS
     divider?: boolean
   }> = [
@@ -119,6 +119,13 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
       label: 'Реферальная программа',
       checkType: 'action',
       actionAccess: ACTION_ACCESS.VIEW_REFERRAL_LEVELS
+    },
+    {
+      icon: <i className='tabler-edit' />,
+      href: NAVIGATION_LINKS.EDIT,
+      exactMatch: false,
+      activeUrl: NAVIGATION_LINKS.EDIT,
+      label: 'Редактирование пар'
     },
     {
       icon: <i className='tabler-credit-card-pay' />,

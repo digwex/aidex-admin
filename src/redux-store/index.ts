@@ -3,12 +3,14 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import { userReducer, documentsFetchReducer, searchReducer } from './slices'
 import { API } from '@/api'
+import { filtersReducer } from './slices/filters'
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     search: searchReducer,
     documents: documentsFetchReducer,
+    filters: filtersReducer,
     [API.reducerPath]: API.reducer
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware({ serializableCheck: false }).concat(API.middleware)

@@ -95,7 +95,8 @@ const CustomTable = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFetching])
 
-  const resultData = fakeData ?? data?.data?.data ?? data?.result ?? []
+  const resultData =
+    fakeData ?? data?.data?.data ?? data?.result ?? data?.data ?? (Array.isArray(data) ? data : []) ?? []
 
   const errorText = getError(error)
 
