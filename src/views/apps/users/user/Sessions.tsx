@@ -76,7 +76,7 @@ function SessionsTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.Sessions.map((row: any) => (
+          {data?.Sessions.map((row: any) => (
             <TableRow key={row.id}>
               <StyledTableCell component='th' scope='row'>
                 {row.ip}
@@ -92,7 +92,7 @@ function SessionsTable() {
           ))}
         </TableBody>
       </Table>
-      {data.Sessions.length === 0 && (
+      {data?.Sessions.length === 0 && (
         <Typography className='text-center bg-[var(--background-color)] py-4'>Нет активных сессий</Typography>
       )}
     </TableContainer>

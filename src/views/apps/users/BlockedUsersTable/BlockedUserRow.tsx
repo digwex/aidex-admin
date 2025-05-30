@@ -13,7 +13,7 @@ import { useCheckAccess } from '@/hooks/useCheckAccess'
 import { ACTION_ACCESS } from '@/utils/accessActions'
 import { WalletsInfo } from '../UsersTable/wallets-info'
 
-type Props = User
+type Props = User & { referralsCount: number }
 
 export const BlockedUserRow = (props: Props) => {
   const user = props

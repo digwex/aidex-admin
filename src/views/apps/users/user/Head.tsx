@@ -9,6 +9,8 @@ import { Avatar, Box, Button, Divider, Paper, Stack, Typography } from '@mui/mat
 import { format } from 'date-fns'
 
 import { useGetUserByIdQuery } from '@/api/endpoints/users/users-api'
+import { CopyButton } from '@/hooks/useCopy'
+import { getUserRefLink } from '@/utils/get-user-ref-link'
 
 const stackProps: StackProps = {
   direction: 'column',
@@ -20,7 +22,8 @@ export const Head = () => {
   const { id } = useParams()
   const { data } = useGetUserByIdQuery(String(id as string))
 
-  const totalSol = data.wallets.reduce((acc: number, wallet: any) => acc + Number(wallet.balance), 0)
+  const totalSol = data?.wallets.reduce((acc: number, wallet: any) => acc + Number(wallet.balance), 0) || 0
+  const refLink = getUserRefLink(data)
 
   return (
     <Paper className='flex items-center gap-3 justify-between p-4 flex-wrap'>
@@ -31,12 +34,24 @@ export const Head = () => {
 
         <Stack {...stackProps}>
           <Typography color='secondary'>ID пользователя:</Typography>
-          <Typography variant='h5'>{data.nId}</Typography>
+          <Typography variant='h5'>{data?.nId}</Typography>
         </Stack>
 
         <Stack {...stackProps}>
           <Typography color='secondary'>Время последнего входа:</Typography>
-          <Typography variant='h5'>{format(data.lastLoggedIn, 'yyyy-MM-dd HH:mm')}</Typography>
+          <Typography variant='h5'>
+            {data?.lastLoggedIn ? format(data?.lastLoggedIn, 'yyyy-MM-dd HH:mm') : 'N/A'}
+          </Typography>
+        </Stack>
+
+        <Stack {...stackProps}>
+          <Typography color='secondary'>Реферальная ссылка:</Typography>
+          <div className='flex items-center gap-2'>
+            <a target='_blank' href={refLink} className='transition-all hover:text-primary duration-300'>
+              {refLink}
+            </a>
+            <CopyButton text={refLink} />
+          </div>
         </Stack>
       </Box>
 

@@ -44,7 +44,7 @@ export const PersonalData = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.wallets.map((row: any) => (
+              {data?.wallets.map((row: any) => (
                 <TableRow key={row.id}>
                   <StyledTableCell className='flex items-center gap-2'>
                     <CopyButton text={row.publicKey} />

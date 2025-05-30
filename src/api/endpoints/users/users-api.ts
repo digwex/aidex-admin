@@ -90,7 +90,7 @@ export const usersApi = API.injectEndpoints({
       query: (id: string) => ({
         url: `users/${id}`
       }),
-      transformResponse: (response: ApiResponse<any>) => response.data,
+      transformResponse: (response: ApiResponse<User>) => response.data,
       providesTags: [Tag.User]
     }),
     updateTrade: builder.mutation({

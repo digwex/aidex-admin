@@ -18,7 +18,7 @@ import { DeleteModal } from './DeleteModal'
 import { UnblockModal } from './UnblockModal'
 import { WalletsInfo } from './wallets-info'
 
-type Props = User & { updateTable: () => void }
+type Props = User & { updateTable: () => void; referralsCount: number }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const UserRow = ({ updateTable, ...user }: Props) => {
