@@ -23,18 +23,20 @@ export const tableHeaders = [
     label: 'Нажали старт',
     sort: 'pressStartCount'
   },
-  {
-    label: 'Заблокировали бота',
-    sort: 'botBlocked'
-  },
+
+  // {
+  //   label: 'Заблокировали бота',
+  //   sort: 'botBlocked'
+  // },
   {
     label: 'Заработано',
     sort: 'earned'
   },
-  {
-    label: 'Покупок все($)',
-    sort: 'purchases'
-  },
+
+  // {
+  //   label: 'Покупок все($)',
+  //   sort: 'purchases'
+  // },
   {
     label: 'Пригласили друзей',
     sort: 'invitedFriends'

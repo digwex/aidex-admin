@@ -4,10 +4,10 @@ import { toast } from 'react-toastify'
 
 import { Button, Divider, IconButton, Typography } from '@mui/material'
 
-import { handleRTKError } from '@/utils/handleRTKError'
-import { useEditSpendingMutation } from '@/api/endpoints/links'
-import ModalButton from '@/components/ModalButton'
 import CustomTextField from '@/@core/components/mui/TextField'
+import { useEditReferralLinkMutation } from '@/api/endpoints/referrals/referrals-api'
+import ModalButton from '@/components/ModalButton'
+import { handleRTKError } from '@/utils/handleRTKError'
 
 interface Props {
   id: string
@@ -17,7 +17,7 @@ interface Props {
 export const EditSpending = ({ id, defaultValue }: Props) => {
   const [spending, setSpending] = useState(String(defaultValue))
 
-  const [mutate, { isLoading }] = useEditSpendingMutation()
+  const [mutate, { isLoading }] = useEditReferralLinkMutation()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value.replace(/[^0-9]/g, '') || '0')

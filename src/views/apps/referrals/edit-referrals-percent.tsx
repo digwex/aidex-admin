@@ -3,7 +3,7 @@ import { Button, Paper, Typography } from '@mui/material'
 import { toast } from 'react-toastify'
 
 import CustomTextField from '@/@core/components/mui/TextField'
-import { useChangePercentMutation, useGetReferralLevelsQuery } from '@/api/endpoints/referralLevels/referral-levels-api'
+import { useChangePercentMutation, useGetReferralLevelsQuery } from '@/api/endpoints/referrals/referrals-api'
 import { Loader } from '@/components/Loader'
 
 import { useCheckAccess } from '@/hooks/useCheckAccess'
