@@ -2,7 +2,6 @@ import type { PropsWithChildren } from 'react'
 
 import { Title } from '@/components/Title'
 import { Sorts } from './sorts'
-import { EditForm } from './edit-form'
 
 export const EditLayout = ({ children }: PropsWithChildren) => {
   return (
@@ -11,7 +10,6 @@ export const EditLayout = ({ children }: PropsWithChildren) => {
 
       <Sorts />
 
-      <EditForm />
       <div>{children}</div>
     </div>
   )

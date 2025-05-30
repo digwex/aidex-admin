@@ -5,14 +5,17 @@ import { useState } from 'react'
 import type { DialogProps } from '@mui/material'
 import { Dialog, DialogTitle } from '@mui/material'
 
+import classNames from 'classnames'
+
 import DialogCloseButton from './dialogs/DialogCloseButton'
 
 interface Props extends Omit<DialogProps, 'content' | 'open'> {
   openButton: (value: { open: boolean; openModal: () => void }) => React.ReactNode
   modalContent: (value: { open: boolean; closeModal: () => void }) => React.ReactNode
+  contentClassName?: string
 }
 
-const ModalButton = ({ modalContent, openButton, ...props }: Props) => {
+const ModalButton = ({ modalContent, openButton, contentClassName, ...props }: Props) => {
   const [open, setOpen] = useState(false)
 
   const closeModal = () => setOpen(false)
@@ -37,7 +40,7 @@ const ModalButton = ({ modalContent, openButton, ...props }: Props) => {
           </DialogCloseButton>
         </DialogTitle>
 
-        <div className='p-5'>{modalContent({ open, closeModal })}</div>
+        <div className={classNames('p-5', contentClassName)}>{modalContent({ open, closeModal })}</div>
       </Dialog>
     </>
   )
