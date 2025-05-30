@@ -1,39 +1,34 @@
-import { BOT_URL } from '@/utils/constants'
+import type { IReferralLink } from '@/api/endpoints/referrals/referrals-types'
 import { CopyRefLink } from './copy-ref-link'
 
 import { EditSpending } from './edit-spending'
 
-import type { ILink } from '@/api/endpoints/links'
-
-type Props = ILink
+type Props = IReferralLink
 
 export const Row = ({
   id,
-  name,
-  refCode,
+  code,
+  link,
   spending,
-  earned,
-  pressStartCount,
   subscribed,
   unsubscribed,
-  maxActiveUsers,
-  botBlocked,
-  invitedFriends
+  pressStart,
+  commissions,
+  invitedUsers,
+  maxActiveUsers
 }: Props) => {
-  const refLink = `https://t.me/${BOT_URL}?start=ref-${refCode}`
-
   return (
     <tr>
-      <td>{name}</td>
-      <CopyRefLink refLink={refLink} />
+      <td>{code}</td>
+      <CopyRefLink refLink={link} />
       <EditSpending id={id} defaultValue={spending} />
       <td>{subscribed}</td>
       <td>{unsubscribed}</td>
-      <td>{pressStartCount}</td>
-      <td>{botBlocked}</td>
-      <td>{earned.toString()}</td>
-      <td>-</td>
-      <td>{invitedFriends}</td>
+      <td>{pressStart}</td>
+      {/* <td>{botBlocked}</td> */}
+      <td>{commissions}</td>
+      {/* <td>-</td> */}
+      <td>{invitedUsers}</td>
       <td>{maxActiveUsers}</td>
     </tr>
   )

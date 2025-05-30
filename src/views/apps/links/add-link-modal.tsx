@@ -1,10 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 
 import * as yup from 'yup'
 
-import { Button, Divider, Typography } from '@mui/material'
+import { Button, Divider, MenuItem, Typography } from '@mui/material'
 
 import { toast } from 'react-toastify'
 
@@ -14,26 +14,41 @@ import ModalButton from '@/components/ModalButton'
 
 import CustomTextField from '@/@core/components/mui/TextField'
 
-import { handleRTKError } from '@/utils/handleRTKError'
-import { useAddLinkMutation } from '@/api/endpoints/links'
+import { useCreateReferralLinkMutation } from '@/api/endpoints/referrals/referrals-api'
+
+const DOMAINS = [
+  { label: '@ApeDex_bot', value: 'ApeDex_bot' },
+  { label: '@DexTrade', value: 'dextrade' }
+]
 
 interface FormSchema {
   name: string
+  domain: string
+  telegramId: string
+  tgUsername: string
 }
 
-const schema = yup.object().shape({
+const schema = yup.object({
   name: yup.string().min(4, 'Имя должно содержать не менее 4 символов')
 })
 
 export const AddLinkModal = () => {
-  const [mutate, { isLoading }] = useAddLinkMutation()
+  const [mutate, { isLoading }] = useCreateReferralLinkMutation()
 
   const {
     register,
     formState: { errors },
+    control,
     handleSubmit
   } = useForm<FormSchema>({
-    // @ts-expect-error type
+    defaultValues: {
+      name: '',
+      telegramId: '',
+      tgUsername: '',
+      domain: DOMAINS[0].value
+    },
+
+    // @ts-expect-error fix
     resolver: yupResolver(schema)
   })
 
@@ -42,13 +57,38 @@ export const AddLinkModal = () => {
       return
     }
 
+    const body = {
+      code: data.name,
+      link: `https://t.me/${data.domain}?start=ref-${data.name}`,
+      telegramId: data.telegramId.length > 0 ? +data.telegramId : undefined,
+      tgUsername: data.tgUsername
+    }
+
+    if (data.telegramId.length === 0 && data.tgUsername.length === 0) {
+      toast.error('Введите Telegram ID или Telegram username')
+
+      return
+    }
+
+    const toastId = toast.loading('Создание ссылки...')
+
     try {
-      await mutate({ name: data.name }).unwrap()
-      toast.success('Ссылка успешно создана')
+      await mutate(body).unwrap()
+      toast.update(toastId, {
+        render: 'Ссылка успешно создана',
+        type: 'success',
+        isLoading: false,
+        delay: 3000
+      })
       close()
     } catch (e) {
       console.log(`Error add link: ${e}`)
-      toast.error((handleRTKError(e), 'Не удалось создать ссылку'))
+      toast.update(toastId, {
+        render: 'Не удалось создать ссылку',
+        type: 'error',
+        isLoading: false,
+        delay: 3000
+      })
     }
   }
 
@@ -67,7 +107,29 @@ export const AddLinkModal = () => {
             Создание ссылки
           </Typography>
           <form className='flex flex-col gap-4' onSubmit={handleSubmit(handleAdd(closeModal))}>
-            <CustomTextField {...register('name')} label='Название' />
+            <Controller
+              name='domain'
+              control={control}
+              render={({ field: { value, onChange } }) => (
+                <CustomTextField
+                  label='Бот'
+                  value={value}
+                  onChange={e => onChange(e.target.value)}
+                  className='max700:w-full [&>div>i]:right-[6px]'
+                  select
+                >
+                  {DOMAINS.map(domain => (
+                    <MenuItem key={domain.value} value={domain.value}>
+                      {domain.label}
+                    </MenuItem>
+                  ))}
+                </CustomTextField>
+              )}
+            />
+            <CustomTextField {...register('name')} label='Название' required />
+            <CustomTextField {...register('telegramId')} label='Telegram ID' />
+            <CustomTextField {...register('tgUsername')} label='Telegram Username' />
+
             <Error error={errors?.name} />
 
             <Divider />

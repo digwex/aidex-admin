@@ -12,3 +12,16 @@ export interface IReferralLevelChangePercent {
   id: string
   percent: number
 }
+
+export interface IReferralLink {
+  id: string
+  link: string
+  code: string
+  spending: number
+  subscribed: number
+  unsubscribed: number
+  pressStart: number
+  commissions: string
+  invitedUsers: number
+  maxActiveUsers: number
+}
