@@ -1,11 +1,11 @@
 export const daysTitles = [
-  { label: 'Дата', sort: '_date_only' },
-  { label: 'Переходы', sort: '_clicks' },
-  { label: 'Регистрации', sort: '_registrations' },
-  { label: 'FTD', sort: '_ftd_count' },
-  { label: 'Трейдеры', sort: '_traders' },
-  { label: 'Сделки', sort: '_deals_count' },
-  { label: 'Выводы', sort: '_withdrawals' },
-  { label: 'Выводы,$', sort: '_withdrawals_count' },
-  { label: 'Макс Online', sort: '_online' }
+  { label: 'Дата', sort: 'date' },
+  { label: 'Переходы', sort: 'referralRegistrations' },
+  { label: 'Регистрации', sort: 'registrations' },
+  { label: 'FTD', sort: 'ftd' },
+  { label: 'Трейдеры', sort: 'trades' },
+  { label: 'Сделки', sort: 'deals' },
+  { label: 'Реферальные выводы', sort: 'withdrawals' },
+  { label: 'Реферальные выводы,$', sort: 'withdrawalsCount' },
+  { label: 'Макс Online', sort: 'maxOnline' }
 ]

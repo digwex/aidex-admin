@@ -7,30 +7,21 @@ import { formatCurrency } from '@/utils/formatCurrency'
 
 type Props = StatisticTrader
 
-const TradersRow = ({
-  _registered: registered,
-  _nid: nid,
-  _balance: balance,
-  _deals_count: dealsCount,
-  _withdrawals: withdrawals,
-  _withdrawals_count: withdrawalsCount,
-  _pnl: pnl
-}: Props) => {
+const TradersRow = ({ nId, profit, trades, withdrawals, withdrawalsCount, balance, createdAt }: Props) => {
   return (
     <tr>
-      <td>{calcDate(registered)}</td>
+      <td>{calcDate(createdAt)}</td>
       <td>
-        <Link href={`/users/${nid}`} className='td_row'>
-          <span className='text-success'>{nid}</span>
+        <Link href={`/users/${nId}`} className='td_row'>
+          <span className='text-success'>{nId}</span>
         </Link>
       </td>
 
-      <td>{withdrawalsCount ?? '0'}</td>
-      <td>{withdrawals ? `$${formatCurrency(Number(withdrawals))}` : '$0'}</td>
-      <td>{dealsCount ?? '0'}</td>
+      <td>{withdrawalsCount}</td>
+      <td>${formatCurrency(Number(withdrawals))}</td>
+      <td>{trades}</td>
 
-      <td>{determineBalance(pnl)}</td>
-      <td>-</td>
+      <td>{determineBalance(profit)}</td>
       <td>{determineBalance(balance)}</td>
     </tr>
   )

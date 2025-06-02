@@ -4,38 +4,39 @@ import { formatCurrency } from '@/utils/formatCurrency'
 type Props = StatisticDay
 
 const DaysFooterRow = (props: Props) => {
-  console.debug('!!!!!!!!!!!!!!!!!!!!!!')
-  const data = Object.values(props)
+  const data = Object.values(props) as StatisticDay[]
 
-  const totalClicks = data?.reduce((acc, item) => acc + Number(item._clicks ?? 0), 0)
+  const totalReferralRegistrations = data?.reduce((acc, item) => acc + Number(item.referralRegistrations), 0)
 
-  const totalRegistrations = data?.reduce((acc, item) => acc + Number(item._registrations ?? 0), 0)
+  const totalRegistrations = data?.reduce((acc, item) => acc + Number(item.referralRegistrations), 0)
 
-  const totalFTD = data?.reduce((acc, item) => acc + Number(item._ftd_count ?? 0), 0)
+  const totalFTD = data?.reduce((acc, item) => acc + Number(item.ftd), 0)
 
-  const tradersClicks = data?.reduce((acc, item) => acc + Number(item._traders ?? 0), 0)
+  const totalTrades = data?.reduce((acc, item) => acc + Number(item.trades), 0)
 
-  const dealsCountClicks = data?.reduce((acc, item) => acc + Number(item._deals_count ?? 0), 0)
+  const totalDeals = data?.reduce((acc, item) => acc + Number(item.deals), 0)
 
-  const withdrawalsCountClicks = data?.reduce((acc, item) => acc + Number(item._withdrawals_count ?? 0), 0)
+  const totalDealsCount = data?.reduce((acc, item) => acc + Number(item.dealsCount), 0)
 
-  const withdrawalsClicks = data?.reduce((acc, item) => acc + Number(item._withdrawals ?? 0), 0)
+  const totalWithdrawals = data?.reduce((acc, item) => acc + Number(item.withdrawals), 0)
 
-  const onlineClicks = data?.reduce((acc, item) => acc + Number(item._online ?? 0), 0)
+  const totalWithdrawalsCount = data?.reduce((acc, item) => acc + Number(item.withdrawalsCount), 0)
+
+  const totalMaxOnline = data?.reduce((acc, item) => acc + Number(item.maxOnline), 0)
 
   return (
     <tr>
       <th>Итого</th>
-      <td>{totalClicks}</td>
+      <td>{totalReferralRegistrations}</td>
       <td>{totalRegistrations}</td>
       <td>{totalFTD}</td>
-      <td>{tradersClicks}</td>
-      <td>{dealsCountClicks}</td>
-
-      <td>{withdrawalsCountClicks}</td>
-      <td>${formatCurrency(withdrawalsClicks)}</td>
-
-      <td>{onlineClicks}</td>
+      <td>{totalTrades}</td>
+      <td>
+        {totalDealsCount} (${formatCurrency(Number(totalDeals))})
+      </td>
+      <td>${formatCurrency(totalWithdrawals)}</td>
+      <td>{totalWithdrawalsCount}</td>
+      <td>{totalMaxOnline}</td>
     </tr>
   )
 }

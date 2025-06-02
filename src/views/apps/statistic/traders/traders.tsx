@@ -1,11 +1,11 @@
 'use client'
 
 import { useLazyByTraderQuery } from '@/api/endpoints/statistics/statistics'
+import { SORT_DIRECTION } from '@/api/types'
+import CustomTable from '@/views/table/CustomTable'
 import TradersFooterRow from './traders-footer-row'
 import TradersRow from './traders-row'
 import { tradersTitles } from './traders-titles'
-import { SORT_DIRECTION } from '@/api/types'
-import CustomTable from '@/views/table/CustomTable'
 
 const Traders = () => {
   return (
@@ -16,7 +16,7 @@ const Traders = () => {
       DataItem={TradersRow}
       DataFooter={TradersFooterRow}
       sortTitles={tradersTitles}
-      order={{ field: '_registered', direction: SORT_DIRECTION.DESC }}
+      order={{ field: 'nId', direction: SORT_DIRECTION.DESC }}
     />
   )
 }
