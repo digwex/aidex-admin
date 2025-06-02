@@ -4,40 +4,28 @@ import { formatCurrency } from '@/utils/formatCurrency'
 type Props = StatisticTrader
 
 const TradersFooterRow = (props: Props) => {
-  const data = Object.values(props)
+  const data = Object.values(props) as StatisticTrader[]
 
   const totalId = data.length
 
-  const depositsCountClicks = data?.reduce((acc, item) => acc + Number(item._deposits_count ?? 0), 0)
-
-  const withdrawalsCountClicks = data?.reduce((acc, item) => acc + Number(item._withdrawals_count ?? 0), 0)
-
-  const withdrawalsClicks = data?.reduce((acc, item) => acc + Number(item._withdrawals ?? 0), 0)
-
-  const dealsCountClicks = data?.reduce((acc, item) => acc + Number(item._deals_count ?? 0), 0)
-
-  const totalPnl = data?.reduce((acc, item) => acc + Number(item._pnl ?? 0), 0)
-
-  const totalBalance = data?.reduce((acc, item) => acc + Number(item._balance ?? 0), 0)?.toString()
+  const totalWithdrawals = data?.reduce((acc, item) => acc + Number(item.withdrawals), 0)
+  const totalWithdrawalsCount = data?.reduce((acc, item) => acc + Number(item.withdrawalsCount), 0)
+  const totalTrades = data?.reduce((acc, item) => acc + Number(item.trades), 0)
+  const totalProfit = data?.reduce((acc, item) => acc + Number(item.profit), 0)
+  const totalBalance = data?.reduce((acc, item) => acc + Number(item.balance), 0)
 
   return (
     <tr>
       <td>Итого</td>
       <td>{totalId}</td>
-      <td>{depositsCountClicks}</td>
-      <td>{withdrawalsCountClicks}</td>
-      <td>${formatCurrency(withdrawalsClicks)}</td>
-      <td>{dealsCountClicks}</td>
+      <td>{totalWithdrawals}</td>
+      <td>${totalWithdrawalsCount}</td>
+      <td>{totalTrades}</td>
       <td>
-        {String(totalPnl).includes('-') ? '-$' : '$'}
-        {formatCurrency(Number(String(totalPnl)?.replace('-', '')))}
+        {String(totalProfit).includes('-') ? '-$' : '$'}
+        {formatCurrency(Number(String(totalProfit).replace('-', '')))}
       </td>
-      <td>-</td>
-      <td>
-        {totalBalance
-          ? `${totalBalance.includes('-') ? '-$' : '$'}${formatCurrency(Number(totalBalance.replace('-', '')))}`
-          : '-'}
-      </td>
+      <td>${formatCurrency(Number(totalBalance))}</td>
     </tr>
   )
 }

@@ -17,7 +17,7 @@ const Days = () => {
       DataItem={DaysRow}
       DataFooter={DaysFooterRow}
       sortTitles={daysTitles}
-      order={{ field: '_date_only', direction: SORT_DIRECTION.DESC }}
+      order={{ field: 'date', direction: SORT_DIRECTION.DESC }}
     />
   )
 }

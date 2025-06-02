@@ -16,7 +16,7 @@ const Months = () => {
       DataItem={MonthsRow}
       DataFooter={MonthsFooterRow}
       sortTitles={monthsTitles}
-      order={{ field: '_date_only', direction: SORT_DIRECTION.ASC }}
+      order={{ field: 'date', direction: SORT_DIRECTION.ASC }}
     />
   )
 }
