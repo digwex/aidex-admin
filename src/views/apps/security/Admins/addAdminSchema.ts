@@ -6,7 +6,7 @@ export const addAdminSchema = yup.object<AddAdminFormValue>({
   tgId: yup
     .string()
     .matches(/^\d+$/, 'ID Телеграм должен состоять только из цифр')
-    .min(4, 'ID Телеграм должен быть не менее 4 символов')
+    .min(3, 'ID Телеграм должен быть не менее 3 символов')
     .required('Это поле обязательное'),
   tgLogin: yup
     .string()
