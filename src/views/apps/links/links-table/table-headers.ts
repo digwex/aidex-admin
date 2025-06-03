@@ -4,6 +4,10 @@ export const tableHeaders = [
     sort: 'name'
   },
   {
+    label: 'ID партнера TG',
+    sort: 'tgPartnerId'
+  },
+  {
     label: 'Реф. ссылка',
     sort: 'refCode'
   },
@@ -12,34 +16,24 @@ export const tableHeaders = [
     sort: 'spending'
   },
   {
-    label: 'Подписки',
-    sort: 'subscribed'
+    label: 'Старт',
+    sort: 'start'
   },
   {
-    label: 'Отписались',
-    sort: 'unsubscribed'
+    label: 'Открыл сделку',
+    sort: 'open'
   },
   {
-    label: 'Нажали старт',
-    sort: 'pressStartCount'
+    label: 'Cуб Партнёров',
+    sort: 'subAffiliates'
   },
-
-  // {
-  //   label: 'Заблокировали бота',
-  //   sort: 'botBlocked'
-  // },
   {
-    label: 'Заработано',
-    sort: 'earned'
+    label: 'Заработал Sol/$',
+    sort: 'profit'
   },
-
-  // {
-  //   label: 'Покупок все($)',
-  //   sort: 'purchases'
-  // },
   {
-    label: 'Пригласили друзей',
-    sort: 'invitedFriends'
+    label: 'Выводы SOL/USD',
+    sort: 'withdrawals'
   },
   {
     label: 'Максимум активных игроков',

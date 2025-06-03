@@ -15,11 +15,13 @@ export const Row = ({
   pressStart,
   commissions,
   invitedUsers,
-  maxActiveUsers
+  maxActiveUsers,
+  tgPartnerId
 }: Props) => {
   return (
     <tr>
       <td>{code}</td>
+      <td>{tgPartnerId ?? '-'}</td>
       <CopyRefLink refLink={link} />
       <EditSpending id={id} defaultValue={spending} />
       <td>{subscribed}</td>

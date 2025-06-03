@@ -58,7 +58,7 @@ export const referralsApi = API.injectEndpoints({
       }
     }),
     getReferralLinks: builder.query<any, void>({
-      query: () => '/referral-links',
+      query: (params: any) => ({ url: '/referral-links', params }),
       transformResponse: (response: { data: any }) => response.data,
       providesTags: result =>
         result

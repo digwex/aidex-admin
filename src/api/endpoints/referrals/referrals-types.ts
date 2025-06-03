@@ -24,4 +24,5 @@ export interface IReferralLink {
   commissions: string
   invitedUsers: number
   maxActiveUsers: number
+  tgPartnerId: string
 }
