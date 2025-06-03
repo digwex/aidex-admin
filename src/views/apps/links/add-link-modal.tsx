@@ -29,7 +29,7 @@ interface FormSchema {
 }
 
 const schema = yup.object({
-  name: yup.string().min(4, 'Имя должно содержать не менее 4 символов')
+  name: yup.string().min(3, 'Имя должно содержать не менее 3 символов')
 })
 
 export const AddLinkModal = () => {
