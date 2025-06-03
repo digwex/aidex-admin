@@ -1,21 +1,16 @@
 export const userSortTitles = [
   { label: 'ID', sort: 'nId' },
   { label: 'Telegram ID', sort: 'telegramId' },
+  { label: 'ID Реферера', sort: null },
   { label: 'Кол.Реф', sort: 'referralsCount' },
+  { label: 'Суб Реф', sort: null },
 
   { label: 'Ник в телеграм', sort: 'tgUsername' },
-  { label: 'Баланс,$', sort: 'balance' },
-  { label: 'Fee, SOL', sort: null },
+  { label: 'Открыл сделок', sort: null },
+  { label: 'Общий бал. SOL', sort: 'balance' },
+  { label: 'Получено с комиссий', sort: null },
+  { label: 'Партнёрский тариф', sort: null },
   { label: 'Кошельки', sort: null },
 
-  // { label: 'E-mail', sort: 'email' },
-  // { label: 'Пароль', sort: 'UserPlainPassword' },
-  // { label: 'Имя Фамилия', sort: 'fullname' },
-  // { label: 'Статус', sort: 'isActive' },
-
-  // { label: 'KYC', sort: 'isWithdrawalAvailable' },
-  // { label: 'Документы', sort: 'needDocuments' },
-  // { label: '2ФА', sort: 'isTwoFactorEnabled' },
-  // { label: 'IP', sort: 'registrationIp' },
   { label: 'Опции', sort: null }
 ]

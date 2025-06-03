@@ -15,6 +15,7 @@ export interface TabItem {
   value: string
   label: React.ReactNode
   icon?: string
+  disabled?: boolean
 }
 
 export interface TabsCustomizedProps {
@@ -36,6 +37,7 @@ const Tabs = ({ tabs }: TabsCustomizedProps) => {
       {tabs.map(tab => (
         <Button
           key={tab.value}
+          disabled={tab.disabled}
           className={classNames('whitespace-nowrap w-fit p-0 max700:w-full  min-h-10 min-w-min', {
             'pointer-events-none': isRoutMatch(tab.value, pathname),
             'bg-[var(--mui-palette-primary-main)] text-[var(--mui-palette-primary-contrastText)]': isRoutMatch(

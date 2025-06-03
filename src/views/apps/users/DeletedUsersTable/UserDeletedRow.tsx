@@ -10,13 +10,11 @@ import { type User } from '../../../../api/endpoints/users/users-types'
 
 import { ACTION_ACCESS } from '@/utils/accessActions'
 
-import { determineBalance } from '@/utils/determineBalance'
-
 import { useCheckAccess } from '@/hooks/useCheckAccess'
 import { WalletsInfo } from '../UsersTable/wallets-info'
 import { ReturnModal } from '../UsersTable/ReturnModal'
 
-type Props = User & { updateTable: () => void }
+type Props = User & { referralsCount: number; updateTable: () => void }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const UserDeletedRow = ({ updateTable, ...user }: Props) => {
@@ -37,6 +35,9 @@ export const UserDeletedRow = ({ updateTable, ...user }: Props) => {
           </Link>
         </td>
         <td>{user.telegramId}</td>
+        <td>-</td>
+        <td>{user.referralsCount || '0'}</td>
+        <td>-</td>
         <td>
           <a
             target='_blank'
@@ -46,8 +47,10 @@ export const UserDeletedRow = ({ updateTable, ...user }: Props) => {
             {user.tgUsername}
           </a>
         </td>
-        <td>{determineBalance(user.balance)}</td>
-        <td>{user.fee} SOL</td>
+        <td>-</td>
+        <td>{user.balance}</td>
+        <td>-</td>
+        <td>-</td>
         <td>
           <WalletsInfo wallets={user.wallets} />
         </td>
@@ -76,7 +79,12 @@ export const UserDeletedRow = ({ updateTable, ...user }: Props) => {
 
             <ReturnModal uid={user.id}>
               {({ openModal }) => (
-                <Button color='success' variant='outlined' className='max700:w-full' onClick={openModal}>
+                <Button
+                  color='success'
+                  variant='outlined'
+                  className='max700:w-full whitespace-nowrap'
+                  onClick={openModal}
+                >
                   Восстановить аккаунт
                 </Button>
               )}

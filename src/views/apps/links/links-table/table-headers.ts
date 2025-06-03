@@ -28,6 +28,14 @@ export const tableHeaders = [
     sort: 'subAffiliates'
   },
   {
+    label: 'По ссылке',
+    sort: null
+  },
+  {
+    label: 'Всего этот партнёр',
+    sort: null
+  },
+  {
     label: 'Заработал Sol/$',
     sort: 'profit'
   },

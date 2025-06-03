@@ -17,6 +17,16 @@ const UserTableSorts = ({ id }: Props) => {
     {
       value: `/users/${id}/withdrawal`,
       label: 'Выводы'
+    },
+    {
+      value: `/users/${id}/links`,
+      label: 'Партнёрские ссылки',
+      disabled: true
+    },
+    {
+      value: `/users/${id}/pnl`,
+      label: 'Сделки + PNL',
+      disabled: true
     }
   ]
 

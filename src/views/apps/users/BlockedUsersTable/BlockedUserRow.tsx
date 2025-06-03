@@ -4,8 +4,6 @@ import { Button } from '@mui/material'
 
 import cn from 'classnames'
 
-import { determineBalance } from '@/utils/determineBalance'
-
 import type { User } from '@/api/endpoints/users/users-types'
 
 import { UnblockModal } from './UnblockModal'
@@ -29,11 +27,13 @@ export const BlockedUserRow = (props: Props) => {
             })}
             href={`/users/${user.nId}`}
           >
-            <span>{user.nId}</span>
+            <span className='color_green td_active'>{user.nId}</span>
           </Link>
         </td>
         <td>{user.telegramId}</td>
+        <td>-</td>
         <td>{user.referralsCount || '0'}</td>
+        <td>-</td>
         <td>
           <a
             target='_blank'
@@ -43,8 +43,10 @@ export const BlockedUserRow = (props: Props) => {
             {user.tgUsername}
           </a>
         </td>
-        <td>{determineBalance(user.balance)}</td>
-        <td>{user.fee} SOL</td>
+        <td>-</td>
+        <td>{user.balance}</td>
+        <td>-</td>
+        <td>-</td>
         <td>
           <WalletsInfo wallets={user.wallets} />
         </td>
@@ -60,23 +62,7 @@ export const BlockedUserRow = (props: Props) => {
                 Больше
               </Button>
             </Link>
-            {/* <Link href={`${user.nId}`}>
-              <Button variant='outlined' color='warning'>
-                Торговля
-              </Button>
-            </Link>
-            <Link href={`${user.nId}`}>
-              <Button variant='outlined' color='success'>
-                Изменить
-              </Button>
-            </Link> */}
-            {/* <DeleteModal uid={user.id}>
-              {({ openModal }) => (
-                <Button onClick={openModal} variant='outlined' color='error'>
-                  Удалить
-                </Button>
-              )}
-            </DeleteModal> */}
+
             <UnblockModal uId={user.id} nId={user.nId} />
           </div>
         </td>

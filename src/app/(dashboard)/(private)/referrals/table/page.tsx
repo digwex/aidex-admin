@@ -1,7 +1,7 @@
 import { ACTION_ACCESS } from '@/utils/accessActions'
 import { AccessActionGuard } from '@/views/access-action-guard'
 
-import { LinksPage } from '@/views/apps/referrals/links-page'
+import { TablePage } from '@/views/apps/referrals/table-page'
 
 export const metadata = {
   title: 'Реферальная программа'
@@ -10,7 +10,7 @@ export const metadata = {
 const Page = () => {
   return (
     <AccessActionGuard action={ACTION_ACCESS.VIEW_REFERRAL_LEVELS}>
-      <LinksPage />
+      <TablePage />
     </AccessActionGuard>
   )
 }

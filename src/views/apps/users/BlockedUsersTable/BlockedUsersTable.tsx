@@ -5,7 +5,7 @@ import { useLazyGetAllUsersQuery } from '../../../../api/endpoints/users/users-a
 import { SORT_DIRECTION } from '../../../../api/types'
 
 import { BlockedUserRow } from './BlockedUserRow'
-import { userSortTitles } from './userSortTitles'
+import { userSortTitles } from '../UsersTable/userSortTitles'
 
 function BlockedUsersTable() {
   return (

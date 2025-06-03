@@ -10,8 +10,6 @@ import { type User } from '../../../../api/endpoints/users/users-types'
 
 import { ACTION_ACCESS } from '@/utils/accessActions'
 
-import { determineBalance } from '@/utils/determineBalance'
-
 import { useCheckAccess } from '@/hooks/useCheckAccess'
 import { BlockModal } from './BlockModal'
 import { DeleteModal } from './DeleteModal'
@@ -39,7 +37,9 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
           </Link>
         </td>
         <td>{user.telegramId}</td>
+        <td>-</td>
         <td>{user.referralsCount || '0'}</td>
+        <td>-</td>
         <td>
           <a
             target='_blank'
@@ -49,21 +49,14 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
             {user.tgUsername}
           </a>
         </td>
-        <td>{determineBalance(user.balance)}</td>
-        <td>{user.fee} SOL</td>
+        <td>-</td>
+        <td>{user.balance}</td>
+        <td>-</td>
+        <td>-</td>
         <td>
           <WalletsInfo wallets={user.wallets} />
         </td>
 
-        {/* <td>
-          {user.isActive ? (
-            <img className='w-4 h-4' src='/images/icons/success.svg' alt='' />
-          ) : (
-            <img className='w-4 h-4' src='/images/icons/cancelled.svg' alt='' />
-          )}
-        </td> */}
-
-        {/* <td>{user.registrationIp ?? '-'}</td> */}
         <td>
           <div className='flex items-center justify-center gap-3'>
             <Link

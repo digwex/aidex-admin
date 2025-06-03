@@ -31,7 +31,7 @@ const DashboardChart = () => {
   const date = useAppSelector(s => s.search.date)
   const from = String(Math.floor(date[0]! / 1000))
   const to = String(Math.floor(date[1]! / 1000))
-  const { data = [], isLoading, isError, error } = useDashboardGraphQuery({ from, to })
+  const { isLoading, isError, error } = useDashboardGraphQuery({ from, to })
 
   const theme = useTheme()
 
@@ -95,9 +95,10 @@ const DashboardChart = () => {
     },
     stroke: {
       curve: 'smooth',
-      width: [0, 3],
+      width: [2, 2, 2],
       lineCap: 'round'
     },
+
     legend: {
       show: true,
       position: 'bottom',
@@ -120,28 +121,28 @@ const DashboardChart = () => {
       },
       offsetY: 10
     },
+
     grid: {
       strokeDashArray: 8,
       borderColor: 'var(--mui-palette-divider)'
     },
-    colors: ['var(--mui-palette-warning-main)', 'var(--mui-palette-primary-main)'],
-    fill: {
-      opacity: [1, 1]
-    },
-    plotOptions: {
-      bar: {
-        columnWidth: '30%',
-        borderRadius: 4,
-        borderRadiusApplication: 'end'
-      }
-    },
+
+    // colors: ['var(--mui-palette-warning-main)', 'var(--mui-palette-success-main)', 'var(--mui-palette-success-main)'],
+
+    // fill: {
+    //   opacity: [1, 1, 1]
+    // },
+
+    plotOptions: {},
     dataLabels: {
       enabled: false
     },
+
     xaxis: {
       type: 'datetime',
       tickAmount: 10,
-      categories: ['1 Jan', '2 Jan', '3 Jan', '4 Jan', '5 Jan', '6 Jan', '7 Jan', '8 Jan', '9 Jan', '10 Jan'],
+
+      // categories: ['1 Jan', '2 Jan', '3 Jan'],
       labels: {
         style: {
           colors: 'var(--mui-palette-text-disabled)',
@@ -176,37 +177,6 @@ const DashboardChart = () => {
     return <Loader />
   }
 
-  const series = data.reduce(
-    (acc, item) => {
-      if (!acc[0]) {
-        acc[0] = {
-          name: 'Shipment',
-          type: 'column',
-          data: [item._delivery]
-        }
-      } else {
-        acc[0].data.push(item._delivery)
-      }
-
-      if (!acc[0]) {
-        acc[0] = {
-          name: 'Shipment',
-          type: 'column',
-          data: [item._delivery]
-        }
-      } else {
-        acc[0].data.push(item._delivery)
-      }
-
-      return acc
-    },
-    [] as {
-      name: string
-      type: string
-      data: number[]
-    }[]
-  )
-
   return (
     <Card sx={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
       <CardHeader
@@ -236,7 +206,63 @@ const DashboardChart = () => {
             type='line'
             height='100%'
             width='100%'
-            series={series}
+            series={[
+              {
+                data: [
+                  {
+                    y: 0,
+                    x: Date.now() - 1000 * 60 * 60 * 24 * 14
+                  },
+                  {
+                    y: 8,
+                    x: Date.now() - 1000 * 60 * 60 * 24 * 7
+                  },
+                  {
+                    y: 4,
+                    x: Date.now() - 1000 * 60 * 60 * 24 * 1
+                  }
+                ],
+                name: 'START',
+                color: 'var(--mui-palette-primary-main)'
+              },
+
+              {
+                data: [
+                  {
+                    y: 2,
+                    x: Date.now() - 1000 * 60 * 60 * 24 * 14
+                  },
+                  {
+                    y: 2,
+                    x: Date.now() - 1000 * 60 * 60 * 24 * 7
+                  },
+                  {
+                    y: 1,
+                    x: Date.now() - 1000 * 60 * 60 * 24 * 1
+                  }
+                ],
+                name: 'Открыли сделку',
+                color: 'var(--mui-palette-warning-main)'
+              },
+              {
+                data: [
+                  {
+                    y: 15,
+                    x: Date.now() - 1000 * 60 * 60 * 24 * 14
+                  },
+                  {
+                    y: 21,
+                    x: Date.now() - 1000 * 60 * 60 * 24 * 7
+                  },
+                  {
+                    y: 0,
+                    x: Date.now() - 1000 * 60 * 60 * 24 * 1
+                  }
+                ],
+                name: 'Комиссия в $',
+                color: 'var(--mui-palette-success-main)'
+              }
+            ]}
             options={options}
           />
         </Box>

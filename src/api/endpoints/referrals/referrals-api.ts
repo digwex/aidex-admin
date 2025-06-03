@@ -65,6 +65,10 @@ export const referralsApi = API.injectEndpoints({
           ? [...result.data.map(({ id }: any) => ({ type: Tag.Links, id })), { type: Tag.Links, id: 'LIST' }]
           : [{ type: Tag.Links, id: 'LIST' }]
     }),
+    getReferrals: builder.query<any, void>({
+      query: (params: any) => ({ url: '/referrals', params }),
+      transformResponse: (response: { data: any }) => response.data
+    }),
     createReferralLink: builder.mutation<any, any>({
       query: body => ({
         url: '/referral-links',
@@ -97,6 +101,7 @@ export const {
   useChangePercentMutation,
   useChangeSubPercentMutation,
   useLazyGetReferralLinksQuery,
+  useLazyGetReferralsQuery,
   useCreateReferralLinkMutation,
   useEditReferralLinkMutation,
   useDeleteReferralLinkMutation
