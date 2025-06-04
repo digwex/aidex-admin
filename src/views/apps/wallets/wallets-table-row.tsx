@@ -6,12 +6,12 @@ import { CopyButton } from '@/hooks/useCopy'
 export const WalletsTableRow = ({ publicKey, balance, userId, telegram, trades }: IWallet) => {
   return (
     <tr>
-      <td className='text-left max-w-[200px]'>
+      <td className='text-left w-[220px]'>
         <div className='flex items-center gap-2'>
           <CopyButton text={publicKey} />
           <a
             target='_blank'
-            className='transition-all duration-300 hover:text-primary'
+            className='transition-all truncate block w-full duration-300 hover:text-primary'
             href={`https://solscan.io/account/${publicKey}`}
           >
             {publicKey}
@@ -44,6 +44,14 @@ export const WalletsTableRow = ({ publicKey, balance, userId, telegram, trades }
       </td>
       <td className='whitespace-nowrap'>{balance} SOL</td>
       <td>{trades ?? '0'}</td>
+      <td>0%</td>
+      <td>
+        <div className='flex items-center gap-3 justify-center'>
+          <p className='text-success'>W: 0%</p>
+          <p className='text-error'>L: 0%</p>
+          <p className='text-warning'>B: 0%</p>
+        </div>
+      </td>
     </tr>
   )
 }

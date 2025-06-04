@@ -11,7 +11,9 @@ const WalletsTable = () => {
     { label: 'ID', sort: null },
     { label: 'TG', sort: null },
     { label: 'Баланс', sort: 'balance' },
-    { label: 'Кол. сделок', sort: 'trades' }
+    { label: 'Кол. сделок', sort: 'trades' },
+    { label: 'PNL', sort: 'pnl' },
+    { label: 'Винрейт', sort: 'winrate' }
   ]
 
   return (
