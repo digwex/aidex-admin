@@ -1,12 +1,12 @@
 'use client'
 
-import CustomTable from '@/views/table/CustomTable'
-
 import { useLazyByDaysQuery } from '@/api/endpoints/statistics/statistics'
 import { SORT_DIRECTION } from '@/api/types'
-import DaysFooterRow from './days-footer-row'
-import DaysRow from './days-row'
-import { daysTitles } from './days-titles'
+import CustomTable from '@/views/table/CustomTable'
+
+import StatisticFooterRow from './footer'
+import StatisticRow from './row'
+import { StatisticTitles } from './titles'
 
 const Days = () => {
   return (
@@ -14,9 +14,9 @@ const Days = () => {
       isDate
       isSearch
       query={useLazyByDaysQuery}
-      DataItem={DaysRow}
-      DataFooter={DaysFooterRow}
-      sortTitles={daysTitles}
+      DataItem={StatisticRow}
+      DataFooter={StatisticFooterRow}
+      sortTitles={StatisticTitles}
       order={{ field: 'date', direction: SORT_DIRECTION.DESC }}
     />
   )

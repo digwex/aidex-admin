@@ -1,4 +1,4 @@
-import Months from '@/views/apps/statistic/months/months'
+import Months from '@/views/apps/statistic/months'
 
 const Page = () => {
   return <Months />

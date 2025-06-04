@@ -1,4 +1,4 @@
-import Days from '@/views/apps/statistic/days/days'
+import Days from '@/views/apps/statistic/days'
 
 const Statistic = () => {
   return <Days />

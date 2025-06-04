@@ -1,4 +1,4 @@
-import Traders from '@/views/apps/statistic/traders/traders'
+import Traders from '@/views/apps/statistic/traders'
 
 const Page = () => {
   return <Traders />
