@@ -113,6 +113,56 @@ export interface UserTransaction {
   }
 }
 
+export const fakeData: UserTransaction = {
+  id: '123',
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  UserId: '123',
+  PaymentType: TRANSACTION_TYPE.DEPOSIT,
+  PaymentStatus: 'PENDING',
+  coinId: 'BTC',
+  wallet: '15q6m9v3q6m9v8q6m9v',
+  amount: '0.0001',
+  balance: '0.0001',
+  toUSDT: '10',
+  additionalData: {
+    id: '123',
+    type: 'DEPOSIT',
+    request: {
+      address: '15q6m9v3q6m9v8q6m9v',
+      nId: 1,
+      amount: 0.0001,
+      wwCoinSignature: '123',
+      wallet: '15q6m9v3q6m9v8q6m9v',
+      blockchain_hash: '123'
+    }
+  },
+  txId: '123',
+  isFake: true,
+  note: '123',
+  nId: 1,
+  coin: {
+    id: 'BTC',
+    coinName: 'Bitcoin',
+    type: 'COIN',
+    network: 'Bitcoin',
+    wwSignature: '123',
+    toUSDTCoefficient: '1',
+    symbol: 'BTC',
+    isWestWallet: true,
+    isCanCreate: true,
+    isAvailableInTrade: true,
+    withdrawalNetworkId: '123',
+    maxLeverage: 10
+  },
+  user: {
+    nId: 1,
+    email: 'test@test.com',
+    balance: '0.0001',
+    fullname: 'Test Test'
+  }
+}
+
 export interface UserPersonalDataParams {
   uid: string
   name: string

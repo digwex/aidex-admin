@@ -6,7 +6,7 @@ import CustomTable from '@/views/table/CustomTable'
 import { useLazyGetUserTransactionsQuery } from '@/api/endpoints/user/user-api'
 import { TransactionRow } from '@/views/apps/users/user/TransactionRow'
 import { SORT_DIRECTION } from '@/api/types'
-import { TRANSACTION_TYPE } from '@/api/endpoints/user/user-types'
+import { fakeData, TRANSACTION_TYPE } from '@/api/endpoints/user/user-types'
 
 const Transaction = () => {
   const { id } = useParams()
@@ -19,7 +19,8 @@ const Transaction = () => {
     { label: 'Зачислено на баланс', sort: 'toUSDT' },
     { label: 'Баланс', sort: 'balance' },
     { label: 'Описание', sort: null },
-    { label: null, sort: null }
+    { label: 'Транзакция', sort: null },
+    { label: 'Перевод', sort: null }
   ]
 
   return (
@@ -30,6 +31,7 @@ const Transaction = () => {
       DataItem={TransactionRow}
       sortTitles={transactionSortTitles}
       fetchParams={{ type: TRANSACTION_TYPE.DEPOSIT, uid: id }}
+      fakeData={[fakeData]}
       order={{ field: 'createdAt', direction: SORT_DIRECTION.DESC }}
     />
   )

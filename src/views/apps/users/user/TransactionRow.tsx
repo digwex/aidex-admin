@@ -1,13 +1,8 @@
-import { useState } from 'react'
-
-import clsx from 'clsx'
-
 import { TRANSACTION_TYPE, type UserTransaction } from '@/api/endpoints/user/user-types'
-
-// import { TransactionDetails } from './TransactionDetails'
 import { formatCurrency } from '@/utils/formatCurrency'
 import { capitalize } from '@/utils/capitalize'
 import { calcDate } from '@/utils/calcDate'
+import { CopyButton } from '@/hooks/useCopy'
 
 type TransactionProps = UserTransaction
 
@@ -20,12 +15,7 @@ const P2P_PROVIDERS_SHORT: Record<string, string> = {
 
 export const TransactionRow = (props: TransactionProps) => {
   const transaction = props
-  const [active, setActive] = useState(true)
-  const [, setCancelActive] = useState(false)
-
   const isWithdrawal = transaction.PaymentType === TRANSACTION_TYPE.WITHDRAWAL
-
-  const isWithdrawalAndPending = isWithdrawal && transaction.PaymentStatus === 'PENDING'
 
   const paymentHistoryStatus = () => {
     switch (transaction.PaymentStatus) {
@@ -98,33 +88,44 @@ export const TransactionRow = (props: TransactionProps) => {
         <td>{transaction.balance} USDT</td>
         <td>{paymentHistoryStatus()}</td>
         <td>
-          {isWithdrawalAndPending ? (
-            <div
-              onClick={e => {
-                e.stopPropagation()
-                setCancelActive(true)
-              }}
-              className='td_btn td_btn_cancel'
+          <div className='flex justify-center items-center gap-1'>
+            <a
+              target='_blank'
+              rel='noopener noreferrer'
+              className='block max-w-[100px] truncate hover:text-primary transition-all duration-300'
+              href={`https://solscan.io/tx/2NHiUeE44PwrqxGXBiQW1FCLabAKHkRv9c7K1o6XaUSvfeFyi2zakC9zbN9rWAz7DgQBmppkcGuEwED9UxeZYkN6`}
             >
-              <span>Отменить</span>
+              2NHiUeE44PwrqxGXBiQW1FCLabAKHkRv9c7K1o6XaUSvfeFyi2zakC9zbN9rWAz7DgQBmppkcGuEwED9UxeZYkN6
+            </a>
+            <CopyButton text='2NHiUeE44PwrqxGXBiQW1FCLabAKHkRv9c7K1o6XaUSvfeFyi2zakC9zbN9rWAz7DgQBmppkcGuEwED9UxeZYkN6' />
+          </div>
+        </td>
+        <td>
+          <div className='flex justify-center min-w-[200px]'>
+            <div className='text-left '>
+              <div className='flex items-center gap-1'>
+                <span className='whitespace-nowrap'>С кошелька:</span>
+                <div className='flex items-center gap-2'>
+                  <a
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    href={`https://solscan.io/account/5vgjNd3cH9BsB4iGPTYQnuTfZgRXYdK6KC3HBnH6ycow`}
+                    className='max-w-[200px] hover:text-primary transition-all cursor-pointer duration-300 block w-full truncate'
+                  >
+                    5vgjNd3cH9BsB4iGPTYQnuTfZgRXYdK6KC3HBnH6ycow
+                  </a>
+                  <CopyButton text='5vgjNd3cH9BsB4iGPTYQnuTfZgRXYdK6KC3HBnH6ycow' />
+                </div>
+              </div>
+
+              <p className='-mt-3'>
+                ID: 1234
+                <CopyButton text='1234' />
+              </p>
             </div>
-          ) : (
-            <div
-              style={{
-                width: 100
-              }}
-              className={clsx('td_btn td_btn_details', {
-                td_btn_details_active: !active
-              })}
-              onClick={() => setActive(!active)}
-            >
-              <span>Детали</span>
-            </div>
-          )}
+          </div>
         </td>
       </tr>
-      {/* {!active && <TransactionDetails {...transaction} />} */}
-      {/* <Cancel isOpen={cancelActive} onClose={() => setCancelActive(false)} transactionId={transaction.id} /> */}
     </>
   )
 }

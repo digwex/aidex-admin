@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation'
 import { useLazyGetUserTransactionsQuery } from '@/api/endpoints/user/user-api'
 import { TransactionRow } from '@/views/apps/users/user/TransactionRow'
 import CustomTable from '@/views/table/CustomTable'
-import { TRANSACTION_TYPE } from '@/api/endpoints/user/user-types'
+import { fakeData, TRANSACTION_TYPE } from '@/api/endpoints/user/user-types'
 import { SORT_DIRECTION } from '@/api/types'
 
 const Withdrawals = () => {
@@ -19,7 +19,8 @@ const Withdrawals = () => {
     { label: 'Зачислено на баланс', sort: 'toUSDT' },
     { label: 'Баланс', sort: 'balance' },
     { label: 'Описание', sort: null },
-    { label: null, sort: null }
+    { label: 'Транзакция', sort: null },
+    { label: 'Перевод', sort: null }
   ]
 
   return (
@@ -30,6 +31,7 @@ const Withdrawals = () => {
       DataItem={TransactionRow}
       sortTitles={transactionSortTitles}
       fetchParams={{ type: TRANSACTION_TYPE.WITHDRAWAL, uid: id }}
+      fakeData={[fakeData]}
       order={{ field: 'createdAt', direction: SORT_DIRECTION.DESC }}
     />
   )

@@ -23,6 +23,11 @@ const tabs = [
     label: 'Список заблокированых',
     value: `/users/blocked`,
     icon: 'tabler-lock-filled'
+  },
+  {
+    label: 'Список удаённых',
+    value: `/users/deleted`,
+    icon: 'tabler-circle-x'
   }
 ]
 

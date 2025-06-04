@@ -1,8 +1,10 @@
+import React from 'react'
+
 import ArrowIcon from '@/views/table/TableSortArrowIcon'
 import { SORT_DIRECTION } from '../api/types'
 
 interface SortTitle {
-  label: string
+  label: string | React.ReactNode
   sort: string
   bgColor?: string
 }

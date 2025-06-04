@@ -30,7 +30,15 @@ export const BlockedUserRow = (props: Props) => {
             <span className='color_green td_active'>{user.nId}</span>
           </Link>
         </td>
-        <td>{user.telegramId}</td>
+        <td>
+          <a
+            target='_blank'
+            className='transition-all duration-300 hover:text-primary'
+            href={`https://t.me/${user.tgUsername}`}
+          >
+            {user.telegramId}
+          </a>
+        </td>
         <td>-</td>
         <td>{user.referralsCount || '0'}</td>
         <td>-</td>

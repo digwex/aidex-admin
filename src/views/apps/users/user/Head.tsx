@@ -11,6 +11,7 @@ import { format } from 'date-fns'
 import { useGetUserByIdQuery } from '@/api/endpoints/users/users-api'
 import { CopyButton } from '@/hooks/useCopy'
 import { getUserRefLink } from '@/utils/get-user-ref-link'
+import { ChangePartnerTariff } from './change-partner-tariff'
 
 const stackProps: StackProps = {
   direction: 'column',
@@ -58,9 +59,7 @@ export const Head = () => {
       <Divider className='w-full max600:block hidden' />
 
       <Box className='flex items-center gap-3 max1000:flex-col max600:justify-center max600:w-full'>
-        <Button variant='outlined' color='success' className='mr-4 max600:w-full max600:mr-0'>
-          Сменить партнёрский план
-        </Button>
+        {data && <ChangePartnerTariff {...data} />}
         <Stack direction='column'>
           <Typography variant='h5'>{totalSol} SOL</Typography>
           {/* <Typography variant='h5'>964.34 USDT</Typography>

@@ -12,11 +12,9 @@ export const metadata = {
 
 const Layout = async ({ children }: Props) => {
   const tabs = [
-    { value: `/withdrawals`, label: 'Ожидаемые выводы трейдера' },
+    { value: `/withdrawals`, label: 'Партнёрские выводы' },
 
-    { value: `/withdrawals/trader-history`, label: 'История трейдера' },
-
-    { value: `/withdrawals/fake-withdraw`, label: 'Фейк вывода' }
+    { value: `/withdrawals/trader-history`, label: 'История выводов' }
   ]
 
   return (

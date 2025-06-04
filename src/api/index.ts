@@ -28,7 +28,8 @@ export const Tag = {
   Bonus: 'Bonus',
   UserMainStats: 'UserMainStats',
   ReferralLevels: 'ReferralLevels',
-  Links: 'Links'
+  Links: 'Links',
+  Referrals: 'Referrals'
 }
 
 export const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
@@ -63,7 +64,8 @@ export const API = createApi({
     Tag.ReferralLevels,
     Tag.UsersAdvertisements,
     Tag.UsersDeleted,
-    Tag.Links
+    Tag.Links,
+    Tag.Referrals
   ],
   baseQuery: (args, api, extraOptions) => baseQueryWithReauth(args, api, extraOptions),
   endpoints: () => ({})

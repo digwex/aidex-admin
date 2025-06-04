@@ -8,14 +8,16 @@ import { WalletsTableRow } from './wallets-table-row'
 const WalletsTable = () => {
   const transactionSortTitles = [
     { label: 'Кошелёк', sort: 'publicKey' },
-    { label: 'Баланс', sort: 'balance' }
+    { label: 'ID', sort: null },
+    { label: 'TG', sort: null },
+    { label: 'Баланс', sort: 'balance' },
+    { label: 'Кол. сделок', sort: 'trades' }
   ]
 
   return (
     <CustomTable
       isDate
       isSearch
-      customTableClass='[&_th_button]:justify-start [&_thead_th]:w-1/2'
       query={useLazyGetWalletsQuery}
       DataItem={WalletsTableRow}
       sortTitles={transactionSortTitles}

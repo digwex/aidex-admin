@@ -1,12 +1,14 @@
 export interface IReferralLevel {
   id: string
-  name: string
+  name: TReferralLevelName
   percent: number
   parentPercent: number
   minCount: number
   maxCount: number | null
   createdAt: string
 }
+
+export type TReferralLevelName = 'BRONZE' | 'SILVER' | 'GOLD'
 
 export interface IReferralLevelChangePercent {
   id: string

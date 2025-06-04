@@ -1,5 +1,5 @@
 import { API, Tag } from '../..'
-import type { IReferralLevel, IReferralLevelChangePercent } from './referrals-types'
+import type { IReferralLevel, IReferralLevelChangePercent, TReferralLevelName } from './referrals-types'
 
 export const referralsApi = API.injectEndpoints({
   endpoints: builder => ({
@@ -31,6 +31,14 @@ export const referralsApi = API.injectEndpoints({
           console.log(`Error on changePercent`, error)
         }
       }
+    }),
+    changePartnerReferralLvl: builder.mutation<void, { id: string; percent: string; lvl: TReferralLevelName }>({
+      query: body => ({
+        url: 'referral-levels/change-partner-lvl',
+        method: 'POST',
+        body
+      }),
+      invalidatesTags: [Tag.User]
     }),
     changeSubPercent: builder.mutation<void, IReferralLevelChangePercent>({
       query: body => ({
@@ -67,7 +75,19 @@ export const referralsApi = API.injectEndpoints({
     }),
     getReferrals: builder.query<any, void>({
       query: (params: any) => ({ url: '/referrals', params }),
-      transformResponse: (response: { data: any }) => response.data
+      transformResponse: (response: { data: any }) => response.data,
+      providesTags: result =>
+        result
+          ? [...result.data.map(({ id }: any) => ({ type: Tag.Referrals, id })), { type: Tag.Referrals, id: 'LIST' }]
+          : [{ type: Tag.Referrals, id: 'REFERRALS_LIST' }]
+    }),
+    editReferralTariffPercent: builder.mutation<any, { id: string; percent: string }>({
+      query: body => ({
+        url: '/referrals/update-tariff-percent',
+        method: 'PUT',
+        body
+      }),
+      invalidatesTags: [Tag.Referrals]
     }),
     createReferralLink: builder.mutation<any, any>({
       query: body => ({
@@ -99,7 +119,9 @@ export const referralsApi = API.injectEndpoints({
 export const {
   useGetReferralLevelsQuery,
   useChangePercentMutation,
+  useChangePartnerReferralLvlMutation,
   useChangeSubPercentMutation,
+  useEditReferralTariffPercentMutation,
   useLazyGetReferralLinksQuery,
   useLazyGetReferralsQuery,
   useCreateReferralLinkMutation,
