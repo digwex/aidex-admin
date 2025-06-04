@@ -104,7 +104,7 @@ export const ChangePartnerTariff = ({ id }: User) => {
     <ModalButton
       fullWidth
       openButton={({ openModal }) => (
-        <Button onClick={openModal} variant='outlined' color='success' className='mr-4 max600:w-full max600:mr-0'>
+        <Button onClick={openModal} variant='outlined' color='success' className='max700:w-full'>
           Сменить партнёрский план
         </Button>
       )}

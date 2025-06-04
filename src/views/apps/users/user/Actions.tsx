@@ -4,17 +4,23 @@ import { BlockModal } from '../UsersTable/BlockModal'
 import { DeleteModal } from '../UsersTable/DeleteModal'
 import { UnblockModal } from '../UsersTable/UnblockModal'
 import { ReturnModal } from '../UsersTable/ReturnModal'
+import { MakeAdvertisementAccount } from './MakeAdvertisementAccount'
+import { ChangePartnerTariff } from './change-partner-tariff'
+import type { User } from '@/api/endpoints/users/users-types'
 
 interface IProps {
   isBlockedForever: boolean
   isDelete: boolean
   userId: string
+  userData?: User
 }
 
-export const Actions = ({ isBlockedForever, isDelete, userId }: IProps) => {
+export const Actions = ({ isBlockedForever, isDelete, userId, userData }: IProps) => {
   return (
     <>
       <Paper className='p-4 flex flex-wrap gap-4'>
+        <MakeAdvertisementAccount />
+        {userData && <ChangePartnerTariff {...userData} />}
         {isBlockedForever ? (
           <UnblockModal uId={userId}>
             {({ openModal }) => (

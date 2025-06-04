@@ -35,7 +35,7 @@ export const UserLayout = ({ children }: PropsWithChildren) => {
   return (
     <div className='space-y-4'>
       <Head />
-      <Actions isBlockedForever={data.isBlockedForever} isDelete={data.isDelete} userId={data.id} />
+      <Actions userData={data} isBlockedForever={data.isBlockedForever} isDelete={data.isDelete} userId={data.id} />
 
       <div className='grid grid-cols-2 gap-4 max1300:grid-cols-1'>
         <PersonalData />
