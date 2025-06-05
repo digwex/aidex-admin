@@ -1,5 +1,7 @@
+import { PartnersLinks } from '@/views/apps/users/user/partners-links'
+
 const Page = () => {
-  return <div></div>
+  return <PartnersLinks />
 }
 
 export default Page

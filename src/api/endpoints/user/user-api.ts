@@ -307,11 +307,20 @@ export const userApi = API.injectEndpoints({
         params
       }),
       providesTags: [Tag.User]
+    }),
+    getUserReferralLinks: builder.query<any, void>({
+      query: (params: any) => ({ url: 'users/referral-links', params }),
+      transformResponse: (response: { data: any }) => response.data,
+      providesTags: result =>
+        result
+          ? [...result.data.map(({ id }: any) => ({ type: Tag.Links, id })), { type: Tag.Links, id: 'LIST' }]
+          : [{ type: Tag.Links, id: 'LIST' }]
     })
   })
 })
 
 export const {
+  useLazyGetUserReferralLinksQuery,
   useGetMainUserStatsQuery,
   useGetUserSessionsQuery,
   useGetUserTransactionsQuery,
