@@ -16,12 +16,12 @@ export const Row = ({
   commissions,
   invitedUsers,
   maxActiveUsers,
-  tgPartnerId
+  telegramId
 }: Props) => {
   return (
     <tr>
       <td>{code}</td>
-      <td>{tgPartnerId ?? '-'}</td>
+      <td>{telegramId}</td>
       <CopyRefLink refLink={link} />
       <EditSpending id={id} defaultValue={spending} />
       <td>{subscribed}</td>
@@ -31,6 +31,8 @@ export const Row = ({
       <td>{commissions}</td>
       {/* <td>-</td> */}
       <td>{invitedUsers}</td>
+      <td>-</td>
+      <td>-</td>
       <td>{maxActiveUsers}</td>
     </tr>
   )

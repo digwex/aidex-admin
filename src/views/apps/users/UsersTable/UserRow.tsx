@@ -11,12 +11,20 @@ import { type User } from '../../../../api/endpoints/users/users-types'
 import { ACTION_ACCESS } from '@/utils/accessActions'
 
 import { useCheckAccess } from '@/hooks/useCheckAccess'
+import { capitalize } from '@/utils/capitalize'
 import { BlockModal } from './BlockModal'
 import { DeleteModal } from './DeleteModal'
 import { UnblockModal } from './UnblockModal'
 import { WalletsInfo } from './wallets-info'
 
-type Props = User & { updateTable: () => void; referralsCount: number }
+type Props = User & {
+  updateTable: () => void
+  referralsCount: number
+  subReferralsCount: number
+  openedTrades: number
+  commissions: number
+  referralLevel?: string
+}
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const UserRow = ({ updateTable, ...user }: Props) => {
@@ -32,7 +40,6 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
             })}
             href={`/users/${user.nId}`}
           >
-            {/* <HandledFlag className='w-5' flag={user.countryCode} /> */}
             <span className='color_green td_active'>{user.nId}</span>
           </Link>
         </td>
@@ -45,9 +52,22 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
             {user.telegramId}
           </a>
         </td>
-        <td>-</td>
-        <td>{user.referralsCount || '0'}</td>
-        <td>-</td>
+        <td>
+          {user.referrerId ? (
+            <Link
+              className={cn('transition-all duration-300 hover:text-primary', {
+                'pointer-events-none': !checkAction(ACTION_ACCESS.VIEW_USER_DETAIL)
+              })}
+              href={`/users/${user.referrerId}`}
+            >
+              <span className='color_green td_active'>{user.referrerId}</span>
+            </Link>
+          ) : (
+            '-'
+          )}
+        </td>
+        <td>{user.referralsCount}</td>
+        <td>{user.subReferralsCount}</td>
         <td>
           <a
             target='_blank'
@@ -57,10 +77,10 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
             {user.tgUsername}
           </a>
         </td>
-        <td>-</td>
+        <td>{user.openedTrades}</td>
         <td>{user.balance}</td>
-        <td>-</td>
-        <td>-</td>
+        <td>{user.commissions}</td>
+        <td>{capitalize(user.referralLevel)}</td>
         <td>
           <WalletsInfo wallets={user.wallets} />
         </td>

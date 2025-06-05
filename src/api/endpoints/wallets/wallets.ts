@@ -1,12 +1,18 @@
 import { API } from '@/api'
 
 export interface IWallet {
-  id: number
-  userId: number
-  balance: string
+  id: string
   publicKey: string
-  telegram: string
-  trades: number
+  balance: string
+  openedTrades: number
+  pnl: number
+  nId: number
+  tgUsername: string
+  winRate: {
+    positive: number
+    negative: number
+    zero: number
+  }
 }
 
 const walletsApi = API.injectEndpoints({

@@ -1,3 +1,4 @@
+import { FRONT_API_URL } from '@/utils/constants'
 import { API } from '..'
 
 export interface QueryParams {
@@ -144,8 +145,6 @@ export interface TrendingToken {
   }
 }
 
-const FRONT_API = process.env.NEXT_PUBLIC_FRONT_URL_API!
-
 const processParams = (params: QueryArg) => {
   const { orderBy, direction, take, skip, type, chain } = params
 
@@ -162,7 +161,7 @@ const processParams = (params: QueryArg) => {
 const trendingApi = API.injectEndpoints({
   endpoints: builder => ({
     getTrending: builder.query<TrendingToken[], QueryArg>({
-      query: params => `${FRONT_API}/trending?${new URLSearchParams(processParams(params) as any)}`,
+      query: params => `${FRONT_API_URL}/trending?${new URLSearchParams(processParams(params) as any)}`,
 
       transformResponse(response: { code: number; message: string; data: TrendingToken[] }) {
         return response.data
