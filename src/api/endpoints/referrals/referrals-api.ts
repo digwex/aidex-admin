@@ -103,7 +103,7 @@ export const referralsApi = API.injectEndpoints({
         method: 'PUT',
         body
       }),
-      invalidatesTags: [Tag.Links]
+      invalidatesTags: [Tag.Links, Tag.UserPartnerLinks]
     }),
     deleteReferralLink: builder.mutation<any, any>({
       query: body => ({

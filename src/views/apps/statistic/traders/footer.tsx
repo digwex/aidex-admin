@@ -31,11 +31,7 @@ const StatisticFooterRow = () => {
       <td>0 $ / 0 SOL</td>
       <td>0 $ / 0 SOL</td>
       <td>0 $ / 0 SOL</td>
-      <td className='flex items-center gap-3'>
-        <p className='text-success whitespace-nowrap'>0 $ / 0 SOL</p>
-        <p>/</p>
-        <p className='text-error whitespace-nowrap'>0 $ / 0 SOL</p>
-      </td>
+      <td className='text-center'>0 $ / 0 SOL</td>
       <td>0%</td>
       <td>
         <div className='flex items-center gap-3 justify-center'>
@@ -44,8 +40,11 @@ const StatisticFooterRow = () => {
           <p className='text-warning whitespace-nowrap'>B: 0%</p>
         </div>
       </td>
-      <td>
-        <span className='text-success'>0</span> / <span className='text-error'>0</span>
+      <td className='flex justify-center items-center gap-2'>
+        <span>0 </span>
+        <p>
+          <span className='text-success'>0</span> / <span className='text-error'>0</span>
+        </p>
       </td>
       <td>0</td>
       <td>0</td>

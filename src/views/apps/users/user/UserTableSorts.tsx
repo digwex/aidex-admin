@@ -20,8 +20,7 @@ const UserTableSorts = ({ id }: Props) => {
     },
     {
       value: `/users/${id}/links`,
-      label: 'Партнёрские ссылки',
-      disabled: true
+      label: 'Партнёрские ссылки'
     },
     {
       value: `/users/${id}/pnl`,
