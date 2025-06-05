@@ -10,9 +10,9 @@ import { toast } from 'react-toastify'
 import { useChangePartnerReferralLvlMutation, useGetReferralLevelsQuery } from '@/api/endpoints/referrals/referrals-api'
 import ModalButton from '@/components/ModalButton'
 
-import type { User } from '@/api/endpoints/users/users-types'
-import type { TReferralLevelName } from '@/api/endpoints/referrals/referrals-types'
 import CustomTextField from '@/@core/components/mui/TextField'
+import type { TReferralLevelName } from '@/api/endpoints/referrals/referrals-types'
+import type { User } from '@/api/endpoints/users/users-types'
 import { useCheckAccess } from '@/hooks/useCheckAccess'
 import { ACTION_ACCESS } from '@/utils/accessActions'
 import { handleRTKError } from '@/utils/handleRTKError'
@@ -32,6 +32,7 @@ export const ChangePartnerTariff = ({ id }: User) => {
     const currentPercent = data.find(plan => plan.name === lvl)?.percent
 
     if (currentPercent) setPercent(String(currentPercent))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
   if (isLoading || isError) return null
@@ -119,7 +120,7 @@ export const ChangePartnerTariff = ({ id }: User) => {
               <Button
                 key={plan.name}
                 onClick={handleChangePlan(plan.name)}
-                className={classNames('whitespace-nowrap w-fit p-0 w-full  min-h-10', {
+                className={classNames('whitespace-nowrap p-0 w-full  min-h-10', {
                   'pointer-events-none': lvl === plan.name
                 })}
                 variant={lvl === plan.name ? 'contained' : 'tonal'}

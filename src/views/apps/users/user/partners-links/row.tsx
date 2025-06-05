@@ -16,12 +16,12 @@ export const Row = ({
   commissions,
   invitedUsers,
   maxActiveUsers,
-  tgPartnerId
+  telegramId
 }: Props) => {
   return (
     <tr>
       <td>{code}</td>
-      <td>{tgPartnerId ?? '-'}</td>
+      <td>{telegramId}</td>
       <td>
         <div className='flex gap-2 items-center'>
           <a href={link} target='_blank' className='hover:text-primary transition-all duration-300 truncate w-[200px]'>
