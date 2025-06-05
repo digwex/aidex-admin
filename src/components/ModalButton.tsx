@@ -12,14 +12,23 @@ import DialogCloseButton from './dialogs/DialogCloseButton'
 interface Props extends Omit<DialogProps, 'content' | 'open'> {
   openButton: (value: { open: boolean; openModal: () => void }) => React.ReactNode
   modalContent: (value: { open: boolean; closeModal: () => void }) => React.ReactNode
+  onModalClose?: () => void
+  onModalOpen?: () => void
   contentClassName?: string
 }
 
-const ModalButton = ({ modalContent, openButton, contentClassName, ...props }: Props) => {
+const ModalButton = ({ modalContent, openButton, onModalClose, onModalOpen, contentClassName, ...props }: Props) => {
   const [open, setOpen] = useState(false)
 
-  const closeModal = () => setOpen(false)
-  const openModal = () => setOpen(true)
+  const closeModal = () => {
+    setOpen(false)
+    onModalClose?.()
+  }
+
+  const openModal = () => {
+    setOpen(true)
+    onModalOpen?.()
+  }
 
   return (
     <>

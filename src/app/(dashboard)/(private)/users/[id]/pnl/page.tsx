@@ -1,5 +1,7 @@
+import { UserPnl } from '@/views/apps/users/user/user-pnl'
+
 const Page = () => {
-  return <div></div>
+  return <UserPnl />
 }
 
 export default Page
