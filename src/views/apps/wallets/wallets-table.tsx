@@ -8,12 +8,12 @@ import { WalletsTableRow } from './wallets-table-row'
 const WalletsTable = () => {
   const transactionSortTitles = [
     { label: 'Кошелёк', sort: 'publicKey' },
-    { label: 'ID', sort: null },
-    { label: 'TG', sort: null },
+    { label: 'ID', sort: 'nId' },
+    { label: 'TG', sort: 'tgUsername' },
     { label: 'Баланс', sort: 'balance' },
-    { label: 'Кол. сделок', sort: 'trades' },
+    { label: 'Кол. сделок', sort: 'openedTrades' },
     { label: 'PNL', sort: 'pnl' },
-    { label: 'Винрейт', sort: 'winrate' }
+    { label: 'Винрейт', sort: null }
   ]
 
   return (
