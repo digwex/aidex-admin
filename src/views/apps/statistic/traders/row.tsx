@@ -19,7 +19,9 @@ const StatisticRow = ({}: Props) => {
       <td className='whitespace-nowrap'>0 $ / 0 SOL</td>
       <td className='whitespace-nowrap'>0 $ / 0 SOL</td>
       <td className='whitespace-nowrap'>0 $ / 0 SOL</td>
-      <td className='whitespace-nowrap text-center'>0 $ / 0 SOL</td>
+      <td className='whitespace-nowrap text-center flex justify-center gap-3'>
+        <span className='text-success'>0 $ / 0 SOL</span> <span className='text-error'>0 $ / 0 SOL</span>
+      </td>
       <td>0%</td>
       <td>
         <div className='flex items-center gap-3 justify-center'>
