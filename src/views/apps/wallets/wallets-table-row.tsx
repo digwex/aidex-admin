@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import classNames from 'classnames'
+
 import type { IWallet } from '@/api/endpoints/wallets/wallets'
 import { CopyButton } from '@/hooks/useCopy'
 
@@ -35,13 +37,13 @@ export const WalletsTableRow = ({ publicKey, balance, openedTrades, pnl, nId, tg
         </a>
       </td>
       <td className='whitespace-nowrap'>{balance} SOL</td>
-      <td>{openedTrades}</td>
-      <td>{pnl}%</td>
+      <td>{openedTrades ?? 0}</td>
+      <td className={classNames({ 'text-error': pnl < 0, 'text-success': pnl > 0 })}>{pnl ?? 0}%</td>
       <td>
         <div className='flex items-center gap-3 justify-center'>
-          <p className='text-success'>W: {winRate.positive}%</p>
-          <p className='text-error'>L: {winRate.negative}%</p>
-          <p className='text-warning'>B: {winRate.zero}%</p>
+          <p className='text-success'>W: {winRate?.positive ?? 0}%</p>
+          <p className='text-error'>L: {winRate?.negative ?? 0}%</p>
+          <p className='text-warning'>B: {winRate?.zero ?? 0}%</p>
         </div>
       </td>
     </tr>
