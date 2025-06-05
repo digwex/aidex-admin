@@ -24,8 +24,7 @@ const UserTableSorts = ({ id }: Props) => {
     },
     {
       value: `/users/${id}/pnl`,
-      label: 'Сделки + PNL',
-      disabled: true
+      label: 'Сделки + PNL'
     }
   ]
 
