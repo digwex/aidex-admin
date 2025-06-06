@@ -1,0 +1,119 @@
+.wrapper {
+  @apply flex flex-col gap-3 max-w-[315px];
+  font-family: 'Geologica', sans-serif;
+}
+
+.banner {
+  @apply relative flex h-[410px] w-full flex-col justify-center overflow-hidden rounded-xl bg-[url('/images/share/bg.png')] bg-cover bg-no-repeat px-[22px];
+}
+
+.logo {
+  @apply mb-[17px] flex items-center justify-center gap-2 text-[14px] font-bold uppercase text-[#151924];
+
+  & img {
+    @apply h-[23px] w-[23px];
+  }
+}
+
+.pnl {
+  @apply mb-[10px] w-full rounded-[8px] bg-[#151924] px-4 pb-[17px] pt-6;
+
+  &_header {
+    @apply mb-2 border-b-[1px] border-[#1d2231] pb-2 font-medium;
+
+    &_number {
+      @apply mb-2 mb-[8px] text-[10px] text-[#fff];
+    }
+
+    &_title {
+      @apply text-[36px] text-[#0dcb81];
+    }
+  }
+
+  &_current {
+    @apply mb-3 text-[10px] font-medium;
+
+    &_pnl {
+      @apply mb-1 text-[#8f9eb3];
+    }
+
+    &_value {
+      @apply flex items-center gap-2 whitespace-nowrap text-[#fff];
+
+      & span {
+        @apply text-[#fcd434];
+      }
+    }
+  }
+
+  &_boxes {
+    @apply grid w-fit grid-cols-2 gap-[10px];
+  }
+
+  &_box {
+    @apply flex max-w-[90px] flex-col justify-center gap-[1px] rounded-[8px] bg-[#1d2231] px-3 py-[6px] text-center text-[8px];
+
+    &_title {
+      @apply text-[9px] uppercase leading-[12px] text-[#fcd434];
+    }
+
+    &_amount {
+      @apply text-[12px] text-[#fff];
+    }
+
+    &_profit {
+      @apply text-[#8f9eb3];
+    }
+  }
+}
+
+.qr {
+  @apply mb-4 flex w-full items-center gap-3 rounded-[8px] bg-[#151924] p-2;
+
+  &_code {
+    @apply h-12 w-12 min-w-12 overflow-hidden rounded-md bg-[#151924];
+    & > div {
+      @apply rounded-none;
+    }
+    & canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
+
+  &_info {
+    @apply text-[8px];
+
+    &_title {
+      @apply mb-2 font-medium uppercase leading-[8px] text-[#fcd434];
+    }
+
+    &_text {
+      @apply font-light leading-[8px] text-[#8f9eb3];
+    }
+  }
+}
+
+.title {
+  @apply text-[10px] font-medium text-[#1d2231];
+}
+
+.decoration {
+  @apply absolute bottom-0 right-0;
+}
+
+.links {
+  @apply flex flex-col gap-4 rounded-[8px] bg-[#252b3c] px-3 py-4 text-[12px] font-light;
+
+  &_link {
+    @apply break-words text-[#fcd434];
+  }
+
+  &_text {
+    @apply text-[#fff];
+  }
+}
+
+.buttons {
+  @apply flex items-center gap-3;
+}

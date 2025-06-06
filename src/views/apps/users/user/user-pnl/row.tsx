@@ -6,6 +6,7 @@ import type { ITrade } from '@/api/endpoints/users/users-types'
 
 import { DeleteTrade } from './delete-trade'
 import { ChangeOrder } from './change-order'
+import { SharePnl } from '@/views/share-pnl'
 
 type Props = ITrade & { pair: { wwSignature: string } }
 
@@ -22,7 +23,12 @@ export const Row = (trade: Props) => {
         <td>{calcDate(trade.openTime)}</td>
         <td>{trade.isDemo ? 'D' : 'R'}</td>
         <td>{calcDate(trade.closingTime)}</td>
-        <td className='text-success'>{determineBalance(trade.PnLStatistics.pnl)}</td>
+        <td className='text-success'>
+          <div className='flex items-center justify-center gap-2'>
+            <span>{determineBalance(trade.PnLStatistics.pnl)}</span>
+            <SharePnl reflink={'https://fake-link.com'} />
+          </div>
+        </td>
         <td className='flex items-center gap-3'>
           <DeleteTrade tradeId={trade.id} />
           <ChangeOrder trade={trade} />
