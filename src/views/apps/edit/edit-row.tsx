@@ -1,5 +1,7 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
+
 import cn from 'classnames'
 
 import { toast } from 'react-toastify'
@@ -41,6 +43,7 @@ const getColor = (val: number | undefined) => {
 export const EditRow = (props: any) => {
   const [deletePair, { isLoading: isLoadingDelete }] = useDeletePairMutation()
   const [returnPair, { isLoading: isLoadingReturn }] = useReturnPairMutation()
+  const pathname = usePathname()
 
   const Symbol = () => {
     const symbol = props?.baseToken?.symbol || props.symbol
@@ -88,10 +91,9 @@ export const EditRow = (props: any) => {
       return
     }
 
-    const { pathname } = window.location
-    let type = pathname.split('/edit/').pop()!
+    let type = pathname.split('/edit/').pop()
 
-    if (type === '/edit') {
+    if (typeof type === 'undefined' || type === '/edit') {
       type = 'trends'
     }
 
@@ -125,10 +127,9 @@ export const EditRow = (props: any) => {
       return
     }
 
-    const { pathname } = window.location
-    let type = pathname.split('/edit/').pop()!
+    let type = pathname.split('/edit/').pop()
 
-    if (type === '/edit') {
+    if (typeof type === 'undefined' || type === '/edit') {
       type = 'trends'
     }
 
