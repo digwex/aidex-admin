@@ -30,10 +30,10 @@ const StatisticFooterRow = (props: Props) => {
       <th>Суммарно:</th>
       <td>0 $ / 0 SOL</td>
       <td>0 $ / 0 SOL</td>
+      <td>0 $ / 0 SOL</td>
+      <td>0</td>
       <td>{totalMaxOnline}</td>
       <td>0</td>
-      <td>0</td>
-      <td>0 $ / 0 SOL</td>
       <td>0 $ / 0 SOL</td>
       <td>0</td>
     </tr>

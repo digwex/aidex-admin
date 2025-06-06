@@ -1,7 +1,7 @@
 'use client'
 
 import { UserLayout } from '@/views/apps/users/user/UserLayout'
-import { AccessActionGuard } from '@/views/access-action-guard'
+import { AccessActionGuard } from '@/hocs/access-action-guard'
 import { ACTION_ACCESS } from '@/utils/accessActions'
 
 interface Props {

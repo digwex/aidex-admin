@@ -1,5 +1,5 @@
 import { NAVIGATION_LINKS } from '@/utils/constants'
-import { AccessRouteGuard } from '@/views/access-route-guard'
+import { AccessRouteGuard } from '@/hocs/access-route-guard'
 import { Statistic } from '@/views/apps/statistic/Statistic'
 
 interface Props {

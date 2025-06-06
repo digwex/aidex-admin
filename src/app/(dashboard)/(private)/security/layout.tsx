@@ -1,5 +1,5 @@
 import { ACTION_ACCESS } from '@/utils/accessActions'
-import { AccessActionGuard } from '@/views/access-action-guard'
+import { AccessActionGuard } from '@/hocs/access-action-guard'
 import { Security } from '@/views/apps/security/security'
 
 interface Props {

@@ -11,6 +11,7 @@ import { StatisticTitles } from './titles'
 const Days = () => {
   return (
     <CustomTable
+      customTableClass='[&_th]:whitespace-nowrap'
       isDate
       isSearch
       query={useLazyByDaysQuery}

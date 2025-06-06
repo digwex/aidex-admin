@@ -8,10 +8,10 @@ const StatisticRow = ({ maxOnline, date }: Props) => {
       <td>{date}</td>
       <td>0 $ / 0 SOL</td>
       <td>0 $ / 0 SOL</td>
+      <td>0 $ / 0 SOL</td>
+      <td>0</td>
       <td>{maxOnline ?? 0}</td>
       <td>0</td>
-      <td>0</td>
-      <td>0 $ / 0 SOL</td>
       <td>0 $ / 0 SOL</td>
       <td>0</td>
     </tr>

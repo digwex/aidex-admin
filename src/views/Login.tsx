@@ -36,8 +36,6 @@ const Login = () => {
     }
   }
 
-  console.log('user!!!!!')
-
   return (
     <div className={styles.login_wrap}>
       <div className={styles.login_panel}>
