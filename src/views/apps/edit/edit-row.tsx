@@ -1,16 +1,21 @@
+'use client'
+
+import { usePathname } from 'next/navigation'
+
 import cn from 'classnames'
 
 import { toast } from 'react-toastify'
 
-import { PRICE_CHANGE_TIME } from '@/api/endpoints/trending'
+import { PRICE_CHANGE_TIME, useDeletePairMutation, useReturnPairMutation } from '@/api/endpoints/pairs/pairs'
+import { formatLargeNumber } from '@/utils/format-large-number'
+import { formatPairPrice } from '@/utils/format-pair-price'
+import { isValidSolanaAddress } from '@/utils/is-valid-solana-address'
+import { timestampToReadableText } from '@/utils/timestamp-to-readable-text'
 import { ChainIcon, chainIcons } from '@/views/chain-icon'
 import { DexIcon, dexIcons } from '@/views/dex-icon'
 import { PairIcon } from '@/views/pair-icon'
-import { formatLargeNumber } from '@/utils/format-large-number'
-import { formatPairPrice } from '@/utils/format-pair-price'
-import { timestampToReadableText } from '@/utils/timestamp-to-readable-text'
 import { DeletePair } from './delete-pair'
-import { isValidSolanaAddress } from '@/utils/is-valid-solana-address'
+import { ReturnPair } from './return-pair'
 
 const getConvertLastTime = (time?: string): PRICE_CHANGE_TIME => {
   switch (time) {
@@ -36,6 +41,10 @@ const getColor = (val: number | undefined) => {
 }
 
 export const EditRow = (props: any) => {
+  const [deletePair, { isLoading: isLoadingDelete }] = useDeletePairMutation()
+  const [returnPair, { isLoading: isLoadingReturn }] = useReturnPairMutation()
+  const pathname = usePathname()
+
   const Symbol = () => {
     const symbol = props?.baseToken?.symbol || props.symbol
     const sybSymbol = props?.quoteToken?.symbol
@@ -69,8 +78,12 @@ export const EditRow = (props: any) => {
 
   const volume = props.volume[lastTime]
 
-  const handleDelete = (close: () => void) => {
-    const address = props.pairAddress
+  const handleDelete = async (close: () => void) => {
+    if (isLoadingDelete) {
+      return
+    }
+
+    const address = props.baseToken.address
 
     if (!isValidSolanaAddress(address)) {
       toast.error('Не валидный адрес')
@@ -78,15 +91,70 @@ export const EditRow = (props: any) => {
       return
     }
 
-    toast.success('Пара удалена')
-    close()
+    let type = pathname.split('/edit/').pop()
+
+    if (typeof type === 'undefined' || type === '/edit') {
+      type = 'trends'
+    }
+
+    const toastId = toast.loading('Удаление пары...')
+
+    try {
+      await deletePair({
+        address,
+        chain: props.chainId,
+        type
+      }).unwrap()
+
+      toast.update(toastId, { render: 'Пара успешно удалена', type: 'success', isLoading: false, autoClose: 3000 })
+      close()
+    } catch (error) {
+      console.log(`Error deleting pair: ${error}`)
+      toast.update(toastId, { render: 'Ошибка при удалении пары', type: 'error', isLoading: false, autoClose: 3000 })
+    }
+  }
+
+  const handleReturn = async (close: () => void) => {
+    if (isLoadingReturn) {
+      return
+    }
+
+    const address = props.baseToken.address
+
+    if (!isValidSolanaAddress(address)) {
+      toast.error('Не валидный адрес')
+
+      return
+    }
+
+    let type = pathname.split('/edit/').pop()
+
+    if (typeof type === 'undefined' || type === '/edit') {
+      type = 'trends'
+    }
+
+    const toastId = toast.loading('Возвращение пары...')
+
+    try {
+      await returnPair({
+        address,
+        chain: props.chainId,
+        type
+      }).unwrap()
+
+      toast.update(toastId, { render: 'Пара успешно возвращена', type: 'success', isLoading: false, autoClose: 3000 })
+      close()
+    } catch (error) {
+      console.log(`Error return pair: ${error}`)
+      toast.update(toastId, { render: 'Не удалось вернуть пару', type: 'error', isLoading: false, autoClose: 3000 })
+    }
   }
 
   return (
     <tr>
       <td>
         <div className={cn('flex items-center gap-2 pl-4')}>
-          <p className='mr-2 w-5'>#{props.index}</p>
+          <p className='mr-2 w-5'>#{props.index + 1}</p>
           <div className='flex w-full'>
             <div className='justify-left flex items-center gap-1.5 px-2 mw1450:px-10 mw1200:px-8 mw1024:px-6 mw900:px-4 mw768:px-0'>
               <ChainIcon className='h-6 w-6 min-w-6' src={chainIcons[props.chainId as keyof typeof chainIcons]} />
@@ -105,7 +173,11 @@ export const EditRow = (props: any) => {
         </div>
       </td>
       <td>
-        <DeletePair handleSubmit={handleDelete} />
+        {props.isBlacklisted ? (
+          <ReturnPair isDisabled={isLoadingReturn} handleSubmit={handleReturn} />
+        ) : (
+          <DeletePair isDisabled={isLoadingDelete} handleSubmit={handleDelete} />
+        )}
       </td>
 
       <td data-is-na={!props.mcap || !props.marketCap}>

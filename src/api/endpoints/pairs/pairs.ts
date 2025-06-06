@@ -1,5 +1,13 @@
+import { API, Tag } from '@/api'
 import { FRONT_API_URL } from '@/utils/constants'
-import { API } from '..'
+
+export interface ICreatePairBody {}
+
+export interface IDeletePairBody {
+  address: string
+  chain: string
+  type?: string
+}
 
 export interface QueryParams {
   sort: string
@@ -80,7 +88,7 @@ export interface TrendingToken {
   isMintable: NoYes
   isProxy: 'unknown'
   slippageModifiable: NoYes
-  isBlacklisted: 'unknown'
+  isBlacklisted: boolean
   sellTax: {
     min: null | number
     max: null | number
@@ -154,20 +162,45 @@ const processParams = (params: QueryArg) => {
     take,
     skip,
     type,
-    chain
+    chain,
+    blacklist: false
   }
 }
 
-const trendingApi = API.injectEndpoints({
+const pairsApi = API.injectEndpoints({
   endpoints: builder => ({
     getTrending: builder.query<TrendingToken[], QueryArg>({
       query: params => `${FRONT_API_URL}/trending?${new URLSearchParams(processParams(params) as any)}`,
-
       transformResponse(response: { code: number; message: string; data: TrendingToken[] }) {
         return response.data
-      }
+      },
+      providesTags: [Tag.Pairs]
+    }),
+    addPair: builder.mutation<void, ICreatePairBody>({
+      query: body => ({
+        url: 'pairs',
+        method: 'POST',
+        body
+      }),
+      invalidatesTags: [Tag.Pairs]
+    }),
+    deletePair: builder.mutation<void, IDeletePairBody>({
+      query: body => ({
+        url: 'pairs',
+        method: 'DELETE',
+        body
+      }),
+      invalidatesTags: [Tag.Pairs]
+    }),
+    returnPair: builder.mutation<void, IDeletePairBody>({
+      query: body => ({
+        url: 'pairs',
+        method: 'PUT',
+        body
+      }),
+      invalidatesTags: [Tag.Pairs]
     })
   })
 })
 
-export const { useLazyGetTrendingQuery } = trendingApi
+export const { useLazyGetTrendingQuery, useAddPairMutation, useDeletePairMutation, useReturnPairMutation } = pairsApi
