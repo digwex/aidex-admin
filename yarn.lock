@@ -3213,6 +3213,7 @@ __metadata:
     flagpack-core: "npm:^1.0.0"
     fs-extra: "npm:11.2.0"
     globby: "npm:14.0.2"
+    html-to-image: "npm:^1.11.13"
     input-otp: "npm:1.4.1"
     keen-slider: "npm:6.8.6"
     mapbox-gl: "npm:3.9.0"
@@ -3232,6 +3233,7 @@ __metadata:
     react-map-gl: "npm:7.1.8"
     react-perfect-scrollbar: "npm:1.5.8"
     react-player: "npm:2.16.0"
+    react-qrcode-logo: "npm:^3.0.0"
     react-redux: "npm:9.2.0"
     react-toastify: "npm:10.0.6"
     react-tooltip: "npm:^5.28.1"
@@ -5866,6 +5868,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"html-to-image@npm:^1.11.13":
+  version: 1.11.13
+  resolution: "html-to-image@npm:1.11.13"
+  checksum: 10c0/03bd7192d87b99499e37ff12a8e2b41ddce4cf8e33a93dfadff18df0f213434c7f1ba8328db2158f4805da07b7aec3c90aec3152908281153217e86784218b10
+  languageName: node
+  linkType: hard
+
 "htmlparser2@npm:^9.1.0":
   version: 9.1.0
   resolution: "htmlparser2@npm:9.1.0"
@@ -6660,6 +6669,13 @@ __metadata:
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
   checksum: 10c0/762998a63e095412b6099b8290903e0a8ddcb353ac6e2e0f2d7e7d03abd4275fe3c689d88960eb90b0dde4f177554d51a690f22a343932ecbc50a5d111849987
+  languageName: node
+  linkType: hard
+
+"lodash.isequal@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "lodash.isequal@npm:4.5.0"
+  checksum: 10c0/dfdb2356db19631a4b445d5f37868a095e2402292d59539a987f134a8778c62a2810c2452d11ae9e6dcac71fc9de40a6fedcb20e2952a15b431ad8b29e50e28f
   languageName: node
   linkType: hard
 
@@ -8073,6 +8089,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qrcode-generator@npm:^1.4.4":
+  version: 1.4.4
+  resolution: "qrcode-generator@npm:1.4.4"
+  checksum: 10c0/3249fcff98cb9fa17c21329d3dfd895e294a2d6ea48161f7b377010779d41f0cd88668b7fb3478a659725061bb0a770b40a227c2f4853e8c4a6b947a9e8bf17a
+  languageName: node
+  linkType: hard
+
 "queue-microtask@npm:^1.2.2":
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
@@ -8276,6 +8299,19 @@ __metadata:
   peerDependencies:
     react: ">=16.6.0"
   checksum: 10c0/ee0f4cd3bd468b28af38dbbb65cae1659218153956f43c0bdd15cd8b38aaaf151deec43b93b7dd887c0ac28242a4ba7e9d01823351e78ba60ae04d5fb51defb4
+  languageName: node
+  linkType: hard
+
+"react-qrcode-logo@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "react-qrcode-logo@npm:3.0.0"
+  dependencies:
+    lodash.isequal: "npm:^4.5.0"
+    qrcode-generator: "npm:^1.4.4"
+  peerDependencies:
+    react: ">=18.0.0"
+    react-dom: ">=18.0.0"
+  checksum: 10c0/5f179762e8354bd8325d4c274cf731466b908a0e297541b7d9a7ebf94ac7cc86872364924402f6dea096d396b4cb70436cd2b496fe6af6bef5d1872d1c07bdd3
   languageName: node
   linkType: hard
 

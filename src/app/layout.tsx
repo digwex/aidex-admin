@@ -1,5 +1,8 @@
+import { Geologica } from 'next/font/google'
+
 import InitColorSchemeScript from '@mui/material/InitColorSchemeScript'
 
+import classNames from 'classnames'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 
 import type { ChildrenType } from '@core/types'
@@ -9,6 +12,11 @@ import '@/app/globals.css'
 
 import '@assets/iconify-icons/generated-icons.css'
 import Providers from '@/components/Providers'
+
+const geologica = Geologica({
+  subsets: ['latin'],
+  display: 'swap'
+})
 
 export const metadata = {
   title: 'Admin panel'
@@ -20,7 +28,7 @@ const RootLayout = async (props: ChildrenType) => {
 
   return (
     <html id='__next' lang='ru' dir={'ltr'} suppressHydrationWarning>
-      <body className='flex is-full min-bs-full flex-auto flex-col'>
+      <body className={classNames(geologica.className, 'flex is-full min-bs-full flex-auto flex-col')}>
         <InitColorSchemeScript attribute='data' defaultMode={systemMode} />
         <Providers direction={'ltr'}>{children}</Providers>
       </body>
