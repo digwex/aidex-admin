@@ -5,6 +5,10 @@ import InitColorSchemeScript from '@mui/material/InitColorSchemeScript'
 import classNames from 'classnames'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 
+import type { Metadata } from 'next'
+
+import * as Sentry from '@sentry/nextjs'
+
 import type { ChildrenType } from '@core/types'
 import { getSystemMode } from '@core/utils/serverHelpers'
 
@@ -18,8 +22,14 @@ const geologica = Geologica({
   display: 'swap'
 })
 
-export const metadata = {
-  title: 'Admin panel'
+export function generateMetadata(): Metadata {
+  return {
+    title: 'Admin panel',
+
+    other: {
+      ...Sentry.getTraceData()
+    }
+  }
 }
 
 const RootLayout = async (props: ChildrenType) => {

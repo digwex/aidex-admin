@@ -18,9 +18,7 @@ export const formatCurrencyFixed = (value: number, fixed: number): string => {
   return formatter.format(value)
 }
 
-export const countDigitsAfterDecimalStr = (
-  num: string | undefined | null = '0.01'
-): number => {
+export const countDigitsAfterDecimalStr = (num: string | undefined | null = '0.01'): number => {
   if (!num) {
     num = '0.01'
   }
@@ -28,6 +26,7 @@ export const countDigitsAfterDecimalStr = (
   while (num.length > 1 && num[num.length - 1] === '0') {
     num = num.slice(0, -1)
   }
+
   const decimalIndex = num.indexOf('.')
 
   if (decimalIndex === -1) {
@@ -37,11 +36,7 @@ export const countDigitsAfterDecimalStr = (
   return num.length - decimalIndex - 1
 }
 
-export const formatCurrencyWithSign = (
-  value?: number | string,
-  withSign = true,
-  fixed: number = 2
-): string => {
+export const formatCurrencyWithSign = (value?: number | string, withSign = true, fixed: number = 2): string => {
   if (!value) return '$0.00'
 
   const formatter = new Intl.NumberFormat('en-US', {
@@ -51,9 +46,7 @@ export const formatCurrencyWithSign = (
 
   const isPositive = Number(value) >= 0
 
-  const formattedValue = formatter.format(
-    Number(String(value).replace('-', ''))
-  )
+  const formattedValue = formatter.format(Number(String(value).replace('-', '')))
 
   return `${withSign ? (isPositive ? '+' : '-') : ''}$${formattedValue}`
 }
