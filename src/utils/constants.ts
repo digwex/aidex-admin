@@ -1,5 +1,5 @@
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
-export const FRONT_API_URL = new URL(API_URL).origin + 'v1'
+export const FRONT_API_URL = new URL(API_URL).origin + '/v1'
 export const BOT_URL = process.env.NEXT_PUBLIC_BOT_URL ?? ''
 
 export const NAVIGATION_LINKS = {

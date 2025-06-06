@@ -8,7 +8,7 @@ interface Props {
   handleSubmit: (closeModal: () => void) => void
 }
 
-export const DeletePair = ({ handleSubmit, handleOpen, isDisabled }: Props) => {
+export const ReturnPair = ({ handleSubmit, handleOpen, isDisabled }: Props) => {
   return (
     <ModalButton
       maxWidth='sm'
@@ -20,31 +20,31 @@ export const DeletePair = ({ handleSubmit, handleOpen, isDisabled }: Props) => {
             openModal()
           }}
           variant='outlined'
-          color='error'
+          color='success'
           className='min-w-fit'
         >
-          Удалить
+          Вернуть
         </Button>
       )}
       modalContent={({ closeModal }) => (
         <Stack spacing={3} justifyContent='center' alignItems={'center'} p={6} textAlign='center'>
           <img className='w-[72px] h-[72px] min-w-[72px]' src='/images/icons/reject.svg' alt='' />
           <Typography variant='h4' className='font-medium'>
-            Вы уверены, что хотите удалить пару?
+            Вы уверены, что хотите вернуть пару?
           </Typography>
 
           <Box className='flex items-center gap-3 w-full max700:flex-col-reverse max700:w-full'>
-            <Button onClick={closeModal} className='w-full' variant='outlined' color='success' disabled={isDisabled}>
+            <Button onClick={closeModal} className='w-full' variant='outlined' color='error' disabled={isDisabled}>
               Отмена
             </Button>
             <Button
               onClick={() => handleSubmit(closeModal)}
               className='w-full'
               variant='contained'
-              color='error'
+              color='success'
               disabled={isDisabled}
             >
-              Удалить
+              Вернуть
             </Button>
           </Box>
         </Stack>

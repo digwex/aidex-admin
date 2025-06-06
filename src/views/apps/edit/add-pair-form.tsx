@@ -2,16 +2,18 @@
 
 import { Box, Button, Divider, MenuItem, Typography } from '@mui/material'
 
-import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { Controller, useForm } from 'react-hook-form'
 
 import * as yup from 'yup'
 
 import { toast } from 'react-toastify'
 
 import CustomTextField from '@/@core/components/mui/TextField'
-import ModalButton from '@/components/ModalButton'
+import { useAddPairMutation } from '@/api/endpoints/pairs'
 import { Error } from '@/components/Error'
+import ModalButton from '@/components/ModalButton'
+import { handleRTKError } from '@/utils/handleRTKError'
 
 const enum TYPE {
   NEW = 'new',
@@ -51,6 +53,8 @@ export const addPairFormSchema = yup.object({
 })
 
 export const AddPairForm = () => {
+  const [addPair] = useAddPairMutation()
+
   const {
     register,
     handleSubmit,
@@ -67,11 +71,34 @@ export const AddPairForm = () => {
     resolver: yupResolver<AddPAirFormValue>(addPairFormSchema)
   })
 
-  const onSubmit = (close: () => void) => (data: AddPAirFormValue) => {
-    console.log(data)
-    reset()
-    toast.success(`Пара добавлена`)
-    close()
+  const onSubmit = (close: () => void) => async (data: AddPAirFormValue) => {
+    const toastId = toast.loading('Добавление пары...')
+
+    try {
+      await addPair({
+        chain: 'solana',
+        ...data
+      }).unwrap()
+
+      reset()
+      toast.update(toastId, {
+        render: 'Пара успешно добавлена',
+        type: 'success',
+        isLoading: false,
+        autoClose: 3000
+      })
+      close()
+    } catch (error) {
+      console.log(`Error add pair: ${error}`)
+      const message = handleRTKError(error)
+
+      toast.update(toastId, {
+        render: message,
+        type: 'error',
+        isLoading: false,
+        autoClose: 3000
+      })
+    }
   }
 
   return (

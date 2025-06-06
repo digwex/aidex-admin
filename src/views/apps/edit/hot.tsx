@@ -1,9 +1,9 @@
 'use client'
 
-import { useLazyGetTrendingQuery } from '@/api/endpoints/trending'
 import { SORT_DIRECTION } from '@/api/types'
 import CustomTable from '@/views/table/CustomTable'
 
+import { useLazyGetTrendingQuery } from '@/api/endpoints/pairs/pairs'
 import { EditRow } from './edit-row'
 import { editTitles } from './edit-titles'
 
