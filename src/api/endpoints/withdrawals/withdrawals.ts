@@ -16,6 +16,22 @@ const argsToString = (args: { [key: string]: string }) =>
 
 const withdrawalsApi = API.injectEndpoints({
   endpoints: builder => ({
+    getReferralWithdrawals: builder.query<any, any>({
+      query: args => `/referrals/withdrawals/history?${argsToString(args)}`
+    }),
+    approveReferralWithdrawal: builder.mutation<void, string>({
+      query: id => ({
+        url: `referrals/withdrawals/${id}/approve`,
+        method: 'PATCH'
+      })
+    }),
+    cancelReferralWithdrawal: builder.mutation<void, string>({
+      query: id => ({
+        url: `referrals/withdrawals/${id}/approve`,
+        method: 'PATCH'
+      })
+    }),
+
     getPendingWithdrawals: builder.query<any, any>({
       query: args => `/withdrawals/pending?${argsToString(args)}`
     }),
@@ -64,6 +80,10 @@ const withdrawalsApi = API.injectEndpoints({
 })
 
 export const {
+  useLazyGetReferralWithdrawalsQuery,
+  useApproveReferralWithdrawalMutation,
+  useCancelReferralWithdrawalMutation,
+
   useLazyGetPendingWithdrawalsQuery,
   useLazyGetHistoryWithdrawalsQuery,
   useLazyGetFakeWithdrawalsQuery,
