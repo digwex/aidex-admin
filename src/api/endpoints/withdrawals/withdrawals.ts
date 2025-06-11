@@ -16,6 +16,31 @@ const argsToString = (args: { [key: string]: string }) =>
 
 const withdrawalsApi = API.injectEndpoints({
   endpoints: builder => ({
+    getReferralWithdrawals: builder.query<any, any>({
+      query: args => `/referrals/withdrawals/history?${argsToString(args)}`,
+      providesTags: result =>
+        result
+          ? [
+              ...result.data.data.map(({ id }: any) => ({ type: Tag.Withdrawals, id })),
+              { type: Tag.Withdrawals, id: 'LIST' }
+            ]
+          : [{ type: Tag.Withdrawals, id: 'LIST' }]
+    }),
+    approveReferralWithdrawal: builder.mutation<void, string>({
+      query: id => ({
+        url: `/referrals/withdrawals/${id}/approve`,
+        method: 'PATCH'
+      }),
+      invalidatesTags: [{ type: Tag.Withdrawals, id: 'LIST' }]
+    }),
+    cancelReferralWithdrawal: builder.mutation<void, string>({
+      query: id => ({
+        url: `/referrals/withdrawals/${id}/cancel`,
+        method: 'PATCH'
+      }),
+      invalidatesTags: [{ type: Tag.Withdrawals, id: 'LIST' }]
+    }),
+
     getPendingWithdrawals: builder.query<any, any>({
       query: args => `/withdrawals/pending?${argsToString(args)}`
     }),
@@ -64,6 +89,10 @@ const withdrawalsApi = API.injectEndpoints({
 })
 
 export const {
+  useLazyGetReferralWithdrawalsQuery,
+  useApproveReferralWithdrawalMutation,
+  useCancelReferralWithdrawalMutation,
+
   useLazyGetPendingWithdrawalsQuery,
   useLazyGetHistoryWithdrawalsQuery,
   useLazyGetFakeWithdrawalsQuery,

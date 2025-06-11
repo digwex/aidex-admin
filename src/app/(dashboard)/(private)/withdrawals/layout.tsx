@@ -1,5 +1,5 @@
-import { ACTION_ACCESS } from '@/utils/accessActions'
 import { AccessActionGuard } from '@/hocs/access-action-guard'
+import { ACTION_ACCESS } from '@/utils/accessActions'
 import { Withdrawals } from '@/views/apps/withdrawals/Withdrawals'
 
 interface Props {
@@ -12,9 +12,9 @@ export const metadata = {
 
 const Layout = async ({ children }: Props) => {
   const tabs = [
-    { value: `/withdrawals`, label: 'Партнёрские выводы' },
+    { value: `/withdrawals/pending`, label: 'Партнёрские выводы' },
 
-    { value: `/withdrawals/trader-history`, label: 'История выводов' }
+    { value: `/withdrawals/history`, label: 'История выводов' }
   ]
 
   return (

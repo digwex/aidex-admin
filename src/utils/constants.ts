@@ -9,7 +9,7 @@ export const NAVIGATION_LINKS = {
   USER_DETAILS: '/users/:id',
   WALLETS: '/wallets',
   REFERRALS: '/referrals',
-  WITHDRAWALS: '/withdrawals',
+  WITHDRAWALS: '/withdrawals/pending',
   SECURITY: '/security',
   SECURITY_LOGINS: '/security/logins',
   EDIT: '/edit',
