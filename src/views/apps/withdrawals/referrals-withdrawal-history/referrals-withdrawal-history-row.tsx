@@ -1,27 +1,59 @@
+import Link from 'next/link'
+
+import clsx from 'clsx'
+
+import { useCheckAccess } from '@/hooks/useCheckAccess'
 import { calcDate } from '@/utils/calcDate'
 import { shortIdTooltip } from '@/utils/shortIdTooltip'
 
 const capitalizeStatus = (status: string) => {
   switch (status) {
     case 'WITHDRAWAL_APPROVED':
-      return 'Approved'
+      return 'Одобрен'
     case 'WITHDRAWAL_CANCELED':
-      return 'Canceled'
+      return 'Отменен'
     default:
       return status
   }
 }
 
 export const ReferralsWithdrawalHistoryRow = ({ id, createdAt, nId, walletTo, amount, signature, status }: any) => {
+  const { checkRoute } = useCheckAccess()
+
   return (
     <tr>
       <td>{calcDate(createdAt)}</td>
-      <td>{nId}</td>
+      <td>
+        <Link
+          href={`/users/${nId}`}
+          className={clsx('td_row', {
+            'pointer-events-none': !checkRoute('/admin/user/:nId')
+          })}
+        >
+          <span className='text-success'>{nId}</span>
+        </Link>
+      </td>
       <td>{shortIdTooltip(id)}</td>
       <td>${amount}</td>
-      <td>{walletTo}</td>
-      <td>{shortIdTooltip(signature)}</td>
-      <td>{capitalizeStatus(status)}</td>
+      <td>{shortIdTooltip(walletTo)}</td>
+      <td>
+        <a
+          href={`https://solscan.io/tx/${signature}`}
+          target='_blank'
+          rel='noreferrer'
+          className='transition-all duration-300 hover:text-primary'
+        >
+          {shortIdTooltip(signature)}
+        </a>
+      </td>
+      <td
+        className={clsx({
+          'text-success': status === 'WITHDRAWAL_APPROVED',
+          'text-error': status === 'WITHDRAWAL_CANCELED'
+        })}
+      >
+        {capitalizeStatus(status)}
+      </td>
     </tr>
   )
 }

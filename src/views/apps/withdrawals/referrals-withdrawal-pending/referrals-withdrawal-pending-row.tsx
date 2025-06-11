@@ -33,9 +33,9 @@ export const ReferralsWithdrawalPendingRow = ({
         </Link>
       </td>
       <td>{withdrawalsTotal}</td>
-      <td>${formatCurrency(Number(withdrawalsSum))}</td>
-      <td className='w250'>${formatCurrency(Number(amount))}</td>
-      <td className='w250'>${formatCurrency(Number(balanceAfter))}</td>
+      <td>${formatCurrency(Number(withdrawalsSum), 6)}</td>
+      <td className='w250'>${amount}</td>
+      <td className='w250'>${formatCurrency(Number(balanceAfter), 6)}</td>
       <td>
         <div className='flex h-full justify-start items-center gap-4'>
           <ReferralsWithdrawalPendingApprove id={id} />

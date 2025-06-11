@@ -3,7 +3,7 @@ export const formatCurrency = (value: number, fixed: number = 2): string => {
 
   const formatter = new Intl.NumberFormat('en-US', {
     maximumFractionDigits: fixed,
-    minimumFractionDigits: fixed,
+    minimumFractionDigits: fixed
   })
 
   const result = formatter.format(value)

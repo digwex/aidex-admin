@@ -39,7 +39,8 @@ export const accessRouteMap: Record<string, ACTION_ACCESS[]> = {
 
   wallets: [ACTION_ACCESS.VIEW_WALLETS],
   referrals: [ACTION_ACCESS.VIEW_REFERRAL_LEVELS],
-  withdrawals: [ACTION_ACCESS.VIEW_WITHDRAWALS]
+  '/withdrawals/pending': [ACTION_ACCESS.VIEW_WITHDRAWALS],
+  '/withdrawals/history': [ACTION_ACCESS.VIEW_WITHDRAWALS]
 }
 
 export function canAccessRoute(path: string, userLevel: ACCESS_LEVELS, permissions: ACTION_ACCESS) {

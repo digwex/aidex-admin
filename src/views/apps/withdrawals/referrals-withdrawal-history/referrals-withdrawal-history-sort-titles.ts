@@ -1,9 +1,9 @@
 export const referralsWithdrawalHistorySortTitles = [
   { label: 'Дата', sort: 'createdAt' },
-  { label: 'ID трейдеров', sort: 'nId' },
-  { label: 'Выводы', sort: 'withdrawalsTotal' },
-  { label: 'Выводы,$', sort: 'withdrawalsSum' },
-  { label: 'Запрос на вывод,$', sort: 'amount' },
-  { label: 'Остаток по балансу,$', sort: 'balanceAfter' },
-  { label: null, sort: null }
+  { label: 'ID трейдеров', sort: 'userNid' },
+  { label: 'ID Вывода', sort: 'id' },
+  { label: 'Сумма вывода,$', sort: 'withdrawalAmount' },
+  { label: 'Адрес', sort: 'address' },
+  { label: 'Signature', sort: 'signature' },
+  { label: 'Статус', sort: 'status' }
 ]
