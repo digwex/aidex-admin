@@ -24,9 +24,10 @@ export const Row = ({
       <td>{telegramId}</td>
       <CopyRefLink refLink={link} />
       <EditSpending id={id} defaultValue={spending} />
-      <td>{subscribed}</td>
-      <td>{unsubscribed}</td>
       <td>{pressStart}</td>
+      <td>{unsubscribed}</td>
+      <td>{subscribed}</td>
+
       {/* <td>{botBlocked}</td> */}
       <td>{commissions}</td>
       {/* <td>-</td> */}
