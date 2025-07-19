@@ -13,10 +13,10 @@ export const Row = ({
   subscribed,
   unsubscribed,
   pressStart,
-  commissions,
-  invitedUsers,
   maxActiveUsers,
-  telegramId
+  telegramId,
+  invitedUsers,
+  commissions
 }: Props) => {
   return (
     <tr>
@@ -31,13 +31,18 @@ export const Row = ({
         </div>
       </td>
       <EditSpending id={id} defaultValue={spending} />
+      <td>{pressStart}</td>
       <td>{subscribed}</td>
       <td>{unsubscribed}</td>
-      <td>{pressStart}</td>
-      {/* <td>{botBlocked}</td> */}
-      <td>{commissions}</td>
-      {/* <td>-</td> */}
       <td>{invitedUsers}</td>
+      <td>{commissions}</td>
+
+      {/* <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td> */}
       <td>{maxActiveUsers}</td>
     </tr>
   )

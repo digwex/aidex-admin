@@ -5,19 +5,21 @@ import { EditSpending } from './edit-spending'
 
 type Props = IReferralLink
 
-export const Row = ({
-  id,
-  code,
-  link,
-  spending,
-  subscribed,
-  unsubscribed,
-  pressStart,
-  commissions,
-  invitedUsers,
-  maxActiveUsers,
-  telegramId
-}: Props) => {
+export const Row = (props: Props) => {
+  const {
+    id,
+    code,
+    link,
+    spending,
+    subscribed,
+    unsubscribed,
+    pressStart,
+    maxActiveUsers,
+    telegramId,
+    invitedUsers,
+    commissions
+  } = props
+
   return (
     <tr>
       <td>{code}</td>
@@ -25,15 +27,16 @@ export const Row = ({
       <CopyRefLink refLink={link} />
       <EditSpending id={id} defaultValue={spending} />
       <td>{pressStart}</td>
-      <td>{unsubscribed}</td>
       <td>{subscribed}</td>
-
-      {/* <td>{botBlocked}</td> */}
-      <td>{commissions}</td>
-      {/* <td>-</td> */}
+      <td>{unsubscribed}</td>
       <td>{invitedUsers}</td>
+      <td>{commissions}</td>
+      {/* <td>-</td>
       <td>-</td>
       <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td> */}
       <td>{maxActiveUsers}</td>
     </tr>
   )

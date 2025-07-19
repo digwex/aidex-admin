@@ -1,15 +1,15 @@
 export const tableHeaders = [
   {
     label: 'Название',
-    sort: 'name'
+    sort: 'code'
   },
   {
     label: 'ID партнера TG',
-    sort: 'tgPartnerId'
+    sort: 'telegramId'
   },
   {
     label: 'Реф. ссылка',
-    sort: 'refCode'
+    sort: 'link'
   },
   {
     label: 'Траты',
@@ -17,32 +17,49 @@ export const tableHeaders = [
   },
   {
     label: 'Старт',
-    sort: 'start'
+    sort: 'pressStart'
   },
   {
-    label: 'Открыл сделку',
-    sort: 'open'
+    label: 'Подписались',
+    sort: 'subscribed'
   },
   {
-    label: 'Cуб Партнёров',
-    sort: 'subAffiliates'
+    label: 'Отписались',
+    sort: 'unsubscribed'
   },
   {
-    label: 'По ссылке',
-    sort: null
+    label: 'Приглашено пользователей',
+    sort: 'invitedUsers'
   },
   {
-    label: 'Всего этот партнёр',
-    sort: null
+    label: 'Комиссии',
+    sort: 'commissions'
   },
-  {
-    label: 'Заработал Sol/$',
-    sort: 'profit'
-  },
-  {
-    label: 'Выводы SOL/USD',
-    sort: 'withdrawals'
-  },
+
+  // {
+  //   label: 'Открыл сделку',
+  //   sort: 'open'
+  // },
+  // {
+  //   label: 'Cуб Партнёров',
+  //   sort: 'subAffiliates'
+  // },
+  // {
+  //   label: 'По ссылке',
+  //   sort: null
+  // },
+  // {
+  //   label: 'Всего этот партнёр',
+  //   sort: null
+  // },
+  // {
+  //   label: 'Заработал Sol/$',
+  //   sort: 'profit'
+  // },
+  // {
+  //   label: 'Выводы SOL/USD',
+  //   sort: 'withdrawals'
+  // },
   {
     label: 'Максимум активных игроков',
     sort: 'maxActiveUsers'
