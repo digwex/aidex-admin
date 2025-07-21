@@ -1,13 +1,13 @@
 import { useLayoutEffect } from 'react'
 
-import { usePathname } from 'next/navigation'
-
 import { useDispatch } from 'react-redux'
+
+import { useLocation } from 'react-router'
 
 import { setSearchByDate, setSearchByDateTime, setSearchByTake, setSearchTerm } from '@/redux-store/slices'
 
 export const useClearStateSearch = () => {
-  const pathname = usePathname()
+  const { pathname } = useLocation()
   const dispatch = useDispatch()
 
   useLayoutEffect(() => {

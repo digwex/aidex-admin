@@ -14,13 +14,13 @@ type Props = ChildrenType & {
   direction: Direction
 }
 
-const Providers = async (props: Props) => {
+const Providers = (props: Props) => {
   const { children, direction } = props
 
-  const mode = await getMode()
-  const settingsCookie = await getSettingsFromCookie()
-  const systemMode = await getSystemMode()
-
+  const mode = getMode()
+  const settingsCookie = getSettingsFromCookie()
+  const systemMode = getSystemMode()
+  console.log({ mode, settingsCookie, systemMode })
   return (
     <VerticalNavProvider>
       <SettingsProvider settingsCookie={settingsCookie} mode={mode}>

@@ -4,11 +4,10 @@ import type { Config } from 'tailwindcss'
 import tailwindPlugin from './src/@core/tailwind/plugin'
 
 const config: Config = {
-  content: ['./src/**/*.{js,ts,jsx,tsx,css}'],
+  content: ['./src/**/*.{js,ts,jsx,tsx,css,scss}'],
   corePlugins: {
     preflight: false
   },
-  important: '#__next',
   plugins: [tailwindcssLogical, tailwindPlugin],
   theme: {
     colors: {
@@ -51,6 +50,9 @@ const config: Config = {
       max650: { max: '650px' },
       max500: { max: '600px' },
       max400: { max: '600px' }
+    },
+    fontFamily: {
+      geologica: ['Geologica', 'sans-serif']
     },
     extend: {}
   }

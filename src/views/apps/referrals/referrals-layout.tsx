@@ -1,8 +1,6 @@
-'use client'
-
-import type { PropsWithChildren } from 'react'
-
 import { Paper } from '@mui/material'
+
+import { Outlet } from 'react-router'
 
 import { Title } from '@/components/Title'
 
@@ -20,7 +18,7 @@ const tabs = [
   }
 ]
 
-export const ReferralsLayout = ({ children }: PropsWithChildren) => {
+export const ReferralsLayout = () => {
   return (
     <div className='space-y-4'>
       <Title icon='tabler-wallet' title='Реферальная программа' />
@@ -31,7 +29,7 @@ export const ReferralsLayout = ({ children }: PropsWithChildren) => {
         <Search placeholder='Поиск по ID, Реф коду' className='max-w-[440px]  max800:max-w-full w-full' />
       </Paper>
 
-      {children}
+      <Outlet />
     </div>
   )
 }

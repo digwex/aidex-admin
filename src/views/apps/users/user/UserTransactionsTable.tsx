@@ -1,12 +1,9 @@
-'use client'
-
-import { useParams } from 'next/navigation'
-
 import CustomTable from '@/views/table/CustomTable'
 import { useLazyGetUserTransactionsQuery } from '@/api/endpoints/user/user-api'
 import { SORT_DIRECTION } from '@/api/types'
 import { TransactionRow } from './TransactionRow'
 import { fakeData } from '@/api/endpoints/user/user-types'
+import { useParams } from 'react-router'
 
 export const allSortTitles = [
   { label: 'ID', sort: 'nId' },
@@ -17,7 +14,7 @@ export const allSortTitles = [
   { label: 'Баланс', sort: 'balance' },
   { label: 'Описание', sort: 'note' },
   { label: 'Транзакция', sort: null },
-  { label: 'Перевод', sort: null },
+  { label: 'Перевод', sort: null }
 ]
 
 const UserTransactionsTable = () => {

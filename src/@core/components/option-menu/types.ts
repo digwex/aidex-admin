@@ -1,15 +1,13 @@
 // React Imports
 import type { ReactNode } from 'react'
 
-// Next Imports
-import type { LinkProps } from 'next/link'
-
 // MUI Imports
 import type { IconButtonProps } from '@mui/material/IconButton'
 import type { MenuItemProps } from '@mui/material/MenuItem'
 import type { DividerProps } from '@mui/material/Divider'
 import type { BoxProps } from '@mui/material/Box'
 import type { TooltipProps } from '@mui/material/Tooltip'
+import type { LinkProps } from 'react-router'
 
 export type OptionDividerType = {
   divider: boolean
@@ -24,7 +22,7 @@ export type OptionMenuItemType = {
   text: ReactNode
   icon?: ReactNode
   linkProps?: BoxProps<'a'>
-  href?: LinkProps['href']
+  href?: LinkProps['to']
   menuItemProps?: MenuItemProps
   divider?: never
   dividerProps?: never

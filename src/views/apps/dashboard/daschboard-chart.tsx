@@ -1,8 +1,3 @@
-'use client'
-
-// Next Imports
-import dynamic from 'next/dynamic'
-
 // Mui Imports
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
@@ -12,11 +7,11 @@ import { useTheme } from '@mui/material/styles'
 // Third Party Imports
 import type { ApexOptions } from 'apexcharts'
 
-// Styled Component Imports
-const AppReactApexCharts = dynamic(() => import('@/libs/styles/AppReactApexCharts'))
+import { Box, Chip, InputAdornment } from '@mui/material'
+
+import AppReactApexCharts from '@/libs/styles/AppReactApexCharts'
 
 // Style Imports
-import { Box, Chip, InputAdornment } from '@mui/material'
 import './styles.css'
 
 import CustomTextField from '@/@core/components/mui/TextField'

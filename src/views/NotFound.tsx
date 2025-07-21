@@ -1,8 +1,5 @@
 'use client'
 
-// Next Imports
-import Link from 'next/link'
-
 // MUI Imports
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { styled, useTheme } from '@mui/material/styles'
@@ -13,6 +10,8 @@ import Typography from '@mui/material/Typography'
 import classnames from 'classnames'
 
 // Type Imports
+import { Link } from 'react-router'
+
 import type { SystemMode } from '@core/types'
 
 // Hook Imports
@@ -48,7 +47,7 @@ const NotFound = ({ mode }: { mode: SystemMode }) => {
           <Typography variant='h4'>Page Not Found ⚠️</Typography>
           <Typography>we couldn&#39;t find the page you are looking for.</Typography>
         </div>
-        <Button href='/' component={Link} variant='contained'>
+        <Button to='/' component={Link} variant='contained'>
           Back To Home
         </Button>
         <img

@@ -1,11 +1,9 @@
 module.exports = {
-  extends: ['next/core-web-vitals', 'plugin:@typescript-eslint/recommended', 'plugin:import/recommended', 'prettier'],
+  extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/recommended', 'prettier'],
   rules: {
     'jsx-a11y/alt-text': 'off',
     'react/display-name': 'off',
     'react/no-children-prop': 'off',
-    '@next/next/no-img-element': 'off',
-    '@next/next/no-page-custom-font': 'off',
     '@typescript-eslint/consistent-type-imports': 'error',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
@@ -63,11 +61,6 @@ module.exports = {
         pathGroups: [
           {
             pattern: 'react',
-            group: 'external',
-            position: 'before'
-          },
-          {
-            pattern: 'next/**',
             group: 'external',
             position: 'before'
           },

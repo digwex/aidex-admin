@@ -1,11 +1,6 @@
-'use client'
-
 // React Imports
 import { useRef, useState } from 'react'
 import type { ReactElement, ReactNode, SyntheticEvent } from 'react'
-
-// Next Imports
-import Link from 'next/link'
 
 // MUI Imports
 import Tooltip from '@mui/material/Tooltip'
@@ -23,6 +18,8 @@ import Divider from '@mui/material/Divider'
 import classnames from 'classnames'
 
 // Type Imports
+import { Link } from 'react-router'
+
 import type { OptionsMenuType, OptionType, OptionMenuItemType } from './types'
 
 // Hook Imports
@@ -38,7 +35,7 @@ const IconButtonWrapper = (props: Pick<OptionsMenuType, 'tooltipProps'> & { chil
 const MenuItemWrapper = ({ children, option }: { children: ReactNode; option: OptionMenuItemType }) => {
   if (option.href) {
     return (
-      <Box component={Link} href={option.href} {...option.linkProps}>
+      <Box component={Link} to={option.href} {...option.linkProps}>
         {children}
       </Box>
     )

@@ -1,6 +1,6 @@
-import Link from 'next/link'
-
 import classNames from 'classnames'
+
+import { Link } from 'react-router'
 
 import type { IWallet } from '@/api/endpoints/wallets/wallets'
 import { CopyButton } from '@/hooks/useCopy'
@@ -22,7 +22,7 @@ export const WalletsTableRow = ({ publicKey, balance, openedTrades, pnl, nId, tg
       </td>
 
       <td>
-        <Link className='transition-all duration-300 hover:text-primary' href={`/users/${nId}`}>
+        <Link className='transition-all duration-300 hover:text-primary' to={`/users/${nId}`}>
           {nId}
         </Link>
       </td>

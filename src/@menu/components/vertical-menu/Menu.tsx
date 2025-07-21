@@ -4,15 +4,14 @@
 import { createContext, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { ForwardRefRenderFunction, MenuHTMLAttributes, MutableRefObject, ReactElement, ReactNode } from 'react'
 
-// Next Imports
-import { usePathname } from 'next/navigation'
-
 // Third-party Imports
 import classnames from 'classnames'
 import { FloatingTree } from '@floating-ui/react'
 import type { CSSObject } from '@emotion/styled'
 
 // Type Imports
+import { useLocation } from 'react-router'
+
 import type {
   ChildrenType,
   MenuItemStyles,
@@ -120,7 +119,7 @@ const Menu: ForwardRefRenderFunction<HTMLMenuElement, MenuProps> = (props, ref) 
   const openSubmenusRef = useRef<OpenSubmenu[]>([])
 
   // Hooks
-  const pathname = usePathname()
+  const { pathname } = useLocation()
   const { updateVerticalNavState } = useVerticalNav()
 
   const toggleOpenSubmenu = useCallback(

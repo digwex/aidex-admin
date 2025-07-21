@@ -1,6 +1,4 @@
-'use client'
-
-import { redirect } from 'next/navigation'
+import { Navigate } from 'react-router'
 
 import type { ChildrenType } from '@core/types'
 
@@ -12,7 +10,7 @@ const GuestOnlyRoute = ({ children }: ChildrenType) => {
   const { isLogged } = useUser()
 
   if (isLogged) {
-    redirect(themeConfig.homePageUrl)
+    return <Navigate to={themeConfig.homePageUrl} replace />
   }
 
   return <>{children}</>

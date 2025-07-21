@@ -1,10 +1,8 @@
-'use client'
-
-import { usePathname } from 'next/navigation'
-
 import cn from 'classnames'
 
 import { toast } from 'react-toastify'
+
+import { useLocation } from 'react-router'
 
 import { PRICE_CHANGE_TIME, useDeletePairMutation, useReturnPairMutation } from '@/api/endpoints/pairs/pairs'
 import { formatLargeNumber } from '@/utils/format-large-number'
@@ -43,7 +41,7 @@ const getColor = (val: number | undefined) => {
 export const EditRow = (props: any) => {
   const [deletePair, { isLoading: isLoadingDelete }] = useDeletePairMutation()
   const [returnPair, { isLoading: isLoadingReturn }] = useReturnPairMutation()
-  const pathname = usePathname()
+  const { pathname } = useLocation()
 
   const Symbol = () => {
     const symbol = props?.baseToken?.symbol || props.symbol

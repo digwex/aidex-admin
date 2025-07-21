@@ -1,7 +1,3 @@
-'use client'
-
-import { useParams } from 'next/navigation'
-
 import { Button, Typography } from '@mui/material'
 import Paper from '@mui/material/Paper'
 import { styled } from '@mui/material/styles'
@@ -13,6 +9,8 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 
 import { toast } from 'react-toastify'
+
+import { useParams } from 'react-router'
 
 import { useStopUserSessionMutation } from '@/api/endpoints/user/user-api'
 import { useGetUserByIdQuery } from '@/api/endpoints/users/users-api'

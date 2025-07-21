@@ -3,11 +3,10 @@
 // React Imports
 import { useEffect, useRef } from 'react'
 
-// Next Imports
-import Link from 'next/link'
-
 // MUI Imports
 import { styled, useColorScheme, useTheme } from '@mui/material/styles'
+
+import { Link } from 'react-router'
 
 import type { Mode } from '@core/types'
 
@@ -87,7 +86,6 @@ const Navigation = (props: Props) => {
     } else {
       collapseVerticalNav(false)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings.layout])
 
   return (
@@ -107,7 +105,7 @@ const Navigation = (props: Props) => {
     >
       {/* Nav Header including Logo & nav toggle icons  */}
       <NavHeader>
-        <Link href={'/'}>
+        <Link to={'/'}>
           <Logo />
         </Link>
         {!(isCollapsed && !isHovered) && (

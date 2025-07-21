@@ -1,16 +1,18 @@
-import type { PropsWithChildren } from 'react'
+import { Outlet } from 'react-router'
 
 import { Title } from '@/components/Title'
 import { Sorts } from './sorts'
 
-export const EditLayout = ({ children }: PropsWithChildren) => {
+export const EditLayout = () => {
   return (
     <div className='space-y-4'>
       <Title icon='tabler-edit' title='Редактирование пар' />
 
       <Sorts />
 
-      <div>{children}</div>
+      <div>
+        <Outlet />
+      </div>
     </div>
   )
 }

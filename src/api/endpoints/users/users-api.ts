@@ -8,8 +8,6 @@ export const usersApi = API.injectEndpoints({
       query: params => ({ url: 'users', params }),
 
       providesTags: result => {
-        console.log('result', result)
-
         return result
           ? [
               // @ts-expect-error type

@@ -1,7 +1,3 @@
-'use client'
-
-import { useParams } from 'next/navigation'
-
 import { Chip, Paper, Stack, styled, Typography } from '@mui/material'
 
 import Table from '@mui/material/Table'
@@ -10,6 +6,8 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
+
+import { useParams } from 'react-router'
 
 import { useGetUserByIdQuery } from '@/api/endpoints/users/users-api'
 import { CopyButton } from '@/hooks/useCopy'

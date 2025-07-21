@@ -11,9 +11,6 @@ import type {
   ReactNode
 } from 'react'
 
-// Next Imports
-import { usePathname } from 'next/navigation'
-
 // Third-party Imports
 import classnames from 'classnames'
 import styled from '@emotion/styled'
@@ -36,6 +33,8 @@ import {
 import type { CSSObject } from '@emotion/styled'
 
 // Type Imports
+import { useLocation } from 'react-router'
+
 import type { OpenSubmenu } from './Menu'
 import type { MenuItemProps } from './MenuItem'
 import type { ChildrenType, RootStylesType, SubMenuItemElement } from '../../types'
@@ -148,7 +147,7 @@ const SubMenu: ForwardRefRenderFunction<HTMLLIElement, SubMenuProps> = (props, r
 
   // Hooks
   const id = useId()
-  const pathname = usePathname()
+  const { pathname } = useLocation()
   const { isCollapsed, isPopoutWhenCollapsed, isHovered, isBreakpointReached } = useVerticalNav()
   const tree = useFloatingTree()
 
@@ -294,7 +293,6 @@ const SubMenu: ForwardRefRenderFunction<HTMLLIElement, SubMenuProps> = (props, r
         openSubmenusRef?.current.push({ level, label, active: false, id })
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Change active state when the url changes
@@ -309,7 +307,6 @@ const SubMenu: ForwardRefRenderFunction<HTMLLIElement, SubMenuProps> = (props, r
     } else {
       setActive(false)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
   /* useEffect(() => {

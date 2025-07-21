@@ -1,12 +1,10 @@
-'use client'
-
 import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react'
-
-import { usePathname } from 'next/navigation'
 
 import { useDebounceValue } from 'usehooks-ts'
 
 import { addDays } from 'date-fns'
+
+import { useLocation } from 'react-router'
 
 import { store } from '@/redux-store'
 import { getInitialSearchDate } from '@/utils/getInitialSearchDate'
@@ -73,7 +71,7 @@ export const usePagination = ({
   isDate = false,
   orderBy
 }: Props) => {
-  const pathname = usePathname()
+  const { pathname } = useLocation()
 
   const [skip, setSkip] = useState(0)
   const [totalPage, setTotalPage] = useState(1)
@@ -135,12 +133,10 @@ export const usePagination = ({
       direction: orderBy.direction,
       ...rest
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [skip, take, storeDate, debouncedSearchValue, type, withHash, pages, uid, orderBy])
 
   useEffect(() => {
     if (!isBadPathName(pathname, storeDate ?? date ?? [])) void fetchAdmins()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchAdmins, pathname, storeDate])
 
   useEffect(() => {
@@ -156,7 +152,6 @@ export const usePagination = ({
         setSkip((countPages - 1) * (take ?? 1))
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
   const handlePageChange = useCallback(

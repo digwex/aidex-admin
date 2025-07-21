@@ -1,9 +1,8 @@
-'use client'
 import { useEffect } from 'react'
 
-import { useRouter } from 'next/navigation'
-
 import { useBoolean } from 'usehooks-ts'
+
+import { useNavigate } from 'react-router'
 
 import { Loader } from '@/components/Loader'
 import { useAuth } from '@/hooks/useAuth'
@@ -15,7 +14,7 @@ export default function AuthGuard({ children }: ChildrenType) {
   const { isLogged } = useUser()
   const { value: isLoading, setFalse } = useBoolean(true)
   const { verifySession } = useAuth()
-  const router = useRouter()
+  const router = useNavigate()
 
   useEffect(() => {
     if (isLogged) {
@@ -27,11 +26,16 @@ export default function AuthGuard({ children }: ChildrenType) {
     const accessToken = getItemFromLocalStorage('accessToken')
 
     if (accessToken) {
-      void verifySession(setFalse, () => router.replace(`/login`))
+      void verifySession(setFalse, () =>
+        router(`/login`, {
+          replace: true
+        })
+      )
     } else {
-      router.replace(`/login`)
+      router(`/login`, {
+        replace: true
+      })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogged])
 
   if (isLoading) {

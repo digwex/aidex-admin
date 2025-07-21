@@ -1,6 +1,6 @@
-import Link from 'next/link'
-
 import clsx from 'clsx'
+
+import { Link } from 'react-router'
 
 import { useCheckAccess } from '@/hooks/useCheckAccess'
 import { calcDate } from '@/utils/calcDate'
@@ -24,7 +24,7 @@ export const ReferralsWithdrawalPendingRow = ({
       <td>{calcDate(createdAt)}</td>
       <td>
         <Link
-          href={`/users/${nId}`}
+          to={`/users/${nId}`}
           className={clsx('td_row', {
             'pointer-events-none': !checkRoute('/admin/user/:nId')
           })}

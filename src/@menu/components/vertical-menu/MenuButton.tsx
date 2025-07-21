@@ -7,6 +7,8 @@ import classnames from 'classnames'
 import { css } from '@emotion/react'
 
 // Type Imports
+import { Link } from 'react-router'
+
 import type { ChildrenType, MenuButtonProps } from '../../types'
 
 // Component Imports
@@ -96,9 +98,9 @@ const MenuButton: ForwardRefRenderFunction<HTMLAnchorElement, MenuButtonProps> =
     // If there is no component but href is defined, render RouterLink
     if (rest.href) {
       return (
-        <RouterLink prefetch={true} ref={ref} className={className} href={rest.href} {...rest}>
+        <Link ref={ref} className={className} to={rest.href} {...rest}>
           {children}
-        </RouterLink>
+        </Link>
       )
     } else {
       return (

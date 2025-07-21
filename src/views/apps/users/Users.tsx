@@ -1,6 +1,4 @@
-'use client'
-
-import type { PropsWithChildren } from 'react'
+import { Outlet } from 'react-router'
 
 import { Title } from '@/components/Title'
 
@@ -31,7 +29,7 @@ const tabs = [
   }
 ]
 
-export const Users = ({ children }: PropsWithChildren) => {
+export const Users = () => {
   return (
     <div>
       <div className='space-y-4 mb-4'>
@@ -40,7 +38,9 @@ export const Users = ({ children }: PropsWithChildren) => {
           <Sorts tabs={{ tabs }} />
         </UsersSortsWrapper>
       </div>
-      <div>{children}</div>
+      <div>
+        <Outlet />
+      </div>
     </div>
   )
 }

@@ -25,14 +25,14 @@ import type { Direction } from '@core/types'
 import type { PrimaryColorConfig } from '@configs/primaryColorConfig'
 
 // Icon Imports
-import SkinDefault from '@core/svg/SkinDefault'
-import SkinBordered from '@core/svg/SkinBordered'
-import LayoutVertical from '@core/svg/LayoutVertical'
-import LayoutCollapsed from '@core/svg/LayoutCollapsed'
+import SkinDefault from '@/@core/svg/SkinDefault'
+import SkinBordered from '@/@core/svg/SkinBordered'
+import LayoutVertical from '@/@core/svg/LayoutVertical'
+import LayoutCollapsed from '@/@core/svg/LayoutCollapsed'
 
 // import LayoutHorizontal from '@core/svg/LayoutHorizontal'
-import ContentCompact from '@core/svg/ContentCompact'
-import ContentWide from '@core/svg/ContentWide'
+import ContentCompact from '@/@core/svg/ContentCompact'
+import ContentWide from '@/@core/svg/ContentWide'
 
 // Config Imports
 import primaryColorConfig from '@configs/primaryColorConfig'

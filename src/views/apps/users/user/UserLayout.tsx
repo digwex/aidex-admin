@@ -1,10 +1,8 @@
-'use client'
-
 import type { PropsWithChildren } from 'react'
 
-import { useParams } from 'next/navigation'
-
 import { Chip } from '@mui/material'
+
+import { useParams } from 'react-router'
 
 import { useGetUserByIdQuery } from '@/api/endpoints/users/users-api'
 import { Loader } from '@/components/Loader'

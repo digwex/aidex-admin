@@ -1,13 +1,8 @@
-'use client'
-
-// React Imports
 import { forwardRef } from 'react'
 
-// Next Imports
-import Link from 'next/link'
-import type { LinkProps } from 'next/link'
-
 // Type Imports
+import { Link, type LinkProps } from 'react-router'
+
 import type { ChildrenType } from '../types'
 
 type RouterLinkProps = LinkProps &
@@ -17,10 +12,10 @@ type RouterLinkProps = LinkProps &
 
 export const RouterLink = forwardRef((props: RouterLinkProps, ref: any) => {
   // Props
-  const { href, className, ...other } = props
+  const { to, className, ...other } = props
 
   return (
-    <Link ref={ref} href={href} className={className} {...other}>
+    <Link ref={ref} to={to} className={className} {...other}>
       {props.children}
     </Link>
   )

@@ -4,15 +4,14 @@
 import { forwardRef, useEffect, useState } from 'react'
 import type { AnchorHTMLAttributes, ForwardRefRenderFunction, ReactElement, ReactNode } from 'react'
 
-// Next Imports
-import { usePathname } from 'next/navigation'
-
 // Third-party Imports
 import classnames from 'classnames'
 import { useUpdateEffect } from 'react-use'
 import type { CSSObject } from '@emotion/styled'
 
 // Type Imports
+import { useLocation } from 'react-router'
+
 import type { ChildrenType, MenuItemElement, MenuItemExactMatchUrlProps, RootStylesType } from '../../types'
 
 // Component Imports
@@ -75,7 +74,7 @@ const MenuItem: ForwardRefRenderFunction<HTMLLIElement, MenuItemProps> = (props,
   const [active, setActive] = useState(false)
 
   // Hooks
-  const pathname = usePathname()
+  const { pathname } = useLocation()
   const { menuItemStyles, renderExpandedMenuItemIcon, textTruncate } = useVerticalMenu()
 
   const { isCollapsed, isHovered, isPopoutWhenCollapsed, toggleVerticalNav, isToggled, isBreakpointReached } =
@@ -118,7 +117,6 @@ const MenuItem: ForwardRefRenderFunction<HTMLLIElement, MenuItemProps> = (props,
         setActive(false)
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
   // Call the onActiveChange callback when the active state changes.
@@ -150,6 +148,7 @@ const MenuItem: ForwardRefRenderFunction<HTMLLIElement, MenuItemProps> = (props,
         {...rest}
         onClick={e => {
           handleClick()
+
           rest.onClick && rest.onClick(e)
         }}
       >

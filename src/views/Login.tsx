@@ -1,8 +1,3 @@
-'use client'
-
-// Next Imports
-import { useRouter } from 'next/navigation'
-
 import classNames from 'classnames'
 
 import { Button } from '@mui/material'
@@ -11,9 +6,10 @@ import styles from './login.module.scss'
 import { getItemFromLocalStorage } from '@/utils/localStorageService'
 import { useUser } from '@/hooks/useUser'
 import { useAuth } from '@/hooks/useAuth'
+import { useNavigate } from 'react-router'
 
 const Login = () => {
-  const router = useRouter()
+  const router = useNavigate()
   const { login, verifySession } = useAuth()
   const { user } = useUser()
 
@@ -22,10 +18,10 @@ const Login = () => {
       const accessToken = getItemFromLocalStorage('accessToken')
 
       if (user) {
-        router.replace(`/dashboard`)
+        router(`/dashboard`, { replace: true })
       } else if (accessToken) {
         await verifySession(
-          () => router.replace(`/dashboard`),
+          () => router(`/dashboard`, { replace: true }),
           async () => await login()
         )
       } else {

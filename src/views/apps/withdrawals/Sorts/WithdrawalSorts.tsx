@@ -1,6 +1,4 @@
-'use client'
-
-import { usePathname } from 'next/navigation'
+import { useLocation } from 'react-router'
 
 import { DefaultSorts } from './DefaultSorts'
 
@@ -9,7 +7,7 @@ interface Props {
 }
 
 export const WithdrawalSorts = ({ withdrawalsSortTabs }: Props) => {
-  const pathname = usePathname()
+  const { pathname } = useLocation()
 
   const isDepositPage = pathname.includes('/withdrawals/deposits')
 

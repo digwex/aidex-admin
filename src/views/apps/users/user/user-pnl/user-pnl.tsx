@@ -1,6 +1,4 @@
-'use client'
-
-import { useParams } from 'next/navigation'
+import { useParams } from 'react-router'
 
 import { SORT_DIRECTION } from '../../../../../api/types'
 

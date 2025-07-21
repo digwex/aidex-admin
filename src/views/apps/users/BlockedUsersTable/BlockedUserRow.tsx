@@ -1,8 +1,8 @@
-import Link from 'next/link'
-
 import { Button } from '@mui/material'
 
 import cn from 'classnames'
+
+import { Link } from 'react-router'
 
 import type { User } from '@/api/endpoints/users/users-types'
 
@@ -25,7 +25,7 @@ export const BlockedUserRow = (props: Props) => {
             className={cn('transition-all duration-300 hover:text-primary', {
               'pointer-events-none': !checkAction(ACTION_ACCESS.VIEW_USER_DETAIL)
             })}
-            href={`/users/${user.nId}`}
+            to={`/users/${user.nId}`}
           >
             <span className='color_green td_active'>{user.nId}</span>
           </Link>
@@ -64,7 +64,7 @@ export const BlockedUserRow = (props: Props) => {
               className={cn({
                 'pointer-events-none': !checkAction(ACTION_ACCESS.VIEW_USER_DETAIL)
               })}
-              href={`${user.nId}`}
+              to={`${user.nId}`}
             >
               <Button variant='outlined' color='secondary'>
                 Больше

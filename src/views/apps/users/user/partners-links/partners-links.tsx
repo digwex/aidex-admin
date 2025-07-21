@@ -1,6 +1,4 @@
-'use client'
-
-import { useParams } from 'next/navigation'
+import { useParams } from 'react-router'
 
 import CustomTable from '@/views/table/CustomTable'
 import { Row } from './row'

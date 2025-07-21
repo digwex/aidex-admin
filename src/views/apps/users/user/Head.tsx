@@ -1,12 +1,10 @@
-'use client'
-
-import { useParams } from 'next/navigation'
-
 import type { StackProps } from '@mui/material'
 
 import { Avatar, Box, Button, Divider, Paper, Stack, Typography } from '@mui/material'
 
 import { format } from 'date-fns'
+
+import { useParams } from 'react-router'
 
 import { useGetUserByIdQuery } from '@/api/endpoints/users/users-api'
 import { CopyButton } from '@/hooks/useCopy'

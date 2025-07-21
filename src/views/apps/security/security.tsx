@@ -1,10 +1,10 @@
-import type { PropsWithChildren } from 'react'
+import { Outlet } from 'react-router'
 
 import { Title } from '@/components/Title'
 import { Sorts } from '@/views/apps/security/Sorts'
 import { SecurityProvider } from './Admins/security-provider'
 
-export const Security = ({ children }: PropsWithChildren) => {
+export const Security = () => {
   return (
     <SecurityProvider>
       <div className='space-y-4'>
@@ -12,7 +12,9 @@ export const Security = ({ children }: PropsWithChildren) => {
 
         <Sorts />
 
-        <div>{children}</div>
+        <div>
+          <Outlet />
+        </div>
       </div>
     </SecurityProvider>
   )

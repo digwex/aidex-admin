@@ -1,8 +1,8 @@
 import { memo } from 'react'
 
-import Link from 'next/link'
-
 import clsx from 'clsx'
+
+import { Link } from 'react-router'
 
 import type { IWithdrawal } from '@/api/endpoints/withdrawals/withdrawals.interface'
 import { useCheckAccess } from '@/hooks/useCheckAccess'
@@ -21,7 +21,7 @@ const ExpectedTradeItem = ({ id, createdAt, userNid, totalWithdrawals, withdrawa
       <td className='w100'>{calcDate(createdAt)}</td>
       <td>
         <Link
-          href={`/users/${userNid}`}
+          to={`/users/${userNid}`}
           className={clsx('td_row', {
             'pointer-events-none': !checkRoute('/admin/user/:nId')
           })}

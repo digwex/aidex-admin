@@ -1,6 +1,6 @@
-import Link from 'next/link'
-
 import clsx from 'clsx'
+
+import { Link } from 'react-router'
 
 import type { IWithdrawal } from '@/api/endpoints/withdrawals/withdrawals.interface'
 import { useCheckAccess } from '@/hooks/useCheckAccess'
@@ -20,7 +20,7 @@ const TradeHistoryItem = ({ createdAt, userNid, id, withdrawalAmount, address, s
       <td className='w-[100px]'>{calcDate(createdAt)}</td>
       <td>
         <Link
-          href={`/users/${userNid}`}
+          to={`/users/${userNid}`}
           className={clsx('flex items-center justify-center gap-2', {
             'pointer-events-none': !checkRoute('/admin/user/:nId')
           })}

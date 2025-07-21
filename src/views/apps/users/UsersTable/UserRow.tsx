@@ -1,10 +1,8 @@
-'use client'
-
-import Link from 'next/link'
-
 import { Button } from '@mui/material'
 
 import cn from 'classnames'
+
+import { Link } from 'react-router'
 
 import { type User } from '../../../../api/endpoints/users/users-types'
 
@@ -38,7 +36,7 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
             className={cn('transition-all duration-300 hover:text-primary', {
               'pointer-events-none': !checkAction(ACTION_ACCESS.VIEW_USER_DETAIL)
             })}
-            href={`/users/${user.nId}`}
+            to={`/users/${user.nId}`}
           >
             <span className='color_green td_active'>{user.nId}</span>
           </Link>
@@ -58,7 +56,7 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
               className={cn('transition-all duration-300 hover:text-primary', {
                 'pointer-events-none': !checkAction(ACTION_ACCESS.VIEW_USER_DETAIL)
               })}
-              href={`/users/${user.referrerId}`}
+              to={`/users/${user.referrerId}`}
             >
               <span className='color_green td_active'>{user.referrerId}</span>
             </Link>
@@ -91,7 +89,7 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
               className={cn('transition-all duration-300 hover:text-primary', {
                 'pointer-events-none': !checkAction(ACTION_ACCESS.VIEW_USER_DETAIL)
               })}
-              href={`/users/${user.nId}`}
+              to={`/users/${user.nId}`}
             >
               <Button variant='outlined' color='secondary'>
                 Больше

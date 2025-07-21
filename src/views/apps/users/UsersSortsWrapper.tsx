@@ -1,13 +1,11 @@
-'use client'
-
-import { usePathname } from 'next/navigation'
+import { useLocation } from 'react-use'
 
 interface Props {
   children: React.ReactNode
 }
 
 export const UsersSortsWrapper = ({ children }: Props) => {
-  const pathname = usePathname()
+  const { pathname } = useLocation()
 
   const regex = new RegExp(`^/users/\\d+(/.*)?$`)
   const isPartnerPage = regex.test(pathname || '')

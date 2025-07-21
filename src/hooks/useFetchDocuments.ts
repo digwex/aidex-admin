@@ -1,15 +1,13 @@
-'use client'
-
 import { useCallback } from 'react'
 
-import { usePathname } from 'next/navigation'
+import { useLocation } from 'react-router'
 
 import { documentsFetchActions } from '@/redux-store/slices'
 import { useAppDispatch } from './useRedux'
 
 export const useFetchDocuments = () => {
   const dispatch = useAppDispatch()
-  const pathname = usePathname()
+  const { pathname } = useLocation()
 
   const processFetch = useCallback(
     (isFetch: boolean) => {
@@ -18,7 +16,6 @@ export const useFetchDocuments = () => {
       }
     },
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [pathname]
   )
 

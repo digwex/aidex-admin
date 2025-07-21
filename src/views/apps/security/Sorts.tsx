@@ -1,8 +1,6 @@
-'use client'
-
-import { usePathname } from 'next/navigation'
-
 import { Paper } from '@mui/material'
+
+import { useLocation } from 'react-use'
 
 import Tabs from '@/views/sorts/Tabs'
 
@@ -10,7 +8,7 @@ import { AdminSorts } from './AdminSorts/AdminSorts'
 import { LoginsSorts } from './LoginsSorts'
 
 export const Sorts = () => {
-  const pathname = usePathname()
+  const { pathname } = useLocation()
 
   const tabs = [
     {
@@ -25,8 +23,8 @@ export const Sorts = () => {
     }
   ]
 
-  const showLoginsSorts = pathname.includes(tabs[1].value)
-  const showAminSorts = pathname.includes(tabs[0].value) && !showLoginsSorts
+  const showLoginsSorts = pathname?.includes(tabs[1].value)
+  const showAminSorts = pathname?.includes(tabs[0].value) && !showLoginsSorts
 
   return (
     <Paper className='p-4 flex items-center gap-3 justify-between flex-wrap max800:flex-col'>
