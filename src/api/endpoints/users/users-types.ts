@@ -226,6 +226,23 @@ export interface Session {
   isOnline: boolean
 }
 
+export interface AllUsers {
+  balance: number
+  commissions: string
+  id: string
+  nId: number
+  openedTrades: number
+  referralLevel: string
+  referralsCount: number
+  referrerId: number
+  subReferralsCount: number
+  tgUsername: null | string
+  totalPnl: number
+  telegramId?: number
+  isBlockedForever?: boolean
+  wallets?: User['wallets']
+}
+
 export interface User {
   id: string
   telegramId: number

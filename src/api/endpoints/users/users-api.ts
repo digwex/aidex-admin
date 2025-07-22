@@ -1,10 +1,10 @@
 import { API, Tag } from '../..'
 import { type ApiResponse, type IQuery, type IUserToBanBody } from '../../types'
-import { type ApiResponseTrades, type IUserOrdersParams, type User } from './users-types'
+import type { AllUsers, ApiResponseTrades, IUserOrdersParams, User } from './users-types'
 
 export const usersApi = API.injectEndpoints({
   endpoints: builder => ({
-    getAllUsers: builder.query<ApiResponse<User[]>, IQuery>({
+    getAllUsers: builder.query<ApiResponse<Array<AllUsers>>, IQuery>({
       query: params => ({ url: 'users', params }),
 
       providesTags: result => {

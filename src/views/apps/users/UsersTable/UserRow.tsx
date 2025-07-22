@@ -4,7 +4,7 @@ import cn from 'classnames'
 
 import { Link } from 'react-router'
 
-import { type User } from '../../../../api/endpoints/users/users-types'
+import type { AllUsers } from '../../../../api/endpoints/users/users-types'
 
 import { ACTION_ACCESS } from '@/utils/accessActions'
 
@@ -15,13 +15,8 @@ import { DeleteModal } from './DeleteModal'
 import { UnblockModal } from './UnblockModal'
 import { WalletsInfo } from './wallets-info'
 
-type Props = User & {
+type Props = AllUsers & {
   updateTable: () => void
-  referralsCount: number
-  subReferralsCount: number
-  openedTrades: number
-  commissions: number
-  referralLevel?: string
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -42,13 +37,17 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
           </Link>
         </td>
         <td>
-          <a
-            target='_blank'
-            className='transition-all duration-300 hover:text-primary'
-            href={`https://t.me/${user.tgUsername}`}
-          >
-            {user.telegramId}
-          </a>
+          {user.telegramId ? (
+            <a
+              target='_blank'
+              className='transition-all duration-300 hover:text-primary'
+              href={`https://t.me/${user.tgUsername}`}
+            >
+              {user.telegramId}
+            </a>
+          ) : (
+            '-'
+          )}
         </td>
         <td>
           {user.referrerId ? (
@@ -78,6 +77,7 @@ export const UserRow = ({ updateTable, ...user }: Props) => {
         <td>{user.openedTrades}</td>
         <td>{user.balance}</td>
         <td>{user.commissions}</td>
+        <td>{user.totalPnl}</td>
         <td>{capitalize(user.referralLevel)}</td>
         <td>
           <WalletsInfo wallets={user.wallets} />
