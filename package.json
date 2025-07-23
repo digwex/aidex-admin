@@ -130,5 +130,5 @@
   "overrides": {
     "rimraf": "^5.0.7"
   },
-  "packageManager": "yarn@4.6.0"
+  "packageManager": "yarn@4.9.2"
 }
