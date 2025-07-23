@@ -11,8 +11,8 @@ export const Row = (props: Props) => {
     code,
     link,
     spending,
-    subscribed,
-    unsubscribed,
+    // subscribed,
+    // unsubscribed,
     pressStart,
     maxActiveUsers,
     telegramId,
@@ -27,8 +27,8 @@ export const Row = (props: Props) => {
       <CopyRefLink refLink={link} />
       <EditSpending id={id} defaultValue={spending} />
       <td>{pressStart}</td>
-      <td>{subscribed}</td>
-      <td>{unsubscribed}</td>
+      {/* <td>{subscribed}</td> */}
+      {/* <td>{unsubscribed}</td> */}
       <td>{invitedUsers}</td>
       <td>{commissions}</td>
       {/* <td>-</td>

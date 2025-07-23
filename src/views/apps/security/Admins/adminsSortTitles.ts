@@ -5,5 +5,5 @@ export const adminsSortTitles = [
   { label: 'Роль', sort: null },
   { label: 'Имя', sort: 'name' },
   { label: 'Уровень доступа', sort: 'accessLevel' },
-  { label: 'Разрешения', sort: null },
+  { label: 'Разрешения', sort: null }
 ]

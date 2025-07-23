@@ -19,14 +19,14 @@ export const tableHeaders = [
     label: 'Старт',
     sort: 'pressStart'
   },
-  {
-    label: 'Подписались',
-    sort: 'subscribed'
-  },
-  {
-    label: 'Отписались',
-    sort: 'unsubscribed'
-  },
+  // {
+  //   label: 'Подписались',
+  //   sort: 'subscribed'
+  // },
+  // {
+  //   label: 'Отписались',
+  //   sort: 'unsubscribed'
+  // },
   {
     label: 'Приглашено пользователей',
     sort: 'invitedUsers'

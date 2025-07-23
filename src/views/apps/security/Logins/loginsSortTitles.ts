@@ -5,5 +5,5 @@ export const loginsSortTitles = [
   { label: 'Роль', sort: null },
   { label: 'Последняя активность', sort: 'lastLogin' },
   { label: 'Время на сайте', sort: null }, // 'spentInAppSecs'
-  { label: 'Доступ', sort: null },
+  { label: 'Доступ', sort: null }
 ]

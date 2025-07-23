@@ -20,7 +20,7 @@ export interface IQuery {
 
 export enum SORT_DIRECTION {
   ASC = 'asc',
-  DESC = 'desc',
+  DESC = 'desc'
 }
 
 export interface IUserToBanBody {
@@ -28,10 +28,4 @@ export interface IUserToBanBody {
   nId?: number
 }
 
-export type PartnerPlan =
-  | 'STAR'
-  | 'REGULAR'
-  | 'PREMIUM'
-  | 'VIP'
-  | 'AMBASSADOR'
-  | 'TRAFFIC_OWNER'
+export type PartnerPlan = 'STAR' | 'REGULAR' | 'PREMIUM' | 'VIP' | 'AMBASSADOR' | 'TRAFFIC_OWNER'

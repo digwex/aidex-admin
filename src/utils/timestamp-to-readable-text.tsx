@@ -16,11 +16,7 @@ export const timestampToReadableText = (timestamp: number): string => {
   if (minutes < 60) return `${minutes}m`
   if (hours < 24) return `${hours}h`
 
-  return [
-    years > 0 ? `${years}y` : '',
-    months > 0 ? `${months}mo` : '',
-    remainingDays > 0 ? `${remainingDays}d` : ''
-  ]
+  return [years > 0 ? `${years}y` : '', months > 0 ? `${months}mo` : '', remainingDays > 0 ? `${remainingDays}d` : '']
     .filter(Boolean)
     .join(' ')
 }

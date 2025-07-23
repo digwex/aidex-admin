@@ -5,7 +5,7 @@ interface LanguageState {
 }
 
 const initialState: LanguageState = {
-  shouldFetch: false,
+  shouldFetch: false
 }
 
 const documentsFetch = createSlice({
@@ -14,11 +14,8 @@ const documentsFetch = createSlice({
   reducers: {
     setShouldFetch(state, action: PayloadAction<boolean>) {
       state.shouldFetch = action.payload
-    },
-  },
+    }
+  }
 })
 
-export const {
-  reducer: documentsFetchReducer,
-  actions: documentsFetchActions,
-} = documentsFetch
+export const { reducer: documentsFetchReducer, actions: documentsFetchActions } = documentsFetch

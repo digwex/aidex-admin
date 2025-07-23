@@ -6,7 +6,7 @@ import { handleRTKError } from '@/utils/handleRTKError'
 export const useDeleteUser = () => {
   const [deleteUser] = useDeleteUserMutation()
 
-/*************  ✨ Windsurf Command ⭐  *************/
+  /*************  ✨ Windsurf Command ⭐  *************/
   /**
    * Deletes a user account
    *
@@ -14,7 +14,7 @@ export const useDeleteUser = () => {
    *
    * @throws {Error} if error occurs during deletion
    */
-/*******  52e0bde4-6008-44b3-9082-a95f42868dc3  *******/  const handleDeleteUser = async (uid: string) => {
+  /*******  52e0bde4-6008-44b3-9082-a95f42868dc3  *******/ const handleDeleteUser = async (uid: string) => {
     try {
       void toast.promise(
         deleteUser({

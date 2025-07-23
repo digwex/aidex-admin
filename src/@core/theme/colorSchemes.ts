@@ -314,5 +314,3 @@ const colorSchemes = (skin: Skin): Theme['colorSchemes'] => {
 }
 
 export default colorSchemes
-
-

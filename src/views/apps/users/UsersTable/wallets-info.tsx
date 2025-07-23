@@ -35,7 +35,9 @@ export const WalletsInfo = ({ wallets }: { wallets?: User['wallets'] }) => {
           <Stack direction='column' spacing={3}>
             <div className='flex items-center gap-3 w-full'>
               <div className='w-full'>
-                {wallets?.map((wallet, i) => <WalletItem index={i} key={wallet.publicKey} {...wallet} />)}
+                {wallets?.map((wallet, i) => (
+                  <WalletItem index={i} key={wallet.publicKey} {...wallet} />
+                ))}
               </div>
             </div>
 

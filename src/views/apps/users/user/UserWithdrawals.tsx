@@ -6,7 +6,6 @@ import CustomTable from '@/views/table/CustomTable'
 import { fakeData, TRANSACTION_TYPE } from '@/api/endpoints/user/user-types'
 import { SORT_DIRECTION } from '@/api/types'
 
-
 export const UserWithdrawals = () => {
   const { id } = useParams()
 
