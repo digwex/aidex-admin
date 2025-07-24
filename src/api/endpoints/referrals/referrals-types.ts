@@ -22,6 +22,7 @@ export interface IReferralLink {
   spending: number
   subscribed: number
   unsubscribed: number
+  openedTrades: number
   pressStart: number
   commissions: string
   invitedUsers: number

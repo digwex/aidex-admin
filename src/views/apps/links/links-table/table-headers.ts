@@ -19,6 +19,11 @@ export const tableHeaders = [
     label: 'Старт',
     sort: 'pressStart'
   },
+
+  {
+    label: 'Открыл сделку',
+    sort: 'openTrades'
+  },
   // {
   //   label: 'Подписались',
   //   sort: 'subscribed'
@@ -35,11 +40,6 @@ export const tableHeaders = [
     label: 'Комиссии',
     sort: 'commissions'
   },
-
-  // {
-  //   label: 'Открыл сделку',
-  //   sort: 'open'
-  // },
   // {
   //   label: 'Cуб Партнёров',
   //   sort: 'subAffiliates'
