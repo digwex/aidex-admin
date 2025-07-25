@@ -37,27 +37,31 @@ export interface IReferrals {
 }
 
 export interface IReferralsData {
-  id: string
-  telegramId: number
-  link: string
   code: string
+  commissions: number
+  id: string
+  invitedUsers: number
+  link: string
+  maxActiveUsers: number
+  pressStart: number
   spending: number
   subscribed: number
+  telegramId: number
+  totalSolAmount: number
+  totalTrades: number
+  uniqueTradersCount: number
   unsubscribed: number
-  pressStart: number
-  commissions: number
-  invitedUsers: number
-  maxActiveUsers: number
 }
 
 export interface IReferralStatistic {
-  period: { from: null | string; to: null | string; specificDate: null | string }
-  totalCommissionSol: number
-  totalCommissionUsd: number
-  totalInvitedPeople: number
-  totalOpenedDeals: number
-  totalPressStartAllTime: number
-  totalPressStartSpecificDay: number | null
-  totalSolInDeals: number
-  uniquePeopleOpenedDeals: number
+  commissions: number
+  invitedUsers: number
+  maxActiveUsers: number
+  pressStart: number
+  spending: number
+  subscribed: number
+  totalSolAmount: number
+  totalTrades: number
+  uniqueTradersCount: number
+  unsubscribed: number
 }

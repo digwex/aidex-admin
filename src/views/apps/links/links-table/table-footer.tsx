@@ -2,14 +2,14 @@ import type { IReferralStatistic } from '@/api/endpoints/referrals/referrals-typ
 
 export const Footer = (props: IReferralStatistic) => {
   const {
-    totalCommissionSol,
-    totalCommissionUsd,
-    totalInvitedPeople,
-    totalOpenedDeals,
-    totalPressStartAllTime,
-    totalPressStartSpecificDay,
-    totalSolInDeals,
-    uniquePeopleOpenedDeals
+    commissions,
+    invitedUsers,
+    maxActiveUsers,
+    pressStart,
+    spending,
+    totalSolAmount,
+    totalTrades,
+    uniqueTradersCount
   } = props
 
   return (
@@ -17,19 +17,14 @@ export const Footer = (props: IReferralStatistic) => {
       <td>-</td>
       <td>-</td>
       <td>-</td>
-      <td>-</td>
-      <td>
-        {totalPressStartAllTime}
-        {totalPressStartSpecificDay && <>/ {totalPressStartSpecificDay}</>}
-      </td>
-      <td>{totalOpenedDeals}</td>
-      <td>{uniquePeopleOpenedDeals}</td>
-      <td>{totalInvitedPeople}</td>
-      <td>{totalSolInDeals} SOL</td>
-      <td>
-        ${totalCommissionUsd} / {totalCommissionSol} SOL
-      </td>
-      <td>-</td>
+      <td>{spending}</td>
+      <td>{pressStart}</td>
+      <td>{totalTrades}</td>
+      <td>{uniqueTradersCount}</td>
+      <td>{invitedUsers}</td>
+      <td>{totalSolAmount} SOL</td>
+      <td>{commissions} SOL</td>
+      <td>{maxActiveUsers}</td>
     </tr>
   )
 }

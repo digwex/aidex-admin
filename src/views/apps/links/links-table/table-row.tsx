@@ -4,7 +4,20 @@ import { CopyRefLink } from './copy-ref-link'
 import { EditSpending } from './edit-spending'
 
 export const Row = (props: IReferralsData) => {
-  const { id, telegramId, link, code, spending, pressStart, commissions, invitedUsers, maxActiveUsers } = props
+  const {
+    id,
+    telegramId,
+    link,
+    code,
+    spending,
+    pressStart,
+    commissions,
+    invitedUsers,
+    maxActiveUsers,
+    totalSolAmount,
+    totalTrades,
+    uniqueTradersCount
+  } = props
 
   return (
     <tr>
@@ -13,10 +26,10 @@ export const Row = (props: IReferralsData) => {
       <CopyRefLink refLink={link} />
       <EditSpending id={id} defaultValue={spending} />
       <td>{pressStart}</td>
-      <td>-</td>
-      <td>-</td>
+      <td>{totalTrades}</td>
+      <td>{uniqueTradersCount}</td>
       <td>{invitedUsers}</td>
-      <td>-</td>
+      <td>{totalSolAmount} SOL</td>
       <td>{commissions}</td>
       <td>{maxActiveUsers}</td>
     </tr>
