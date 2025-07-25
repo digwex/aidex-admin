@@ -24,8 +24,6 @@ export const Footer = (props: IReferralStatistic) => {
       </td>
       <td>{totalOpenedDeals}</td>
       <td>{uniquePeopleOpenedDeals}</td>
-      <td>-</td>
-      <td>-</td>
       <td>{totalInvitedPeople}</td>
       <td>{totalSolInDeals} SOL</td>
       <td>

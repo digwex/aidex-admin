@@ -8,8 +8,6 @@ export const tableHeaders: Array<{ label: string; sort: keyof IReferralsData | n
   { label: 'Старт', sort: 'pressStart' },
   { label: 'Открыто сделок', sort: null },
   { label: 'Кол. юзеров открыли сделки', sort: null },
-  { label: 'Подписались', sort: 'subscribed' },
-  { label: 'Отписались', sort: 'unsubscribed' },
   { label: 'Приглашено пользователей', sort: 'invitedUsers' },
   { label: 'Сумма сделок', sort: null },
   { label: 'Комиссии', sort: 'commissions' },
