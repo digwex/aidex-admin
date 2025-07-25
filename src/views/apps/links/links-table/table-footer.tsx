@@ -9,12 +9,12 @@ export const Footer = (props: IReferralStatistic) => {
       <td>-</td>
       <td>-</td>
       <td>-</td>
-      <td>{totalPressStartAllTime ?? 0}</td>
+      <td>{totalPressStartAllTime ?? '-'}</td>
       <td>-</td>
       <td>-</td>
-      <td>{totalInvitedPeople}</td>
+      <td>{totalInvitedPeople ?? '-'}</td>
       <td>
-        {totalCommissionUsd ?? 0} $ / {totalCommissionSol ?? 0} SOL
+        {totalCommissionUsd ?? '-'} $ / {totalCommissionSol ?? '-'} SOL
       </td>
       <td>-</td>
     </tr>
