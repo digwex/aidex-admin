@@ -1,5 +1,5 @@
 import { API, Tag } from '../..'
-import type { IReferralLevel, IReferralLevelChangePercent, TReferralLevelName } from './referrals-types'
+import type { IReferralLevel, IReferralLevelChangePercent, IReferrals, TReferralLevelName } from './referrals-types'
 
 export const referralsApi = API.injectEndpoints({
   endpoints: builder => ({
@@ -65,7 +65,7 @@ export const referralsApi = API.injectEndpoints({
         }
       }
     }),
-    getReferralLinks: builder.query<any, void>({
+    getReferralLinks: builder.query<IReferrals, void>({
       query: (params: any) => ({ url: '/referral-links', params }),
       transformResponse: (response: { data: any }) => response.data,
       providesTags: result =>

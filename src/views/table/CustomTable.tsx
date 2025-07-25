@@ -26,6 +26,7 @@ interface Props {
     field: string
     direction?: string
   }
+  footerDataKey?: string
   customTableClass?: string
   fakeData?: any[]
   queryProps?: string
@@ -54,6 +55,7 @@ const CustomTable = ({
   order,
   customTableClass = '',
   fakeData,
+  footerDataKey,
   queryProps
 }: Props) => {
   const [orderBy, setOrderBy] = useState({
@@ -98,6 +100,10 @@ const CustomTable = ({
   const resultData =
     fakeData ?? data?.data?.data ?? data?.result ?? data?.data ?? (Array.isArray(data) ? data : []) ?? []
 
+  const resultFooterData = footerDataKey
+    ? (data?.data?.[footerDataKey] ?? data?.[footerDataKey] ?? data?.[footerDataKey] ?? [])
+    : resultData
+
   const errorText = getError(error)
 
   if (errorText === 'Permission denied')
@@ -130,7 +136,7 @@ const CustomTable = ({
               </tbody>
               {!!DataFooter && isSuccess && resultData.length > 0 && (
                 <tfoot>
-                  <DataFooter {...resultData} />
+                  <DataFooter {...resultFooterData} />
                 </tfoot>
               )}
             </table>

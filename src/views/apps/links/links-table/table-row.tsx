@@ -1,24 +1,21 @@
-import type { IReferralLink } from '@/api/endpoints/referrals/referrals-types'
+import type { IReferralsData } from '@/api/endpoints/referrals/referrals-types'
 import { CopyRefLink } from './copy-ref-link'
 
 import { EditSpending } from './edit-spending'
 
-type Props = IReferralLink
-
-export const Row = (props: Props) => {
+export const Row = (props: IReferralsData) => {
   const {
     id,
-    code,
-    link,
-    spending,
-    // subscribed,
-    // unsubscribed,
-    pressStart,
-    openedTrades,
-    maxActiveUsers,
     telegramId,
+    link,
+    code,
+    spending,
+    subscribed,
+    unsubscribed,
+    pressStart,
+    commissions,
     invitedUsers,
-    commissions
+    maxActiveUsers
   } = props
 
   return (
@@ -28,17 +25,10 @@ export const Row = (props: Props) => {
       <CopyRefLink refLink={link} />
       <EditSpending id={id} defaultValue={spending} />
       <td>{pressStart}</td>
-      <td>{openedTrades}</td>
-      {/* <td>{subscribed}</td> */}
-      {/* <td>{unsubscribed}</td> */}
+      <td>{subscribed}</td>
+      <td>{unsubscribed}</td>
       <td>{invitedUsers}</td>
       <td>{commissions}</td>
-      {/* <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td> */}
       <td>{maxActiveUsers}</td>
     </tr>
   )

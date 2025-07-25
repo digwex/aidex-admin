@@ -36,13 +36,6 @@ export const Row = ({
       <td>{unsubscribed}</td>
       <td>{invitedUsers}</td>
       <td>{commissions}</td>
-
-      {/* <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td> */}
       <td>{maxActiveUsers}</td>
     </tr>
   )

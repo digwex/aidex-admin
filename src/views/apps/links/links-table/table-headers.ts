@@ -1,4 +1,6 @@
-export const tableHeaders = [
+import type { IReferralsData } from '@/api/endpoints/referrals/referrals-types'
+
+export const tableHeaders: Array<{ label: string; sort: keyof IReferralsData }> = [
   {
     label: 'Название',
     sort: 'code'
@@ -19,19 +21,14 @@ export const tableHeaders = [
     label: 'Старт',
     sort: 'pressStart'
   },
-
   {
-    label: 'Открыл сделку',
-    sort: 'openTrades'
+    label: 'Подписались',
+    sort: 'subscribed'
   },
-  // {
-  //   label: 'Подписались',
-  //   sort: 'subscribed'
-  // },
-  // {
-  //   label: 'Отписались',
-  //   sort: 'unsubscribed'
-  // },
+  {
+    label: 'Отписались',
+    sort: 'unsubscribed'
+  },
   {
     label: 'Приглашено пользователей',
     sort: 'invitedUsers'
@@ -40,26 +37,6 @@ export const tableHeaders = [
     label: 'Комиссии',
     sort: 'commissions'
   },
-  // {
-  //   label: 'Cуб Партнёров',
-  //   sort: 'subAffiliates'
-  // },
-  // {
-  //   label: 'По ссылке',
-  //   sort: null
-  // },
-  // {
-  //   label: 'Всего этот партнёр',
-  //   sort: null
-  // },
-  // {
-  //   label: 'Заработал Sol/$',
-  //   sort: 'profit'
-  // },
-  // {
-  //   label: 'Выводы SOL/USD',
-  //   sort: 'withdrawals'
-  // },
   {
     label: 'Максимум активных игроков',
     sort: 'maxActiveUsers'
