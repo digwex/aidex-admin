@@ -22,10 +22,7 @@ interface Props {
   isSearch?: boolean
   isSearchBar?: boolean
   isDate?: boolean
-  order?: {
-    field: string
-    direction?: string
-  }
+  order?: { field: string; direction?: string }
   footerDataKey?: string
   customTableClass?: string
   fakeData?: any[]
@@ -58,28 +55,17 @@ const CustomTable = ({
   footerDataKey,
   queryProps
 }: Props) => {
-  const [orderBy, setOrderBy] = useState({
-    field: order?.field,
-    direction: order?.direction ?? SORT_DIRECTION.DESC
-  })
+  const [orderBy, setOrderBy] = useState({ field: order?.field, direction: order?.direction ?? SORT_DIRECTION.DESC })
 
   const processFetch = useFetchDocuments()
 
   const [refetch, { data: realData, isFetching, isLoading, isSuccess: isRealSuccess, isError, error }] = query()
 
-  const data = fakeData
-    ? {
-        data: fakeData
-      }
-    : realData
+  const data = fakeData ? { data: fakeData } : realData
 
   const isSuccess = fakeData ? true : isRealSuccess
 
-  const { tableSortTitles } = useTableSortHeader({
-    sortTitles,
-    orderBy,
-    setOrderBy
-  })
+  const { tableSortTitles } = useTableSortHeader({ sortTitles, orderBy, setOrderBy })
 
   const { currentPage, totalPage, handlePageChange } = usePagination({
     refetch,
@@ -94,7 +80,6 @@ const CustomTable = ({
 
   useLayoutEffect(() => {
     processFetch(isFetching)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFetching])
 
   const resultData =

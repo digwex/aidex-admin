@@ -25,9 +25,12 @@ export const Row = (props: IReferralsData) => {
       <CopyRefLink refLink={link} />
       <EditSpending id={id} defaultValue={spending} />
       <td>{pressStart}</td>
+      <td>-</td>
+      <td>-</td>
       <td>{subscribed}</td>
       <td>{unsubscribed}</td>
       <td>{invitedUsers}</td>
+      <td>-</td>
       <td>{commissions}</td>
       <td>{maxActiveUsers}</td>
     </tr>
