@@ -51,17 +51,23 @@ export interface IReferralsData {
 }
 
 export interface IReferralStatistic {
-  totalPressStartAllTime: number
-  totalPressStartSpecificDay: number | null // null if 'date' not provided
+  totalPressStartSpecificDay: number | null
   totalOpenedDeals: number
   uniquePeopleOpenedDeals: number
-  totalInvitedPeople: number
   totalSolInDeals: number
+  period: {
+    from: null | string
+    to: null | string
+    specificDate: null | string
+  }
+
+  totalPressStartAllTime: number
+  totalInvitedPeople: number
   totalCommissionSol: number
   totalCommissionUsd: number
-  period: {
-    from: null | string // '2024-01-01T00:00:00.000Z' // null if not provided
-    to: null | string // '2024-12-31T23:59:59.999Z' // null if not provided
-    specificDate: null | string // '2024-07-25T00:00:00.000Z' // null if not provided
-  }
+
+  totalSpending: number
+  totalSubscribed: number
+  totalUnsubscribed: number
+  totalMaxActiveUsers: number
 }
