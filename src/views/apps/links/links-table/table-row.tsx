@@ -30,7 +30,7 @@ export const Row = (props: IReferralsData) => {
       <td>{uniqueTradersCount}</td>
       <td>{invitedUsers}</td>
       <td>{totalSolAmount} SOL</td>
-      <td>{commissions}</td>
+      <td>{commissions} SOL</td>
       <td>{maxActiveUsers}</td>
     </tr>
   )

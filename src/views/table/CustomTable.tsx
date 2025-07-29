@@ -98,6 +98,8 @@ const CustomTable = ({
       </div>
     )
 
+  console.log({ isError, test: !!DataFooter, isSuccess, resultFooterData })
+
   return (
     <>
       <div className='table_wrap'>
@@ -119,7 +121,7 @@ const CustomTable = ({
                     />
                   ))}
               </tbody>
-              {!!DataFooter && isSuccess && resultData.length > 0 && (
+              {!!DataFooter && isSuccess && resultFooterData && (
                 <tfoot>
                   <DataFooter {...resultFooterData} />
                 </tfoot>
