@@ -128,6 +128,15 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
       label: 'Редактирование пар'
     },
     {
+      icon: <i className='tabler-send' />,
+      href: NAVIGATION_LINKS.MAILING,
+      exactMatch: false,
+      activeUrl: NAVIGATION_LINKS.MAILING,
+      label: 'Рассылка',
+      checkType: 'action',
+      actionAccess: ACTION_ACCESS.VIEW_WITHDRAWALS
+    },
+    {
       icon: <i className='tabler-credit-card-pay' />,
       href: NAVIGATION_LINKS.WITHDRAWALS,
       exactMatch: false,

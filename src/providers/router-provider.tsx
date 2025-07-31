@@ -38,6 +38,7 @@ import { ReferralsWithdrawalHistory } from '@/views/apps/withdrawals/referrals-w
 import { ReferralsWithdrawalPending } from '@/views/apps/withdrawals/referrals-withdrawal-pending/referrals-withdrawal-pending'
 import { WithdrawalsLayout } from '@/views/apps/withdrawals/WithdrawalsLayout'
 import Login from '@/views/Login'
+import { Mailing } from '@/views/apps/mailing'
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
             <DashboardPage />
           </AccessRouteGuard>
         )
+      },
+      {
+        path: NAVIGATION_LINKS.MAILING,
+        element: <Mailing />
       },
       {
         path: NAVIGATION_LINKS.EDIT,

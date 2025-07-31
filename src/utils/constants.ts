@@ -14,7 +14,8 @@ export const NAVIGATION_LINKS = {
   SECURITY_LOGINS: '/security/logins',
   EDIT: '/edit',
   EDIT_HOT: '/edit/hot',
-  EDIT_NEW: '/edit/new'
+  EDIT_NEW: '/edit/new',
+  MAILING: '/mailing',
 }
 
 export const hiddenIds = ['508440400', '485512202']
