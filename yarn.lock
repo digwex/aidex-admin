@@ -3334,6 +3334,7 @@ __metadata:
     input-otp: "npm:1.4.1"
     js-cookie: "npm:^3.0.5"
     keen-slider: "npm:6.8.6"
+    lucide-react: "npm:^0.535.0"
     mapbox-gl: "npm:3.9.0"
     postcss: "npm:8.4.49"
     postcss-styled-syntax: "npm:0.7.0"
@@ -6632,6 +6633,15 @@ __metadata:
   dependencies:
     yallist: "npm:^3.0.2"
   checksum: 10c0/89b2ef2ef45f543011e38737b8a8622a2f8998cddf0e5437174ef8f1f70a8b9d14a918ab3e232cb3ba343b7abddffa667f0b59075b2b80e6b4d63c3de6127482
+  languageName: node
+  linkType: hard
+
+"lucide-react@npm:^0.535.0":
+  version: 0.535.0
+  resolution: "lucide-react@npm:0.535.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/688439e202b36866ee40479b9f1093a144cc249690c2710b463cdd6c5b00006b439d763840d8d1f4cfe91d51e036c30024ccff5290cd7842dd20ebe5c9e4a8b2
   languageName: node
   linkType: hard
 

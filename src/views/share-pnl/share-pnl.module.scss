@@ -4,7 +4,7 @@
 }
 
 .banner {
-  @apply relative flex h-[410px] w-full flex-col justify-center overflow-hidden rounded-xl bg-[url('/images/share/bg.png')] bg-cover bg-no-repeat px-[22px];
+  @apply relative flex h-[430px] w-full flex-col justify-center overflow-hidden rounded-xl bg-[url('/images/share/bg.png')] bg-cover bg-no-repeat px-[22px];
 }
 
 .logo {
@@ -15,6 +15,10 @@
   }
 }
 
+.asset_title {
+  @apply text-xl font-semibold text-[#fff];
+}
+
 .pnl {
   @apply mb-[10px] w-full rounded-[8px] bg-[#151924] px-4 pb-[17px] pt-6;
 
@@ -22,11 +26,15 @@
     @apply mb-2 border-b-[1px] border-[#1d2231] pb-2 font-medium;
 
     &_number {
-      @apply mb-2 mb-[8px] text-[10px] text-[#fff];
+      @apply text-[10px] text-[#fff];
+    }
+
+    &_time {
+      @apply flex items-center gap-1 text-xs;
     }
 
     &_title {
-      @apply text-[36px] text-[#0dcb81];
+      @apply text-4xl text-[#0dcb81];
     }
   }
 
@@ -34,11 +42,11 @@
     @apply mb-3 text-[10px] font-medium;
 
     &_pnl {
-      @apply mb-1 text-[#8f9eb3];
+      @apply leading-[12px] mb-1 text-[#8f9eb3];
     }
 
     &_value {
-      @apply flex items-center gap-2 whitespace-nowrap text-[#fff];
+      @apply leading-[12px] flex items-center gap-2 whitespace-nowrap text-[#fff];
 
       & span {
         @apply text-[#fcd434];

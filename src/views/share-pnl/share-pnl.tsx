@@ -4,6 +4,8 @@ import { Button, IconButton } from '@mui/material'
 
 import cn from 'classnames'
 
+import { Clock } from 'lucide-react'
+
 import { SharePnlInMedia } from './share-pnl-in-media'
 import styles from './share-pnl.module.scss'
 import { QrCode } from '../qr-code'
@@ -137,9 +139,14 @@ export const SharePnl = memo(({ asset = 'SOL', reflink }: Props) => {
             <div className={styles.pnl}>
               <div className={styles.pnl_header}>
                 <p className={styles.pnl_header_number}>№3242424</p>
+                <p className={styles.asset_title}>{asset}</p>
                 <p style={{ color }} className={styles.pnl_header_title}>
                   {formatCurrency(pnl)}%
                 </p>
+                <div className={styles.pnl_header_time}>
+                  <Clock size={14} />
+                  <span>5h 10m</span>
+                </div>
               </div>
 
               <div className={styles.pnl_current}>
